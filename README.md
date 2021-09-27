@@ -9,4 +9,12 @@ Synthetic choice data is simulated and modeled in cumulative prospect theory to 
 ## How to Reproduce this Project
 
 - Add note on how to reproduce the project
+
+## Copyright Notice
+
+Copyright (c) 2021 Linus Hof, Veronika Zilker & Thorsten Pachur
+
+All material made available in this GitHub repository is licensed under the Creative Commons Attribution 4.0 International Public License. Subject to the terms and conditions of this Public License, you are free to reproduce and share the Licensed Material and to produce, reproduce, and Share Adapted Material.
+
+[![licensebuttons by](https://licensebuttons.net/l/by/3.0/88x31.png)](https://github.com/linushof/sampling-in-dfe/blob/main/LICENSE.md)
  
