@@ -1,0 +1,865 @@
+---
+title: 'Sampling Strategies in Decisions from Experience'
+author: "Linus Hof, Thorsten Pachur, Veronika Zilker"
+bibliography: sampling-strategies-in-dfe.bib
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_float: yes
+    number_sections: no
+  pdf_document:
+    toc: yes
+csl: apa.csl
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+# load packages
+pacman::p_load(repro,
+               tidyverse,
+               knitr, 
+               viridis)
+```
+
+# Author Note
+
+This document was created from the commit with the hash `r repro::current_hash()`. 
+
+- Add information on how to reproduce the project.
+- Add contact.
+
+# Abstract
+
+A probability theoretic definition of prospects and a rough stochastic sampling model for decisions from experience is proposed.
+It is demonstrated how the model can be used a) to explicate assumptions about the sampling and decision strategies that agents may apply and b) to derive predictions about function forms and parameter values that describe the resulting decision behavior. 
+Synthetic choice data is simulated and modeled in cumulative prospect theory to test these predictions. 
+
+# Introduction
+
+...
+
+## Sampling in Decisions from Experience 
+
+In research on the decision theory, a standard paradigm is the choice between at least two (monetary) prospects.
+Let a prospect be a probability space $(\Omega, \mathscr{F}, P)$.
+$\Omega$ is the sample space 
+
+$$\begin{equation}
+\Omega = \{\omega_1, ..., \omega_n\}
+\end{equation}$$ 
+
+containing a finite set of possible outcomes $\omega$, monetary gains and/or losses respectively. 
+$\mathscr{F}$ is the set of all possible subsets of $\Omega$: 
+
+$$\begin{equation}
+\mathscr{F} = \{A_1, A_2, ...\} = \mathscr{P}(\Omega) 
+\; .
+\end{equation}$$
+
+$P$ is a probability mass function  
+
+$$\begin{equation}
+P: \mathscr{F} \mapsto [0,1] 
+\end{equation}$$
+
+that assigns each outcome $\omega$ a probability $0 < p(\omega) \leq 1$ with $P(\Omega) = 1$ [ @kolmogorovFoundationsTheoryProbability1950, pp. 2-3].
+
+In such a choice paradigm, agents are asked to evaluate the prospects and build a preference for either one of them. 
+It is common to make a distinction between two variants of this evaluation process [cf. @hertwigDescriptionexperienceGapRisky2009]. 
+For decisions from description (DfD), agents are provided a full symbolic description of the prospects.
+For decisions from experience [DfE; e.g., @hertwigDecisionsExperienceEffect2004], prospects are not described but must be explored by the means of sampling. 
+
+To provide a formal definition of sampling in risky choice, we make use of the mathematical concept of a random variable and start by referring to a prospect as *"risky"* in the case where $p(\omega) \neq 1$ for all $\omega \in \Omega$.
+Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
+It is acceptable to speak of the occurrence of $\omega$ as a realization of a random variable $X$ defined on a prospect iff the following conditions (1) and (2) are met: 
+
+(1) $X$ is a measurable function $$\begin{equation} X: (\Omega, \mathscr{F})  \mapsto (\Omega', \mathscr{F'}) \; , \end{equation}$$ where $\Omega'$ is a set of real numbered values $X$ can take and $\mathscr{F'}$ is a set of subsets of $\Omega'$. I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathscr{F'}$ has a pre-image $X^{-1}A' \in \mathscr{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
+
+(2) The mapping is such that $X(\omega) = x \equiv \omega$. 
+
+In (2), $x \equiv \omega$ means that the realization of a random variable $X(\omega) = x$ is numerically equivalent to its pre-image $\omega$.  
+Given conditions (1) and (2), we denote any observation of $\omega$ as a *"single sample"*, or realization, of a random variable defined on a prospect and the act of generating a sequence of single samples in discrete time as *"sequential sampling"*. 
+Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect [cf. @bernoulliArsConjectandiOpus1713].
+Thus, long sample sequences in principle allow to obtain the same information about a prospect by sampling as by symbolic description.
+
+Consider now a choice between prospects $1, ..., k$.
+To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
+
+$$\begin{equation}
+D:= f((\Omega, \mathscr{F}, P)_1, ..., (\Omega, \mathscr{F}, P)_k)
+\;.
+\end{equation}$$
+
+Now, since in DfE no symbolic descriptions of the prospects are provided, the model must be restricted to the case where decisions are based on sequences of single samples originating from the respective prospects:
+
+$$\begin{equation}
+D := f(X_{i1}, ..., X_{ik}) 
+\; ,
+\end{equation}$$
+
+where $i = 1, ..., N$ denotes a sequence of length $N$ of random variables that are iid.  
+
+Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
+Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
+
+## A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies  
+
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] discussed a potential link between sampling and decision strategies in DfE. 
+Specifically, the authors suppose that if single samples originating from different prospects are generated in direct succession (piecewise sampling), the evaluation of prospects is based on multiple ordinal comparisons of single samples (round-wise decisions).
+In contrast, if single samples originating from the same prospect are generated in direct succession (comprehensive sampling), it is supposed that the evaluation of prospects is based on a single ordinal comparison of long sequences of single samples (summary decisions) [@hillsInformationSearchDecisions2010, Figure 1 for a graphical summary]. 
+
+We now consider choices between two prospects and the assumptions of Hills and Hertwig [-@hillsInformationSearchDecisions2010] in more detail to build the respective stochastic sampling model for DfE.
+
+Let $X$ and $Y$ be random variables defined on the prospects $(\Omega, \mathscr{F}, P)_X$ and $(\Omega, \mathscr{F}, P)_Y$. 
+
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggest that any two sample sequences $X_i$ and $Y_i$ are compared by their means. 
+Let thus $C = \mathbb{R}$ be the set of all possible outcomes of such a mean comparison for given sequence lengths $N_X$ and $N_Y$ and 
+
+$$\begin{equation}
+\mathscr{C} = \left\{ \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
+\right\}
+\end{equation}$$
+
+be a set of subsets of $C$, indicating that comparisons of prospects on the ordinal (rather than on the metric) scale are of primary interest. 
+The outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
+To integrate the concept of evidence accumulation into the current model, we let $D$ be a measurable function that maps the possible outcomes of a mean comparison in $C$ onto a measure space $C' = \{0,1\}$, with $0$ ($1$) indicating a lost (won) comparison:
+
+$$\begin{equation}
+D(c \in C) = 
+  \begin{cases}
+    1 & \text{for} & \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0) \in \mathscr{C} \} \\
+    0 & \text{else}. 
+  \end{cases} 
+\end{equation}$$
+
+It can be shown that for fixed sequence lengths $N_X$ and $N_Y$, a sequence $D_i = D_1, ..., D_n$ is a Bernoulli process following the binomial distribution
+
+$$\begin{equation}
+D \sim B\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
+\end{equation}$$
+
+where $p$ is the probability of $X$ winning a single mean comparison and $n$ is the number of comparisons (see [Appendix]).
+However, although $p$ can in principle be determined, it becomes intractable with increasing elements in $\Omega$ and growing sequence lengths. 
+
+## Predicting Choice Behavior in DfE 
+
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed the two different sampling strategies in combination with the respective decision strategies, i.e., piecewise sampling and round-wise comparison vs. comprehensive sampling and summary comparison, as an explanation for different choice patterns in DfE. 
+How does the current version of the SSM support this proposition? 
+Given prospects $X$ and $Y$, the sample spaces $S = \left\{\frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}}\right\}^{\mathbb{N}}$ can be varied by changes on three parameters, i.e., the number of comparisons $\mathbb{N}$ and the sample sizes $N_X$ and $N_Y$ on which these comparisons are based.
+First, only considering the pure cases formulated by the above authors, the following restrictions are put the parameters:
+
+$$\begin{equation}
+\mathbb{N}
+  =
+  \begin{cases}
+    1 & \text{if} & \text{Summary} \\ 
+    \geq 1 & \text{if} & \text{Round-wise}  
+  \end{cases}\\
+\end{equation}$$
+ 
+and 
+
+$$\begin{equation}
+N_X \, \text{and} \, N_Y
+  =
+  \begin{cases}
+    \geq 1 & \text{if} & \text{Summary} \\ 
+    1 & \text{if} & \text{Round-wise}  
+  \end{cases}\\
+\end{equation}$$
+
+For the summary strategy, the following prediction is obtained: 
+
+Given that 
+
+$$\begin{equation}
+P\left(\lim_{N_X \to \infty} \overline{X}_{N_X} = E(X) \right) = 
+P\left(\lim_{N_Y \to \infty} \overline{Y}_{N_Y} = E(Y) \right) = 
+1 \; ,
+\end{equation}$$
+
+we obtain that
+
+$$\begin{equation}
+\left(
+    \frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}}
+\right)
+\in S : 
+P\left(\lim_{N_X \to \infty} \lim_{N_Y \to \infty} \frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}} = 
+\frac{E(X)} {E(Y)}
+\right ) =
+1 \; ,
+\end{equation}$$
+
+I.e., for the summary strategy, we assume that for increasing sample sizes $N_X$ and $N_Y$, the prospect with the larger expected value is chosen almost surely.  
+
+For the round-wise strategy, the following prediction is obtained:
+
+Given that $N_X$ and $N_Y$ are set to 1, $D$ follows the binomial distribution 
+
+$$\begin{equation}
+B(k \, | \, p_X, \mathbb{N}) \; ,
+\end{equation}$$
+
+where $p$ is the probability that a single sample of prospect $X$ is larger than a single sample of prospect $Y$, $\mathbb{N}$ is the number of comparisons and $k$ is the number of times $x \in X$ is larger than $y \in Y$. 
+
+*Proof.*
+
+For $N_X = N_Y = 1$, the sample space is 
+
+$$\begin{equation}
+\left\{\frac{\overline{X}_{N_X = 1}} {\overline{Y}_{N_Y = 1}} \right\}^{\mathbb{N}} =
+\left\{\frac{x_i \in \Omega'_X} {y_j \in \Omega'_Y}\right\}^{\mathbb{N}}
+\end{equation}$$
+
+# Method
+
+## Test set
+
+Under each condition, i.e., strategy-parameter combinations, all gambles are played by 100 synthetic agents.
+We test a set of gambles, in which one of the prospects contains a safe outcome and the other two risky outcomes (*safe-risky gambles*).
+Therefore, 60 gambles from an initial set of 10,000 are sampled.
+Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the lower risky outcomes $p_{low}$.
+The probabilities of the higher risky outcomes are $1-p_{low}$, respectively.
+To omit dominant prospects, safe outcomes fall between both risky outcomes.
+The table below contains the test set of 60 gambles.
+Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
+Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
+
+```{r message=FALSE}
+gambles <- read_csv("data/gambles/sr_subset.csv")
+gambles %>% kable()
+```
+
+## Model Parameters
+
+**Switching probability** $s$ is the probability with which agents draw the following single sample from the prospect they did not get their most recent single sample from.
+$s$ is varied between .1 to 1 in increments of .1.
+
+The **boundary type** is either the minimum value any prospect's sample statistic must reach (absolute) or the minimum value for the difference of these statistics (relative).
+Sample statistics are sums over outcomes (comprehensive strategy) and sums over wins (piecewise strategy), respectively.
+
+For comprehensive integration, the **boundary value** $a$ is varied between 15 to 75 in increments of 15.
+For piecewise integration $a$ is varied between 1 to 5 in increments of 1.
+
+```{r message=FALSE}
+# read choice data 
+cols <- list(.default = col_double(),
+             strategy = col_factor(),
+             boundary = col_factor(),
+             gamble = col_factor(),
+             rare = col_factor(),
+             agent = col_factor(),
+             choice = col_factor())
+choices <- read_csv("data/choices/choices.csv", col_types = cols)
+```
+
+In sum, 2 (strategies) x 60 (gambles) x 100 (agents) x 100 (parameter combinations) = `r nrow(choices)` choices are simulated.
+
+# Results
+
+Because we are not interested in deviations from normative choice due to sampling artifacts (e.g., ceiling effects produced by low boundaries), we remove trials in which only one prospect was attended.
+In addition, we use relative frequencies of sampled outcomes rather than 'a priori' probabilities to compare actual against normative choice behavior.
+
+```{r}
+# remove choices where prospects were not attended
+choices <- choices %>%
+  filter(!(is.na(a_ev_exp) | is.na(b_ev_exp)))
+```
+
+```{r eval = FALSE}
+# remove choices where not all outcomes were sampled
+choices <- choices %>% 
+  filter(!(is.na(a_ev_exp) | is.na(b_ev_exp) | a_p1_exp == 0 | a_p2_exp == 0))
+```
+
+Removing the respective trials, we are left with `r nrow(choices)` choices.
+
+## Sample Size
+
+```{r message=FALSE}
+samples <- choices %>% 
+  group_by(strategy, s, boundary, a) %>% 
+  summarise(n_med = median(n_sample))
+samples_piecewise <- samples %>% filter(strategy == "piecewise")
+samples_comprehensive <- samples %>% filter(strategy == "comprehensive")
+```
+
+The median sample sizes generated by different parameter combinations ranged from `r min(samples_piecewise$n_med)` to `r max(samples_piecewise$n_med)` for piecewise integration and `r min(samples_comprehensive$n_med)` to `r max(samples_comprehensive$n_med)` for comprehensive integration.
+
+### Boundary type and boundary value (a)
+
+As evidence is accumulated sequentially, relative boundaries and large boundary values naturally lead to larger sample sizes, irrespective of the integration strategy.
+
+```{r message=FALSE}
+group_med <- samples_piecewise %>%
+  group_by(boundary, a) %>% 
+  summarise(group_med = median(n_med)) # to get the median across all s values
+
+samples_piecewise %>%
+  ggplot(aes(a, n_med, color = a)) + 
+  geom_jitter(alpha = .5, size = 2) +
+  geom_point(data = group_med, aes(y = group_med), size = 3) +
+  facet_wrap(~boundary) + 
+  scale_color_viridis() + 
+  labs(title = "Piecewise Integration",
+       x ="a", 
+       y="Sample Size", 
+       col="a") + 
+  theme_minimal()
+```
+
+```{r message=FALSE}
+group_med <- samples_comprehensive %>%
+  group_by(boundary, a) %>% 
+  summarise(group_med = median(n_med)) 
+
+samples_comprehensive %>%
+  ggplot(aes(a, n_med, color = a)) + 
+  geom_jitter(alpha = .5, size = 2) +
+  geom_point(data = group_med, aes(y = group_med), size = 3) +
+  facet_wrap(~boundary) + 
+  scale_color_viridis() + 
+  labs(title = "Comprehensive Integration",
+       x ="a", 
+       y="Sample Size", 
+       col="a") + 
+  theme_minimal()
+```
+
+### Switching probability (s)
+
+For piecewise integration, there is an inverse relationship between switching probability and sample size.
+I.e., the lower s, the less frequent prospects are compared and thus, boundaries are only approached with larger sample sizes.
+This effect is particularly pronounced for low probabilities such that the increase in sample size accelerates as switching probability decreases.
+
+```{r message=FALSE}
+group_med <- samples_piecewise %>%
+  group_by(boundary, s) %>% 
+  summarise(group_med = median(n_med)) # to get the median across all a values
+
+samples_piecewise %>%
+  ggplot(aes(s, n_med, color = s)) + 
+  geom_jitter(alpha = .5, size = 2) +
+  geom_point(data = group_med, aes(y = group_med), size = 3) +
+  facet_wrap(~boundary) + 
+  scale_color_viridis() + 
+  labs(title = "Piecewise Integration",
+       x ="s", 
+       y="Sample Size", 
+       col="s") + 
+  theme_minimal()
+```
+
+For comprehensive integration, boundary types differ in the effects of switching probability.
+For absolute boundaries, switching probability has no apparent effect on sample size as the distance of a given prospect to its absolute boundary is not changed by switching to (and sampling from) the other prospect.
+For relative boundaries, however, samples sizes increase with switching probability.
+
+```{r message=FALSE}
+group_med <- samples_comprehensive %>%
+  group_by(boundary, s) %>% 
+  summarise(group_med = median(n_med)) # to get the median across all a values
+
+samples_comprehensive %>%
+  ggplot(aes(s, n_med, color = s)) + 
+  geom_jitter(alpha = .5, size = 2) +
+  geom_point(data = group_med, aes(y = group_med), size = 3) +
+  facet_wrap(~boundary) + 
+  scale_color_viridis() + 
+  labs(title = "Comprehensive Integration",
+       x ="s",
+       y = "Sample Size", 
+       col="s") + 
+  theme_minimal()
+```
+
+## Choice Behavior
+
+Below, in extension to Hills and Hertwig [-@hillsInformationSearchDecisions2010], the interplay of integration strategies, gamble features, and model parameters in their effects on choice behavior in general and their contribution to underweighting of rare events in particular is investigated.
+We apply two definitions of underweighting of rare events: Considering false response rates, we define underweighting such that the rarity of an attractive (unattractive) outcome leads to choose the safe (risky) prospect although the risky (safe) prospect has a higher expected value.
+
+```{r message=FALSE}
+fr_rates <- choices %>% 
+  mutate(ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2), 
+         norm = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) %>% 
+  filter(!is.na(norm)) %>% # exclude trials with normative indifferent options
+  group_by(strategy, s, boundary, a, rare, norm, choice) %>% # group correct and incorrect responses
+  summarise(n = n()) %>% # absolute numbers 
+  mutate(rate = round(n/sum(n), 2), # response rates 
+         type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% 
+  filter(!is.na(type)) # remove correct responses
+```
+
+Considering the parameters of Prelec's [-@prelecProbabilityWeightingFunction1998] implementation of the weighting function [CPT; cf. @tverskyAdvancesProspectTheory1992], underweighting is reflected by decisions weights estimated to be smaller than the corresponding objective probabilities.
+
+### False Response Rates
+
+```{r message=FALSE}
+fr_rates_piecewise <- fr_rates %>% filter(strategy == "piecewise")
+fr_rates_comprehensive <- fr_rates %>% filter(strategy == "comprehensive")
+```
+
+The false response rates generated by different parameter combinations ranged from `r min(fr_rates_piecewise$rate)` to `r max(fr_rates_piecewise$rate)` for piecewise integration and from `r min(fr_rates_comprehensive$rate)` to `r max(fr_rates_comprehensive$rate)` for comprehensive integration.
+However, false response rates vary considerably as a function of rare events, indicating that their presence and attractiveness are large determinants of false response rates.
+
+```{r message=FALSE}
+fr_rates %>% 
+  group_by(strategy, boundary, rare) %>% 
+  summarise(min = min(rate),
+            max = max(rate)) %>% 
+  kable()
+```
+
+The heatmaps below show the false response rates for all strategy-parameter combinations.
+Consistent with our - somewhat rough - definition of underweighting, the rate of false risky responses is generally higher, if the unattractive outcome of the risky prospect is rare (top panel).
+Conversely, if the attractive outcome of the risky prospect is rare, the rate of false safe responses is generally higher (bottom panel).
+As indicated by the larger range of false response rates, the effects of rare events are considerably larger for piecewise integration.
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "piecewise", boundary == "absolute") %>% 
+  ggplot(aes(a, s, fill = rate)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_tile(colour="white", size=0.25) + 
+  scale_x_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
+  scale_fill_viridis() + 
+  labs(title = "Piecewise Integration | Absolute Boundary",
+       x = "a", 
+       y= "s", 
+       fill = "% False Responses") + 
+  theme_minimal() 
+```
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "piecewise", boundary == "relative") %>% 
+  ggplot(aes(a, s, fill = rate)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_tile(colour="white", size=0.25) + 
+  scale_x_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
+  scale_fill_viridis() + 
+  labs(title = "Piecewise Integration | Relative Boundary",
+       x = "a", 
+       y= "s", 
+       fill = "% False Responses") + 
+  theme_minimal() 
+```
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "comprehensive", boundary == "absolute") %>% 
+  ggplot(aes(a, s, fill = rate)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_tile(colour="white", size=0.25) + 
+  scale_x_continuous(expand=c(0,0), breaks = seq(15, 75, 15)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
+  scale_fill_viridis() + 
+  labs(title = "Comprehensive Integration | Absolute Boundary",
+       x = "a", 
+       y= "s", 
+       fill = "% False Responses") + 
+  theme_minimal() 
+```
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "comprehensive", boundary == "relative") %>% 
+  ggplot(aes(a, s, fill = rate)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_tile(colour="white", size=0.25) + 
+  scale_x_continuous(expand=c(0,0), breaks = seq(15, 75, 15)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
+  scale_fill_viridis() + 
+  labs(title = "Comprehensive Integration | Relative Boundary",
+       x = "a", 
+       y= "s", 
+       fill = "% False Responses") + 
+  theme_minimal() 
+```
+
+#### Switching Probability (s) and Boundary Value (a)
+
+As for both piecewise and comprehensive integration the differences between boundary types are rather minor and of magnitude than of qualitative pattern, the remaining analyses of false response rates are summarized across absolute and relative boundaries.
+
+Below, the $s$ and $a$ parameter are considered as additional sources of variation in the false response pattern above and beyond the interplay of integration strategies and the rarity and attractiveness of outcomes.
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "piecewise") %>% 
+  ggplot(aes(s, rate, color = a)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_jitter(size = 2) + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_color_viridis() + 
+  labs(title = "Piecewise Integration",
+       x = "s", 
+       y= "% False Responses", 
+       color = "a") + 
+  theme_minimal() 
+```
+
+```{r message=FALSE}
+fr_rates %>% 
+  filter(strategy == "comprehensive") %>% 
+  ggplot(aes(s, rate, color = a)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_jitter(size = 2) + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_color_viridis() + 
+  labs(title = "Comprehensive Integration",
+       x = "s", 
+       y= "% False Responses", 
+       color = "a") + 
+  theme_minimal() 
+```
+
+For piecewise integration, switching probability is naturally related to the size of the samples on which the round-wise comparisons of prospects are based on, with low values of $s$ indicating large samples and vice versa.
+Accordingly, switching probability is positively related to false response rates.
+I.e., the larger the switching probability, the smaller the round-wise sample size and the probability of experiencing a rare event within a given round.
+Because round-wise comparisons are independent of each other and binomial distributions within a given round are skewed for small samples and outcome probabilities [@kolmogorovFoundationsTheoryProbability1950], increasing boundary values do not reverse but rather amplify this relation.
+
+For comprehensive integration, switching probability is negatively related to false response rates, i.e., an increase in $s$ is associated with decreasing false response rates.
+This relation, however, may be the result of an artificial interaction between the $s$ and $a$ parameter.
+Precisely, in the current algorithmic implementation of sampling with a comprehensive integration mechanism, decreasing switching probabilities cause comparisons of prospects based on increasingly unequal sample sizes immediately after switching prospects.
+Consequentially, reaching (low) boundaries is rather a function of switching probability and associated sample sizes than of actual evidence for a given prospect over the other.
+
+### Cumulative Prospect Theory
+
+In the following, we examine the possible relations between the parameters of the *choice-generating* sampling models and the *choice-describing* cumulative prospect theory.
+
+For each distinct strategy-parameter combination, we ran 20 chains of 40,000 iterations each, after a warm-up period of 1000 samples.
+To reduce potential autocorrelation during the sampling process, we only kept every 20th sample (thinning).
+
+```{r}
+# read CPT data
+cols <- list(.default = col_double(),
+             strategy = col_factor(),
+             boundary = col_factor(),
+             parameter = col_factor())
+estimates <- read_csv("data/estimates/estimates_cpt_pooled_goldstein-einhorn-87.csv", col_types = cols)
+```
+
+#### Convergence
+
+```{r}
+gel_92 <- max(estimates$Rhat) # get largest scale reduction factor (Gelman & Rubin, 1992) 
+```
+
+The potential scale reduction factor $\hat{R}$ was $n \leq$ `r round(gel_92, 3)` for all estimates, indicating good convergence.
+
+#### Piecewise Integration
+
+```{r}
+# generate subset of all strategy-parameter combinations (rows) and their parameters (columns)
+curves_cpt <- estimates %>% 
+  select(strategy, s, boundary, a, parameter, mean) %>% 
+  pivot_wider(names_from = parameter, values_from = mean)
+```
+
+##### Weighting function w(p)
+
+We start by plotting the weighting curves for all parameter combinations under piecewise integration.
+
+```{r}
+
+cpt_curves_piecewise <- curves_cpt %>% 
+  filter(strategy == "piecewise") %>% 
+  expand_grid(p = seq(0, 1, .1)) %>% # add vector of objective probabilities
+  mutate(w = round(exp(-delta*(-log(p))^gamma), 2)) # compute decision weights (cf. Prelec, 1998)
+
+# all strategy-parameter combinations 
+
+cpt_curves_piecewise %>% 
+  ggplot(aes(p, w)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Piecewise Integration: Weighting functions",
+       x = "p", 
+       y= "w(p)") + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_piecewise %>% 
+  ggplot(aes(p, w)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Piecewise Integration: Weighting functions",
+       x = "p",
+       y= "w(p)",
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_piecewise %>% 
+  ggplot(aes(p, w, color = s)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Piecewise Integration: Weighting functions",
+       x = "p", 
+       y= "w(p)", 
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_piecewise %>% 
+  ggplot(aes(p, w, color = s)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Piecewise Integration: Weighting functions",
+       x = "p",
+       y= "w(p)",
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+##### Value function v(x)
+
+```{r}
+
+cpt_curves_piecewise <- curves_cpt %>% 
+  filter(strategy == "piecewise") %>% 
+  expand_grid(x = seq(0, 20, 2)) %>% # add vector of objective outcomes
+  mutate(v = round(x^alpha, 2)) # compute decision weights (cf. Prelec, 1998)
+
+# all strategy-parameter combinations 
+
+cpt_curves_piecewise %>% 
+  ggplot(aes(x, v)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Piecewise Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_piecewise %>% 
+  ggplot(aes(x, v, color = s)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Piecewise Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  scale_color_viridis() + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_piecewise %>% 
+  ggplot(aes(x, v, color = s)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Piecewise Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  scale_color_viridis() + 
+  theme_minimal() 
+```
+
+#### Comprehensive Integration
+
+##### Weighting function w(p)
+
+We start by plotting the weighting curves for all parameter combinations under piecewise integration.
+
+```{r}
+
+cpt_curves_comprehensive <- curves_cpt %>% 
+  filter(strategy == "comprehensive") %>% 
+  expand_grid(p = seq(0, 1, .1)) %>% # add vector of objective probabilities
+  mutate(w = round(exp(-delta*(-log(p))^gamma), 2)) # compute decision weights (cf. Prelec, 1998)
+
+# all strategy-parameter combinations 
+
+cpt_curves_comprehensive %>% 
+  ggplot(aes(p, w)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Comprehensive Integration: Weighting functions",
+       x = "p", 
+       y= "w(p)") + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(p, w)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Comprehensive Integration: Weighting functions",
+       x = "p", 
+       y= "w(p)") + 
+  facet_wrap(~a) + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(p, w, color = s)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Comprehensive Integration: Weighting functions",
+       x = "p", 
+       y= "w(p)", 
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(p, w, color = s)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Comprehensive Integration: Weighting functions",
+       x = "p",
+       y= "w(p)",
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  filter(s >= .7) %>% 
+  ggplot(aes(p, w, color = s)) + 
+  geom_path() +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Comprehensive Integration: Weighting functions",
+       x = "p",
+       y= "w(p)",
+       color = "Switching Probability") + 
+  scale_color_viridis() +
+  theme_minimal() 
+```
+
+##### Value function v(x)
+
+```{r}
+
+cpt_curves_comprehensive <- curves_cpt %>% 
+  filter(strategy == "comprehensive") %>% 
+  expand_grid(x = seq(0, 20, 2)) %>% # add vector of objective outcomes
+  mutate(v = round(x^alpha, 2)) # compute decision weights (cf. Prelec, 1998)
+
+
+# all strategy-parameter combinations 
+
+cpt_curves_comprehensive %>% 
+  ggplot(aes(x, v)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Comprehensive Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(x, v)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Comprehensive Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(x, v, color = s)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  labs(title = "Comprehensive Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  scale_color_viridis() + 
+  theme_minimal() 
+```
+
+```{r}
+cpt_curves_comprehensive %>% 
+  ggplot(aes(x, v, color = s)) + 
+  geom_path(size = .5) +
+  geom_abline(intercept = 0, slope = 1, color = "red", size = 1) +
+  facet_wrap(~a) + 
+  labs(title = "Comprehensive Integration: Value functions",
+       x = "p", 
+       y= "w(p)") + 
+  scale_color_viridis() + 
+  theme_minimal() 
+```
+
+# Discussion 
+
+# Conclusion
+
+# Appendix 
+
+Let  
+
+$$\begin{equation}
+X_1, ..., X_{N_X}
+\end{equation}$$
+
+and 
+
+$$\begin{equation}
+Y_1, ..., Y_{N_Y} 
+\end{equation}$$
+
+be sequences of random variables that are iid.
+Then
+
+$$\begin{equation}
+P\left(\frac{\overline{X}_{N_X}}{\overline{Y}_{N_Y}} > 0 \right) = 
+P\left(\frac{\frac{1}{N_X}\sum\limits_{n=1}^{N_X} (X(\omega_i) = A'_X \in \mathscr{F'}_X)_n} 
+{\frac{1}{N_Y}\sum\limits_{m=1}^{N_Y} (Y(\omega_j) = A'_Y \in \mathscr{F'}_Y)_m} > 0 \right)
+\end{equation}$$
+
+is the probability that the quotient of the mean of both sequences takes on a value larger $0$.
+Given the sample sizes $N_X = N_Y = 1$, the equation reduces to 
+
+$$\begin{equation}
+P\left(\frac{X(\omega_i \in \Omega_X) = A'_X \in \mathscr{F'}_X}{Y(\omega_j \in \Omega_Y) = A'_Y \in \mathscr{F'}_Y} > 0 \right) \; ,
+\end{equation}$$
+
+which is the sum across all joint probabilities $p(\omega_i \cap \omega_j)$ for which the above inequation holds:.
+
+
+$$\begin{equation}
+D:= 
+  f
+  \left(
+    \frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}}
+  \right) 
+  =
+  \begin{cases}
+    1 & \text{if} & \frac{\overline{X}_{N_X}}{\overline{Y}_{N_Y}} > 0 \in \mathscr{D} \\
+    0 & \text{else}. 
+  \end{cases} 
+\end{equation}$$
+
+# References
+
