@@ -1,0 +1,98 @@
+model
+{
+
+  # in the hierarchical model, agent level parameters are drawn from a group level distribution
+
+  # group level
+
+  ## we specify priors for the group level distributions on transformed scales to facilitate the hierarchical implementation (cf. Rouder & Lu, 2005; Nilsson, 2011)
+  ## prob is probit scale, log is the logarithmic scale
+  ## the priors on the prob and log scale translate to uninformative priors on the original line
+  ## we use uninformative priors for CPT parameters to facilitate comparison of different generative mechanisms
+
+  ## alpha
+
+  mu.alpha.prob ~ dnorm(0, 1)
+  tau.alpha.prob <- pow(sigma.alpha.prob, -2)
+  sigma.alpha.prob ~ dunif(0, 10)
+
+  ## gamma
+
+  mu.gamma.prob ~ dnorm(0, 1)
+  tau.gamma.prob <- pow(sigma.gamma.prob, -2)
+  sigma.gamma.prob ~ dunif(0, 10)
+
+  ## delta
+
+  mu.delta.prob ~ dnorm(0, 1)
+  tau.delta.prob <- pow(sigma.delta.prob, -2)
+  sigma.delta.prob ~ dunif(0, 10)
+
+  ## rho
+
+  mu.rho.log ~ dunif(-2.3, 1.61)
+  tau.rho.log <- pow(sigma.rho.log, -2)
+  sigma.rho.log ~ dunif(0, 1.13)
+
+  ## retransfrom group level means and extend scales to a reasonable range (cf. Scheibehenne & Pachur, 2015)
+
+  mu.alpha <- phi(mu.alpha.prob)
+  mu.gamma <- 2*phi(mu.gamma.prob)
+  mu.delta <- 10*phi(mu.delta.prob)
+  mu.rho <- exp(mu.rho.log)
+
+  # agent level
+
+  for (j in 1:n_agents)
+  {
+
+  ## transformed agent-level parameters are drawn from group-level normal distributions on the respective scale
+
+	alpha.prob[j] ~ dnorm(mu.alpha.prob, tau.alpha.prob) T(-3, 3)
+	gamma.prob[j] ~ dnorm(mu.gamma.prob, tau.gamma.prob) T(-3, 3)
+	delta.prob[j] ~ dnorm(mu.delta.prob, tau.delta.prob) T(-3, 3)
+	rho.log[j]   ~ dnorm(mu.rho.log, tau.rho.log)
+
+	## retransform parameters and extend scales to a reasonable range
+
+	alpha[j] <- phi(alpha.prob[j])
+	gamma[j] <- 2*phi(gamma.prob[j])
+	delta[j] <- 10*phi(delta.prob[j])
+  rho[j]   <- exp(rho.log[j])
+
+    # define CPT model
+
+    for (i in 1:n_gambles)
+	  {
+
+    # value function
+
+	  v.a.o1[i, j] <- pow(a_o1[i], alpha[j])
+	  v.a.o2[i, j] <- pow(a_o2[i], alpha[j])
+	  v.b.o1[i, j] <- pow(b_o1[i], alpha[j])
+  	v.b.o2[i, j] <- pow(b_o2[i], alpha[j])
+
+	  # weighting function (cf. Prelec, 1998)
+
+	  w.a.p2[i, j] <- exp(-delta[j]*(pow((-1*(log(a_p2_exp[i, j]))), gamma[j])))
+	  w.a.p1[i, j] <- 1-w.a.p2[i, j]
+	  w.b.p1[i, j] <- exp(-delta[j]*(pow((-1*(log(b_p1[i]))), gamma[j])))
+	  w.b.p2[i, j] <- 1-w.b.p1[i, j]
+
+	  Vf.a[i, j]  <- w.a.p1[i, j] * v.a.o1[i, j] + w.a.p2[i, j] * v.a.o2[i, j]
+	  Vf.b[i, j]  <- w.b.p1[i, j] * v.b.o1[i, j] + w.b.p2[i, j] * v.b.o2[i, j]
+
+	  # rescale subjective values to alleviate possible parameter intercorrelations (cf. Krefeld-Schwalb et al., 2021)
+
+	  Vf.a.re[i, j] <- pow(Vf.a[i, j], (1/alpha[j]))
+	  Vf.b.re[i, j] <- pow(Vf.b[i, j], (1/alpha[j]))
+
+	  # stochastic choice rule
+
+	  binval[i, j] <- (1)/(1+exp((-1*rho[j])*(Vf.a.re[i, j]-Vf.b.re[i, j])))
+	  choice[i, j] ~ dbern(binval[i, j])
+	  }
+  }
+}
+
+
