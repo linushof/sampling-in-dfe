@@ -1,7 +1,7 @@
 ---
 title: 'Sampling Strategies in Decisions from Experience'
 author: "Linus Hof, Thorsten Pachur, Veronika Zilker"
-bibliography: sampling-strategies-in-dfe.bib
+bibliography: references_sampling-in-dfe.bib
 output:
   html_document:
     code_folding: hide
@@ -116,21 +116,27 @@ We now consider choices between two prospects and the assumptions of Hills and H
 Let $X$ and $Y$ be random variables defined on the prospects $(\Omega, \mathscr{F}, P)_X$ and $(\Omega, \mathscr{F}, P)_Y$. 
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggest that any two sample sequences $X_i$ and $Y_i$ are compared by their means. 
-Let thus $C = \mathbb{R}$ be the set of all possible outcomes of such a mean comparison for given sequence lengths $N_X$ and $N_Y$ and 
+Let thus $C = \mathbb{R}$ be the set of all possible outcomes of the comparison of the means over two unordered sequences $X_i$ and $Y_i$ of given lengths $N_X$ and $N_Y$ and  
 
 $$\begin{equation}
-\mathscr{C} = \left\{ \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
+\mathscr{C} = \left\{B_1 = \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, B_2 = \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
 \right\}
 \end{equation}$$
 
 be a set of subsets of $C$, indicating that comparisons of prospects on the ordinal (rather than on the metric) scale are of primary interest. 
 The outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
-To integrate the concept of evidence accumulation into the current model, we let $D$ be a measurable function that maps the possible outcomes of a mean comparison in $C$ onto a measure space $C' = \{0,1\}$, with $0$ ($1$) indicating a lost (won) comparison:
+To integrate the concept of evidence accumulation into the current model, we let $D$ be a measurable function 
 
 $$\begin{equation}
-D(c \in C) = 
+D: C \mapsto C'
+\end{equation}$$
+
+that maps the possible outcomes of a mean comparison in $C$ onto a measure space $C' = \{0,1\}$, with $0$ ($1$) indicating a lost (won) comparison:
+
+$$\begin{equation}
+D(c \in C) \in C' = 
   \begin{cases}
-    1 & \text{for} & \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0) \in \mathscr{C} \} \\
+    1 & \text{for} & \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\}  \in \mathscr{C} \\
     0 & \text{else}. 
   \end{cases} 
 \end{equation}$$
@@ -138,10 +144,10 @@ D(c \in C) =
 It can be shown that for fixed sequence lengths $N_X$ and $N_Y$, a sequence $D_i = D_1, ..., D_n$ is a Bernoulli process following the binomial distribution
 
 $$\begin{equation}
-D \sim B\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
+D \sim \mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
 \end{equation}$$
 
-where $p$ is the probability of $X$ winning a single mean comparison and $n$ is the number of comparisons (see [Appendix]).
+where $p$ is the probability of $X$ winning a single mean comparison and $n$ is the number of comparisons (see [Proof A1][Proof A1: Distribution of the Decision Variable]).
 However, although $p$ can in principle be determined, it becomes intractable with increasing elements in $\Omega$ and growing sequence lengths. 
 
 ## Predicting Choice Behavior in DfE 
@@ -817,49 +823,53 @@ cpt_curves_comprehensive %>%
 
 # Appendix 
 
-Let  
+## Proof A1: Distribution of the Decision Variable
+
+To proof is that a sequence $D_i = D_1, ..., D_n$ of decision variables with the mapping
 
 $$\begin{equation}
-X_1, ..., X_{N_X}
-\end{equation}$$
-
-and 
-
-$$\begin{equation}
-Y_1, ..., Y_{N_Y} 
-\end{equation}$$
-
-be sequences of random variables that are iid.
-Then
-
-$$\begin{equation}
-P\left(\frac{\overline{X}_{N_X}}{\overline{Y}_{N_Y}} > 0 \right) = 
-P\left(\frac{\frac{1}{N_X}\sum\limits_{n=1}^{N_X} (X(\omega_i) = A'_X \in \mathscr{F'}_X)_n} 
-{\frac{1}{N_Y}\sum\limits_{m=1}^{N_Y} (Y(\omega_j) = A'_Y \in \mathscr{F'}_Y)_m} > 0 \right)
-\end{equation}$$
-
-is the probability that the quotient of the mean of both sequences takes on a value larger $0$.
-Given the sample sizes $N_X = N_Y = 1$, the equation reduces to 
-
-$$\begin{equation}
-P\left(\frac{X(\omega_i \in \Omega_X) = A'_X \in \mathscr{F'}_X}{Y(\omega_j \in \Omega_Y) = A'_Y \in \mathscr{F'}_Y} > 0 \right) \; ,
-\end{equation}$$
-
-which is the sum across all joint probabilities $p(\omega_i \cap \omega_j)$ for which the above inequation holds:.
-
-
-$$\begin{equation}
-D:= 
-  f
-  \left(
-    \frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}}
-  \right) 
-  =
+D(c \in C) \in C' = 
   \begin{cases}
-    1 & \text{if} & \frac{\overline{X}_{N_X}}{\overline{Y}_{N_Y}} > 0 \in \mathscr{D} \\
-    0 & \text{else}. 
-  \end{cases} 
+    1 & \text{for} & B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C}  \\
+    0 & \text{else},
+  \end{cases}
 \end{equation}$$
+
+describes a Bernoulli process following a binomial distribution $\mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right)$ for fixed sequence lengths $N_X$ and $N_Y$.
+Therefore, $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$ must be identified.
+To demonstrate that this is the case, we assume independence of all random variables $X_i$ and $Y_i$: 
+
+$$\begin{equation}
+  \begin{split}
+    p(D = 1) & = p\left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\ \\
+    
+     & = \sum_{c=1}^{|B_1|} \left( \;
+      p(\overline{X}_{N_X})  \times p(\overline{Y}_{N_Y}) \;
+    \right)_{c \in B_1} \\ \\
+    
+    & = \sum_{c=1}^{|B_1|} \left( \; 
+      p\left( \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X_i(\omega \in \Omega_X)\right) 
+      \times
+      p\left( \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y_i(\omega \in \Omega_Y)\right) \;
+    \right)_{c \in B_1}
+    \; ,
+  \end{split}
+\end{equation}$$
+
+where the index $k = 1, ..., N_k$ can be paraphrased as follows: 
+For given sequence lengths $N_X$ and $N_Y$, $k$ denotes a pair of the two sequences $X_i$ and $Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs and which satisfies the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
+
+As the unordered sequence $k_{\omega_1}, ..., k_{\omega_n}$ follows the multinomial distribution $\mathcal{M}(N_X, p(\omega_1), ..., p(\omega_n))$, its probability is determined by the probability mass function
+
+$$\begin{equation}
+  \begin{split}
+    P(k_{\omega_1}, ..., k_{\omega_n}) &= {N_X\choose k_{\omega_1}, ..., k_{\omega_n} } \prod_{\omega \in \Omega_X} p(\omega)^{k_{\omega}} \\ \\
+    & = 
+    \; ,
+  \end{split}
+\end{equation}$$
+
+reduces to: 
 
 # References
 
