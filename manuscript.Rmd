@@ -89,7 +89,7 @@ Consider now a choice between prospects $1, ..., k$.
 To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
 
 $$\begin{equation}
-D:= f((\Omega, \mathscr{F}, P)_1, ..., (\Omega, \mathscr{F}, P)_k)
+D:= f((\Omega_1, \mathscr{F}_1, P_1), ..., (\Omega_k, \mathscr{F}_k, P_k))
 \;.
 \end{equation}$$
 
@@ -100,7 +100,7 @@ D := f(X_{i1}, ..., X_{ik})
 \; ,
 \end{equation}$$
 
-where $i = 1, ..., N$ denotes a sequence of length $N$ of random variables that are iid.  
+where $i = \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
 
 Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
 Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
@@ -113,10 +113,12 @@ In contrast, if single samples originating from the same prospect are generated 
 
 We now consider choices between two prospects and the assumptions of Hills and Hertwig [-@hillsInformationSearchDecisions2010] in more detail to build the respective stochastic sampling model for DfE.
 
-Let $X$ and $Y$ be random variables defined on the prospects $(\Omega, \mathscr{F}, P)_X$ and $(\Omega, \mathscr{F}, P)_Y$. 
+Let $X$ and $Y$ be random variables defined on the prospects $(\Omega_X, \mathscr{F}_X, P_X)$ and $(\Omega_Y, \mathscr{F}_Y, P_Y)$. 
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggest that any two sample sequences $X_i$ and $Y_i$ are compared by their means. 
-Let thus $C = \mathbb{R}$ be the set of all possible outcomes of the comparison of the means over two unordered sequences $X_i$ and $Y_i$ of given lengths $N_X$ and $N_Y$ and  
+Let thus $C = \mathbb{R}$ be the set of all possible outcomes of the comparison of the means over two unordered sequences $X_i$ and $Y_i$ of given lengths $N_X$ and $N_Y$.
+That is, each element $c \in C$ represents a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs. 
+Let then
 
 $$\begin{equation}
 \mathscr{C} = \left\{B_1 = \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, B_2 = \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
@@ -124,7 +126,8 @@ $$\begin{equation}
 \end{equation}$$
 
 be a set of subsets of $C$, indicating that comparisons of prospects on the ordinal (rather than on the metric) scale are of primary interest. 
-The outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
+We denote a single ordinal comparison by the event space $(C, \mathscr{C})$.
+The observed outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
 To integrate the concept of evidence accumulation into the current model, we let $D$ be a measurable function 
 
 $$\begin{equation}
@@ -141,14 +144,27 @@ D(c \in C) \in C' =
   \end{cases} 
 \end{equation}$$
 
-It can be shown that for fixed sequence lengths $N_X$ and $N_Y$, a sequence $D_i = D_1, ..., D_n$ is a Bernoulli process following the binomial distribution
+It can be shown that for fixed sequence lengths $N_X$ and $N_Y$, a sequence $D_i = D_1, ..., D_n$ representing multiple independent comparisons is a Bernoulli process where the number of won comparisons follows the binomial distribution
 
 $$\begin{equation}
 D \sim \mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
 \end{equation}$$
 
-where $p$ is the probability of $X$ winning a single mean comparison and $n$ is the number of comparisons (see [Proof A1][Proof A1: Distribution of the Decision Variable]).
-However, although $p$ can in principle be determined, it becomes intractable with increasing elements in $\Omega$ and growing sequence lengths. 
+with $p$ denoting probability of $X_i$ winning a single comparison, i.e., the probability of success, and $n$ denoting the number of comparisons.
+
+It becomes evident that the two combinations of sampling and decision strategies proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010] are reflected in certain restrictions on the free parameters $N_X, N_Y$ and $n$ of the sampling model and that these restrictions translate to the shape of the binomial distribution, straightforwardly via the parameter $n$, more interestingly, however, via its parameter $p$. 
+
+I.e., first, whether a single (summary decision) or multiple ordinal comparisons (round-wise decision) are conducted, is reflected by the length of the sequence $D_i = D_1, ..., D_n$ with $n = 1$ for summary decisions and $n \geq 1$ for round-wise decisions. 
+The idea that multiple comparisons may be conducted can be formalized by extending the event space $(C, \mathscr{C})$ of a single comparison to its $n$-fold product 
+
+$$\begin{equation}
+\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathscr{C}_i \right)
+\; .
+\end{equation}$$
+
+Second, whether comparisons are conducted on the basis of longer sample sequences (comprehensive sampling) or single samples (piecewise sampling) is reflected by the lengths of sample sequences from the same prospect with $N_X, N_Y \geq 1$ for comprehensive sampling and $N_X = N_Y = 1$ for piecewise sampling. 
+
+although $p$ can in principle be determined (see [Appendix][A1. Determining the Probability of Success in a Comparison of Sample Means]), it becomes intractable with increasing elements in $\Omega$ and growing sequence lengths. 
 
 ## Predicting Choice Behavior in DfE 
 
@@ -823,51 +839,72 @@ cpt_curves_comprehensive %>%
 
 # Appendix 
 
-## Proof A1: Distribution of the Decision Variable
+## A1. Determining the Probability of Success in a Comparison of Sample Means
 
-To proof is that a sequence $D_i = D_1, ..., D_n$ of decision variables with the mapping
+To proof is that the sequence $D_i = D_1, ..., D_n$ (see [Definition of D][A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies]) describes a Bernoulli process following the binomial distribution $\mathcal{B}\left(p(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0), n \right)$ for fixed sequence lengths $N_X$ and $N_Y$.
 
-$$\begin{equation}
-D(c \in C) \in C' = 
-  \begin{cases}
-    1 & \text{for} & B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C}  \\
-    0 & \text{else},
-  \end{cases}
-\end{equation}$$
+Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified.
 
-describes a Bernoulli process following a binomial distribution $\mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right)$ for fixed sequence lengths $N_X$ and $N_Y$.
-Therefore, $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$ must be identified.
-To demonstrate that this is the case, we assume independence of all random variables $X_i$ and $Y_i$: 
+We start by setting the probability of success equal to the probability of $B_1 \in \mathscr{C}$ which is the subset of the set of all mean comparisons resulting from the pairs $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ satisfying the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$. 
+
 
 $$\begin{equation}
   \begin{split}
-    p(D = 1) & = p\left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\ \\
-    
-     & = \sum_{c=1}^{|B_1|} \left( \;
-      p(\overline{X}_{N_X})  \times p(\overline{Y}_{N_Y}) \;
-    \right)_{c \in B_1} \\ \\
-    
-    & = \sum_{c=1}^{|B_1|} \left( \; 
-      p\left( \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X_i(\omega \in \Omega_X)\right) 
-      \times
-      p\left( \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y_i(\omega \in \Omega_Y)\right) \;
-    \right)_{c \in B_1}
-    \; ,
+    p(D = 1) 
+      & = p \left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\\\\\ 
+      & = \sum_{c=1}^{|B_1|} \left( \;
+          p(\overline{X}_{N_X})  
+          \times 
+          p(\overline{Y}_{N_Y}) \; 
+        \right)_{c \, \in \, B_1} \\\\\\
+      & = \sum_{c=1}^{|B_1|} \left( \; 
+        p \left( 
+          \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X_i(\omega \in \Omega_X)
+        \right) 
+        \times
+        p \left( 
+          \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y_i(\omega \in \Omega_Y)
+        \right) \; 
+        \right)_{c \, \in \, B_1} \\\\\\
+      & = \sum_{c=1}^{|B_1|} \left( \;
+        \left(
+          {N_X\choose k_{\omega_{1X}}, ..., k_{\omega_{nX}} } \prod_{\omega_{iX} \in \Omega_X} p(\omega_{iX})^{k_{\omega_{iX}}}
+        \right)
+        \times
+        \left(
+        {N_Y\choose k_{\omega_{1Y}}, ..., k_{\omega_{nY}} } \prod_{\omega_{iY} \in \Omega_Y} p(\omega_{iY})^{k_{\omega_{iY}}}
+        \right)
+        \right)_{c \, \in \, B_1} \\\\\\
+      & = \sum_{c=1}^{|B_1|} \left( \;
+        \left(
+          \frac{N_X!}{k_{\omega_{1X}}! \times ... \times k_{\omega_{nX}}!} 
+          \times 
+          p(\omega_{1X})^{k_{\omega_{1X}}} 
+          \times 
+          ... 
+          \times p(\omega_{nX})^{k_{\omega_{nX}}}
+        \right)
+        \times
+        \left(
+          \frac{N_Y!}{k_{\omega_{1Y}}! \times ... \times k_{\omega_{nY}}!} 
+          \times 
+          p(\omega_{1Y})^{k_{\omega_{1Y}}} 
+          \times 
+          ... 
+          \times p(\omega_{nY})^{k_{\omega_{nY}}}
+        \right)
+      \right)_{c \, \in \, B_1}
   \end{split}
 \end{equation}$$
 
-where the index $k = 1, ..., N_k$ can be paraphrased as follows: 
-For given sequence lengths $N_X$ and $N_Y$, $k$ denotes a pair of the two sequences $X_i$ and $Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs and which satisfies the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
+where $|B_1|$ denotes the cardinality of the set $B_1$. 
+The above equation can be paraphrased as follows: 
+The probability that an unordered sequence $X_i$ of length $N_X$ has a higher mean than an unordered sequence $Y_i$ of length $N_Y$ is given by the sum of the probabilities of all $|B_1|$ pairs $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs and which satisfies the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
 
-As the unordered sequence $k_{\omega_1}, ..., k_{\omega_n}$ follows the multinomial distribution $\mathcal{M}(N_X, p(\omega_1), ..., p(\omega_n))$, its probability is determined by the probability mass function
+Let $k_{\omega}$ be the number of times an outcome $\omega \in \Omega$ occurs in the sequence $X_i$. As the unordered sequence $k_{\omega_1}, ..., k_{\omega_n}$ follows the multinomial distribution $\mathcal{M}(N_X, p(\omega_1), ..., p(\omega_n))$, its probability is determined by the probability mass function
 
-$$\begin{equation}
-  \begin{split}
-    P(k_{\omega_1}, ..., k_{\omega_n}) &= {N_X\choose k_{\omega_1}, ..., k_{\omega_n} } \prod_{\omega \in \Omega_X} p(\omega)^{k_{\omega}} \\ \\
-    & = 
-    \; ,
-  \end{split}
-\end{equation}$$
+
+
 
 reduces to: 
 
