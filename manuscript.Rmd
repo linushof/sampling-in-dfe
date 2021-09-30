@@ -18,18 +18,20 @@ editor_options:
 
 ```{r}
 # load packages
-pacman::p_load(repro,
-               tidyverse,
+pacman::p_load(tidyverse,
                knitr, 
                viridis)
 ```
 
+This document was created from the commit with the hash `r repro::current_hash()`.
+
 # Author Note
 
-This document was created from the commit with the hash `r repro::current_hash()`. 
+All materials of this work in progress can be found on the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe
 
-- Add information on how to reproduce the project.
-- Add contact.
+- Add information on how to reproduce the project
+
+- Add contact
 
 # Abstract
 
@@ -164,36 +166,15 @@ $$\begin{equation}
 
 Second, whether comparisons are conducted on the basis of longer sample sequences (comprehensive sampling) or single samples (piecewise sampling) is reflected by the lengths of sample sequences from the same prospect with $N_X, N_Y \geq 1$ for comprehensive sampling and $N_X = N_Y = 1$ for piecewise sampling. 
 
-although $p$ can in principle be determined (see [Appendix][A1. Determining the Probability of Success in a Comparison of Sample Means]), it becomes intractable with increasing elements in $\Omega$ and growing sequence lengths. 
+Note that, in order to derive predictions of the choice behavior from the stochastic model, the probability of success $p$ and therefore, necessarily, the probability of each possible outcome $c \in C$ of a mean comparison must be identified.
+Although this can be demonstrated for random variables defined on prospects of the kind considered so far (see [Appendix 1][Appendix 1: Determining the Probability of Success in a Comparison of Sample Means]), it becomes soon intractable with increasing elements in $\Omega$ and growing sequence lengths. 
+However, in the following section and a subsequent simulation analysis, we demonstrate that the combinations of sampling and decision strategies and their corresponding parameter values in the stochastic model produce some principle and predictable trends in the choice behavior that can be modeled in the cumulative prospect theory.     
 
-## Predicting Choice Behavior in DfE 
+## Predicting Choice Behavior 
 
-Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed the two different sampling strategies in combination with the respective decision strategies, i.e., piecewise sampling and round-wise comparison vs. comprehensive sampling and summary comparison, as an explanation for different choice patterns in DfE. 
-How does the current version of the SSM support this proposition? 
-Given prospects $X$ and $Y$, the sample spaces $S = \left\{\frac{\overline{X}_{N_X}} {\overline{Y}_{N_Y}}\right\}^{\mathbb{N}}$ can be varied by changes on three parameters, i.e., the number of comparisons $\mathbb{N}$ and the sample sizes $N_X$ and $N_Y$ on which these comparisons are based.
-First, only considering the pure cases formulated by the above authors, the following restrictions are put the parameters:
+Note first that the current stochastic sampling model allows to treat sampling and decision strategies independently by parameterization of both lengths of sample sequences and the number of comparisons.    
 
-$$\begin{equation}
-\mathbb{N}
-  =
-  \begin{cases}
-    1 & \text{if} & \text{Summary} \\ 
-    \geq 1 & \text{if} & \text{Round-wise}  
-  \end{cases}\\
-\end{equation}$$
- 
-and 
-
-$$\begin{equation}
-N_X \, \text{and} \, N_Y
-  =
-  \begin{cases}
-    \geq 1 & \text{if} & \text{Summary} \\ 
-    1 & \text{if} & \text{Round-wise}  
-  \end{cases}\\
-\end{equation}$$
-
-For the summary strategy, the following prediction is obtained: 
+... 
 
 Given that 
 
@@ -218,24 +199,6 @@ P\left(\lim_{N_X \to \infty} \lim_{N_Y \to \infty} \frac{\overline{X}_{N_X}} {\o
 
 I.e., for the summary strategy, we assume that for increasing sample sizes $N_X$ and $N_Y$, the prospect with the larger expected value is chosen almost surely.  
 
-For the round-wise strategy, the following prediction is obtained:
-
-Given that $N_X$ and $N_Y$ are set to 1, $D$ follows the binomial distribution 
-
-$$\begin{equation}
-B(k \, | \, p_X, \mathbb{N}) \; ,
-\end{equation}$$
-
-where $p$ is the probability that a single sample of prospect $X$ is larger than a single sample of prospect $Y$, $\mathbb{N}$ is the number of comparisons and $k$ is the number of times $x \in X$ is larger than $y \in Y$. 
-
-*Proof.*
-
-For $N_X = N_Y = 1$, the sample space is 
-
-$$\begin{equation}
-\left\{\frac{\overline{X}_{N_X = 1}} {\overline{Y}_{N_Y = 1}} \right\}^{\mathbb{N}} =
-\left\{\frac{x_i \in \Omega'_X} {y_j \in \Omega'_Y}\right\}^{\mathbb{N}}
-\end{equation}$$
 
 # Method
 
@@ -247,14 +210,9 @@ Therefore, 60 gambles from an initial set of 10,000 are sampled.
 Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the lower risky outcomes $p_{low}$.
 The probabilities of the higher risky outcomes are $1-p_{low}$, respectively.
 To omit dominant prospects, safe outcomes fall between both risky outcomes.
-The table below contains the test set of 60 gambles.
+Table A1 contains the test set of 60 gambles [Appendix 2][Appendix 2: Prospect Test Set].
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
-
-```{r message=FALSE}
-gambles <- read_csv("data/gambles/sr_subset.csv")
-gambles %>% kable()
-```
 
 ## Model Parameters
 
@@ -839,25 +797,22 @@ cpt_curves_comprehensive %>%
 
 # Appendix 
 
-## A1. Determining the Probability of Success in a Comparison of Sample Means
+## Appendix 1: Determining the Probability of Success in a Comparison of Sample Means
 
-To proof is that the sequence $D_i = D_1, ..., D_n$ (see [Definition of D][A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies]) describes a Bernoulli process following the binomial distribution $\mathcal{B}\left(p(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0), n \right)$ for fixed sequence lengths $N_X$ and $N_Y$.
+To proof is that the sequence $D_i = D_1, ..., D_n$ (see [Definition of D][A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies]) describes a Bernoulli process with the number of won comparisons following the binomial distribution $\mathcal{B}\left(p(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0), n \right)$ for fixed sequence lengths $N_X$ and $N_Y$.
 
-Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified.
-
-We start by setting the probability of success equal to the probability of $B_1 \in \mathscr{C}$ which is the subset of the set of all mean comparisons resulting from the pairs $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ satisfying the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$. 
-
+Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified:
 
 $$\begin{equation}
   \begin{split}
     p(D = 1) 
       & = p \left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\\\\\ 
-      & = \sum_{c=1}^{|B_1|} \left( \;
+      & = \sum_{c_i=1}^{|B_1|} \left( \;
           p(\overline{X}_{N_X})  
           \times 
           p(\overline{Y}_{N_Y}) \; 
-        \right)_{c \, \in \, B_1} \\\\\\
-      & = \sum_{c=1}^{|B_1|} \left( \; 
+        \right)_{c_i \, \in \, B_1} \\\\\\
+      & = \sum_{c_i=1}^{|B_1|} \left( \; 
         p \left( 
           \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X_i(\omega \in \Omega_X)
         \right) 
@@ -865,8 +820,8 @@ $$\begin{equation}
         p \left( 
           \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y_i(\omega \in \Omega_Y)
         \right) \; 
-        \right)_{c \, \in \, B_1} \\\\\\
-      & = \sum_{c=1}^{|B_1|} \left( \;
+        \right)_{c_i \, \in \, B_1} \\\\\\
+      & = \sum_{c_i=1}^{|B_1|} \left( \;
         \left(
           {N_X\choose k_{\omega_{1X}}, ..., k_{\omega_{nX}} } \prod_{\omega_{iX} \in \Omega_X} p(\omega_{iX})^{k_{\omega_{iX}}}
         \right)
@@ -874,8 +829,8 @@ $$\begin{equation}
         \left(
         {N_Y\choose k_{\omega_{1Y}}, ..., k_{\omega_{nY}} } \prod_{\omega_{iY} \in \Omega_Y} p(\omega_{iY})^{k_{\omega_{iY}}}
         \right)
-        \right)_{c \, \in \, B_1} \\\\\\
-      & = \sum_{c=1}^{|B_1|} \left( \;
+        \right)_{c_i \, \in \, B_1} \\\\\\
+      & = \sum_{c_i=1}^{|B_1|} \left( \;
         \left(
           \frac{N_X!}{k_{\omega_{1X}}! \times ... \times k_{\omega_{nX}}!} 
           \times 
@@ -893,20 +848,22 @@ $$\begin{equation}
           ... 
           \times p(\omega_{nY})^{k_{\omega_{nY}}}
         \right)
-      \right)_{c \, \in \, B_1}
+      \right)_{c_i \, \in \, B_1}
+      \; ,
   \end{split}
 \end{equation}$$
 
-where $|B_1|$ denotes the cardinality of the set $B_1$. 
-The above equation can be paraphrased as follows: 
-The probability that an unordered sequence $X_i$ of length $N_X$ has a higher mean than an unordered sequence $Y_i$ of length $N_Y$ is given by the sum of the probabilities of all $|B_1|$ pairs $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs and which satisfies the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
-
-Let $k_{\omega}$ be the number of times an outcome $\omega \in \Omega$ occurs in the sequence $X_i$. As the unordered sequence $k_{\omega_1}, ..., k_{\omega_n}$ follows the multinomial distribution $\mathcal{M}(N_X, p(\omega_1), ..., p(\omega_n))$, its probability is determined by the probability mass function
+where $|B_1|$ denotes the cardinality of the set $B_1$, $c_i \in B_1$ a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs, and $k$ denotes the number of times $\omega$ was observed within a sequence. 
 
 
+## Appendix 2: Prospect Test Set
+
+```{r message=FALSE}
+gambles <- read_csv("data/gambles/sr_subset.csv")
+gambles %>% kable()
+```
 
 
-reduces to: 
 
 # References
 
