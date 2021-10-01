@@ -135,5 +135,5 @@ for (set in seq_len(nrow(theta))) {  # loop over parameter combinations
   all_gambles <- gamble_list %>% map_dfr(as.list)
   param_list[[set]] <- expand_grid(theta[set, ], all_gambles)
 }
-sim_piecewise <- param_list %>% map_dfr(as.list)
-write_csv(sim_piecewise, "data/simulation/sim_piecewise.csv")
+simulation <- param_list %>% map_dfr(as.list)
+write_csv(simulation, "data/simulation/simulation.csv")
