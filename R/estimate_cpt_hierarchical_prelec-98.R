@@ -4,7 +4,6 @@ source("R/fun_inits_MCMC_hierarchical.R") # call function creating initial value
 # read choice data
 
 cols <- list(.default = col_double(),
-             strategy = col_factor(),
              boundary = col_factor(),
              gamble = col_factor(),
              rare = col_factor(),
@@ -14,29 +13,28 @@ choices <- read_csv("data/choices/choices.csv", col_types = cols)
 
 # prepare data for JAGS
 
-choices_cpt <- choices %>%
-  filter(!(is.na(a_ev_exp) | is.na(b_ev_exp))) %>% # remove choices where prospect were not attended
-  mutate(choice_A = if_else(choice == "A", 1, 0))
+choices <- choices %>%
+  mutate(choice_A = if_else(choice == "A", 1, 0)) # to apply logit choice rule
 
-gambles <- choices_cpt %>% select(gamble:ev_ratio) %>% distinct()
+gambles <- choices %>% select(gamble:ev_ratio) %>% distinct()
 n_gambles <- nrow(gambles)
-n_agents <- choices_cpt %>% distinct(agent) %>% nrow()
+n_agents <- choices %>% distinct(agent) %>% nrow()
 
 ## group trials of distinct strategy-parameter combinations of the generating model
 
-params_sim <- choices_cpt %>% distinct(strategy, s, boundary, a) # to get distinct strategy-parameter combinations
+params_sim <- choices %>% distinct(s, boundary, a) # to get distinct strategy-parameter combinations
 params_grouped <- vector("list", nrow(params_sim))
 
-choices_cpt_grouped <- vector("list", nrow(params_sim))
+choices_grouped <- vector("list", nrow(params_sim))
 a_p1_exp_grouped <- vector("list", nrow(params_sim))
 a_p2_exp_grouped <- vector("list", nrow(params_sim))
 
 for(set in seq_len(nrow(params_sim))){
 
-  params_grouped[[set]] <- choices_cpt %>%
-    filter(strategy == params_sim[[set, "strategy"]] & s == params_sim[[set, "s"]] & boundary == params_sim[[set, "boundary"]] & a == params_sim[[set, "a"]])
+  params_grouped[[set]] <- choices %>%
+    filter(s == params_sim[[set, "s"]] & boundary == params_sim[[set, "boundary"]] & a == params_sim[[set, "a"]])
 
-  choices_cpt_grouped[[set]] <- params_grouped[[set]] %>%
+  choices_grouped[[set]] <- params_grouped[[set]] %>%
     select(gamble, agent, choice_A) %>%
     pivot_wider(names_from = "agent", values_from = "choice_A", names_prefix = "Ag_") %>%
     select(-gamble)
@@ -55,7 +53,6 @@ for(set in seq_len(nrow(params_sim))){
 # allocate space for JAGS output
 
 estimates_cpt <- vector("list", nrow(params_sim)) # posterior statistics and MCMC diagnostics
-posteriors_cpt <- vector("list", nrow(params_sim)) # posterior distributions
 
 # MCMC simulation
 
@@ -66,7 +63,7 @@ for(set in seq_len(nrow(params_sim))){
 
   ## get trials of the respective strategy-parameter combination
 
-  current_trials <- list(choice = choices_cpt_grouped[[set]],
+  current_trials <- list(choice = choices_grouped[[set]],
                          a_o1 = gambles$a_o1,
                          a_o2 = gambles$a_o2,
                          b_o1 = gambles$b_o1,
@@ -100,5 +97,5 @@ for(set in seq_len(nrow(params_sim))){
 # save data
 
 estimates_cpt <- estimates_cpt %>% map_dfr(as.list)
-write_csv(estimates_cpt, "data/estimates/estimates_cpt_hierarchical_prelec-98.csv")
+write_csv(estimates_cpt, "data/estimates/estimates_cpt.csv")
 
