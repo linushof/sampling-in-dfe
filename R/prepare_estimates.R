@@ -6,6 +6,7 @@ cols <- list(.default = col_double(),
              parameter = col_guess())
 cpt <- read_csv("data/estimates/estimates_hierarchical_cpt.csv", col_types = cols)
 
+cpt <- cpt %>% filter(parameter != "deviance")
 
 # separate parameter type from hierarchy level
 cpt <- cpt %>%
