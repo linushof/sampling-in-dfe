@@ -1,5 +1,5 @@
 pacman::p_load(tidyverse, R2jags)
-source("R/fun_inits_MCMC_hierarchical.R") # call function creating initial values for MCMC
+source("R/fun_inits_MCMC.R") # call function creating initial values for MCMC
 
 # read choice data
 
@@ -78,9 +78,9 @@ for(set in seq_len(nrow(params_sim))){
   ## sample from posterior distributions using MCMC
 
   current_sample <- jags.parallel(data = current_trials,
-                                  inits = inits_MCMC_hierarchical,
+                                  inits = inits_MCMC,
                                   parameters.to.save = params_cpt,
-                                  model.file = "JAGS/cpt_hierarchical_prelec-98.txt",
+                                  model.file = "JAGS/hierarchical_cpt.txt",
                                   n.chains = n_chains,
                                   n.iter = 21000,
                                   n.burnin = 1000,
