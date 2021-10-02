@@ -7,9 +7,8 @@ output:
     code_folding: hide
     toc: yes
     toc_float: yes
-    number_sections: no
-  pdf_document:
-    toc: yes
+    fig_width: 10
+    fig_height: 7
 csl: apa.csl
 editor_options: 
   markdown: 
@@ -25,7 +24,7 @@ pacman::p_load(tidyverse,
                )
 ```
 
-This document was created from the commit with the hash `r repro::current_hash()`.
+This document was created from the commit with the hash ``r repro::current_hash()``
 
 # Author Note
 
@@ -43,7 +42,7 @@ Synthetic choice data is simulated and modeled in cumulative prospect theory to 
 
 # Introduction
 
-[...]
+...
 
 ## Sampling in Decisions from Experience 
 
@@ -104,12 +103,12 @@ D := f(X_{i1}, ..., X_{ik})
 \; ,
 \end{equation}$$
 
-where $i = \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
+where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
 
 Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
 Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
 
-## A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies  
+## Capturing Differences in Sampling and Decision Strategies  
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] discussed a potential link between sampling and decision strategies in DfE. 
 Specifically, the authors suppose that if single samples originating from different prospects are generated in direct succession (piecewise sampling), the evaluation of prospects is based on multiple ordinal comparisons of single samples (round-wise decisions).
@@ -132,7 +131,7 @@ $$\begin{equation}
 be a set of subsets of $C$, indicating that comparisons of prospects on the ordinal (rather than on the metric) scale are of primary interest. 
 We denote a single ordinal comparison by the event space $(C, \mathscr{C})$.
 The observed outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
-To integrate the concept of evidence accumulation into the current model, we let $D$ be a measurable function 
+To integrate the concept of evidence accumulation into the current model, we let the decision variable $D$ be a measurable function 
 
 $$\begin{equation}
 D: C \mapsto C'
@@ -156,54 +155,64 @@ D \sim \mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\rig
 
 with $p$ denoting probability of $X_i$ winning a single comparison, i.e., the probability of success, and $n$ denoting the number of comparisons.
 
-It becomes evident that the two combinations of sampling and decision strategies proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010] are reflected in certain restrictions on the free parameters $N_X, N_Y$ and $n$ of the sampling model and that these restrictions translate to the shape of the binomial distribution, straightforwardly via the parameter $n$, more interestingly, however, via its parameter $p$. 
+It becomes evident that the two combinations of sampling and decision strategies proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010] are reflected in certain restrictions on the free parameters $N_X, N_Y$ and $n$ of the sampling model and that these restrictions translate to the shape of the binomial distribution associated to the decision variables, straightforwardly via the parameter $n$, more interestingly, however, via its parameter $p$. 
 
-I.e., first, whether a single (summary decision) or multiple ordinal comparisons (round-wise decision) are conducted, is reflected by the length of the sequence $D_i = D_1, ..., D_n$ with $n = 1$ for summary decisions and $n \geq 1$ for round-wise decisions. 
+I.e., first, whether a single (summary decision) or multiple ordinal comparisons (round-wise decision) are conducted, is reflected by the length of the sequence $D_i = D_1, ..., D_n$, with $n = 1$ for summary decisions and $n \geq 1$ for round-wise decisions. 
 The idea that multiple comparisons may be conducted can be formalized by extending the event space $(C, \mathscr{C})$ of a single comparison to its $n$-fold product 
 
 $$\begin{equation}
 \left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathscr{C}_i \right)
-\; .
+\; ,
 \end{equation}$$
 
-Second, whether comparisons are conducted on the basis of longer sample sequences (comprehensive sampling) or single samples (piecewise sampling) is reflected by the lengths of sample sequences from the same prospect with $N_X, N_Y \geq 1$ for comprehensive sampling and $N_X = N_Y = 1$ for piecewise sampling. 
+where $i \in \{1, ..., n\}$ denotes the number of comparisons. 
 
-Note that, in order to derive predictions of the choice behavior from the stochastic model, the probability of success $p$ and therefore, necessarily, the probability of each possible outcome $c \in C$ of a mean comparison must be identified.
-Although this can be demonstrated for random variables defined on prospects of the kind considered so far (see [Appendix 1][Appendix 1: Determining the Probability of Success in a Comparison of Sample Means]), it becomes soon intractable with increasing elements in $\Omega$ and growing sequence lengths. 
-However, in the following section and a subsequent simulation analysis, we demonstrate that the combinations of sampling and decision strategies and their corresponding parameter values in the stochastic model produce some principle and predictable trends in the choice behavior that can be modeled in the cumulative prospect theory.     
+Second, whether comparisons are conducted on the basis of longer sample sequences or single samples is reflected by the lengths of sample sequences from the same prospect with $N_X, N_Y \geq 1$ for comprehensive sampling and $N_X = N_Y = 1$ for piecewise sampling. 
+
+Note now that, in order to derive predictions of the choice behavior from the current stochastic model, the full product model
+
+$$\begin{equation}
+\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathscr{C}_i, \bigotimes_{i = 1}^{n} P_i \right)
+\; ,
+\end{equation}$$
+
+including the probability measure $P$, which assigns each $c \in C$, and each $B \in \mathscr{C}$ respectively, a probability, must be identified. 
+Although this can be demonstrated for the random variables considered so far, it becomes rather quickly intractable with increasing elements in $\Omega$ and growing sequence lengths. 
+However, by explicating the above probability measure ([Appendix 1][Appendix 1: Probability Measure Over Sample Mean Comparisons]), it becomes evident that it is largely influenced by the underlying sequence lengths $N_X$ and $N_Y$.
+In the following section and a subsequent simulation analysis, we demonstrate that this influence is of such a form that it produces some principle and predictable trends in the choice behavior that can be modeled in the cumulative prospect theory.
 
 ## Predicting Choice Behavior 
 
 Note first that the current stochastic sampling model allows to treat sampling and decision strategies independently by parameterization of both lengths of sample sequences and the number of comparisons.    
 
-[...] 
+... 
 
 # Method
 
 ## Generating Model
 
-[...]
+...
 
-The *switching probability* $s$ is the probability with which agents draw a single sample from the prospect they did not get their most recent single sample from.
+The switching probability $s$ is the probability with which agents draw a single sample from the prospect they did not get their most recent single sample from.
 $s$ is varied between .1 to 1 in increments of .1.
 The two boundary parameters resemble the concept of a decision threshold, i.e., if a prospect reaches a boundary, it is chosen by the synthetic agent.
-The *boundary type* is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
-The **boundary value** $a$ is varied between 1 to 5 in increments of 1.
+The boundary type is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
+The boundary value $a$ is varied between 1 to 5 in increments of 1.
 
 ## Test set
 
 For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
-In sum, 100 (parameter combinations), 100 (agents) x 60 (choices) = 600,000 choices are simulated.
+In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
 We test a set of 2-prospect choice problems, where one of the prospects contains a safe outcome, i.e., $p(\omega) = 1$ and the other two outcomes where all $p(\omega) \neq 1$.
 Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the smaller outcome of the risky prospect.
 To omit dominant prospects within a choice problem, outcomes of the safe prospect always fall between both outcomes of the risky prospect.
-Table A1 contains the test set of 60 choice problems [Appendix 2][Appendix 2: Choice Problems], which were sampled from an initial set of 10,000.
+Table A1 in [Appendix 2][Appendix 2: Choice Problems] contains the test set of 60 choice problems, which were sampled from an initial set of 10,000.
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
 
 ## Describing Model: Cumulative Prospect Theory
 
-[...]
+...
 
 For each distinct strategy-parameter combination, we ran 20 chains of 20,000 iterations each, after a warm-up period of 1000 samples.
 To reduce potential autocorrelation during the sampling process, we only kept every 20th sample (thinning). 
@@ -211,7 +220,7 @@ Bar plots displaying the potential scale reduction factors $\hat{R}$ [@gelmanInf
 
 # Results
 
-## Plausibility Check: Relationship between Switching Probability and Trial Sample Sizes
+## Plausibility Check: Relationship between Switching Probability and Trial Length
 
 ```{r message=FALSE}
 
@@ -232,9 +241,9 @@ trial_length <- choices %>%
   summarise(med = median(n_sample))
 ```
 
-The median length of trials, i.e., the number of single samples drawn in trial, generated by different parameter combinations ranged from `r min(trial_length$med)` to `r max(trial_length$med)`.
+The median length of trials, i.e., the number of single samples drawn in a trial, generated by different parameter combinations ranged from `r min(trial_length$med)` to `r max(trial_length$med)`.
 As expected, the scatter plot below shows an inverse relationship between switching probability and trial length.
-I.e., the lower the switching probability, the larger become the sample sequences on which each comparison between prospects is based.  
+I.e., the lower the switching probability, the larger become the sample sequences on which each comparison between prospects is based, which in turn leads to longer trials.  
 This effect is particularly pronounced for low probabilities such that the increase in trial length accelerates as switching probability decreases.
 
 ```{r message=FALSE}
@@ -262,9 +271,6 @@ trial_length %>%
 ```
 
 ## Probability Weighting Function
-
-The following analyses of choice behavior uses the modeling framework of CPT. 
-A non parametric approach, analyzing false response rates, can be found in [Appendix 4][Appendix 4: False Response Rates].
 
 ```{r}
 
@@ -307,7 +313,7 @@ cpt_agent %>%
   geom_point(data = cpt_agent_mean, aes(color = s), size = 3) +
   geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) + 
+  scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(breaks = seq(0, 2, .2)) +
   facet_grid(boundary~a, switch = "y") +
   labs(title = expression(paste("Curvature ", gamma)),
@@ -324,7 +330,7 @@ cpt_agent %>%
   geom_point(data = cpt_agent_mean, aes(color = s), size = 3) +
   geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) + 
+  scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(breaks = seq(0, 10, .5)) +
   facet_grid(boundary~a, switch = "y") +
   labs(title = expression(paste("Elevation ", delta)),
@@ -357,22 +363,10 @@ cpt_agent_w %>%
   geom_path(color = "#CECECE") + 
   geom_path(data = cpt_agent_mean_w, aes(color = s), size = 1.1) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(0, 1, .2)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) + 
   labs(title = "Probability Weighting Function",
        x ="Experienced Probability",
-       y = "Subjective Experienced Probability", 
-       color="Switching Probability") + 
-  theme_minimal()
-
-cpt_agent_w %>% 
-  ggplot(aes(x = ep, y = w, color = s)) +
-  geom_path() + 
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) + 
-  labs(title = "Probability Weighting Function",
-       x ="Experienced Probability ep",
        y = "Subjective Experienced Probability", 
        color="Switching Probability") + 
   theme_minimal()
@@ -391,7 +385,7 @@ cpt_agent_w %>%
   geom_path(color = "#CECECE") + 
   geom_path(data = cpt_agent_mean_w, aes(color = s), size = 1.1) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(0, 1, .2)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) +
   facet_wrap(~a, nrow = 2) + 
   labs(title = "Probability Weighting Function",
@@ -399,92 +393,89 @@ cpt_agent_w %>%
        y = "Subjective Experienced Probability", 
        color="Switching Probability") + 
   theme_minimal()
-
-cpt_agent_w %>% 
-  ggplot(aes(x = ep, y = w, color = s)) +
-  geom_path() + 
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) + 
-  facet_wrap(~a, nrow = 2) + 
-  labs(title = "Probability Weighting Function",
-       x ="Experienced Probability ep",
-       y = "Subjective Experienced Probability", 
-       color="Switching Probability") + 
-  theme_minimal()
 ```
 
 ## Value Function 
 
-[...]
+...
 
 # Discussion 
 
-[...]
+...
 
 # Conclusion
 
-[...]
+...
+
+# References
+
+<div id="refs"></div>
 
 # Appendix 
 
-## Appendix 1: Determining the Probability of Success in a Comparison of Sample Means
+## Appendix 1: Probability Measure Over Sample Mean Comparisons
 
-To proof is that the sequence $D_i = D_1, ..., D_n$ (see [Definition of D][A Stochastic Sampling Model Capturing Differences in Sampling and Decision Strategies]) describes a Bernoulli process with the number of won comparisons following the binomial distribution $\mathcal{B}\left(p(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0), n \right)$ for fixed sequence lengths $N_X$ and $N_Y$.
+To proof is that the sequence $D_i = D_1, ..., D_n$ describes a Bernoulli process with the number of won comparisons following the binomial distribution $\mathcal{B}\left(p(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0), n \right)$ for fixed sequence lengths $N_X$ and $N_Y$.
 
-Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified:
+Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified.
+The derivation chain is first roughly paraphrased and then formalized as a mathematical equation. 
+
+We start by noting that the probability of success equals the probability of the subset $B_1 \in \mathscr{C}$ which contains all comparisons $c \in C$ that satisfy the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
+Since the probability of the subset $B_1$ equals the probability that any of its elements occurs, the probabilities of all $c \in B_1$ are summed up. 
+We therefore use the sum operator with the limits $j \in \{1, ..., |B_1|\}$, with $|B_1|$ denoting the cardinality of the set $B_1$, i.e., the number of elements within the set. 
+As a major assumption is that the random variables within a sample sequence are iid and independent across sequences, the joint probability of a pair $\overline{X}_{N_X} \cap \overline{Y}_{N_Y}$, i.e., a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs, is described by the product of their individual probabilities $p(\overline{X}_{N_X})$ and $p(\overline{Y}_{N_Y})$.
+Finally, to get these individual probabilities, we must determine the probability that each possible realization indeed occurs the respective number of times in the underlying sample sequence.
+This probability is given by the multinomial distribution which reduces to a binomial distribution in the case of only two possible realizations. 
+We denote the number of times a realization occurs in a sample sequence with $k_{\omega}$, where $\omega$ signals that the realizations of the random variables are numerical equivalent to the outcomes in the sample space of the prospects.  
 
 $$\begin{equation}
   \begin{split}
     p(D = 1) 
       & = p \left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\\\\\ 
-      & = \sum_{c_i=1}^{|B_1|} \left( \;
-          p(\overline{X}_{N_X})  
+      & = \sum_{j=1}^{|B_1|} \left( \;
+          p(\overline{X}_{N_Xj})  
           \times 
-          p(\overline{Y}_{N_Y}) \; 
-        \right)_{c_i \, \in \, B_1} \\\\\\
-      & = \sum_{c_i=1}^{|B_1|} \left( \; 
+          p(\overline{Y}_{N_Yj}) \; 
+        \right)_{j \, \in \, \{1, ..., |B_1|\}} \\\\\\
+      & = \sum_{j=1}^{|B_1|} \left( \; 
         p \left( 
-          \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X_i(\omega \in \Omega_X)
+          \frac{1}{N_X} \sum\limits_{i = 1}^{N_X} X(\omega \in \Omega_X)_{ij}
         \right) 
         \times
         p \left( 
-          \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y_i(\omega \in \Omega_Y)
+          \frac{1}{N_Y} \sum\limits_{i = 1}^{N_Y} Y(\omega \in \Omega_Y)_{ij}
         \right) \; 
-        \right)_{c_i \, \in \, B_1} \\\\\\
-      & = \sum_{c_i=1}^{|B_1|} \left( \;
+        \right)_{j \, \in \, \{1, ..., |B_1|\}} \\\\\\
+      & = \sum_{j=1}^{|B_1|} \left( \;
         \left(
-          {N_X\choose k_{\omega_{1X}}, ..., k_{\omega_{nX}} } \prod_{\omega_{iX} \in \Omega_X} p(\omega_{iX})^{k_{\omega_{iX}}}
+          {N_X\choose k_{\omega_{1X}j}, ..., k_{\omega_{nX}j}} \prod_{\omega_{iX} \in \Omega_X} p(\omega_{iX})^{k_{\omega_{iX}j}}
         \right)
         \times
         \left(
-        {N_Y\choose k_{\omega_{1Y}}, ..., k_{\omega_{nY}} } \prod_{\omega_{iY} \in \Omega_Y} p(\omega_{iY})^{k_{\omega_{iY}}}
+        {N_Y\choose k_{\omega_{1Y}j}, ..., k_{\omega_{nY}j} } \prod_{\omega_{iY} \in \Omega_Y} p(\omega_{iY})^{k_{\omega_{iY}j}}
         \right)
-        \right)_{c_i \, \in \, B_1} \\\\\\
-      & = \sum_{c_i=1}^{|B_1|} \left( \;
+        \right)_{j \, \in \, \{1, ..., |B_1|\}} \\\\\\
+      & = \sum_{j=1}^{|B_1|} \left( \;
         \left(
-          \frac{N_X!}{k_{\omega_{1X}}! \times ... \times k_{\omega_{nX}}!} 
+          \frac{N_X!}{k_{\omega_{1X}j}! \times ... \times k_{\omega_{nX}j}!} 
           \times 
-          p(\omega_{1X})^{k_{\omega_{1X}}} 
+          p(\omega_{1X})^{k_{\omega_{1X}j}} 
           \times 
           ... 
-          \times p(\omega_{nX})^{k_{\omega_{nX}}}
+          \times p(\omega_{nX})^{k_{\omega_{nX}j}}
         \right)
         \times
         \left(
-          \frac{N_Y!}{k_{\omega_{1Y}}! \times ... \times k_{\omega_{nY}}!} 
+          \frac{N_Y!}{k_{\omega_{1Y}j}! \times ... \times k_{\omega_{nY}j}!} 
           \times 
-          p(\omega_{1Y})^{k_{\omega_{1Y}}} 
+          p(\omega_{1Y})^{k_{\omega_{1Y}j}} 
           \times 
           ... 
-          \times p(\omega_{nY})^{k_{\omega_{nY}}}
+          \times p(\omega_{nY})^{k_{\omega_{nY}j}}
         \right)
-      \right)_{c_i \, \in \, B_1}
-      \; ,
+      \right)_{j \, \in \, \{1, ..., |B_1|\}}
   \end{split}
 \end{equation}$$
-
-where $|B_1|$ denotes the cardinality of the set $B_1$, $c_i \in B_1$ a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs, and $k$ denotes the number of times $\omega$ was observed within a sequence. 
 
 ## Appendix 2: Choice Problems 
 
@@ -533,11 +524,3 @@ print(gel_92 %>%
   theme_minimal())
 }
 ```
-
-## Appendix 4: False Response Rates 
-
-[...]
-
-
-# References
-
