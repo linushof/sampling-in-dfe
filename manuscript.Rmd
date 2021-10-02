@@ -303,6 +303,16 @@ cpt_agent_mean <- cpt_agent %>%
 cpt_mu <- cpt %>% filter(level == "mu") # group level posterior means
 ```
 
+The figures below display the estimates of the $\gamma$ and $\delta$ parameter of the probability weighting function [@prelecProbabilityWeightingFunction1998] fitted to DfE simulated for different parameter values of the generating model.
+The estimates are plotted against the switching probability, where each panel represents a distinct boundary type and level, i.e., number of comparisons. 
+Grey dots represent agent level estimates, colored dots represent the mean across all agent level estimates. 
+
+Most significantly, there is a strong relationship between the switching probability in the generating model and the $\gamma$ parameter.
+I.e., large switching probabilities, which are indicative for small sample sequences, lead to larger estimates for $\gamma$. 
+The resulting strong curvature leads to a compression of probabilities in the lower and upper range, reflecting underweighting of small probabilities and overweighting of large probabilities. 
+This pattern is robust for varying degrees of the boundary level, except for $a = 1$. 
+The latter deviation may be explained by the potential scale reduction factors for the respective parameter estimates, which indicate that the MCMC chains did not converge (see [Appendix 3][Appendix 3: Convergence Diagnostics for CPT Parameters]).   
+
 ```{r}
 
 # gamma
@@ -310,7 +320,7 @@ cpt_mu <- cpt %>% filter(level == "mu") # group level posterior means
 cpt_agent %>% 
   ggplot(aes(x = s, y = gamma)) +
   geom_jitter(color = "#CECECE" ) + 
-  geom_point(data = cpt_agent_mean, aes(color = s), size = 3) +
+  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
   geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
@@ -327,7 +337,7 @@ cpt_agent %>%
 cpt_agent %>% 
   ggplot(aes(x = s, y = delta)) +
   geom_jitter(color = "#CECECE") + 
-  geom_point(data = cpt_agent_mean, aes(color = s), size = 3) +
+  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
   geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
@@ -338,8 +348,11 @@ cpt_agent %>%
        y = expression(delta), 
        color="Switching Probability") + 
   theme_minimal()
+```
 
+Below, the resulting probability weighting functions are displayed. 
 
+```{r}
 # weighting function 
 
 ## compute decision weights 
@@ -357,7 +370,6 @@ cpt_agent_mean_w <- cpt_agent %>%
   mutate(w = round(exp(-delta*(-log(ep))^gamma), 2)) 
   
 ## plot curves
-
 cpt_agent_w %>% 
   ggplot(aes(x = ep, y = w)) +
   geom_path(color = "#CECECE") + 
@@ -395,9 +407,123 @@ cpt_agent_w %>%
   theme_minimal()
 ```
 
+The false response rates for different parameter values of the generating model reflect the probability weighting patterns from above. 
+That is, the strong curvature resulting from large switching probabilities produces an underweighting of small probabilities. This in turn has the effect that the rarity of an attractive (unattractive) outcome leads to higher rates of choosing the safe (risky) prospect although the risky (safe) prospect had a higher experienced expected value.
+
+```{r}
+
+# compute false response rates
+
+fr_rates <- choices %>% 
+  mutate(ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2), # experienced EV (eEV)
+         norm = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) %>% # normative choice according to eEV
+  filter(!is.na(norm)) %>% # exclude trials with normative indifferent prospects
+  group_by(s, boundary, a, rare, norm, choice) %>% # group correct and incorrect responses
+  summarise(n = n()) %>% # absolute numbers 
+  mutate(rate = round(n/sum(n), 2), # response rates 
+         type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% filter(!is.na(type))  # remove correct responses
+
+fr_rates %>% 
+  ggplot(aes(a, s, fill = rate)) + 
+  geom_tile(colour="white", size=0.1) +
+  scale_fill_scico(palette = "buda") + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  scale_x_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
+  labs(x = "a", 
+       y= "s", 
+       fill = "% False Responses") + 
+  theme_minimal() 
+
+
+fr_rates %>% 
+  ggplot(aes(s, rate, color = s)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_jitter(size = 3) + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_color_scico(palette = "buda") + 
+  labs(title = "Piecewise Integration",
+       x = "s", 
+       y= "% False Responses", 
+       color = "a") + 
+  theme_minimal()
+```
+
 ## Value Function 
 
-...
+The figures below display the estimates of the $\alpha$ and the resulting value function.
+
+```{r}
+
+# alpha
+cpt_agent %>% 
+  ggplot(aes(x = s, y = alpha)) +
+  geom_jitter(color = "#CECECE" ) + 
+  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
+  geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 1, .2)) + 
+  scale_y_continuous(breaks = seq(0, 2, .2)) +
+  facet_grid(boundary~a, switch = "y") +
+  labs(title = expression(alpha),
+       x ="Switching Probability",
+       y = expression(alpha), 
+       color="Switching Probability") + 
+  theme_minimal()
+
+# value function 
+
+## compute values 
+
+cpt_agent_v <- cpt_agent %>% 
+  select(-c(gamma, delta, rho)) %>% 
+  expand_grid(x = seq(0, 20, 2)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+cpt_agent_mean_v <- cpt_agent %>% 
+  select(-c(gamma, delta, rho)) %>% 
+  group_by(s) %>% 
+  summarise(alpha = round(mean(alpha), 2)) %>% 
+  expand_grid(x = seq(0, 20, 2)) %>%  
+  mutate(v = round(x^alpha, 2))
+  
+## plot curves
+cpt_agent_v %>% 
+  ggplot(aes(x = x, y = v)) +
+  geom_path(color = "#CECECE") + 
+  geom_path(data = cpt_agent_mean_v, aes(color = s), size = 1.1) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 5)) +
+  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  labs(title = "Value Function",
+       x ="Objective Value",
+       y = "Subjective Value", 
+       color="Switching Probability") + 
+  theme_minimal()
+
+## for separate a 
+
+cpt_agent_mean_v <- cpt_agent %>% 
+  group_by(s, a) %>% 
+  summarise(alpha = round(mean(alpha), 2)) %>% 
+  expand_grid(x = seq(0, 20, 2)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+  
+cpt_agent_v %>% 
+  ggplot(aes(x = x, y = v)) +
+  geom_path(color = "#CECECE", size = 0.5) + 
+  geom_path(data = cpt_agent_mean_v, aes(color = s), size = 1.1) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 5)) +
+  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  facet_wrap(~a, nrow = 2) + 
+  labs(title = "Value Function",
+       x ="Objective Value",
+       y = "Subjective Value", 
+       color="Switching Probability") + 
+  theme_minimal()
+```
 
 # Discussion 
 
