@@ -1,0 +1,49 @@
+model
+{
+
+  # we use uninformative priors for CPT parameters to facilitate comparison of different generative mechanisms
+
+	alpha ~ dbeta(1,1)
+	gamma.pre ~ dbeta(1,1)
+	delta.pre ~ dbeta(1,1)
+	rho.pre ~ dbeta(1,1)
+
+	## extend scales to a reasonable range (cf. Scheibehenne & Pachur, 2015)
+
+	gamma <- 2 * (gamma.pre)
+	delta <- 10 * (delta.pre)
+	rho   <- 5 * (rho.pre)
+
+  # define CPT model
+
+  for (i in start:stop)
+	{
+
+  # value function
+
+	v.a.o1[i] <- pow(a_o1[i], alpha)
+	v.a.o2[i] <- pow(a_o2[i], alpha)
+	v.b.o1[i] <- pow(b_o1[i], alpha)
+	v.b.o2[i] <- pow(b_o2[i], alpha)
+
+	# weighting function (cf. Goldstein-Einhorn, 1987)
+
+	w.a.p2[i] <- (delta * (pow(a_p2_exp[i], gamma))) / (delta * (pow(a_p2_exp[i], gamma)) + pow(a_p1_exp[i], gamma))
+	w.a.p1[i] <- 1-w.a.p2[i]
+	w.b.p1[i] <- (delta * (pow(b_p1[i], gamma))) / (delta * (pow(b_p1[i],gamma)) + pow(b_p2[i], gamma))
+	w.b.p2[i] <- 1-w.b.p1[i]
+
+	Vf.a[i]  <- w.a.p1[i] * v.a.o1[i] + w.a.p2[i] * v.a.o2[i]
+	Vf.b[i]  <- w.b.p1[i] * v.b.o1[i] + w.b.p2[i] * v.b.o2[i]
+
+	# rescale subjective values to alleviate possible parameter intercorrelations (cf. Krefeld-Schwalb et al., 2021)
+
+	Vf.a.re[i] <- pow(Vf.a[i], (1/alpha))
+	Vf.b.re[i] <- pow(Vf.b[i], (1/alpha))
+
+	# stochastic choice rule
+
+	binval[i] <- (1)/(1+exp((-1*rho)*(Vf.a.re[i]-Vf.b.re[i])))
+	choice[i] ~ dbern(binval[i])
+	}
+}
