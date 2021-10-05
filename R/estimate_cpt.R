@@ -19,7 +19,7 @@ choices <- choices %>%
 params_sim <- choices %>% distinct(s, boundary, a) # to get distinct parameter combinations
 choices_grouped <- vector("list", nrow(params_sim))
 for(set in seq_len(nrow(params_sim))){
-  choices_grouped[[set]] <- choices_cpt %>%
+  choices_grouped[[set]] <- choices %>%
     filter(s == params_sim[[set, "s"]] & boundary == params_sim[[set, "boundary"]] & a == params_sim[[set, "a"]]) %>%
     mutate(i = row_number()) # assign trial numbers
 }
