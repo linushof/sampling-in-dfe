@@ -1,0 +1,218 @@
+---
+title: "Sampling in Decisions from Experience"
+subtitle: https://github.com/linushof/sampling-in-dfe
+author: "Linus, Veronika & Thorsten"
+date: "October 11, 2021"
+output:
+  beamer_presentation: default
+bibliography: references_sampling-in-dfe.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+pacman::p_load(tidyverse, 
+               scico)
+```
+
+
+## Project Description    
+
+### Starting Ideas
+
+1. Description-experience gap [cf. @wulffMetaanalyticReviewTwo2018]
+
+2. Empirical samples that carry over to cognitive processes  
+
+### Core Question
+
+- Does choice behavior reflect different sampling strategies?
+
+## Prospects and Sampling
+
+- Standard paradigm: Choice between 2 or multiple prospects
+
+- *Prospects*: Probability spaces $(\Omega, \mathcal{F}, P)$, where 
+$$
+\Omega = \{\omega_1, ..., \omega_n\}
+$$
+and 
+$$
+P = \{p(\omega_1), ..., p(\omega_n)\}
+$$
+
+- *Single sample*: Realization of a random variable:
+$$
+X(\omega \in \Omega) = x 
+$$
+
+- *Sequential sampling*: Generating a sequence of single samples in discrete time: 
+$$
+X_i = X_1, ..., X_n 
+$$
+
+## Difference between DfD and DfE 
+
+- Decisions from Description (DfD): Function of symbolical descriptions of prospects:  
+$$
+D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
+$$
+
+- Decisions from Experience (DfE): Function of sample sequences originating from prospects:
+$$
+D := f(X_{i1}, ..., X_{ik}) 
+$$
+
+- $f$ informed by psychological theory and empirical protocols 
+
+## Sampling and Decision Strategies 
+
+- Hills and Hertwig [-@hillsInformationSearchDecisions2010]: Assumption of a systematic link between sampling and decision strategies
+
+- Sampling strategy: Succession of single samples in a sequence generated from multiple prospects
+
+  + Piecewise: Single samples from **different** prospects 
+  + Comprehensive: Single samples from **same** prospect  
+
+```{r, echo=FALSE, out.height="40%", out.width="40%", fig.align='center'}
+knitr::include_graphics("hills-hertwig_2010_figure-1.png")
+```
+
+
+## Modeling the Assumptions of Hills & Hertwig (2010)
+
+- Consider two prospects $(\Omega_X, \mathcal{F}_X, P_X)$ and $(\Omega_Y, \mathcal{F}_Y, P_Y)$ and the ground model for DfE
+$$
+D := f(X_i, Y_i) 
+$$
+
+- $f$ maps a comparison of $\overline{X}$ and $\overline{Y}$ on the set $\{0, 1\}$, with 0 (1) indicating a lost (won) comparison:
+$$
+D := f(\overline{X} - \overline{Y}) = 
+  \begin{cases}
+    1 \quad \text{for} \quad \overline{X} - \overline{Y} > 0 \\
+    0 \quad \text{else}. 
+  \end{cases} 
+$$
+
+- A series of ordinal comparisons $D_i = D_1, ..., D_n$ is a Bernoulli process where the number of won comparisons follows the binomial distribution
+$$
+D \sim \mathcal{B}\left( p \left(\overline{X} - \overline{Y}> 0\right), n\right)
+$$
+
+## Predicting Choices from the Stochastic Model
+
+- $n$ and $p$ of the binomial distribution are influenced by the sampling and decision strategies:
+
+### Comprehensive Sampling and Summary Decisions
+
+- $n = 1$  
+- $p$: For $\lim_{N_X, N_Y  \to \infty}$, $p (\overline{X} - \overline{Y}> 0) \approx p (E(X) - E(Y))$ 
+- Choices should become *"normative"*, i.e., linear weighting and value function 
+
+### Piecewise Sampling and Round-wise Decisions
+
+- $n \geq 1$ and $N_X, N_Y = 1$
+- $p$: For $N_X, N_Y = 1$, $p (\overline{X} - \overline{Y} > 0) = p(\omega \in \Omega_X > \omega \in \Omega_Y)$
+- Choices depend on probabilities in the mid-range, i.e., S-shaped weighting function and concave value function
+
+
+## Probability Weighting
+
+```{r}
+cols <- list(.default = col_double(),
+             boundary = col_factor(),
+             a = col_factor(),
+             parameter = col_factor())
+cpt <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols)
+
+cpt <- cpt %>% 
+  select(s, boundary, a, parameter, mean) %>% 
+  pivot_wider(names_from = parameter, values_from = mean)
+
+cpt_w <- cpt %>% 
+  select(-c(alpha, rho)) %>% 
+  expand_grid(ep = seq(0, 1, .1)) %>% #
+  mutate(w = round(  (delta * ep^gamma)/ ((delta * ep^gamma)+(1-ep)^gamma), 2)) 
+
+## plot curves
+cpt_w %>% 
+  filter(a != 1) %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = ep, y = w, color = s)) +
+  geom_path(size = 1.2) + 
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 1, .2)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) + 
+  labs(title = "Probability Weighting Function",
+       x ="Experienced Probability",
+       y = "Subjective Experienced Probability", 
+       color="Switching Probability") + 
+  theme_minimal()
+```
+
+## False Response Rates
+
+```{r message=FALSE, warning=FALSE}
+cols <- list(.default = col_double(),
+             boundary = col_factor(),
+             gamble = col_factor(),
+             rare = col_factor(),
+             agent = col_factor(),
+             choice = col_factor())
+choices <- read_csv("data/choices/choices.csv", col_types = cols)
+
+# compute false response rates
+
+fr_rates <- choices %>% 
+  mutate(ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2), # experienced EV (eEV)
+         norm = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) %>% # normative choice according to eEV
+  filter(!is.na(norm)) %>% # exclude trials with normative indifferent prospects
+  group_by(s, boundary, a, rare, norm, choice) %>% # group correct and incorrect responses
+  summarise(n = n()) %>% # absolute numbers 
+  mutate(rate = round(n/sum(n), 2), # response rates 
+         type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% filter(!is.na(type))  # remove correct responses
+
+fr_rates %>% 
+  ggplot(aes(s, rate, color = s)) + 
+  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
+  geom_jitter(size = 3) + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_color_scico(palette = "buda") + 
+  labs(title = "False Response Rates", 
+       x = "s", 
+       y= "% False Responses", 
+       color = "a") + 
+  theme_minimal()
+```
+
+
+## Value Function 
+
+```{r}
+cpt_v <- cpt %>% 
+  select(-c(gamma, delta, rho)) %>% 
+  expand_grid(x = seq(0, 20, 2)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+## plot curves
+cpt_v %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = x, y = v)) +
+  geom_path(aes(color = s)) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 5)) +
+  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  labs(title = "Value Function",
+       x ="Objective Value",
+       y = "Subjective Value", 
+       color="Switching Probability") + 
+  theme_minimal()
+```
+
+
+
+
+## References
