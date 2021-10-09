@@ -14,7 +14,7 @@ editor_options:
 ```{r setup, include=FALSE}
 pacman::p_load(tidyverse, 
                scico,
-               gridExtra)
+               ggpubr)
 ```
 
 
@@ -28,7 +28,7 @@ pacman::p_load(tidyverse,
 
 ### Core Question
 
-- Does choice behavior reflect different sampling strategies?
+- May samples be generated in such a way that they produce systematic choice patterns?
 
 ## Prospects and Sampling
 
@@ -118,10 +118,18 @@ $$
 - $p$: For $N_X, N_Y = 1$, $p (\overline{X} - \overline{Y} > 0) = p(\omega \in \Omega_X > \omega \in \Omega_Y)$
 - Choices depend on probabilities in the mid-range, i.e., S-shaped weighting function and concave value function
 
+## Method
+
+- 60 choices between a 2-outcome prospect and a safe prospect
+- 100 synthetic agents
+- Parameterization of the sampling and decision process
+  + Probability of switching between prospects
+  + Number of comparisons
+- Description of simulated DfE in Cumulative Prospect Theory
 
 ## Probability Weighting
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 cols <- list(.default = col_double(),
              boundary = col_factor(),
              a = col_factor(),
@@ -138,51 +146,74 @@ cpt_w <- cpt %>%
   mutate(w = round(  (delta * ep^gamma)/ ((delta * ep^gamma)+(1-ep)^gamma), 2)) 
 
 ## plot curves
-curve <- cpt_w %>% 
+curve_w <- cpt_w %>% 
   group_by(boundary, a, s) %>% 
   ggplot(aes(x = ep, y = w, color = s)) +
-  geom_path(size = 1.1) + 
+  geom_path() + 
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) +
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) + 
-  labs(x ="Experienced Probability",
-       y = "Subjective Experienced Probability", 
+  labs(title = "Probability Weighting", 
+       x ="Experienced Probability p",
+       y = "w(p)", 
        color="Switching Probability") + 
-  theme_minimal()
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom")
 
 gamma <- cpt %>% 
   group_by(boundary, a) %>% 
   ggplot(aes(x = s, y = gamma, color = s)) +
+  geom_smooth(data = cpt %>% filter(a != 1), color = "grey") + 
   geom_jitter(size = 3, show.legend = FALSE) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) + 
   scale_y_continuous(breaks = seq(0, 2, .2)) +
-  labs(title = expression(paste("Curvature ", gamma)),
-       x ="Switching Probability",
-       y = expression(gamma), 
-       color="Switching Probability") + 
-  theme_minimal()
+  labs(title = expression(gamma),
+       x ="",
+       y = "") + 
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5)) 
 
 delta <- cpt %>% 
   ggplot(aes(x = s, y = delta, color = s)) +
+  geom_smooth(data = cpt %>% filter(a != 1), color = "grey") + 
   geom_jitter(size = 3, show.legend = FALSE) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(limits = c(0.75, 2.25), breaks = seq(0.75, 2.25, .25)) +
-  labs(title = expression(paste("Elevation ", delta)),
+  scale_x_continuous(breaks = seq(0, 1, .1)) + 
+  scale_y_continuous(limits = c(1, 2), breaks = seq(1, 2, .2)) +
+  labs(title = expression(delta),
        x ="Switching Probability",
-       y = expression(delta), 
+       y = "") + 
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+params <- ggarrange(gamma, delta, nrow = 2)
+ggarrange(curve_w, params)
+```
+
+## Probability Weighting: Multiple Comparisons
+
+```{r echo=FALSE}
+cpt_w %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = ep, y = w, color = s)) +
+  geom_path(size = 1.2) + 
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) + 
+  labs(x ="Experienced Probability p",
+       y = "w(p)", 
        color="Switching Probability") + 
-  theme_minimal()
-
-plot_params <- grid.arrange(gamma, delta, nrow = 2)
-
-grid.arrange(plot_params, curve, nrow = 1)
+  facet_wrap(~a, nrow = 2) +  
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom")
 ```
 
 ## False Response Rates
 
-```{r message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 cols <- list(.default = col_double(),
              boundary = col_factor(),
              gamble = col_factor(),
@@ -203,44 +234,92 @@ fr_rates <- choices %>%
          type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% filter(!is.na(type))  # remove correct responses
 
 fr_rates %>% 
-  ggplot(aes(s, rate, color = s)) + 
+  ggplot(aes(s, a, fill = rate)) + 
+  geom_tile(colour="white", size=0.1) +
+  scale_fill_scico(palette = "buda") + 
   facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
-  geom_jitter(size = 3) + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) +
-  scale_color_scico(palette = "buda") + 
-  labs(title = "False Response Rates", 
-       x = "s", 
-       y= "% False Responses", 
-       color = "a") + 
-  theme_minimal()
+  scale_x_continuous(expand=c(0,0), breaks = seq(0, 1, .1)) +
+  scale_y_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
+  labs(title = "Type of Rare Event", 
+       x = "Switching Probability", 
+       y= "Number of Comparisons", 
+       fill = "% False Responses") + 
+  theme_minimal() +
+    theme(plot.title = element_text(hjust = 0.5))
 ```
-
 
 ## Value Function 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 cpt_v <- cpt %>% 
   select(-c(gamma, delta, rho)) %>% 
   expand_grid(x = seq(0, 20, 2)) %>%  
   mutate(v = round(x^alpha, 2)) 
 
 ## plot curves
-cpt_v %>% 
+curve_v <- cpt_v %>% 
   group_by(boundary, a, s) %>% 
   ggplot(aes(x = x, y = v)) +
   geom_path(aes(color = s)) +
   scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 20, 5)) +
-  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  scale_x_continuous(breaks = seq(0, 20, 2)) +
+  scale_y_continuous(breaks = seq(0, 20, 2)) + 
   labs(title = "Value Function",
-       x ="Objective Value",
-       y = "Subjective Value", 
+       x ="Objective Value x",
+       y = "v(x)", 
        color="Switching Probability") + 
-  theme_minimal()
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom")
+
+alpha <- cpt %>% 
+  group_by(boundary, a) %>% 
+  ggplot(aes(x = s, y = alpha, color = s)) +
+  geom_smooth(data = cpt %>% filter(a != 1), color = "grey") + 
+  geom_jitter(size = 3, show.legend = FALSE) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 1, .1)) + 
+  scale_y_continuous(breaks = seq(0, 2, .1)) +
+  labs(title = expression(alpha),
+       x ="Switching Probability",
+       y = "") + 
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+ggarrange(curve_v, alpha)
 ```
 
+## Value Function: Multiple Comparisons
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+cpt_v %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = x, y = v, color = s)) +
+  geom_path(size = 1.2) + 
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 2)) +
+  scale_y_continuous(breaks = seq(0, 20, 2)) + 
+  labs(x ="Objective Value x",
+       y = "v(x)", 
+       color="Switching Probability") + 
+  facet_wrap(~a, nrow = 2) +  
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position="bottom")
+```
 
+## Summary and Q&A
+
+Random processes underlying DfE ...
+
+- ... can be modeled according to probability theory
+
+- ... can be integrated into current decision theories
+
+- ... could be shaped by sampling and decision strategies
+
+- ... could explain empirically observed choice patterns  
+
+I happily take your questions, comments and critique. 
 
 ## References
