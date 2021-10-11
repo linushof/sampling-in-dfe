@@ -30,34 +30,11 @@ pacman::p_load(tidyverse,
 
 - May samples be generated in such a way that they produce systematic choice patterns?
 
-## Prospects and Sampling
-
-- Standard paradigm: Choice between 2 or multiple prospects
-
-- *Prospects*: Probability spaces $(\Omega, \mathcal{F}, P)$, where 
-$$
-\Omega = \{\omega_1, ..., \omega_n\}
-$$
-and 
-$$
-P = \{p(\omega_1), ..., p(\omega_n)\}
-$$
-
-- *Single sample*: Realization of a random variable:
-$$
-X(\omega \in \Omega) = x 
-$$
-
-- *Sequential sampling*: Generating a sequence of single samples in discrete time: 
-$$
-X_i = X_1, ..., X_n 
-$$
-
 ## Difference between DfD and DfE 
 
-- Decisions from Description (DfD): Function of symbolical descriptions of prospects:  
+- Decisions from Description (DfD): Function of symbolical descriptions of prospects (gambles):  
 $$
-D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
+D:= f((\Omega_1, P_1), ..., (\Omega_k, P_k))
 $$
 
 - Decisions from Experience (DfE): Function of sample sequences originating from prospects:
@@ -83,11 +60,6 @@ knitr::include_graphics("hills-hertwig_2010_figure-1.png")
 
 ## Modeling the Assumptions of Hills & Hertwig (2010)
 
-- Consider two prospects $(\Omega_X, \mathcal{F}_X, P_X)$ and $(\Omega_Y, \mathcal{F}_Y, P_Y)$ and the ground model for DfE
-$$
-D := f(X_i, Y_i) 
-$$
-
 - $f$ maps a comparison of $\overline{X}$ and $\overline{Y}$ on the set $\{0, 1\}$, with 0 (1) indicating a lost (won) comparison:
 $$
 D := f(\overline{X} - \overline{Y}) = 
@@ -101,22 +73,6 @@ $$
 $$
 D \sim \mathcal{B}\left( p \left(\overline{X} - \overline{Y}> 0\right), n\right)
 $$
-
-## Predicting Choices from the Stochastic Model
-
-- $n$ and $p$ of the binomial distribution are influenced by the sampling and decision strategies:
-
-### Comprehensive Sampling and Summary Decisions
-
-- $n = 1$  
-- $p$: For $\lim_{N_X, N_Y  \to \infty}$, $p (\overline{X} - \overline{Y}> 0) \approx p (E(X) - E(Y))$ 
-- Choices should become *"normative"*, i.e., linear weighting and value function 
-
-### Piecewise Sampling and Round-wise Decisions
-
-- $n \geq 1$ and $N_X, N_Y = 1$
-- $p$: For $N_X, N_Y = 1$, $p (\overline{X} - \overline{Y} > 0) = p(\omega \in \Omega_X > \omega \in \Omega_Y)$
-- Choices depend on probabilities in the mid-range, i.e., S-shaped weighting function and concave value function
 
 ## Method
 
