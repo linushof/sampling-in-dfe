@@ -20,53 +20,39 @@ editor_options:
 # load packages
 pacman::p_load(tidyverse, 
                knitr, 
+               ggbeeswarm,
                scico # for scientific color palettes
                )
 ```
 
-This document was created from the commit with the hash ``r repro::current_hash()``
-
-# Author Note
-
-All materials of this work in progress can be found on the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe
-
-- Add information on how to reproduce the project
-
-- Add contact
-
-# Abstract
-
-A probability theoretic definition of prospects and a rough stochastic sampling model for decisions from experience is proposed.
-It is demonstrated how the model can be used a) to explicate assumptions about the sampling and decision strategies that agents may apply and b) to derive predictions about function forms and parameter values that describe the resulting decision behavior. 
-Synthetic choice data is simulated and modeled in cumulative prospect theory to test these predictions. 
 
 # Introduction
 
 ...
 
-## Sampling in Decisions from Experience 
+# Sampling in Decisions from Experience 
 
 In research on the decision theory, a standard paradigm is the choice between at least two (monetary) prospects.
-Let a prospect be a probability space $(\Omega, \mathscr{F}, P)$.
+Let a prospect be a probability space $(\Omega, \mathcal{F}, P)$.
 $\Omega$ is the sample space 
 
-$$\begin{equation}
+$$
 \Omega = \{\omega_1, ..., \omega_n\}
-\end{equation}$$ 
+$$ 
 
 containing a finite set of possible outcomes $\omega$, monetary gains and/or losses respectively. 
-$\mathscr{F}$ is the set of all possible subsets of $\Omega$: 
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$: 
 
-$$\begin{equation}
-\mathscr{F} = \{A_1, A_2, ...\} = \mathscr{P}(\Omega) 
+$$
+\mathcal{F} = \{A_1, A_2, ...\} = \mathcal{P}(\Omega) 
 \; .
-\end{equation}$$
+$$
 
 $P$ is a probability mass function  
 
-$$\begin{equation}
-P: \mathscr{F} \mapsto [0,1] 
-\end{equation}$$
+$$
+P: \mathcal{F} \mapsto [0,1] 
+$$
 
 that assigns each outcome $\omega$ a probability $0 < p(\omega) \leq 1$ with $P(\Omega) = 1$ [ @kolmogorovFoundationsTheoryProbability1950, pp. 2-3].
 
@@ -79,7 +65,7 @@ To provide a formal definition of sampling in risky choice, we make use of the m
 Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
 It is acceptable to speak of the occurrence of $\omega$ as a realization of a random variable $X$ defined on a prospect iff the following conditions (1) and (2) are met: 
 
-(1) $X$ is a measurable function $$\begin{equation} X: (\Omega, \mathscr{F})  \mapsto (\Omega', \mathscr{F'}) \; , \end{equation}$$ where $\Omega'$ is a set of real numbered values $X$ can take and $\mathscr{F'}$ is a set of subsets of $\Omega'$. I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathscr{F'}$ has a pre-image $X^{-1}A' \in \mathscr{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
+(1) $X$ is a measurable function $$X: (\Omega, \mathcal{F})  \mapsto (\Omega', \mathcal{F'}) \; ,$$ where $\Omega'$ is a set of real numbered values $X$ can take and $\mathcal{F'}$ is a set of subsets of $\Omega'$. I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathcal{F'}$ has a pre-image $X^{-1}A' \in \mathcal{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
 
 (2) The mapping is such that $X(\omega) = x \equiv \omega$. 
 
@@ -91,24 +77,24 @@ Thus, long sample sequences in principle allow to obtain the same information ab
 Consider now a choice between prospects $1, ..., k$.
 To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
 
-$$\begin{equation}
-D:= f((\Omega_1, \mathscr{F}_1, P_1), ..., (\Omega_k, \mathscr{F}_k, P_k))
+$$
+D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
 \;.
-\end{equation}$$
+$$
 
 Now, since in DfE no symbolic descriptions of the prospects are provided, the model must be restricted to the case where decisions are based on sequences of single samples originating from the respective prospects:
 
-$$\begin{equation}
+$$
 D := f(X_{i1}, ..., X_{ik}) 
 \; ,
-\end{equation}$$
+$$
 
 where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
 
 Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
 Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
 
-## Capturing Differences in Sampling and Decision Strategies  
+# Capturing Differences in Sampling and Decision Strategies  
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] discussed a potential link between sampling and decision strategies in DfE. 
 Specifically, the authors suppose that if single samples originating from different prospects are generated in direct succession (piecewise sampling), the evaluation of prospects is based on multiple ordinal comparisons of single samples (round-wise decisions).
@@ -116,54 +102,54 @@ In contrast, if single samples originating from the same prospect are generated 
 
 We now consider choices between two prospects and the assumptions of Hills and Hertwig [-@hillsInformationSearchDecisions2010] in more detail to build the respective stochastic sampling model for DfE.
 
-Let $X$ and $Y$ be random variables defined on the prospects $(\Omega_X, \mathscr{F}_X, P_X)$ and $(\Omega_Y, \mathscr{F}_Y, P_Y)$. 
+Let $X$ and $Y$ be random variables defined on the prospects $(\Omega_X, \mathcal{F}_X, P_X)$ and $(\Omega_Y, \mathcal{F}_Y, P_Y)$. 
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggest that any two sample sequences $X_i$ and $Y_i$ are compared by their means. 
 Let thus $C = \mathbb{R}$ be the set of all possible outcomes of the comparison of the means over two unordered sequences $X_i$ and $Y_i$ of given lengths $N_X$ and $N_Y$.
 That is, each element $c \in C$ represents a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs. 
 Let then
 
-$$\begin{equation}
-\mathscr{C} = \left\{B_1 = \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, B_2 = \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
+$$
+\mathcal{G} = \left\{B_1 = \{c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\}, B_2 = \{ c \in C: \overline{X}_{N_X} - \overline{Y}_{N_Y} \leq 0\}
 \right\}
-\end{equation}$$
+$$
 
 be a set of subsets of $C$, indicating that comparisons of prospects on the ordinal (rather than on the metric) scale are of primary interest. 
-We denote a single ordinal comparison by the event space $(C, \mathscr{C})$.
+We denote a single ordinal comparison by the event space $(C, \mathcal{G})$.
 The observed outcome of such an ordinal comparison can be regarded as evidence for or against a prospect and the number of wins over a series of independent ordinal comparisons as accumulated evidence. 
 To integrate the concept of evidence accumulation into the current model, we let the decision variable $D$ be a measurable function 
 
-$$\begin{equation}
+$$
 D: C \mapsto C'
-\end{equation}$$
+$$
 
-that maps the possible outcomes of a mean comparison in $C$ onto a measure space $C' = \{0,1\}$, with $0$ ($1$) indicating a lost (won) comparison:
+that maps the possible outcomes of a mean comparison in $C$ onto a measure space $C' = \{0,1\}$, with $0$ $(1)$ indicating a lost (won) comparison:
 
-$$\begin{equation}
+$$
 D(c \in C) \in C' = 
   \begin{cases}
-    1 & \text{for} & \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\}  \in \mathscr{C} \\
-    0 & \text{else}. 
+    1 \quad \text{for} \quad \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\}  \in \mathcal{G} \\
+    0 \quad \text{else}. 
   \end{cases} 
-\end{equation}$$
+$$
 
 It can be shown that for fixed sequence lengths $N_X$ and $N_Y$, a sequence $D_i = D_1, ..., D_n$ representing multiple independent comparisons is a Bernoulli process where the number of won comparisons follows the binomial distribution
 
-$$\begin{equation}
+$$
 D \sim \mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
-\end{equation}$$
+$$
 
 with $p$ denoting probability of $X_i$ winning a single comparison, i.e., the probability of success, and $n$ denoting the number of comparisons.
 
 It becomes evident that the two combinations of sampling and decision strategies proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010] are reflected in certain restrictions on the free parameters $N_X, N_Y$ and $n$ of the sampling model and that these restrictions translate to the shape of the binomial distribution associated to the decision variables, straightforwardly via the parameter $n$, more interestingly, however, via its parameter $p$. 
 
 I.e., first, whether a single (summary decision) or multiple ordinal comparisons (round-wise decision) are conducted, is reflected by the length of the sequence $D_i = D_1, ..., D_n$, with $n = 1$ for summary decisions and $n \geq 1$ for round-wise decisions. 
-The idea that multiple comparisons may be conducted can be formalized by extending the event space $(C, \mathscr{C})$ of a single comparison to its $n$-fold product 
+The idea that multiple comparisons may be conducted can be formalized by extending the event space $(C, \mathcal{G})$ of a single comparison to its $n$-fold product 
 
-$$\begin{equation}
-\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathscr{C}_i \right)
+$$
+\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathcal{G}_i \right)
 \; ,
-\end{equation}$$
+$$
 
 where $i \in \{1, ..., n\}$ denotes the number of comparisons. 
 
@@ -171,17 +157,17 @@ Second, whether comparisons are conducted on the basis of longer sample sequence
 
 Note now that, in order to derive predictions of the choice behavior from the current stochastic model, the full product model
 
-$$\begin{equation}
-\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathscr{C}_i, \bigotimes_{i = 1}^{n} P_i \right)
+$$
+\left(\prod_{i = 1}^{n} C_i, \bigotimes_{i = 1}^{n} \mathcal{G}_i, \bigotimes_{i = 1}^{n} P_i \right)
 \; ,
-\end{equation}$$
+$$
 
-including the probability measure $P$, which assigns each $c \in C$, and each $B \in \mathscr{C}$ respectively, a probability, must be identified. 
+including the probability measure $P$, which assigns each $c \in C$, and each $B \in \mathcal{G}$ respectively, a probability, must be identified. 
 Although this can be demonstrated for the random variables considered so far, it becomes rather quickly intractable with increasing elements in $\Omega$ and growing sequence lengths. 
 However, by explicating the above probability measure ([Appendix 1][Appendix 1: Probability Measure Over Sample Mean Comparisons]), it becomes evident that it is largely influenced by the underlying sequence lengths $N_X$ and $N_Y$.
 In the following section and a subsequent simulation analysis, we demonstrate that this influence is of such a form that it produces some principle and predictable trends in the choice behavior that can be modeled in the cumulative prospect theory.
 
-## Predicting Choice Behavior 
+# Predicting Choice Behavior 
 
 Note first that the current stochastic sampling model allows to treat sampling and decision strategies independently by parameterization of both lengths of sample sequences and the number of comparisons.    
 
@@ -214,9 +200,25 @@ Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"at
 
 ...
 
-For each distinct strategy-parameter combination, we ran 20 chains of 20,000 iterations each, after a warm-up period of 1000 samples.
-To reduce potential autocorrelation during the sampling process, we only kept every 20th sample (thinning). 
-Bar plots displaying the potential scale reduction factors $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] of the group and agent level CPT parameters can be found in [Appendix 3][Appendix 3: Convergence Diagnostics for CPT Parameters]. 
+```{r}
+
+# read cpt data
+
+cols <- list(.default = col_double(),
+             boundary = col_factor(),
+             a = col_factor(),
+             parameter = col_factor())
+cpt_long <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols)
+
+# store convergence diagnostics
+
+gel_92 <- cpt_long %>% select(s, boundary, a, parameter, Rhat, n.eff) 
+```
+
+For each distinct parameter combination, we ran 20 chains of 40,000 iterations each, after a warm-up period of 1000 samples.
+To reduce potential autocorrelation during the sampling process, we only kept every 20th sample (thinning).
+The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(gel_92$Rhat), 3)` for all parameters, indicating good convergence.
+The minimum effective sample size was `r min(gel_92$n.eff)`.
 
 # Results
 
@@ -264,43 +266,23 @@ trial_length %>%
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .1)) + 
   scale_y_continuous(breaks = seq(0, 120, 10)) +
-  labs(x ="Switching Probability",
+  labs(title = "Trial Length", 
+       x ="Switching Probability",
        y = "Median Trial Length", 
        color="Switching Probability") + 
   theme_minimal()
 ```
 
+
 ## Probability Weighting Function
 
 ```{r}
 
-# call script for preparing CPT data
+# tidy CPT data: parameters as separate columns 
 
-source("R/prepare_estimates.R") 
-gel_92 <- cpt %>% select(s, boundary, a, parameter, level, Rhat) # store scale reduction factor
-
-# Tidy: CPT parameters in columns 
-
-cpt <- cpt %>% 
-  select(s, boundary, a, parameter, level, mean) %>% 
+cpt_wide <- cpt_long %>% 
+  select(s, boundary, a, parameter, mean) %>% 
   pivot_wider(names_from = parameter, values_from = mean)
-
-# agent level estimates
-
-cpt_agent <- cpt %>% filter(level != "mu") # agent level estimates
-
-## compute mean across all agent level estimates
-
-cpt_agent_mean <- cpt_agent %>% 
-  group_by(s, boundary, a) %>% 
-  summarise(alpha = round(mean(alpha), 2), 
-            gamma = round(mean(gamma), 2), 
-            delta = round(mean(delta), 2), 
-            rho = round(mean(rho), 2))
-
-# group level estimates 
-
-cpt_mu <- cpt %>% filter(level == "mu") # group level posterior means
 ```
 
 The figures below display the estimates of the $\gamma$ and $\delta$ parameter of the probability weighting function [@prelecProbabilityWeightingFunction1998] fitted to DfE simulated for different parameter values of the generating model.
@@ -315,94 +297,97 @@ The latter deviation may be explained by the potential scale reduction factors f
 
 ```{r}
 
-# gamma
+# Density Plot 
 
-cpt_agent %>% 
-  ggplot(aes(x = s, y = gamma)) +
-  geom_jitter(color = "#CECECE" ) + 
-  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
-  geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
+cpt_long %>% 
+  filter(parameter == "gamma" | parameter == "delta") %>% 
+  ggplot(aes(x = s, y = mean)) +
+  geom_density_2d_filled(contour_var = "ndensity") + 
+  scale_fill_scico_d(palette = "buda") +
+  scale_x_continuous(breaks = seq(0, 1, .2)) + 
+  scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
+  labs(x ="Switching Probability",
+       y = "Parameter Value",  
+       fill="Density") + 
+  facet_grid(parameter~a) + 
+  theme_minimal()
+```
+
+```{r eval=FALSE, include=FALSE}
+
+# Scatter Plots 
+
+# Gamma 
+
+cpt_wide %>% 
+  ggplot(aes(x = s, y = gamma, color = s)) +
+  geom_point(size = 2) +
+  geom_line(size = 1) +
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(breaks = seq(0, 2, .2)) +
-  facet_grid(boundary~a, switch = "y") +
+  facet_grid(boundary~a) +
   labs(title = expression(paste("Curvature ", gamma)),
        x ="Switching Probability",
        y = expression(gamma), 
        color="Switching Probability") + 
   theme_minimal()
 
-# delta
+# Delta
 
-cpt_agent %>% 
-  ggplot(aes(x = s, y = delta)) +
-  geom_jitter(color = "#CECECE") + 
-  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
-  geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
+cpt_wide %>% 
+  ggplot(aes(x = s, y = delta, color = s)) +
+  geom_point(size = 2) +
+  geom_line(size = 1) +
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(breaks = seq(0, 10, .5)) +
+  scale_y_continuous(breaks = seq(0, 2, .2)) +
   facet_grid(boundary~a, switch = "y") +
-  labs(title = expression(paste("Elevation ", delta)),
+  labs(title = expression(paste("Curvature ", delta)),
        x ="Switching Probability",
        y = expression(delta), 
        color="Switching Probability") + 
   theme_minimal()
 ```
 
+
 Below, the resulting probability weighting functions are displayed. 
 
 ```{r}
-# weighting function 
+
+# Weighting Functions 
 
 ## compute decision weights 
 
-cpt_agent_w <- cpt_agent %>% 
+cpt_w <- cpt_wide %>% 
   select(-c(alpha, rho)) %>% 
-  expand_grid(ep = seq(0, 1, .1)) %>% # 
-  mutate(w = round(exp(-delta*(-log(ep))^gamma), 2)) 
+  expand_grid(ep = seq(0, 1, .1)) %>% #
+  mutate(w = round(  (delta * ep^gamma)/ ((delta * ep^gamma)+(1-ep)^gamma), 2)) 
 
-cpt_agent_mean_w <- cpt_agent %>% 
-  group_by(s) %>% 
-  summarise(gamma = round(mean(gamma), 2), 
-            delta = round(mean(delta), 2)) %>% 
-  expand_grid(ep = seq(0, 1, .1)) %>%
-  mutate(w = round(exp(-delta*(-log(ep))^gamma), 2)) 
-  
 ## plot curves
-cpt_agent_w %>% 
-  ggplot(aes(x = ep, y = w)) +
-  geom_path(color = "#CECECE") + 
-  geom_path(data = cpt_agent_mean_w, aes(color = s), size = 1.1) +
+
+cpt_w %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = ep, y = w, color = s)) +
+  geom_path() + 
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) + 
-  labs(title = "Probability Weighting Function",
-       x ="Experienced Probability",
-       y = "Subjective Experienced Probability", 
+  scale_y_continuous(breaks = seq(0, 1, .2)) + 
+  labs(x ="Experienced Probability",
+       y = "Probability Weighting", 
        color="Switching Probability") + 
   theme_minimal()
 
-## for separate a 
-
-cpt_agent_mean_w <- cpt_agent %>% 
-  group_by(s, a) %>% 
-  summarise(gamma = round(mean(gamma), 2), 
-            delta = round(mean(delta), 2)) %>% 
-  expand_grid(ep = seq(0, 1, .1)) %>%
-  mutate(w = round(exp(-delta*(-log(ep))^gamma), 2)) 
-  
-cpt_agent_w %>% 
-  ggplot(aes(x = ep, y = w)) +
-  geom_path(color = "#CECECE") + 
-  geom_path(data = cpt_agent_mean_w, aes(color = s), size = 1.1) +
+cpt_w %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = ep, y = w, color = s)) +
+  geom_path() + 
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) +
-  facet_wrap(~a, nrow = 2) + 
-  labs(title = "Probability Weighting Function",
-       x ="Experienced Probability",
-       y = "Subjective Experienced Probability", 
+  scale_y_continuous(breaks = seq(0, 1, .2)) + 
+  facet_wrap(~a) +
+  labs(x ="Experienced Probability",
+       y = "Probability Weighting", 
        color="Switching Probability") + 
   theme_minimal()
 ```
@@ -423,6 +408,22 @@ fr_rates <- choices %>%
   mutate(rate = round(n/sum(n), 2), # response rates 
          type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% filter(!is.na(type))  # remove correct responses
 
+# violin scatter plot
+
+fr_rates %>% 
+  ggplot(aes(x = rare, y = rate, color = s)) +
+  geom_quasirandom(aes(shape = type), size = 3) +  
+  scale_y_continuous(breaks = seq(0, 1, .2)) +
+  scale_color_scico(palette = "buda") + 
+  scale_shape_manual(values=c(8, 16))+
+  labs(x = "Rare Event", 
+       y = "False Response Rate", 
+       color = "Switching Probability",
+       shape = "False Response") + 
+  theme_minimal() 
+```
+
+```{r eval=FALSE, include=FALSE}
 fr_rates %>% 
   ggplot(aes(a, s, fill = rate)) + 
   geom_tile(colour="white", size=0.1) +
@@ -430,7 +431,8 @@ fr_rates %>%
   facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
   scale_x_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
   scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
-  labs(x = "a", 
+  labs(title = "False Response Rates", 
+       x = "a", 
        y= "s", 
        fill = "% False Responses") + 
   theme_minimal() 
@@ -443,25 +445,83 @@ fr_rates %>%
   scale_x_continuous(breaks = seq(0, 1, .1)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) +
   scale_color_scico(palette = "buda") + 
-  labs(title = "Piecewise Integration",
+  labs(title = "False Response Rates", 
        x = "s", 
        y= "% False Responses", 
        color = "a") + 
   theme_minimal()
 ```
 
-## Value Function 
 
-The figures below display the estimates of the $\alpha$ and the resulting value function.
+## Value Function 
 
 ```{r}
 
-# alpha
-cpt_agent %>% 
+# Density Plot 
+
+cpt_wide %>%
   ggplot(aes(x = s, y = alpha)) +
-  geom_jitter(color = "#CECECE" ) + 
-  geom_point(data = cpt_agent_mean, aes(color = s), size = 2) +
-  geom_line(data = cpt_agent_mean, aes(color = s), size = 1) +
+  geom_density_2d_filled(contour_var = "ndensity") + 
+  scale_fill_scico_d(palette = "buda") +
+  scale_x_continuous(breaks = seq(0, 1, .2)) + 
+  scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
+  labs(x ="Switching Probability",
+       y = "Parameter Value",  
+       fill="Density") + 
+  facet_wrap(~a, nrow = 1) + 
+  theme_minimal()
+```
+
+```{r}
+# value function 
+
+## compute values 
+
+cpt_v <- cpt_wide %>% 
+  select(-c(gamma, delta, rho)) %>% 
+  expand_grid(x = seq(0, 20, 2)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+## plot curves
+
+cpt_v %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = x, y = v)) +
+  geom_path(aes(color = s)) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 5)) +
+  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  labs(title = "Value Function",
+       x ="Objective Value",
+       y = "Subjective Value", 
+       color="Switching Probability") + 
+  theme_minimal()
+
+cpt_v %>% 
+  group_by(boundary, a, s) %>% 
+  ggplot(aes(x = x, y = v)) +
+  geom_path(aes(color = s)) +
+  scale_color_scico(palette = "buda") + 
+  scale_x_continuous(breaks = seq(0, 20, 5)) +
+  scale_y_continuous(breaks = seq(0, 20, 5)) + 
+  facet_wrap(~a) +
+  labs(title = "Value Function",
+       x ="Objective Value",
+       y = "Subjective Value", 
+       color="Switching Probability") + 
+  theme_minimal()
+```
+
+
+
+
+```{r eval=FALSE, include=FALSE}
+
+# alpha
+cpt_wide %>% 
+  ggplot(aes(x = s, y = alpha, color = s)) +
+  geom_point(size = 2) +
+  geom_line(size = 1) +
   scale_color_scico(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(breaks = seq(0, 2, .2)) +
@@ -472,57 +532,7 @@ cpt_agent %>%
        color="Switching Probability") + 
   theme_minimal()
 
-# value function 
 
-## compute values 
-
-cpt_agent_v <- cpt_agent %>% 
-  select(-c(gamma, delta, rho)) %>% 
-  expand_grid(x = seq(0, 20, 2)) %>%  
-  mutate(v = round(x^alpha, 2)) 
-
-cpt_agent_mean_v <- cpt_agent %>% 
-  select(-c(gamma, delta, rho)) %>% 
-  group_by(s) %>% 
-  summarise(alpha = round(mean(alpha), 2)) %>% 
-  expand_grid(x = seq(0, 20, 2)) %>%  
-  mutate(v = round(x^alpha, 2))
-  
-## plot curves
-cpt_agent_v %>% 
-  ggplot(aes(x = x, y = v)) +
-  geom_path(color = "#CECECE") + 
-  geom_path(data = cpt_agent_mean_v, aes(color = s), size = 1.1) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 20, 5)) +
-  scale_y_continuous(breaks = seq(0, 20, 5)) + 
-  labs(title = "Value Function",
-       x ="Objective Value",
-       y = "Subjective Value", 
-       color="Switching Probability") + 
-  theme_minimal()
-
-## for separate a 
-
-cpt_agent_mean_v <- cpt_agent %>% 
-  group_by(s, a) %>% 
-  summarise(alpha = round(mean(alpha), 2)) %>% 
-  expand_grid(x = seq(0, 20, 2)) %>%  
-  mutate(v = round(x^alpha, 2)) 
-  
-cpt_agent_v %>% 
-  ggplot(aes(x = x, y = v)) +
-  geom_path(color = "#CECECE", size = 0.5) + 
-  geom_path(data = cpt_agent_mean_v, aes(color = s), size = 1.1) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 20, 5)) +
-  scale_y_continuous(breaks = seq(0, 20, 5)) + 
-  facet_wrap(~a, nrow = 2) + 
-  labs(title = "Value Function",
-       x ="Objective Value",
-       y = "Subjective Value", 
-       color="Switching Probability") + 
-  theme_minimal()
 ```
 
 # Discussion 
@@ -532,6 +542,8 @@ cpt_agent_v %>%
 # Conclusion
 
 ...
+
+# Acknowledgements
 
 # References
 
@@ -546,7 +558,7 @@ To proof is that the sequence $D_i = D_1, ..., D_n$ describes a Bernoulli proces
 Therefore we must demonstrate that the probability of success, i.e., $p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right)$, is identified.
 The derivation chain is first roughly paraphrased and then formalized as a mathematical equation. 
 
-We start by noting that the probability of success equals the probability of the subset $B_1 \in \mathscr{C}$ which contains all comparisons $c \in C$ that satisfy the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
+We start by noting that the probability of success equals the probability of the subset $B_1 \in \mathcal{G}$ which contains all comparisons $c \in C$ that satisfy the inequation $\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0$.
 Since the probability of the subset $B_1$ equals the probability that any of its elements occurs, the probabilities of all $c \in B_1$ are summed up. 
 We therefore use the sum operator with the limits $j \in \{1, ..., |B_1|\}$, with $|B_1|$ denoting the cardinality of the set $B_1$, i.e., the number of elements within the set. 
 As a major assumption is that the random variables within a sample sequence are iid and independent across sequences, the joint probability of a pair $\overline{X}_{N_X} \cap \overline{Y}_{N_Y}$, i.e., a pair $X_i \cap Y_i$ with a unique combination of the number of times any possible realization of $X$ and $Y$ occurs, is described by the product of their individual probabilities $p(\overline{X}_{N_X})$ and $p(\overline{Y}_{N_Y})$.
@@ -554,10 +566,10 @@ Finally, to get these individual probabilities, we must determine the probabilit
 This probability is given by the multinomial distribution which reduces to a binomial distribution in the case of only two possible realizations. 
 We denote the number of times a realization occurs in a sample sequence with $k_{\omega}$, where $\omega$ signals that the realizations of the random variables are numerical equivalent to the outcomes in the sample space of the prospects.  
 
-$$\begin{equation}
+$$
   \begin{split}
     p(D = 1) 
-      & = p \left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathscr{C} \; \right) \\\\\\ 
+      & = p \left( \; B_1 = \{c \in C: (\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0)\} \in \mathcal{G} \; \right) \\\\\\ 
       & = \sum_{j=1}^{|B_1|} \left( \;
           p(\overline{X}_{N_Xj})  
           \times 
@@ -601,7 +613,7 @@ $$\begin{equation}
         \right)
       \right)_{j \, \in \, \{1, ..., |B_1|\}}
   \end{split}
-\end{equation}$$
+$$
 
 ## Appendix 2: Choice Problems 
 
@@ -610,43 +622,3 @@ gambles <- read_csv("data/gambles/sr_subset.csv")
 gambles %>% kable()
 ```
 
-## Appendix 3: Convergence Diagnostics for CPT Parameters 
-
-```{r}
-# group level
-
-gel_92 %>% 
-  filter(level == "mu") %>% 
-  ggplot(aes(x = boundary, y = Rhat, fill = s)) +
-  geom_bar(position = "dodge_2", stat = "identity") +
-  scale_fill_scico(palette = "buda") + 
-  scale_x_discrete(name = element_blank()) +
-  scale_y_continuous(breaks = seq(.1, 1.5, .2)) +
-  geom_hline(yintercept = 1, color = "black") +
-  geom_hline(yintercept = 1.1, color = "red", linetype = "dashed") +
-  facet_grid(parameter~a, switch = "y") +
-  labs(y = "Scale Reduction Factor", 
-       fill="Switching Probability") + 
-  theme_minimal()
-
-# agent level
-
-parameters <- c("alpha", "gamma", "delta", "rho")
-for(i in seq_along(parameters)) {
-
-print(gel_92 %>% 
-  filter(level != "mu", parameter == parameters[i]) %>% 
-  ggplot(aes(x = level, y = Rhat, fill = s)) +
-  geom_bar(stat = "identity", position = "dodge_2") +
-  scale_x_discrete(breaks = element_blank(), name = element_blank()) + 
-  scale_y_continuous(breaks = seq(.1, 1.5, .2)) +
-  geom_hline(yintercept = 1, color = "black") +
-  geom_hline(yintercept = 1.1, color = "red", linetype = "dashed") +
-  facet_grid(boundary~a, switch = "y") +
-  labs(title = parameters[i],
-       y = "Scale Reduction Factor", 
-       fill="Switching Probability") + 
-  scale_fill_scico(palette = "buda") + 
-  theme_minimal())
-}
-```
