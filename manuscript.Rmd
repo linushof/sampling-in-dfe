@@ -1,19 +1,65 @@
 ---
-title: 'Sampling Strategies in Decisions from Experience'
-author: "Linus Hof, Thorsten Pachur, Veronika Zilker"
-bibliography: references_sampling-in-dfe.bib
-output:
-  html_document:
-    code_folding: hide
-    toc: yes
-    toc_float: yes
-    fig_width: 10
-    fig_height: 7
-csl: apa.csl
-editor_options: 
-  markdown: 
-    wrap: sentence
-  chunk_output_type: console
+title             : "Sampling Strategies in Decisions from Experience"
+shorttitle        : "Sampling in Decisions from Experience"
+
+header-includes: 
+  - \renewcommand\author[1]{}
+  - \renewcommand\affiliation[1]{}
+  - \authorsnames[1, 2, 2]{Linus Hof, Thorsten Pachur, Veronika Zilker}
+  - \authorsaffiliations{{Department of Psychology, Heidelberg University}, {Center for Adaptive Rationality, Max Planck Institute for Human Development}}
+
+author: 
+  - name          : "Linus Hof"
+    affiliation   : "1"
+    corresponding : yes    
+    address       : "Department of Psychology, Heidelberg University, Hauptstraße 47-51, 69117 Heidelberg, Germany"
+    email         : "linushof@posteo.de"
+    role:
+      - Conceptualization
+      - Methodology
+      - Formal Analysis
+      - Visualization
+      - Software
+      - Validation
+      - Writing---original draft
+  - name          : "Thorsten Pachur"
+    role:
+      - Conceptualization
+      - Methodology
+      - Supervision
+  - name          : "Veronika Zilker" 
+    role:
+      - Conceptualization
+      - Methodology
+      - Supervision
+
+note: | 
+  Unsubmitted draft 
+
+authornote: |
+ This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. This version was created from the commit with the hash ``r repro::current_hash()``. 
+ 
+abstract: |
+  Add abstract
+  
+keywords          : ""
+wordcount         : ""
+
+bibliography      : ["references_sampling-in-dfe.bib"]
+csl               : apa.csl
+
+floatsintext      : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : no
+linkcolor         : "blue"
+mask              : no
+draft             : no
+
+classoption       : "man"
+documentclass     : "apa7"
+output            : papaja::apa6_pdf
 ---
 
 ```{r}
@@ -25,12 +71,7 @@ pacman::p_load(tidyverse,
                )
 ```
 
-
-# Introduction
-
 ...
-
-# Sampling in Decisions from Experience 
 
 In research on the decision theory, a standard paradigm is the choice between at least two (monetary) prospects.
 Let a prospect be a probability space $(\Omega, \mathcal{F}, P)$.
@@ -303,7 +344,9 @@ cpt_long %>%
   filter(parameter == "gamma" | parameter == "delta") %>% 
   ggplot(aes(x = s, y = mean)) +
   geom_density_2d_filled(contour_var = "ndensity") + 
+  geom_density_2d(contour_var = "ndensity") +
   scale_fill_scico_d(palette = "buda") +
+  scale_color_scico_d(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
   labs(x ="Switching Probability",
