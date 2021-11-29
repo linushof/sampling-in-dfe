@@ -1,4 +1,4 @@
-# Sampling in Decisions from Experiences 
+# Sampling Strategies in Decisions from Experiences 
 
 ## Abstract 
 
