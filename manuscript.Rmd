@@ -5,8 +5,8 @@ shorttitle        : "Sampling in Decisions from Experience"
 header-includes: 
   - \renewcommand\author[1]{}
   - \renewcommand\affiliation[1]{}
-  - \authorsnames[1, 2, 2]{Linus Hof, Thorsten Pachur, Veronika Zilker}
-  - \authorsaffiliations{{Department of Psychology, Heidelberg University}, {Center for Adaptive Rationality, Max Planck Institute for Human Development}}
+  - \authorsnames[1]{Linus Hof}
+  - \authorsaffiliations{{Department of Psychology, Heidelberg University}}
 
 author: 
   - name          : "Linus Hof"
@@ -14,30 +14,14 @@ author:
     corresponding : yes    
     address       : "Department of Psychology, Heidelberg University, Hauptstraße 47-51, 69117 Heidelberg, Germany"
     email         : "linushof@posteo.de"
-    role:
-      - Conceptualization
-      - Methodology
-      - Formal Analysis
-      - Visualization
-      - Software
-      - Validation
-      - Writing---original draft
-  - name          : "Thorsten Pachur"
-    role:
-      - Conceptualization
-      - Methodology
-      - Supervision
-  - name          : "Veronika Zilker" 
-    role:
-      - Conceptualization
-      - Methodology
-      - Supervision
 
 note: | 
-  Unsubmitted draft 
+  **Unsubmitted draft created from the commit with the hash**: ``r repro::current_hash()``
 
 authornote: |
- This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. This version was created from the commit with the hash ``r repro::current_hash()``. 
+ This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. 
+ 
+ The current version of this manuscript is prepared for submission as a master's thesis. A modified later version might be prepared together with co-authors and submitted for peer-review.  
  
 abstract: |
   Add abstract
@@ -47,6 +31,7 @@ wordcount         : ""
 
 bibliography      : ["references_sampling-in-dfe.bib"]
 csl               : apa.csl
+
 
 floatsintext      : yes
 figurelist        : no
@@ -67,11 +52,26 @@ output            : papaja::apa6_pdf
 pacman::p_load(tidyverse, 
                knitr, 
                ggbeeswarm,
-               scico # for scientific color palettes
-               )
+               scico, # for scientific color palettes
+               papaja)
 ```
 
-...
+<!-- Computational level -->
+
+Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
+The basic structure of the problem may be modeled by the inclusion map $\iota : A' \mapsto A$, indicating that decision making is a *process* that starts from an initial set $A$, including all choice alternatives, and stops at a proper subset $A' \subset A$, only including the chosen alternatives. 
+Given that this selection process is systematic---as opposed to random---the chosen alternatives in $A'$ possess the same *property* or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
+We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
+
+<!-- Algorithmic Level -->
+
+Thus, a rather important part---although by far not the only one---of the computation that connects the initial set with its subset is the comparison of the properties of the choice alternatives against some selection criteria. 
+At the algorithmic level, such comparisons require an explicit description of the properties using a representation system which is useful to the processing system, i.e., a living organism or a computer [@marrRepresentationRecognitionSpatial1978; @marrVisionComputationalInvestigation1982]. 
+In quite many cases, however, the selection process is not restricted to one particular representation system but a number of different representations can be used to describe the properties of a given set of choice alternatives. 
+E.g., an important difference that has emerged in behavioral decision research is whether the probability of a risky outcome is readily described as a decimal number, ratio, or percentage or whether it must be inferred from the relative frequency of occurrence of the particular outcome in a collection of random variables [@hertwigDescriptionexperienceGapRisky2009]. 
+
+
+<!-- Samples as representation -->
 
 In research on the decision theory, a standard paradigm is the choice between at least two (monetary) prospects.
 Let a prospect be a probability space $(\Omega, \mathcal{F}, P)$.
@@ -289,7 +289,8 @@ As expected, the scatter plot below shows an inverse relationship between switch
 I.e., the lower the switching probability, the larger become the sample sequences on which each comparison between prospects is based, which in turn leads to longer trials.  
 This effect is particularly pronounced for low probabilities such that the increase in trial length accelerates as switching probability decreases.
 
-```{r message=FALSE}
+
+```{r fig.cap="Test"}
 
 # get median trial length for each switching probability 
 
@@ -311,7 +312,7 @@ trial_length %>%
        x ="Switching Probability",
        y = "Median Trial Length", 
        color="Switching Probability") + 
-  theme_minimal()
+  theme_apa()
 ```
 
 
@@ -336,7 +337,7 @@ The resulting strong curvature leads to a compression of probabilities in the lo
 This pattern is robust for varying degrees of the boundary level, except for $a = 1$. 
 The latter deviation may be explained by the potential scale reduction factors for the respective parameter estimates, which indicate that the MCMC chains did not converge (see [Appendix 3][Appendix 3: Convergence Diagnostics for CPT Parameters]).   
 
-```{r}
+```{r fig.cap="test 2"}
 
 # Density Plot 
 
@@ -344,7 +345,6 @@ cpt_long %>%
   filter(parameter == "gamma" | parameter == "delta") %>% 
   ggplot(aes(x = s, y = mean)) +
   geom_density_2d_filled(contour_var = "ndensity") + 
-  geom_density_2d(contour_var = "ndensity") +
   scale_fill_scico_d(palette = "buda") +
   scale_color_scico_d(palette = "buda") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
@@ -353,7 +353,7 @@ cpt_long %>%
        y = "Parameter Value",  
        fill="Density") + 
   facet_grid(parameter~a) + 
-  theme_minimal()
+  theme_apa()
 ```
 
 ```{r eval=FALSE, include=FALSE}
@@ -555,9 +555,6 @@ cpt_v %>%
   theme_minimal()
 ```
 
-
-
-
 ```{r eval=FALSE, include=FALSE}
 
 # alpha
@@ -574,23 +571,18 @@ cpt_wide %>%
        y = expression(alpha), 
        color="Switching Probability") + 
   theme_minimal()
-
-
 ```
 
 # Discussion 
 
-...
-
 # Conclusion
 
-...
-
-# Acknowledgements
 
 # References
 
 <div id="refs"></div>
+
+# Software
 
 # Appendix 
 
@@ -658,10 +650,11 @@ $$
   \end{split}
 $$
 
+
 ## Appendix 2: Choice Problems 
 
 ```{r message=FALSE}
 gambles <- read_csv("data/gambles/sr_subset.csv")
-gambles %>% kable()
+gambles %>% apa_table()
 ```
 
