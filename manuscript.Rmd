@@ -24,7 +24,7 @@ authornote: |
  The current version of this manuscript is prepared for submission as a master's thesis. A modified later version might be prepared together with co-authors and submitted for peer-review.  
  
 abstract: |
-  Add abstract
+  Add short abstract.
   
 keywords          : ""
 wordcount         : ""
@@ -59,16 +59,29 @@ pacman::p_load(tidyverse,
 <!-- Computational level -->
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
-The basic structure of the problem may be modeled by the inclusion map $\iota : A' \mapsto A$, indicating that decision making is a *process* that starts from an initial set $A$, including all choice alternatives, and stops at a proper subset $A' \subset A$, only including the chosen alternatives. 
-Given that this selection process is systematic---as opposed to random---the chosen alternatives in $A'$ possess the same *property* or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
+The basic structure of the problem may be modeled by the inclusion map $\iota : A' \mapsto A$, where $\iota(a) = a$ for all $a \in A'$, indicating that decision making is a *process* that starts from an initial set $A$, including all choice alternatives, and stops at a proper subset $A' \subset A$, including only the chosen alternatives. 
+Given that the selection process is systematic---as opposed to random---the chosen alternatives in $A'$ should possess the same *property* or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
 We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
+
+Now, consider the power set $\cal{P}(A)$, which is the set of all possible subsets of $A$.
+Each of the subsets $A' \in \cal{P}(A)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [@jostMathematicalConcepts2015, p. 16]. 
+The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives.
 
 <!-- Algorithmic Level -->
 
-Thus, a rather important part---although by far not the only one---of the computation that connects the initial set with its subset is the comparison of the properties of the choice alternatives against some selection criteria. 
-At the algorithmic level, such comparisons require an explicit description of the properties using a representation system which is useful to the processing system, i.e., a living organism or a computer [@marrRepresentationRecognitionSpatial1978; @marrVisionComputationalInvestigation1982]. 
-In quite many cases, however, the selection process is not restricted to one particular representation system but a number of different representations can be used to describe the properties of a given set of choice alternatives. 
-E.g., an important difference that has emerged in behavioral decision research is whether the probability of a risky outcome is readily described as a decimal number, ratio, or percentage or whether it must be inferred from the relative frequency of occurrence of the particular outcome in a collection of random variables [@hertwigDescriptionexperienceGapRisky2009]. 
+A rather important part---though by far not the only one---of the computation that connects the initial set with its subset is the comparison of the properties of the choice alternatives against some selection criteria. 
+At the algorithmic level [cf. @marrVisionComputationalInvestigation1982], such comparisons require an explicit description of the properties using a representation system which is useful to the processing system, i.e., a living organism or a computer [@marrRepresentationRecognitionSpatial1978]. 
+In quite many cases, however, the selection process is not restricted to one particular representation system but a number of different representations can be used to describe the properties of choice alternatives in a given set.
+Yet, not every representation system permits the description of a given property.
+E.g., a consequential difference that has emerged in behavioral decision research is whether the probability of a risky outcome is readily described, i.e., as a decimal number (.2), ratio (2/10), or percentage (20%), or whether it must be inferred from the relative frequency of occurrence of the particular outcome in a collection of i.i.d. random variables [@hertwigDescriptionexperienceGapRisky2009]. 
+Whereas all four representation systems can in principal be used to describe the probabilities of given outcomes, only the representation which uses collections of random variables can, for example, plausibly produce wavy recency effects due to the perception of spurious temporal outcome patterns [@plonskyRelianceSmallSamples2015; @plonskyLearningSettingsPartial2017].
+Although a discrete-time collection of i.i.d. random variables cannot, by definition, exhibit temporal regularity in the sequence of sampled outcomes, spurious temporal patterns might nevertheless be regarded as a property of choice alternatives and affect the consequential decision behavior in a way that would not be possible in other representation systems. 
+The reason is simply that such a (spurious) property could not emerge in the other representations. 
+
+The preceding example illustrates how some properties can be described in one representation but not in another and how representation systems can differ with regards to the processing effort required to describe the same property.
+Thus, there is generally a trade-off between different representation systems, where in a given representation certain properties become explicit while others are pushed into the background [@marrVisionComputationalInvestigation1982, p. 21].
+
+<!-- In the same vein, there is a call for *representational pluralism* in cognition research [@griffithsProbabilisticModelsCognition2010] -->
 
 
 <!-- Samples as representation -->
