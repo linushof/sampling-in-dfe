@@ -1,6 +1,6 @@
 ---
-title             : "Sampling Strategies in Decisions from Experience"
-shorttitle        : "Sampling in Decisions from Experience"
+title             : "Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation"
+shorttitle        : "Sampling strategies in decisions from experience"
 
 header-includes: 
   - \renewcommand\author[1]{}
@@ -55,6 +55,7 @@ pacman::p_load(tidyverse,
                scico, # for scientific color palettes
                papaja)
 ```
+
 
 <!-- Computational level -->
 
