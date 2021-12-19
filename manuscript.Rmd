@@ -60,10 +60,10 @@ pacman::p_load(tidyverse,
 
 Any cognitive system operates on information inputs from an environment or memory. 
 Often, however, these inputs do not readily describe the *properties* that the operating system uses to produce meaningful outputs. 
-To obtain useful descriptions of the properties of interest, it is rather required to make inferences from incomplete or noisy inputs, and the feasibility and ease of these inferences is partly determined by how the inputs are represented. 
+To obtain useful descriptions of the properties of interest, it is rather required to make inferences from incomplete or noisy inputs.
+Yet, the feasibility and ease of these inferences depends on how the inputs are represented, since the *representation* determines the information that is made explicit and the costs at which certain operations can be carried out [@marrVisionComputationalInvestigation1982].
+For example, probabilistic models of cognition suggest that qualitatively different assumptions about how people may represent input information are required to capture their inferences in different inductive contexts [@griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
 
-
-<!-- The way shape information is organized by a representation. Different information/properties require different organizations of the inputs ... some information may be costly to obtain in a certain representaion ...    -->
 
 <!--- Still introduction: Problems/Issues of property induction carry over to the decision making process; "I argue that statement" -->
 
@@ -82,7 +82,7 @@ The concept of the power set thereby illustrates in a primitive way how differen
 <!-- Algorithmic Level -->
 
 A rather important part---though by far not the only one---of the computation that connects the initial set with its subset is then the comparison of the properties of the choice alternatives against some selection criteria. 
-At the algorithmic level, such a comparison requires an explicit description of the properties using a *representation* which is useful to the processing system [cf. @marrVisionComputationalInvestigation1982]. 
+At the algorithmic level, such a comparison requires an explicit description of the properties using a representation which is useful to the processing system [cf. @marrVisionComputationalInvestigation1982]. 
 In quite many cases, however, a number of different representations can be used to describe the properties of choice alternatives in a given set.
 Yet, not every representation permits an accurate description of a given property at reasonable expenses or allows to describe a property at all [cf. @marrRepresentationRecognitionSpatial1978].
 E.g., a consequential difference that has emerged in behavioral research on risky choice is whether the probability of a risky outcome is described using a decimal number (.2), ratio (2/10), or percentage (20%), or whether it must be inferred from the relative frequency of occurrence of the particular outcome in a collection of independent and identically distributed (i.i.d.) random variables, i.e., a *random sample*.
