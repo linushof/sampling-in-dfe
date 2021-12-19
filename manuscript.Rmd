@@ -1,6 +1,6 @@
 ---
 title             : "Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation"
-shorttitle        : "Sampling strategies in decisions from experience"
+shorttitle        : "Sampling strategies"
 
 header-includes: 
   - \renewcommand\author[1]{}
@@ -56,17 +56,28 @@ pacman::p_load(tidyverse,
                papaja)
 ```
 
+<!-- Introduction -->
+
+Any cognitive system operates on information inputs from an environment or memory. 
+Often, however, these inputs do not readily describe the *properties* that the operating system uses to produce meaningful outputs. 
+To obtain useful descriptions of the properties of interest, it is rather required to make inferences from incomplete or noisy inputs, and the feasibility and ease of these inferences is partly determined by how the inputs are represented. 
+
+
+<!-- The way shape information is organized by a representation. Different information/properties require different organizations of the inputs ... some information may be costly to obtain in a certain representaion ...    -->
+
+<!--- Still introduction: Problems/Issues of property induction carry over to the decision making process; "I argue that statement" -->
+
 
 <!-- Computational level -->
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
 The basic structure of the problem may be modeled by the inclusion map $\iota : A' \mapsto A$, where $\iota(a) = a$ for all $a \in A'$, indicating that decision making is a *process* that starts from an initial set $A$, including all choice alternatives, and stops at a proper subset $A' \subset A$, including only the chosen alternatives. 
-Given that the selection process is systematic---as opposed to random---the chosen alternatives in $A'$ should possess the same *property* or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
+Given that the selection process is systematic---as opposed to random---the chosen alternatives in $A'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
 We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
 
 Now, consider the power set $\cal{P}(A)$, which is the set of all possible subsets of $A$.
 Each of the subsets $A' \in \cal{P}(A)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives.
+The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives [cf. @kempStructuredStatisticalModels2009].
 
 <!-- Algorithmic Level -->
 
