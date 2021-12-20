@@ -59,14 +59,13 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 Any cognitive system operates on information inputs from an environment or memory. 
-Often, however, these inputs do not readily describe the *properties* that the operating system uses to produce meaningful outputs. 
+Often, however, these inputs do not readily describe the *properties* that the operating system uses to control the output. 
 To obtain useful descriptions of the properties of interest, it is rather required to make inferences from incomplete or noisy inputs.
-Yet, the feasibility and ease of these inferences depends on how the inputs are represented, since the *representation* determines the information that is made explicit and the costs at which certain operations can be carried out [@marrVisionComputationalInvestigation1982].
-For example, probabilistic models of cognition suggest that qualitatively different assumptions about how people may represent input information are required to capture their inferences in different inductive contexts [@griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Since how the input is represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information [@marrVisionComputationalInvestigation1982], the feasibility and ease of these inferences depends greatly on the choice of *representation*.
+For example, probabilistic models of cognition suggest that a broad range of different assumptions about how people may structurally represent input information are required to capture their inferences about the extensions of novel properties in different inductive contexts [@griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Hence, to explain the operations that turn an input into an output, one needs to understand the properties that control the output, the representation that is used by the cognitive system to describe these properties, and the costs of making the descriptions in that representation, including their susceptibility to distortions from noise or uncertainty. 
 
-
-<!--- Still introduction: Problems/Issues of property induction carry over to the decision making process; "I argue that statement" -->
-
+ 
 
 <!-- Computational level -->
 
@@ -77,7 +76,7 @@ We may label the properties that serve to distinguish between the chosen and non
 
 Now, consider the power set $\cal{P}(A)$, which is the set of all possible subsets of $A$.
 Each of the subsets $A' \in \cal{P}(A)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives [cf. @kempStructuredStatisticalModels2009].
+The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives.
 
 <!-- Algorithmic Level -->
 
