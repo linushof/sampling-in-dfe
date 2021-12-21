@@ -58,24 +58,25 @@ pacman::p_load(tidyverse,
 
 <!-- Introduction -->
 
-Any cognitive system operates on information inputs from an environment or memory. 
-Often, however, these inputs do not readily describe the *properties* that the operating system uses to control the output. 
-To obtain useful descriptions of the properties of interest, it is rather required to make inferences from incomplete or noisy inputs.
-Since how the input is represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information [@marrVisionComputationalInvestigation1982], the feasibility and ease of these inferences depends greatly on the choice of *representation*.
-For example, probabilistic models of cognition suggest that a broad range of different assumptions about how people may structurally represent input information are required to capture their inferences about the extensions of novel properties in different inductive contexts [@griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain the operations that turn an input into an output, one needs to understand the properties that control the output, the representation that is used by the cognitive system to describe these properties, and the costs of making the descriptions in that representation, including their susceptibility to distortions from noise or uncertainty. 
+The mind is a cognitive system that operates on inputs from an environment or memory.
+Such inputs may be treated as a set *I* and its elements, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
+Often, however, the properties that the mind uses to control the output are not readily described, but must be inferred from incomplete or noisy information. 
+Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of making the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. 
 
- 
+In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, however, primarily to illustrate one rather important point:
+Given that the properties of choice alternatives serve as *selection criteria*, the more accurately these properties are described, the more systematic the choices should become.
+Importantly, this principle is not restricted to any specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives. 
 
 <!-- Computational level -->
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
-The basic structure of the problem may be modeled by the inclusion map $\iota : A' \mapsto A$, where $\iota(a) = a$ for all $a \in A'$, indicating that decision making is a *process* that starts from an initial set $A$, including all choice alternatives, and stops at a proper subset $A' \subset A$, including only the chosen alternatives. 
-Given that the selection process is systematic---as opposed to random---the chosen alternatives in $A'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $A \setminus A'$ do not possess.
+The basic structure of the problem may be modeled by the inclusion map $\iota : I' \mapsto I$, where $\iota(i) = i$ for all $i \in I'$, indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
+Given that the selection process is systematic---as opposed to random---the chosen alternatives in $I'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
 
-Now, consider the power set $\cal{P}(A)$, which is the set of all possible subsets of $A$.
-Each of the subsets $A' \in \cal{P}(A)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
+Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$.
+Each of the subsets $A' \in \mathcal{P}(I)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
 The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives.
 
 <!-- Algorithmic Level -->
