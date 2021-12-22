@@ -66,16 +66,22 @@ Hence, to explain how the mind turns certain inputs into meaningful outputs, one
 
 In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
 Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately these properties are described, the more systematic the choices should become.
-Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives. 
+Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
 
+As the discussion proceeds and for the sake of example, I argue that a choice pattern robustly emerging in so-called *decisions from experience* (DfE), i.e., the underweighting of small probability events, may be due to the constraints set by a certain selection criterion. 
+Considering in some detail *sampling strategies* as input representations used to describe the property of interest, I illustrate that if the sample size increases and thereby uncertainty is reduced, property induction should become more accurate and underweighting more pronounced.
+Interestingly, this prediction diverges from the common theme that an increase in the sample size will reduce the underweighting. 
+The sampling and decision process are mathematically formalized and implemented into a computational model to simulate choice data [cf. @guestHowComputationalModeling2021; @haslbeckModelingPsychopathologyData2021].
+Simulation data is analyzed using descriptive statistics and cumulative prospect theory (CPT) as a commonly used data model [@tverskyAdvancesProspectTheory1992; @goldsteinExpressionTheoryPreference1987]. 
+All simulations and analyses are reproducible---materials and instructions can be found on the accompanying GitHub repository. 
 
-
+# Header
 <!-- Computational level -->
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
 The basic structure of the problem may be modeled by the inclusion map $\iota : I' \mapsto I$, where $\iota(i) = i$ for all $i \in I'$, indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
 Given that the selection process is systematic---as opposed to random---the chosen alternatives in $I'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
-We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
+We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as selection criteria. 
 
 Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$.
 Each of the subsets $A' \in \mathcal{P}(I)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
