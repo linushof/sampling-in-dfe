@@ -59,14 +59,16 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
-Such inputs may be treated as a set *I* and its elements, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
+Such inputs may be treated as a set $I$ and its elements, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
 Often, however, the properties that the mind uses to control the output are not readily described, but must be inferred from incomplete or noisy information. 
 Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
 Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of making the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. 
 
-In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, however, primarily to illustrate one rather important point:
-Given that the properties of choice alternatives serve as *selection criteria*, the more accurately these properties are described, the more systematic the choices should become.
-Importantly, this principle is not restricted to any specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives. 
+In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
+Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately these properties are described, the more systematic the choices should become.
+Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives. 
+
+
 
 <!-- Computational level -->
 
