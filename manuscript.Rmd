@@ -60,22 +60,28 @@ pacman::p_load(tidyverse,
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
 Such inputs may be treated as a set $I$ and its elements, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
-Often, however, the properties that the mind uses to control the output are not readily described, but must be inferred from incomplete or noisy information. 
+Often, however, the properties used by the mind to control the outputs are not readily described, but proper descriptions must be inferred from incomplete or noisy information. 
 Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of making the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. 
+Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. 
 
 In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
-Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately these properties are described, the more systematic the choices should become.
-Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern reflect the bias that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
+Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately the descriptions of these properties are inferred, the more systematic the choices should become.
+Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern result from the constraints that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
 
-As the discussion proceeds and for the sake of example, I argue that a choice pattern robustly emerging in so-called *decisions from experience* (DfE), i.e., the underweighting of small probability events, may be due to the constraints set by a certain selection criterion. 
-Considering in some detail *sampling strategies* as input representations used to describe the property of interest, I illustrate that if the sample size increases and thereby uncertainty is reduced, property induction should become more accurate and underweighting more pronounced.
-Interestingly, this prediction diverges from the common theme that an increase in the sample size will reduce the underweighting. 
-The sampling and decision process are mathematically formalized and implemented into a computational model to simulate choice data [cf. @guestHowComputationalModeling2021; @haslbeckModelingPsychopathologyData2021].
-Simulation data is analyzed using descriptive statistics and cumulative prospect theory (CPT) as a commonly used data model [@tverskyAdvancesProspectTheory1992; @goldsteinExpressionTheoryPreference1987]. 
-All simulations and analyses are reproducible---materials and instructions can be found on the accompanying GitHub repository. 
+As the discussion proceeds and for the sake of example, I argue that a choice pattern robustly emerging in so-called *decisions from experience* (DfE), i.e., the apparent underweighting of small probability events, may be caused by the assessment constraints associated with a round-wise decision rule.
+This particular argument has already been made by @hillsInformationSearchDecisions2010, however, decision rules, as I try to explain below, are for several reasons better formulated as selection criteria whose descriptions are rarely restricted to one representation.
+Considering *sampling strategies* as representations used to describe the properties of interest in DfE, I illustrate how the inferred descriptions of these properties indeed become more accurate with increasing sample sizes. 
+Yet, caused by the selection criterion corresponding to the round-wise decision rule, the underweighting pattern is a priori predicted to become more pronounced in such a case. 
+This prediction is different from the relatively undisputed explanation that underweighting is caused by the reliance on small samples and the skewness of the binomial distribution, indicating that the effects of sample size on underweighting are conditional on the selection criterion. 
+I will elaborate on this matter as I proceed, however, to be rather clear from the outset, what the mind does in neither case is performing an underweighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level.
 
-# Header
+The theoretical argument is substantiated by a simulation study [cf. @guestHowComputationalModeling2021]. 
+For this purpose, the sampling and decision processes are expressed mathematically and implemented in a computational model.
+Choice data from DfE is simulated and modeled using cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@tverskyAdvancesProspectTheory1992]. 
+All simulations and analyses are reproducible---materials and instructions can be found on the accompanying GitHub repository.
+
+# Heading Section 1
+
 <!-- Computational level -->
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
@@ -104,8 +110,7 @@ Indeed, the underweighting pattern and other behavioral phenomena like the wavy 
 The preceding two examples illustrate how some properties of choice alternatives can be described in one representation but not in another and how representations can differ with regards to the processing effort required to describe the same property.
 Thus, there is generally a trade-off between different representations, where in a given representation certain properties become explicit while others are pushed into the background [@marrVisionComputationalInvestigation1982, p. 21].
 
-<!-- In the same vein, there is a call for *representational pluralism* in cognition research [@griffithsProbabilisticModelsCognition2010] -->
-
+# Heading Section 2
 
 <!-- Samples as representation -->
 
@@ -171,7 +176,7 @@ where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables
 Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
 Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
 
-# Capturing Differences in Sampling and Decision Strategies  
+## Subheading: Capturing Differences in Sampling and Decision Strategies  
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] discussed a potential link between sampling and decision strategies in DfE. 
 Specifically, the authors suppose that if single samples originating from different prospects are generated in direct succession (piecewise sampling), the evaluation of prospects is based on multiple ordinal comparisons of single samples (round-wise decisions).
@@ -244,15 +249,13 @@ Although this can be demonstrated for the random variables considered so far, it
 However, by explicating the above probability measure ([Appendix 1][Appendix 1: Probability Measure Over Sample Mean Comparisons]), it becomes evident that it is largely influenced by the underlying sequence lengths $N_X$ and $N_Y$.
 In the following section and a subsequent simulation analysis, we demonstrate that this influence is of such a form that it produces some principle and predictable trends in the choice behavior that can be modeled in the cumulative prospect theory.
 
-# Predicting Choice Behavior 
+## Subheading: Predicting Choice Behavior 
 
 Note first that the current stochastic sampling model allows to treat sampling and decision strategies independently by parameterization of both lengths of sample sequences and the number of comparisons.    
 
 ... 
 
-# Method
-
-## Generating Model
+# Simulation Study
 
 ...
 
@@ -273,7 +276,7 @@ Table A1 in [Appendix 2][Appendix 2: Choice Problems] contains the test set of 6
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
 
-## Describing Model: Cumulative Prospect Theory
+## Results
 
 ...
 
@@ -297,9 +300,8 @@ To reduce potential autocorrelation during the sampling process, we only kept ev
 The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(gel_92$Rhat), 3)` for all parameters, indicating good convergence.
 The minimum effective sample size was `r min(gel_92$n.eff)`.
 
-# Results
 
-## Plausibility Check: Relationship between Switching Probability and Trial Length
+### Plausibility Check: Relationship between Switching Probability and Trial Length
 
 ```{r message=FALSE}
 
@@ -351,8 +353,7 @@ trial_length %>%
   theme_apa()
 ```
 
-
-## Probability Weighting Function
+### Probability Weighting Function
 
 ```{r}
 
@@ -428,7 +429,6 @@ cpt_wide %>%
        color="Switching Probability") + 
   theme_minimal()
 ```
-
 
 Below, the resulting probability weighting functions are displayed. 
 
@@ -531,8 +531,7 @@ fr_rates %>%
   theme_minimal()
 ```
 
-
-## Value Function 
+### Value Function 
 
 ```{r}
 
@@ -609,16 +608,11 @@ cpt_wide %>%
   theme_minimal()
 ```
 
-# Discussion 
-
-# Conclusion
-
+# Discussion and Conclusion
 
 # References
 
 <div id="refs"></div>
-
-# Software
 
 # Appendix 
 
