@@ -2,12 +2,6 @@
 title             : "Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation"
 shorttitle        : "Sampling strategies"
 
-header-includes: 
-  - \renewcommand\author[1]{}
-  - \renewcommand\affiliation[1]{}
-  - \authorsnames[1]{Linus Hof}
-  - \authorsaffiliations{{Department of Psychology, Heidelberg University}}
-
 author: 
   - name          : "Linus Hof"
     affiliation   : "1"
@@ -17,7 +11,7 @@ author:
 
 note: | 
   **Unsubmitted draft created from the commit with the hash**: ``r repro::current_hash()``
-
+  
 authornote: |
  This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. 
  
@@ -32,8 +26,6 @@ wordcount         : ""
 bibliography      : ["references_sampling-in-dfe.bib"]
 csl               : apa.csl
 
-
-floatsintext      : yes
 figurelist        : no
 tablelist         : no
 footnotelist      : no
@@ -45,6 +37,13 @@ draft             : no
 classoption       : "man"
 documentclass     : "apa7"
 output            : papaja::apa6_pdf
+
+header-includes:
+   - \usepackage[capposition=top]{floatrow}
+   - \renewcommand\author[1]{}
+   - \renewcommand\affiliation[1]{}
+   - \authorsnames[1]{Linus Hof}
+   - \authorsaffiliations{{Department of Psychology, Heidelberg University}}
 ---
 
 ```{r}
@@ -59,48 +58,60 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
-Such inputs may be treated as a set $I$ and its elements, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
+Such inputs may be treated as a set $I$ and its elements $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
 Often, however, the properties used by the mind to control the outputs are not readily described, but proper descriptions must be inferred from incomplete or noisy information. 
 Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. 
+Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
+\
+
+(ref:figure1) A sketch of the structure of information processing. To turn inputs into meaningful outputs, the mind is required to describe the relevant properties before they can be evaluated. Descriptions are inferred from the inputs using a representation.    
+
+```{r fig.cap="(ref:figure1)", fig.align='left'}
+knitr::include_graphics("manuscript_files/figure-png/figure1.png")
+```
 
 In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
 Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately the descriptions of these properties are inferred, the more systematic the choices should become.
-Importantly, this principle is not restricted to any one specific property, but rather does the choice pattern result from the constraints that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
+Importantly, this principle is not restricted to any one specific property, but rather does a characteristic choice pattern result from the constraints that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
 
 As the discussion proceeds and for the sake of example, I argue that a choice pattern robustly emerging in so-called *decisions from experience* (DfE), i.e., the apparent underweighting of small probability events, may be caused by the assessment constraints associated with a round-wise decision rule.
 This particular argument has already been made by @hillsInformationSearchDecisions2010, however, decision rules, as I try to explain below, are for several reasons better formulated as selection criteria whose descriptions are rarely restricted to one representation.
-Considering *sampling strategies* as representations used to describe the properties of interest in DfE, I illustrate how the inferred descriptions of these properties indeed become more accurate with increasing sample sizes. 
-Yet, caused by the selection criterion corresponding to the round-wise decision rule, the underweighting pattern is a priori predicted to become more pronounced in such a case. 
-This prediction is different from the relatively undisputed explanation that underweighting is caused by the reliance on small samples and the skewness of the binomial distribution, indicating that the effects of sample size on underweighting are conditional on the selection criterion. 
-I will elaborate on this matter as I proceed, however, to be rather clear from the outset, what the mind does in neither case is performing an underweighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level.
+Considering *sampling strategies* as representations used to describe the properties of interest in DfE, I illustrate how the inferred descriptions of properties indeed become more accurate with increasing sample sizes. 
+Yet, caused by the selection criterion corresponding to a round-wise decision rule, the underweighting pattern is a priori predicted to become more pronounced in such a case. 
+This prediction is different from the explanation that underweighting is partly caused by the reliance on small samples and the skewness of the binomial distribution [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009], indicating that the effects of sample size on the choice pattern are conditional on the selection criterion. 
+I will elaborate on this matter as I proceed, however, to be rather clear from the outset, what the mind does in neither case is performing an underweighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf. @griffithsRationalUseCognitive2015]. 
 
-The theoretical argument is substantiated by a simulation study [cf. @guestHowComputationalModeling2021]. 
-For this purpose, the sampling and decision processes are expressed mathematically and implemented in a computational model.
+The theoretical argument is supported by a simulation study. 
+For this purpose, the sampling and decision making processes are expressed mathematically and implemented in a computational model.
 Choice data from DfE is simulated and modeled using cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@tverskyAdvancesProspectTheory1992]. 
-All simulations and analyses are reproducible---materials and instructions can be found on the accompanying GitHub repository.
+All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
 
-# Heading Section 1
-
-<!-- Computational level -->
+# The Decision Making Process and the Properties of Choice Alternatives
 
 Decision making is an information-processing problem whose solution requires a selection among choice alternatives. 
 The basic structure of the problem may be modeled by the inclusion map $\iota : I' \mapsto I$, where $\iota(i) = i$ for all $i \in I'$, indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
-Given that the selection process is systematic---as opposed to random---the chosen alternatives in $I'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
+Given that the selection is systematic---as opposed to random---the chosen alternatives in $I'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as selection criteria. 
+I.e., with regards to a given selection criteria, all chosen alternatives are equal to each other but different from the non-chosen alternatives.
 
-Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$.
-Each of the subsets $A' \in \mathcal{P}(I)$ corresponds to a possible distinction between choice alternatives that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates in a primitive way how different selection criteria can affect the consequential choice, provided the properties that can be captured and manipulated by a particular processing system, i.e., a living organism or a computer, are not uniformly distributed among the alternatives.
+Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2).
+Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
+The concept of the power set thereby illustrates in a plain way how different selection criteria can alter the consequential choice, provided the properties are not uniformly distributed among the alternatives. 
+\
 
-<!-- Algorithmic Level -->
+(ref:figure2) The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property.   
+
+```{r fig.cap="(ref:figure2)", fig.align='left'}
+knitr::include_graphics("manuscript_files/figure-png/figure2.png")
+```
 
 A rather important part---though by far not the only one---of the computation that connects the initial set with its subset is then the comparison of the properties of the choice alternatives against some selection criteria. 
 At the algorithmic level, such a comparison requires an explicit description of the properties using a representation which is useful to the processing system [cf. @marrVisionComputationalInvestigation1982]. 
 In quite many cases, however, a number of different representations can be used to describe the properties of choice alternatives in a given set.
 Yet, not every representation permits an accurate description of a given property at reasonable expenses or allows to describe a property at all [cf. @marrRepresentationRecognitionSpatial1978].
+
 E.g., a consequential difference that has emerged in behavioral research on risky choice is whether the probability of a risky outcome is described using a decimal number (.2), ratio (2/10), or percentage (20%), or whether it must be inferred from the relative frequency of occurrence of the particular outcome in a collection of independent and identically distributed (i.i.d.) random variables, i.e., a *random sample*.
-Noteworthy, for the latter case, which is usually referred to as *decisions from experience*, empirical protocols indicate that people decide as if they were underweighting small probability events [@barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004].
+Noteworthy, for the latter case, which is usually referred to as decisions from experience, empirical protocols indicate that people decide as if they were underweighting small probability events [@barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004].
 One undisputed factor that contributes to this underweighting pattern is the sampling error associated with people's reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018 for a meta-analytic review], indicating that, although the probabilities of outcomes can in principle be accurately described in decisions from experience, the actual description is rather inaccurate because it cannot be done at reasonable expenses.  
 
 Another property of choice alternatives that is likely to play a role in risky choice but can only be made explicit using a sample representation as in decisions from experience is the sequence in which outcomes occur.
@@ -110,7 +121,7 @@ Indeed, the underweighting pattern and other behavioral phenomena like the wavy 
 The preceding two examples illustrate how some properties of choice alternatives can be described in one representation but not in another and how representations can differ with regards to the processing effort required to describe the same property.
 Thus, there is generally a trade-off between different representations, where in a given representation certain properties become explicit while others are pushed into the background [@marrVisionComputationalInvestigation1982, p. 21].
 
-# Heading Section 2
+# Sampling Strategies
 
 <!-- Samples as representation -->
 
