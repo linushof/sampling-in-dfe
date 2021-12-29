@@ -58,9 +58,9 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
-Such inputs may be treated as a set $I$ and its elements $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
-Often, however, the properties used by the mind to control the outputs are not readily described, but proper descriptions must be inferred from incomplete or noisy information. 
-Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Such inputs may be treated as a set $I$ and its elements $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [@jostMathematicalConcepts2015, p. 1].
+Often, however, the properties used by the mind to control the outputs are not readily described, but proper descriptions must be inferred from the available information. 
+Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982, p. 21; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
 Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
 \
 
@@ -96,17 +96,44 @@ I.e., with regards to a given selection criteria, all chosen alternatives are eq
 
 Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2).
 Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates in a plain way how different selection criteria can alter the consequential choice, provided the properties are not uniformly distributed among the alternatives. 
+The concept of the power set thereby illustrates in a plain way how different selection criteria can alter the consequential choice, provided the properties are not uniformly distributed among the alternatives and the mind is sensitive to whatever relations the alternatives have with each other. 
 \
 
-(ref:figure2) The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property.   
+(ref:figure2) The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives.
 
 ```{r fig.cap="(ref:figure2)", fig.align='left'}
 knitr::include_graphics("manuscript_files/figure-png/figure2.png")
 ```
 
-A rather important part---though by far not the only one---of the computation that connects the initial set with its subset is then the comparison of the properties of the choice alternatives against some selection criteria. 
-At the algorithmic level, such a comparison requires an explicit description of the properties using a representation which is useful to the processing system [cf. @marrVisionComputationalInvestigation1982]. 
+Using Marr's [-@marrVisionComputationalInvestigation1982] framework, the sensitivity aspect addresses the algorithmic level and refers to the achievement that the true properties of the choice alternatives are accurately described and the resulting relations among the alternatives are properly evaluated [cf. @brunswikOrganismicAchievementEnvironmental1943].
+Note that if the descriptions of the relevant properties were available, the process sketched out in Figure 1 would be substantially simplified since the two intermediate steps of representation and property description would be omitted.
+For quite many decisions the mind faces, however, it is simply not the case that the properties of interest, e.g., outcome probabilities, are readily described and amenable to direct assessment, as has been repeatedly stated [e.g., @busemeyerChoiceBehaviorSequential1982; @fiedlerBewareSamplesCognitiveecological2000; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment].
+In such cases, to obtain the respective descriptions from the inputs, the mind is required to make an inference from the available information.
+
+impose a proper organization on them, with the rules for doing so determined by the representation [cf. @marrVisionComputationalInvestigation1982; @marrRepresentationRecognitionSpatial1978], or it must make an inference from incomplete information, or both.
+Consider a prospect $P$ with the following outcomes (probabilities):
+
+$$
+\tag{1}
+P = 
+  \begin{cases}
+    8.0 \quad (.9) \\
+    2.5 \quad (.1) 
+  \end{cases} 
+$$
+
+In (1), outcomes and probabilities are properties of $P$ and readily described using the decimal number system as a representation.
+Now, if the expected value as another property of $P$ is to be described, the organizational rule would be to first multiply the outcomes by their probability and then sum the resulting products, i.e., $8 \times .9 + 2.5 \times .1 = 7.45$.
+For the sake of example, one could think of another prospect 
+
+$$
+\tag{2}
+P = \{8.0, 8.0\}
+$$
+
+where the probability of the outcome $2.5$ must be inferred from the facts that the prospect has only two outcomes and the other outcome has a probability of $.9$. 
+Therefore, in (2), the explicit description of the probability as one property of $P$ requires an inference, whereas the description of the expected value as another property now requires both, an inference and a calculus. 
+
 In quite many cases, however, a number of different representations can be used to describe the properties of choice alternatives in a given set.
 Yet, not every representation permits an accurate description of a given property at reasonable expenses or allows to describe a property at all [cf. @marrRepresentationRecognitionSpatial1978].
 
