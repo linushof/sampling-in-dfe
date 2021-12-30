@@ -58,19 +58,20 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
-Such inputs may be treated as a set $I$ and its elements $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [@jostMathematicalConcepts2015, p. 1].
-Often, however, the properties used by the mind to control the outputs are not readily described, but proper descriptions must be inferred from the available information. 
-Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982, p. 21; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind turns certain inputs into meaningful outputs, one needs to understand the properties that control the output, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
+In the domain of decision making, such inputs may be treated abstractly as a set $I$ of choice alternatives $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015, p. 1].
+Often, however, the properties used by the mind to control the outputs/decisions, are not readily described, but proper descriptions must be inferred from the available information. 
+These inferences are part of the algorithm the mind executes to make a decision and may rely on transformation rules, statistical generalizations, or both.
+Since how the input set is represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982, p. 21; see also @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Hence, to explain how the mind turns certain inputs into meaningful outputs/decisions, one needs to understand the output-controlling properties, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
 \
 
-(ref:figure1) A sketch of the structure of information processing. To turn inputs into meaningful outputs, the mind is required to describe the relevant properties before they can be evaluated. Descriptions are inferred from the inputs using a representation.    
+(ref:figure1) An abstract sketch of the decision making process. To turn inputs into meaningful outputs, the mind requires explicit descriptions of the output-controlling properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
 
 ```{r fig.cap="(ref:figure1)", fig.align='left'}
 knitr::include_graphics("manuscript_files/figure-png/figure1.png")
 ```
 
-In what follows, the discussion will turn to the domain of decision making and elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
+In what follows, the discussion will elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important mechanism:
 Given that the properties of choice alternatives serve as *selection criteria* and the mind is indeed sensitive to variations in their values, the more accurately the descriptions of these properties are inferred, the more systematic the choices should become.
 Importantly, this principle is not restricted to any one specific property, but rather does a characteristic choice pattern result from the constraints that the designation of a property as a selection criterion imposes on the assessment of choice alternatives.
 
