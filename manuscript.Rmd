@@ -58,13 +58,23 @@ pacman::p_load(tidyverse,
 <!-- Introduction -->
 
 The mind is a cognitive system that operates on inputs from an environment or memory.
-In the domain of decision making, such inputs can be treated as a set $I$ of choice alternatives $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess [cf. @jostMathematicalConcepts2015].
-The basic structure of decision making may then be modeled by the inclusion map $\iota : I' \mapsto I$, where $\iota(i) = i$ for all $i \in I'$, indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
-Given that the choice is systematic---as opposed to random---the chosen alternatives in $I'$ should possess the same property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
+In the domain of decision making, such inputs can be organized in a set $I$ of choice alternatives $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess.
+The basic structure of decision making may then be modeled by the inclusion map
+
+$$
+\begin{aligned}
+  & \iota : I' \mapsto I \\
+  & \iota(i) = i \ \text{for all} \ i \in I' 
+\end{aligned}
+\tag{1}
+$$
+
+[cf. @jostMathematicalConcepts2015, pp. 14-15], indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
+Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 We may label the properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
 
-Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
-Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [cf. @marrVisionComputationalInvestigation1982; see also @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated [cf. @brunswikRepresentativeDesignProbabilistic1955; see @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment]; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
+Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also, e.g., @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
 Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
 \
 
@@ -74,47 +84,56 @@ Hence, to explain how the mind makes a selection among choice alternatives, one 
 knitr::include_graphics("manuscript_files/figure-png/figure1.png")
 ```
 
-In what follows, the discussion will elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate one rather important principle:
+In what follows, this paper will elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
 Given that the mind is indeed sensitive to variations in the property values, the more accurately their descriptions are inferred, the more systematic the choices should become.
 Importantly, this principle is not restricted to any one specific property. 
 Rather, each selection criterion or combination thereof imposes constraints on the assessment of choice alternatives, leading to characteristic choice patterns that are eventually blurred by inaccurate property descriptions.
 
-As the discussion proceeds and for the sake of example, I argue that a choice pattern robustly emerging in *decisions from experience* (DfE), the apparent underweighting of small probability events [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @wulffMetaanalyticReviewTwo2018, for a meta-analytic review], may be caused by the assessment constraints associated with a round-wise decision strategy.
-This particular claim has already been made by @hillsInformationSearchDecisions2010, is in principle not restricted to DfE, and follows quite directly from probability theory.
-However, the current article treats decision strategies explicitly as selection criteria and addresses in some detail a few of the problems associated with DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
+For the sake of example, I argue that a choice pattern robustly emerging in *decisions from experience* (DfE), the apparent underweighting of small probability events [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @wulffMetaanalyticReviewTwo2018, for a meta-analytic review], may be caused by the assessment constraints associated with a round-wise decision strategy.
+This particular claim has already been made by @hillsInformationSearchDecisions2010 and follows quite directly from probability theory.
+However, the current paper suggests to subordinate decision strategies to the adoption of selection criteria and addresses in some detail two "problems" in the context of DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
 
-For one, there is the well-known statistical *induction problem* that the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
-Yet, the underweighting pattern that is caused by the adoption of a certain selection criterion is a priori predicted to become more pronounced with increasing sample size. 
-This prediction is in line with the principle already stated above, i.e., that choice patterns should become more systematic as property descriptions become more accurate.
-Nevertheless, the prediction is different from the explanation that underweighting is caused by the reliance on small samples and the skewness of the binomial distribution [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play [cf. @mcelreathStatisticalRethinkingBayesian2020], and that a rather important difference between the latter resides in the selection criteria they include.
-I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing an underweighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf. @griffithsRationalUseCognitive2015]. 
+For one, there is an *induction problem*, well known from inferential statistics, according to which the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
+Yet, it follows that the underweighting pattern that is caused by the adoption of an arbitrary selection criterion is a priori predicted to become more stable with increasing sample size. 
+This prediction is in line with the principle already stated above, i.e., that selection-criteria-induced choice patterns should become more systematic as property descriptions become more accurate.
+Nevertheless, the prediction contrasts the explanation that underweighting is caused by the reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside of the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play, and that a rather important difference between these causal models resides in the selection criteria they incorporate.
+I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf., e.g., @griffithsRationalUseCognitive2015]. 
 
-For another, this article approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [see @simonBehavioralModelRational1955; @simonInvariantsHumanBehavior1990]. 
+For another, this paper approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [cf. @simonInvariantsHumanBehavior1990; @simonBehavioralModelRational1955]. 
 This may be considered a *representation problem* since the inference chains are constructed around explicit descriptions of the properties of choice alternatives and representations are the "formal schemes" of symbols and rules with which these descriptions are derived [@marrRepresentationRecognitionSpatial1978, p. 270]. 
 Specifically, representations differ in how they organize the information used to infer the descriptions of certain properties and these organizations determine the algorithms that can be built into the inference chain [@marrVisionComputationalInvestigation1982].
 In this article, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
 Though most of my expositions on the role of sampling strategies remain speculative, the core idea is not new to decision research [see, e.g., @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
-By restating this idea and adopting some terms and concepts that have well-defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory [e.g., @simonRationalChoiceStructure1956; @hertwigTamingUncertainty2019]. 
+By restating this idea and adopting some terms and concepts that have well defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory. 
 
-The theoretical arguments sketched in this admittingly dense introduction are substantiated by a simulation study. 
+The theoretical arguments sketched in this introduction are substantiated by a simulation study. 
 For this purpose, the sampling and decision making processes are expressed mathematically and implemented in a computational model to simulate choice data from DfE.
 The simulated data is modeled in cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@goldsteinExpressionTheoryPreference1987; see also @tverskyAdvancesProspectTheory1992]. 
 All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
 
-# The Decision Making Process and the Properties of Choice Alternatives
+# Selection Criteria / Properties of Choice Alternatives / Sampling
 
-We already stated that decision making is an information-processing problem whose solution requires a selection among choice alternatives.  all chosen alternatives are equal to each other but different from the non-chosen alternatives.
-
-Now, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2).
-Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that can be made after assessing for each alternative whether it fulfills the selection criteria or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates in a plain way how different selection criteria can alter the consequential choice, provided the properties are not uniformly distributed among the alternatives and the mind is sensitive to whatever relations the alternatives have with each other.
+By defining decision making as an information-processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
+To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2).
 \
 
-(ref:figure2) The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives.
+(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram showing the relation between a subset $I'$ and its superset $I$.
 
 ```{r fig.cap="(ref:figure2)", fig.align='left'}
 knitr::include_graphics("manuscript_files/figure-png/figure2.png")
 ```
+
+Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
+The concept of the power set thereby illustrates how different selection criteria can alter the consequential choice.
+That is, in rather abstract terms, selection criteria are statements regarding the properties of choice alternatives that the mind evaluates as either true or false during the decision making process; accordingly, the subset $I'$ only contains the alternatives for which the statement is evaluated to be true.
+It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
+<!-- Of course, the whole argument rests on the assumption that ... -->
+
+## What are the properties of choice alternatives and the selection criteria? 
+
+This paper refrains from making inroads into the questions of whether and why *prospects* are useful abstractions of the choice alternatives the mind is required to evaluate in natural world decisions.
+It just considers choices between at least two prospects because they are the standard paradigm in research on decision theory and they suffice 
+
 
 Using Marr's [-@marrVisionComputationalInvestigation1982] framework, the sensitivity aspect addresses the algorithmic level and refers to the achievement that the true properties of the choice alternatives are accurately described and the resulting relations among the alternatives are properly evaluated [cf. @brunswikOrganismicAchievementEnvironmental1943].
 Note that if the descriptions of the relevant properties were available, the process sketched out in Figure 1 would be substantially simplified since the two intermediate steps of representation and property description would be omitted.
@@ -125,7 +144,7 @@ impose a proper organization on them, with the rules for doing so determined by 
 Consider a prospect $P$ with the following outcomes (probabilities):
 
 $$
-\tag{1}
+\tag{2}
 P = 
   \begin{cases}
     8.0 \quad (.9) \\
@@ -138,7 +157,7 @@ Now, if the expected value as another property of $P$ is to be described, the or
 For the sake of example, one could think of another prospect 
 
 $$
-\tag{2}
+\tag{3}
 P = \{8.0, 8.0\}
 $$
 
