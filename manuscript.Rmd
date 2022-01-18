@@ -15,7 +15,7 @@ note: |
 authornote: |
  This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. 
  
- The current version of this manuscript is prepared for submission as a master's thesis. A modified later version might be prepared together with co-authors and submitted for peer-review.  
+ The current version of this manuscript is prepared for submission as a master's thesis.  
  
 abstract: |
   Add short abstract.
@@ -78,7 +78,7 @@ Since how the inputs are represented determines the information that is made exp
 Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
 \
 
-(ref:figure1) A computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
+(ref:figure1) A rough computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
 
 ```{r fig.cap="(ref:figure1)", fig.align='left'}
 knitr::include_graphics("manuscript_files/figure-png/figure1.png")
@@ -94,7 +94,7 @@ This particular claim has already been made by @hillsInformationSearchDecisions2
 However, the current paper suggests to subordinate decision strategies to the adoption of selection criteria and addresses in some detail two "problems" in the context of DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
 
 For one, there is an *induction problem*, well known from inferential statistics, according to which the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
-Yet, it follows that the underweighting pattern that is caused by the adoption of an arbitrary selection criterion is a priori predicted to become more stable with increasing sample size. 
+Yet, it follows that if an underweighting pattern is caused by the adoption of an arbitrary selection criterion, it is *a priori* predicted to become more stable with increasing sample size. 
 This prediction is in line with the principle already stated above, i.e., that selection-criteria-induced choice patterns should become more systematic as property descriptions become more accurate.
 Nevertheless, the prediction contrasts the explanation that underweighting is caused by the reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside of the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play, and that a rather important difference between these causal models resides in the selection criteria they incorporate.
 I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf., e.g., @griffithsRationalUseCognitive2015]. 
@@ -102,22 +102,22 @@ I will elaborate on this matter as I proceed, however, to be clear from the outs
 For another, this paper approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [cf. @simonInvariantsHumanBehavior1990; @simonBehavioralModelRational1955]. 
 This may be considered a *representation problem* since the inference chains are constructed around explicit descriptions of the properties of choice alternatives and representations are the "formal schemes" of symbols and rules with which these descriptions are derived [@marrRepresentationRecognitionSpatial1978, p. 270]. 
 Specifically, representations differ in how they organize the information used to infer the descriptions of certain properties and these organizations determine the algorithms that can be built into the inference chain [@marrVisionComputationalInvestigation1982].
-In this article, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
+In this paper, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
 Though most of my expositions on the role of sampling strategies remain speculative, the core idea is not new to decision research [see, e.g., @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
 By restating this idea and adopting some terms and concepts that have well defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory. 
 
 The theoretical arguments sketched in this introduction are substantiated by a simulation study. 
-For this purpose, the sampling and decision making processes are expressed mathematically and implemented in a computational model to simulate choice data from DfE.
+For this purpose, the sampling and decision making processes are implemented in a computational model to simulate choice data from DfE.
 The simulated data is modeled in cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@goldsteinExpressionTheoryPreference1987; see also @tverskyAdvancesProspectTheory1992]. 
 All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
 
 # Selection Criteria / Properties of Choice Alternatives / Sampling
 
-By defining decision making as an information-processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
+By defining decision making as an information processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
 To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2).
 \
 
-(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram showing the relation between a subset $I'$ and its superset $I$.
+(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram visualizing the inclusion map $\iota : I' \mapsto I$. $\iota$ maps every element $i$ of the subset $I'$ to its image $i$, treated as element of the superset $I$.
 
 ```{r fig.cap="(ref:figure2)", fig.align='left'}
 knitr::include_graphics("manuscript_files/figure-png/figure2.png")
@@ -129,11 +129,34 @@ That is, in rather abstract terms, selection criteria are statements regarding t
 It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
 <!-- Of course, the whole argument rests on the assumption that ... -->
 
-## What are the properties of choice alternatives and the selection criteria? 
+## What Are the Properties of Choice Alternatives and the Selection Criteria? 
 
-This paper refrains from making inroads into the questions of whether and why *prospects* are useful abstractions of the choice alternatives the mind is required to evaluate in natural world decisions.
-It just considers choices between at least two prospects because they are the standard paradigm in research on decision theory and they suffice 
+The argument so far has been quite general and abstract, since there is no complete answer to the question raised above this paragraph---there is, of course, an uncountable number of decisions and so are there choice alternatives, properties, and selection criteria.
+Therefore, in the present paper, *prospects* are used as a proxy for the variety of choice alternatives the mind is required to evaluate in natural world decisions. 
+Consequently, the argument continues to proceed at an abstract level: with choices between at least two prospects, the current paper considers a case which is counterfactual, since it is freed from many varieties and complexities that the mind is normally confronted with. 
+The case is, however, quite paradigmatic in research on decision theory and there are good reasons for that [cf. @knightRiskUncertaintyProfit1921, especially Chapter 1 for a brief discussion closely related to the current subject]. 
+Moreover, the case suffices to answer the above question and to subsequently address the induction and representation problem, at least within the stated limitations.
 
+Now, let a prospect be a *probability space* denoted by the tuple $(\Omega, \mathcal{F}, P)$. 
+Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ is the sample space 
+
+$$
+\Omega = \{\omega_1, ..., \omega_n\}
+\; ,
+\tag{2.1}
+$$ 
+
+containing a finite set of possible outcomes $\omega$. 
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$.^[Note that this paper considers only the case of finite sample spaces containing of a small number of outcomes. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such. See Georgii [-@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1] for a comprehensive mathematical treatment of this matter.] 
+$P$ is a probability measure  
+
+$$
+P: \mathcal{F} \mapsto [0,1]
+\; ,
+\tag{2.2}
+$$
+
+which assigns each subset $A \in \mathcal{F}$, or *event*, a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.^[The probability measure formally assigns probabilities to sets of outcomes $A \in F$ rather than the elementary outcomes $\omega \in \Omega$. The probabilities of $\omega$ are determined by the probability mass function $p : \Omega \mapsto [0,1]$, which is used to construct the probability measure according to the equation $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{P}(\Omega)$ [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.2]. The literature on behavioral decision research usually forgoes the admittedly technical definition of probability spaces and defines prospects as probability mass functions. Nonetheless, even though probability spaces are idealized models, they provide a useful mathematical foundation for the case where the simultaneous occurrence of more than one elementary outcome is of interest.]
 
 Using Marr's [-@marrVisionComputationalInvestigation1982] framework, the sensitivity aspect addresses the algorithmic level and refers to the achievement that the true properties of the choice alternatives are accurately described and the resulting relations among the alternatives are properly evaluated [cf. @brunswikOrganismicAchievementEnvironmental1943].
 Note that if the descriptions of the relevant properties were available, the process sketched out in Figure 1 would be substantially simplified since the two intermediate steps of representation and property description would be omitted.
