@@ -1,4 +1,4 @@
-Copyright (c) 2021 Linus Hof, Veronika Zilker & Thorsten Pachur
+Copyright (c) 2022 The Authors
 
 Attribution 4.0 International
 
