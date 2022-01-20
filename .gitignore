@@ -2,8 +2,12 @@
 .Rhistory
 .RData
 .Ruserdata
-*.bib
+*.tex
+*.aux
 *.html
 *.csl
 *.pptx
 supplements/
+manuscript_files/
+notebook.md
+manuscript.pdf
