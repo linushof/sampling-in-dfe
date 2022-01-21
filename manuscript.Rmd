@@ -19,7 +19,8 @@ note: |
 authornote: |
  This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. 
  
- The current version of this manuscript is prepared for submission as a master's thesis.  
+ The current version of this manuscript is prepared for submission as a master's thesis.
+ Supervisors: Thorsten Pachur & Veronika Zilker.   
  
 abstract: |
   Add short abstract.
@@ -46,15 +47,19 @@ header-includes:
    - \usepackage[capposition=top]{floatrow}
 ---
 
-```{r}
-# load packages
-pacman::p_load(tidyverse, 
-               knitr, 
-               ggbeeswarm,
-               scico, # for scientific color palettes
-               papaja)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = F, fig.pos = "t", fig.align = "l")
+```
 
-knitr::opts_chunk$set(fig.pos = "tb")
+```{r packages}
+# load required packages
+pacman::p_load(papaja,
+               readr,
+               tidyr, 
+               dplyr,
+               ggplot2,
+               ggbeeswarm,
+               scico)
 ```
 
 <!-- Introduction -->
@@ -77,15 +82,15 @@ In the following, I will refer to statements about properties that serve to dist
 
 Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated [cf. @brunswikRepresentativeDesignProbabilistic1955; see @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment]; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
 Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also, e.g., @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is schematically shown in Figure 1.  
+Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is sketched in Figure 1.  
 
 (ref:figure1) A rough computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
 
-```{r fig.cap="(ref:figure1)", fig.align='left'}
-knitr::include_graphics("manuscript_files/figure-png/figure1.png")
+```{r fig.cap= "(ref:figure1)"}
+knitr::include_graphics("images/dm-sketch.png")
 ```
 
-In what follows, this paper will elaborate on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
+In what follows, the paper elaborates on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
 Given that the mind is indeed sensitive to variations in the property values, the more accurately their descriptions are inferred, the more systematic the choices should become.
 Importantly, this principle is not restricted to any one specific property. 
 Rather, each selection criterion or combination thereof imposes constraints on the assessment of choice alternatives, leading to characteristic choice patterns that are eventually blurred by inaccurate property descriptions.
@@ -116,14 +121,14 @@ All simulations and analyses are reproducible---materials and instructions can b
 
 By defining decision making as an information processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
 To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2). 
-Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
 
 (ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram visualizing the inclusion map $\iota : I' \mapsto I$. $\iota$ maps every element $i$ of the subset $I'$ to its image $i$, treated as element of the superset $I$.
 
-```{r fig.cap="(ref:figure2)", fig.align='left'}
-knitr::include_graphics("manuscript_files/figure-png/figure2.png")
+```{r fig.cap= "(ref:figure2)"}
+knitr::include_graphics("images/power-set.png")
 ```
 
+Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
 The concept of the power set thereby illustrates how different selection criteria can alter the consequential choice.
 That is, in rather abstract terms, selection criteria are statements regarding the properties of choice alternatives that the mind evaluates as either true or false during the decision making process; accordingly, the subset $I'$ only contains the alternatives for which the statement is evaluated to be true.
 It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
@@ -134,7 +139,6 @@ The argument so far has been quite general and abstract, since there is no compl
 Therefore, in the present paper, *prospects* are used as a proxy for the variety of choice alternatives the mind is required to evaluate in natural world decisions. 
 Consequently, the argument continues to proceed at an abstract level: with choices between at least two prospects, the current paper considers a case which is counterfactual, since it is freed from many varieties and complexities that the mind is normally confronted with. 
 The case is, however, quite paradigmatic in research on decision theory and there are good reasons for that [cf. @knightRiskUncertaintyProfit1921, especially Chapter 1 for a brief discussion closely related to the current subject]. 
-Moreover, the case suffices to answer the above question and to subsequently address the induction and representation problem, at least within the stated limitations.
 
 Now, let a prospect be a *probability space* denoted by the tuple $(\Omega, \mathcal{F}, P)$. 
 Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ is the sample space 
@@ -146,7 +150,8 @@ $$
 $$ 
 
 containing a finite set of possible outcomes $\omega$. 
-$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$.^[Note that this paper considers only the case of finite sample spaces containing of a small number of outcomes. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such. See Georgii [-@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1] for a comprehensive mathematical treatment.] 
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$.^[Note that this paper considers only the case of finite sample spaces containing of a small number of outcomes. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such. See Georgii [-@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1] for a comprehensive but accessible mathematical treatment.] 
+
 $P$ is a probability measure  
 
 $$
@@ -156,6 +161,7 @@ P: \mathcal{F} \mapsto [0,1]
 $$
 
 which assigns each subset $A \in \mathcal{F}$, also referred to as *events*, a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.^[The probability measure formally assigns probabilities to sets of outcomes $A \in F$ rather than the elementary outcomes $\omega \in \Omega$. The probabilities of $\omega$ are determined by the probability mass function $p : \Omega \mapsto [0,1]$, which is used to construct the probability measure according to the equation $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{F}$ [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.2].]
+
 In less technical terms, following the choice of a prospect, one of the outcomes associated with this particular prospect is obtained, a gain or loss respectively.
 If there is just one outcome associated with a prospect, it is obtained with certainty.
 However, if there is a collection of outcomes, just one outcome out of this collection is obtained according to some probability, where the probabilities can vary between outcomes and are given by the measure of the form described in (2.2) (see also Footnote 2). 
@@ -168,18 +174,25 @@ $$
 \tag{3}
 $$
 
-Given (3), it is evident that the prospects can only be distinguished by the elements of their tuples, and these elements are properties---be that a smallest single element, e.g., an outcome, collections thereof, e.g., the sample space $\Omega$, or more complex combinations of elements, e.g., the weighted average which is obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities in $P$ and then summing the resulting products.^[I do not refer to this quantity as expected value, since the term is reserved for random variables, which were not introduced so far.]
-In turn, for choices between prospects, selection criteria are statements about the elements of their tuples that are true or false and these statements imply relations among prospects that are at least nominal, e.g., *"One of the prospect's outcome is positive in value"*, but may also draw on other levels of measurement, e.g., *"The prospect's average mean is the largest among the prospects"* refers to an ordinal level.  
+Given (3), it is evident that the prospects can only be distinguished by the elements of their tuples. 
+These elements are, generally speaking, symbols, some of which describe properties on their own, e.g., the outcome $\omega$, whereas other properties can only be described by collections of symbols, e.g., the sample space $\Omega$ by a set of outcomes as in (2.1), or more complex combinations thereof, e.g., the weighted average which is obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities in $P$ and then summing the resulting products.^[I do not refer to this quantity as expected value, since the term is reserved for random variables, which were not introduced so far.]
+In turn, for choices between prospects, selection criteria are statements about the elements of their tuples that are true or false and these statements imply relations among prospects that are at least nominal, but may also draw on other levels of measurement.  
 
 ## Inferring Property Descriptions from Sampling Data
 
-Using Marr's [-@marrVisionComputationalInvestigation1982] framework, the sensitivity aspect addresses the algorithmic level and refers to the achievement that the true properties of the choice alternatives are accurately described and the resulting relations among the alternatives are properly evaluated [cf. @brunswikOrganismicAchievementEnvironmental1943].
-Note that if the descriptions of the relevant properties were available, the process sketched out in Figure 1 would be substantially simplified since the two intermediate steps of representation and property description would be omitted.
-For quite many decisions the mind faces, however, it is simply not the case that the properties of interest, e.g., outcome probabilities, are readily described and amenable to direct assessment, as has been repeatedly stated [e.g., @busemeyerChoiceBehaviorSequential1982; @fiedlerBewareSamplesCognitiveecological2000; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment].
-In such cases, to obtain the respective descriptions from the inputs, the mind is required to make an inference from the available information.
+Note that a selection criterion may refer to a property for which the raw input, i.e., the symbols, their organization, and the information they encode, do not yet provide an explicit description.
+Even more so, it has been repeatedly stated that for quite many decisions the mind faces, it is simply not possible to draw on direct descriptions of the properties, since they are part of the distal environment  [e.g., @fiedlerExplainingSimulatingJudgment1996; @hertwigDescriptionexperienceGapRisky2009; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956; @kozyrevaInterpretationUncertaintyEcological2021].
+In either case, some form of description must be inferred from whatever information the input provides about the property in question.
+Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
+Since all information about the prospect is given, one may in principle consider the input complete, yet, the tuple implies properties of the prospect which are not explicitly described.
+For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
+In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and/or combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20]. 
+In natural world decisions, however, the relevant properties of choice alternatives are often distal and amenable only through a *sample* which, by definition, cannot provide complete information.
+Such a sample requires the mind to make an inductive inference, leading to a description which, according to the law of large numbers [cf., e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 5.1], is only probable in proportion to the size of the (representative) sample [but see @fiedlerInformationSamplingAdaptive2006, for a selection of papers which goes beyond the mere discussion of statistically representative samples]. 
 
-In such a choice paradigm, agents are asked to evaluate the prospects and build a preference for either one of them. 
-It is common to make a distinction between two variants of this evaluation process [cf. @hertwigDescriptionexperienceGapRisky2009]. 
+To express the idea that the tuple of a prospect is not given
+
+As for prospects, a sample is  sample has a well defined meaning
 For decisions from description (DfD), agents are provided a full symbolic description of the prospects.
 For decisions from experience [DfE; e.g., @hertwigDecisionsExperienceEffect2004], prospects are not described but must be explored by the means of sampling. 
 
@@ -272,7 +285,7 @@ The minimum effective sample size was `r min(gel_92$n.eff)`.
 
 ### Plausibility Check: Relationship between Switching Probability and Trial Length
 
-```{r message=FALSE}
+```{r include=FALSE}
 
 # read choice data 
 
@@ -297,7 +310,7 @@ I.e., the lower the switching probability, the larger become the sample sequence
 This effect is particularly pronounced for low probabilities such that the increase in trial length accelerates as switching probability decreases.
 
 
-```{r fig.cap="Test"}
+```{r eval=FALSE}
 
 # get median trial length for each switching probability 
 
@@ -324,7 +337,7 @@ trial_length %>%
 
 ### Probability Weighting Function
 
-```{r}
+```{r eval=FALSE}
 
 # tidy CPT data: parameters as separate columns 
 
@@ -343,7 +356,7 @@ The resulting strong curvature leads to a compression of probabilities in the lo
 This pattern is robust for varying degrees of the boundary level, except for $a = 1$. 
 The latter deviation may be explained by the potential scale reduction factors for the respective parameter estimates, which indicate that the MCMC chains did not converge (see [Appendix 3][Appendix 3: Convergence Diagnostics for CPT Parameters]).   
 
-```{r fig.cap="test 2"}
+```{r eval=FALSE}
 
 # Density Plot 
 
@@ -362,7 +375,7 @@ cpt_long %>%
   theme_apa()
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 
 # Scatter Plots 
 
@@ -401,7 +414,7 @@ cpt_wide %>%
 
 Below, the resulting probability weighting functions are displayed. 
 
-```{r}
+```{r eval=FALSE}
 
 # Weighting Functions 
 
@@ -443,7 +456,7 @@ cpt_w %>%
 The false response rates for different parameter values of the generating model reflect the probability weighting patterns from above. 
 That is, the strong curvature resulting from large switching probabilities produces an underweighting of small probabilities. This in turn has the effect that the rarity of an attractive (unattractive) outcome leads to higher rates of choosing the safe (risky) prospect although the risky (safe) prospect had a higher experienced expected value.
 
-```{r}
+```{r eval=FALSE}
 
 # compute false response rates
 
@@ -471,7 +484,7 @@ fr_rates %>%
   theme_minimal() 
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 fr_rates %>% 
   ggplot(aes(a, s, fill = rate)) + 
   geom_tile(colour="white", size=0.1) +
@@ -502,7 +515,7 @@ fr_rates %>%
 
 ### Value Function 
 
-```{r}
+```{r eval=FALSE}
 
 # Density Plot 
 
@@ -519,7 +532,7 @@ cpt_wide %>%
   theme_minimal()
 ```
 
-```{r}
+```{r eval=FALSE}
 # value function 
 
 ## compute values 
@@ -559,7 +572,7 @@ cpt_v %>%
   theme_minimal()
 ```
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 
 # alpha
 cpt_wide %>% 
@@ -580,6 +593,3 @@ cpt_wide %>%
 # Discussion and Conclusion
 
 # References
-
-
-
