@@ -186,15 +186,14 @@ In either case, some form of description must be inferred from whatever informat
 Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
 Since all information about the prospect is given, one may in principle consider the input complete, yet, the tuple implies properties of the prospect which are not explicitly described.
 For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
-In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and/or combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20]. 
-In natural world decisions, however, the relevant properties of choice alternatives are often distal and amenable only through a *sample* which, by definition, cannot provide complete information.
-Such a sample requires the mind to make an inductive inference, leading to a description which, according to the law of large numbers [cf., e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 5.1], is only probable in proportion to the size of the (representative) sample [but see @fiedlerInformationSamplingAdaptive2006, for a selection of papers which goes beyond the mere discussion of statistically representative samples]. 
+In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and/or combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20].
 
-To express the idea that the tuple of a prospect is not given
+In natural world decisions, however, the properties of choice alternatives are often distal and amenable only through their probabilistic relation to proximal cues or samples.
+Such a proximal information basis, obtained by experience or, more technically, by *sampling*, is neither consistent nor complete but requires the mind to draw inductive inferences to arrive at property descriptions which then, by definition, are only probable. 
+In turn, the "achievement" [@brunswikOrganismicAchievementEnvironmental1943, p. 255] of the mind, i.e., highly probable descriptions, depends in part ... [but see @fiedlerInformationSamplingAdaptive2006, for a selection of papers which goes beyond the mere discussion of statistically representative samples]. 
 
-As for prospects, a sample is  sample has a well defined meaning
-For decisions from description (DfD), agents are provided a full symbolic description of the prospects.
-For decisions from experience [DfE; e.g., @hertwigDecisionsExperienceEffect2004], prospects are not described but must be explored by the means of sampling. 
+To adapt (3) such that it fits to the sampling, as it is done for decisions from experience [@hertwigDecisionsExperienceEffect2004], we define sampling as follows: 
+
 
 To provide a formal definition of sampling in risky choice, we make use of the mathematical concept of a random variable and start by referring to a prospect as *"risky"* in the case where $p(\omega) \neq 1$ for all $\omega \in \Omega$.
 Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
