@@ -76,7 +76,44 @@ $$
 \tag{1}
 $$
 
-[cf. @jostMathematicalConcepts2015, pp. 14-15], indicating that decision making is a *process* that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives. 
+[cf. @jostMathematicalConcepts2015, pp. 14-15], indicating that decision making is a process that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives [see @heOntologyDecisionModels2020]. 
+
+Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from particular decisions, e.g., the choice between job offers, political parties to vote for, travel destinations, investment plans, and so on.
+Rather, with the choice between at least two *prospects*, it considers a case which is counterfactual in that it omits the many particularities of decisions and the differences among them, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See also @knightRiskUncertaintyProfit1921, especially Chapter 1, for a brief discussion of the reasonableness of such abstractions.] 
+These fundamental properties are conceived of as the possible outcomes of a choice alternative and the probabilities with which these outcomes occur following the choice of the respective alternative.
+Prospects therefore resemble a probability mass function 
+
+$$
+p: \Omega \mapsto [0,1]
+\; ,
+\tag{2}
+$$ 
+
+which assigns each possible outcome in the finite set $\Omega = \{\omega_1, ..., \omega_n\}$ a probability $0 < p(\omega) \leq 1$ with $\sum_{\omega \in \Omega} p(\omega) = 1$.
+
+The actual choices of people in such a decision paradigm are often assessed in terms of their deviation from choosing the prospect with the largest expected value (EV), a quantity obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities and then summing the resulting products: 
+
+$$
+EV = \sum_{\omega \in \Omega} \omega \times p(\omega)
+\; .
+\tag{3}
+$$ 
+
+In fact, the many assessments of peoples' choices neither corroborate the theory that people follow the principle of EV maximization nor that of expected utility (EU) maximization [e.g., @kahnemanProspectTheoryAnalysis1979, ...].^[Following the EU principle [@bernoulliExpositionNewTheory1954], the objective outcomes in (3) are transformed by a concave utility function. This transformation expresses the idea that an increase of the objective outcome yields a diminishing increase in its subjective utility, where the latter are weighted by the objective probability to assess the value of a prospect.]
+To *describe* the deviations from EV/EU maximization, the models of subjective expected utility theory [for an overview, see @heOntologyDecisionModels2020; @stottCumulativeProspectTheory2006] replace the objective outcomes and probabilities in (3) by parameterized nonlinear transformations thereof to obtain: 
+
+$$
+V_{SEUT} = \sum_{\omega \in \Omega} v(\omega) \times w(p(\omega))
+\; .
+\tag{4}
+$$ 
+
+Importantly, 
+Rather, the 
+, which has lead to the description of some robust phenomena.  
+The parameters of the outcome function $v(\omega)$ and the probability weighting function $w(p(\omega))$ can 
+One such model is the cumulative prospect theory [@tverskyAdvancesProspectTheory1992]  
+
 Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
 
@@ -225,7 +262,7 @@ It is acceptable to speak of the occurrence of $\omega$ as a realization of a ra
 
 In (2), $x \equiv \omega$ means that the realization of a random variable $X(\omega) = x$ is numerically equivalent to its pre-image $\omega$.  
 Given conditions (1) and (2), we denote any observation of $\omega$ as a *"single sample"*, or realization, of a random variable defined on a prospect and the act of generating a sequence of single samples in discrete time as *"sequential sampling"*. 
-Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect [cf. @bernoulliArsConjectandiOpus1713].
+Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect.
 Thus, long sample sequences in principle allow to obtain the same information about a prospect by sampling as by symbolic description.
 
 Consider now a choice between prospects $1, ..., k$.
