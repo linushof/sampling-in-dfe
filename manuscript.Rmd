@@ -62,72 +62,116 @@ pacman::p_load(papaja,
                scico)
 ```
 
-<!--The mind is a cognitive system that operates on inputs from an environment or memory.
-In the domain of decision making, such inputs can be organized in a set $I$ of choice alternatives $i \in I$, the latter being distinguishable from each other on the basis of the *properties* they possess.
-The basic structure of decision making may then be modeled by the inclusion map
+<!-- Introduction -->
 
+The human mind is a cognitive system that operates on inputs from an environment or memory. 
+In the domain of decision making, such inputs provide information about the choice alternatives among which people can choose. 
+Given that each choice alternative is an element $i$ of the set $I$, the basic structure of decision making may be modeled by the inclusion map
 $$
 \begin{aligned}
-  & \iota : I' \mapsto I \\
-  & \iota(i) = i \ \text{for all} \ i \in I' 
+  \iota : I' &\to I \\
+  i &\mapsto i \quad \text{for all} \ i \in I' 
 \end{aligned}
 \tag{1}
 $$
+[@jostMathematicalConcepts2015, pp. 14-15], indicating that decision making is an information processing problem which starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives.
+Indeed, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
 
-[cf. @jostMathematicalConcepts2015, pp. 14-15], indicating that decision making is a process that starts from an input set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives [see @heOntologyDecisionModels2020].--> 
+However, information about the choice alternatives may come in many forms.
+Rarely in their daily life, people make *decisions from description*, since in such a case all information about the choice alternatives is available through symbolic descriptions of their *properties*. 
+Yet, rather often, people make *decisions from experience* [@hertwigDecisionsExperienceEffect2004], since 
+
+
+# Header 
 
 Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from particular decisions, e.g., the choice between job offers, political parties to vote for, travel destinations, investment plans, and whatnot.
-Rather, with the choice between at least two *prospects* (or: gambles), it studies a case which is counterfactual in that it omits the many particularities of each decision and the differences between them, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See Chapter 1 in @knightRiskUncertaintyProfit1921, for a discussion of the reasonableness of such abstractions.] 
+Rather, with the choice between at least two *prospects* (or: gambles), it studies a case which is counterfactual in that it omits the many particularities of each decision and the differences between them, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983; see also @knightRiskUncertaintyProfit1921, for a discussion of the reasonableness of such abstractions]. 
 These fundamental properties are considered to be the possible outcomes of a choice alternative---hereafter denoted by the Greek letter $\omega$---and the probabilities with which these outcomes occur following the choice of the alternative---hereafter $p(\omega)$.
-Thus, prospects are abstract surrogates for choice alternatives in the natural world, resembling probability mass functions of the form 
-$$
-p: \Omega \mapsto [0,1]
-\; ,
-\tag{1}
-$$ 
-each of which assigns the possible outcomes in a finite set $\Omega = \{\omega_1, ..., \omega_n\}$ a probability $0 < p(\omega_i) \leq 1$, where $i \in \{1, ..., n\}$ and $\sum_i^n p(\omega_i) = 1$.
 
-The choices people actually make between such prospects are often described in terms of their deviation from the principle of expected value (EV) maximization, where the EV is given by 
+Now, let a prospect be a *probability space* denoted by the tuple $(\Omega, \mathcal{F}, P)$. 
+Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ denotes the sample space, containing a finite set of possible outcomes:
 $$
-EV = \sum_i^n \omega_i \times p(\omega_i)
+\omega_i \in \{\omega_1, ..., \omega_n\} = \Omega
 \; .
 \tag{2}
 $$ 
-That is, following the principle of EV maximization, people would first calculate the prospects' EV according to (2) and thereafter chose the prospect for which the EV is maximized.
-<!--However, the many assessments of peoples' choices in these decisions neither corroborate the theory that people follow the principle of EV maximization nor that of expected utility (EU) maximization [e.g., @kahnemanProspectTheoryAnalysis1979, ...].^[Following the EU principle [@bernoulliExpositionNewTheory1954], the objective outcomes in (2) are transformed by a concave utility function. This transformation expresses the idea that an increase in the objective outcome yields a diminishing increase in its subjective utility, where the latter is weighted by the objective probability to compute the expected utility of a prospect. Note that for negative outcomes the transformation function is convex.]-->
-To *describe* peoples' deviations from EV <!--and EU--> maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; see also @stottCumulativeProspectTheory2006, for an overview of models] may replace the objective outcomes and probabilities in (2) by nonlinear transformations thereof.
-More specifically, the models contain a combination of two parameterized <!--monotonic--> functions, one transforming the objective outcomes---referred to as the *value function*, $\omega \mapsto v(\omega)$---and the other transforming the cumulative distribution function of objective probabilities---referred to as the *probability weighting function*, $p(\omega) \mapsto w(p(\omega))$ or $p(\omega) \mapsto w(p(\omega))$.
-<!--Note that the probability weighting function is a composition of two functions $\omega \maps to p(\omega) \maps to w(p(\omega))$.-->
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$.^[Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].] 
+$P$ is a probability measure
+$$
+P: \mathcal{F} \mapsto [0,1]
+\; ,
+\tag{3}
+$$
+which assigns each subset $A \in \mathcal{F}$, also referred to as *events*, a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.^[The probabilities $p(\omega)$ are determined by the probability mass function $p : \Omega \mapsto [0,1]$, which is used to construct the probability measure $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{F}$ [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.2].]
 
+The choices people actually make between such prospects are often described in terms of deviations from expected value (EV) maximization, where the EV is given by 
+$$
+EV = \sum_i^n \omega_i \times P(X = \omega_i)
+\; ,
+\tag{4}
+$$ 
+with $X$ being a random variable defined on the respective probability space.^[$X$ is measurable function $X: \Omega \to \Omega'$ [see @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.3] with $\omega \mapsto \omega$ for all $\omega \in \Omega$.]
+That is, following the principle of EV maximization, one would first calculate the prospects' EV according to (3) and thereafter chose the prospect with the largest EV.
+To *describe* how peoples' choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data with a combination of two parameterized functions that may replace the objective outcomes and probabilities in (3) by nonlinear transformations thereof.^[Note that CPT or other originally deterministic decision models may be amended by a stochastic choice function [see, e.g., @rieskampProbabilisticNaturePreferential2008].] 
+That is, the models of CPT fit choice data by maximizing the value 
+$$
+V = \sum_i^n v(\omega_i) \times \pi_i
+\; ,
+\tag{5}
+$$ 
+with subjective values $v(\omega)$ derived from a *value function* that may transform the objective outcomes, and decision weights $\pi$ derived from the objective probabilities' cumulative distribution function that may be transformed by a *probability weighting function* (see below). 
+Now, since the probability weighting function may redistribute the entire probability mass of $\sum_i^n p(\omega_i) = 1$ across outcomes, the decision weights 
+$$
+\pi =
+  \begin{cases}
+     w(P(X \geq \omega_i)) - w(P(X > \omega_i)) \quad \text{for} \ 1, \\
+     w(P(X \leq \omega_i)) - w(P(X < \omega_i)) \quad \text{else}, 
+  \end{cases}
+\tag{5}
+$$
+may 
+people's deviations from EV maximization is often described in terms of the probability weighting pattern. 
+
+Now, in rather general terms, if people were following the principle of EV maximization, the estimates for the parameters of both functions (see below) would be such that the resulting subjective values and decision weights are equal to the objective outcomes and probabilities, i.e., $v(\omega) = \omega$ and $\pi = p(\omega)$. 
+However, for deviations from EV maximization, at least one of the equations should not hold.
+
+The value function 
+$$
+\begin{aligned}
+  v : \Omega &\to \mathbb{R} \\
+  \omega &\mapsto
+  \begin{cases}
+     \omega^a \qquad \qquad \text{for} \ \omega > 0, \\
+    -\lambda \times|\omega|^a \quad \text{else}, 
+  \end{cases}
+\end{aligned}
+\tag{4}
+$$ 
+where $a \in [0,1]$ and $\lambda > 1$ [but see @stottCumulativeProspectTheory2006, for alternative functional forms], transforms the objective outcomes $\omega$ into subjective values $v(\omega)$.
+The *probability weighting function*, for which several functional forms have been proposed [e.g., @goldsteinExpressionTheoryPreference1987, see also Equation 5]  
+$$
+w
+\tag{5}
+$$ 
+transforms the cumulative distribution function of the objective probabilities to derive the subjective decision weights.
 
 The shape of the probability weighting function lead to the common interpretation that people choose as if they were over- or underweighting outcomes of certain probability (see Figure 1). 
-```{r}
-wf <- tibble(gamma = c(.7, 1, 1.5), 
-             type = c("overweighting", "linear", "underweighting")) %>%
-  expand_grid(prob = seq(0, 1, .01)) %>%
-  mutate(w = exp(-1*(-log(prob))^gamma)) %>% 
-  select(-gamma)
 
+```{r}
+wf <- tibble(gamma = seq(.1, 1.9, .05)) %>%
+  expand_grid(prob = seq(0, 1, .01)) %>%
+  mutate(w = (prob^gamma)/((prob^gamma)+(1-prob)^gamma))
 
 ggplot(wf) +
-  geom_path(aes(prob, w, linetype = type)) +
-   scale_linetype_manual(values=c("solid", "dotted", "longdash")) +
+  geom_line(aes(prob, w, group = gamma, color = gamma)) +
+  scale_color_scico(palette = "cork") + 
   scale_x_continuous(breaks = seq(0, 1, .1)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) + 
   labs(x = expression(paste("p(", omega, ")")),
-       y = expression(paste("w(p(", omega, "))")),
-       linetype = "Weighting Pattern") + 
+       y = expression(pi), 
+       color = expression(gamma)) + 
   theme_apa() 
 ```
-
-One such model is the cumulative prospect theory [@tverskyAdvancesProspectTheory1992] 
-
-
-
- 
-$$
-\tag{3}
-$$ 
 
 Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
