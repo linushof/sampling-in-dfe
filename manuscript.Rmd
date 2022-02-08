@@ -65,104 +65,168 @@ pacman::p_load(papaja,
 <!-- Introduction -->
 
 The human mind is a cognitive system that operates on inputs from an environment or memory. 
-In the domain of decision making, such inputs provide information about the choice alternatives among which people can choose and may therefore be organized in a set $I$ with each element $i \in I$ denoting a choice alternative. 
-That is, each element $i \in I$ is assigned some information from the inputs and this information may be used by the mind to learn about the respective choice alternative.
-In turn, decision making can be considered an information processing problem which starts from the set $I$, including all choice alternatives, and stops at a proper subset $I' \subset I$, including only the chosen alternatives.
+In the domain of decision making, such inputs provide information about the choice alternatives among which people can choose and may therefore be organized in a set $C$ with each element $c \in C$ denoting a choice alternative. 
+That is, each element $c \in C$ is assigned some information from the inputs and this information may be used by the mind to learn about the respective choice alternative.
+In turn, decision making can be considered an information processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
+$$
+\begin{aligned}
+  \iota : C' &\to C \\
+  c &\mapsto c  \quad \text{for all} \ c \in C'
+\end{aligned}
+\tag{1}
+$$
+[@jostMathematicalConcepts2015, p. 15], containing only the chosen alternatives.
 Indeed, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
 
-Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from decisions between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, travel destinations, investment plans, and whatnot.
+<!-- Add short and general outlook on the paper -->
+
+# The Description of Choices in Cumulative Prospect Theory
+
+Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from decisions between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
 Rather, with the choice between at least two *prospects* (see below), it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental *properties* that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See @knightRiskUncertaintyProfit1921, Chapter 1, for a timeless discussion of the reasonableness of such abstractions.] 
 These fundamental properties are considered to be the possible outcomes of a choice alternative---hereafter denoted by the Greek letter $\omega$---and the probabilities with which these outcomes occur following the choice of the alternative---hereafter $p(\omega)$.
-That is, any choice alternative that can be fully described by its outcomes and their probabilities is a prospect. 
-For illustration, take the choice alternatives in the following example with monetary outcomes: 
+That is, all choice alternatives that can be fully described by their outcomes and probabilities are prospects, which are exclusively considered below. 
+<!--For illustration, take the choice alternatives in the following example with monetary outcomes: 
 
 \noindent
 **Example 1.** 
-*A1 gives \$1 with 100%.*
-*A2 gives \$10 with 90% and \$0 with 10%.* 
+```{r echo=TRUE}
+# Alternative 1
+a1_outcomes <- 1 
+a1_prob <- 1 
+
+# Alternative 2
+a2_outcomes <- c(10, 0)
+a2_prob <- c(.1, .9)
+```
+-->
 
 Now, let the exact axiomatic definition of a prospect be that of a *probability space* denoted by the tuple $(\Omega, \mathcal{F}, P)$. 
 Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ denotes the sample space, containing a finite set of possible outcomes:
 $$
 \omega_i \in \{\omega_1, ..., \omega_n\} = \Omega
 \; .
-\tag{1}
+\tag{2}
 $$ 
 $\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$ with each element $A \in P(\Omega)$ being a subset of $\Omega$.^[Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].] 
 $P$ is a probability measure
 $$
 P: \mathcal{F} \mapsto [0,1]
 \; ,
-\tag{2}
-$$
-which assigns each subset $A \in \mathcal{F}$ a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.^[The probabilities $p(\omega)$ are determined by the probability mass function $p : \Omega \mapsto [0,1]$, which is used to construct the probability measure $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{F}$.]
-Given a choice between 1, ..., k prospects, the inputs from the environment or memory should therefore provide information about the set
-$$
-I = \{(\Omega_1, \mathcal{F}_1, P_1), ... ,(\Omega_k, \mathcal{F}_k, P_k)\}
-\; .
 \tag{3}
 $$
-
-However, rarely in peoples' daily life, inputs take the form of explicit descriptions of all outcomes and their probabilities (as in Example 1).
-In such cases, people would make *decisions from description* (DfD), since the information from which the mind learns about the choice alternatives---the probability spaces in (3)---are complete descriptions thereof.
-Yet, rather often, people make *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], where the mind can learn about the choice alternatives only from a record of past experiences with them, which necessarily provides only incomplete and probable information.
-That is, people may have experienced the possible outcomes of a choice alternative when they themselves or others have made the same decision repeatedly in the past, and the record of experienced outcomes for this particular choice alternative is denoted a *sample*. 
-The mind may then infer from the relative frequency with which an outcome occurs in such a sample of past decisions its probability of occurrence for a future decision. 
-Of course, all other things being equal, the accuracy of this inference depends on the size of the sample.
-For illustration, take the sampled outcomes in the following example, where alternative A2 from Example 1 was chosen ten times without prior knowledge about the possible outcomes of this alternative and their actual probabilities:  
-
-\noindent
-**Example 2.** *A2 gave: \$0, \$0, \$10, \$0, \$0, \$0, \$0, \$10, \$0, \$0*
-
-\noindent
-One may now make an inference from the sample about the possible outcomes of choice alternative A2 and their probabilities. 
-However, this conclusion is not certain, but only probable, since the relative frequencies of the results will almost surely change as the sample size increases. 
-
-To provide a mathematical definition, this paper treats a sample as a collection of independent and identically distributed (i.i.d.) random variables $X$, each of which is a measurable function defined on the same probability space:^[Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.] 
+which assigns each subset $A \in \mathcal{F}$ a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.^[The probabilities $p(\omega)$ are determined by the probability mass function $p : \Omega \mapsto [0,1]$, which is used to construct the probability measure $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{F}$.]
+Given a choice between $c \in \{1, ..., k\}$ prospects, the inputs from the environment or memory should therefore provide information about the set
 $$
-\begin{aligned}
-  X : (\Omega, \mathcal{F}) &\to (\Omega', \mathcal{F}') \\
-  \omega &\mapsto \omega  \quad \text{for all} \ \omega \in \Omega
-\end{aligned}
+C = \{(\Omega_1, \mathcal{F}_1, P_1), ... ,(\Omega_k, \mathcal{F}_k, P_k)\}
+\; .
 \tag{4}
 $$
-[see @kolmogorovFoundationsTheoryProbability1950, p. 21; see also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.3, for a more accessible and comprehensive treatment]. 
-Accordingly, the inputs to DfE 
+
+However, rarely in peoples' daily life, inputs take the form of explicit descriptions of all outcomes and their probabilities<!--(as in Example 1)-->.
+In such cases, people would make *decisions from description* (DfD), since the information from which the mind learns about the prospects---the probability spaces in (3)---are complete descriptions thereof.
+Yet, rather often, people make *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], where the mind can learn about the prospects only from a record of past experiences with them<!--, which necessarily provides only incomplete and probable information-->.
+That is, people may have experienced the possible outcomes of a prospect when they themselves or others have made the same decision repeatedly in the past, and the record of experienced outcomes for this particular prospect is denoted a *sample*. 
+<!--The mind may then infer from the relative frequency with which an outcome occurs in such a sample of past decisions its probability of occurrence for a future decision. 
+Of course, ceteris paribus, the accuracy of this inference depends on the size of the sample.
+For illustration, take the sampled outcomes in the following example, where alternative A2 from Example 1 was chosen ten times without prior knowledge about the possible outcomes and their actual probabilities:
+
+\noindent
+**Example 2.**
+```{r echo=TRUE}
+set.seed(1)
+sample(a2_outcomes, size = 10, prob = a2_prob, replace = TRUE)
+```
+
+\noindent
+One may now make an inference from the sample about the possible outcomes of alternative A2 and their probabilities. 
+However, this inference is only probable, since the relative frequencies of outcomes will almost surely change with increasing sample size.-->
+
+More formally, let the sample of a prospect be a set of realizations of independent and identically distributed (i.i.d.) random variables, where each random variable
 $$
-S = \{X_{1i}, ... , X_{ki}\}
-\; ,
+\begin{aligned}
+  X : (\Omega, \mathcal{F}) &\to (\Omega', \mathcal{F'})  \\
+  \omega &\mapsto X(\omega), \ \text{with} \ X(\omega) = \omega \ \text{for all} \ \omega \in \Omega,
+\end{aligned}
 \tag{5}
 $$
-where $i \in \{1, ..., n\}$. 
+is a measurable function from the prospect's respective sample space $\Omega$ to a measurable space $\Omega'$ that takes the same values [see @kolmogorovFoundationsTheoryProbability1950, p. 21; see also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.3, for a more accessible and comprehensive treatment].^[Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
+Accordingly, for the choice between $c \in \{1, ..., k\}$ prospects, the inputs to DfE are generated by the following set of stochastic sampling processes:
+$$
+S = \{X_{1t}, ... , X_{kt}\}
+\; ,
+\tag{6}
+$$
+with $t \in \{1, ..., N\}$ denoting a sequence of realizations of $X$ and $N$ denoting the size of the respective sequence. 
 
-The choices people actually make between prospects---be that on the basis of ---are often described in terms of deviations from expected value (EV) maximization, where the EV is given by 
+The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from expected value (EV) maximization, where the EV is given by 
 $$
 EV = \sum_i^n \omega_i \times P(X = \omega_i)
 \; .
-\tag{6}
+\tag{7}
 $$ 
-That is, following the principle of EV maximization, one would first calculate the prospects' EV according to (6) and thereafter chose the prospect with the largest EV.
-To *describe* how peoples' choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data with a combination of two parameterized functions that may replace the objective outcomes and probabilities in (6) by nonlinear transformations thereof.^[Note that CPT or other originally deterministic decision models may be amended by a stochastic choice function to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].] 
+That is, following the principle of EV maximization, one would first calculate the prospects' EV according to (7) and thereafter chose the prospect with the largest EV.
+To *describe* how peoples' choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data with a combination of two parameterized functions that may replace the objective outcomes and probabilities in (7) by nonlinear transformations thereof. 
 That is, the models of CPT fit choice data by maximizing the value 
 $$
 V = \sum_i^n v(\omega_i) \times \pi_i
 \; ,
-\tag{7}
+\tag{8}
 $$ 
-with subjective values $v(\omega)$ derived from a *value function* that may transform the objective outcomes, and decision weights $\pi$ derived from the objective probabilities' cumulative distribution function that may be transformed by a *probability weighting function*. 
-Now, since the probability weighting function may redistribute the entire probability mass of $P(\Omega) = 1$ across outcomes [@zilkerNonlinearProbabilityWeighting2021], the decision weights 
+with subjective values $v(\omega)$ derived from a *value function* $v$ that may transform the objective outcomes, and decision weights $\pi$ derived from the objective probabilities' cumulative distribution function that may be transformed by a *probability weighting function* $w$.^[Note that CPT or other originally deterministic decision models may be amended by a stochastic choice function to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].] 
+
+## Probability Weighting and The Description-Experience Gap
+
+Since the nonlinear probability weighting function may redistribute the entire probability mass of $P(\Omega) = 1$ [@zilkerNonlinearProbabilityWeighting2021], the estimated decision weights 
 $$
-\pi =
+\pi_i =
   \begin{cases}
-     w(P(X \geq \omega_i)) - w(P(X > \omega_i)) \quad \text{for} \ \omega \geq 1, \\
+     w(P(X \geq \omega_i)) - w(P(X > \omega_i)) \quad \text{for} \ \omega \geq 0, \\
      w(P(X \leq \omega_i)) - w(P(X < \omega_i)) \quad \text{else}, 
   \end{cases}
-\tag{8}
+\tag{9}
 $$
-may be larger or smaller than the objective probabilities.  
+may deviate---i.e., they may be smaller or greater---from the respective objective probabilities<!-- and these deviations are usually regressive-->.
+Although the possible deviation patterns, which span the entire probability scale, depend on the exact parameterization of the probability weighting function [e.g., @goldsteinExpressionTheoryPreference1987; @prelecProbabilityWeightingFunction1998; see also @stottCumulativeProspectTheory2006], they allow the adoption of an as-if weighting terminology for the description of choice behavior, which was originally introduced outside of the CPT models [see @pachurWeightUncertainEvents2019].
+Figure 1 illustrates such a description in CPT with different parameter settings for the two-parameter probability weighting function of @goldsteinExpressionTheoryPreference1987 with
+$$
+\begin{aligned}
+  w : P &\to [0,1] \\
+  p(\omega) &\mapsto \frac{\delta \times p(\omega)^{\gamma}}
+  {\delta \times p(\omega)^{\gamma} + (1-p(\omega))^{\gamma}}
+  \; ,
+\end{aligned}
+\tag{10}
+$$
+where $\gamma \in [0,2]$ and $\delta \geq 0$ determine the function's curvature and elevation, respectively.
+Essentially, if the estimate of a decision weight is larger (smaller) than the objective probability from which it is derived, the weighting function runs above (below) the dashed identity line.
+The choice data are then described *as if* people maximized the value in (8) and applied the over- and underweighting pattern indicated by the estimated shape of the overall probability weighting function.
+Importantly, the as-if prefix indicates that it cannot be concluded from the inferred decision weights that the mind does perform a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [see, e.g., @griffithsRationalUseCognitive2015]. 
 
-Now, in rather general terms, if people were following the principle of EV maximization, the estimates for the parameters of both functions (see below) would be such that the resulting subjective values and decision weights are equal to the objective outcomes and probabilities, i.e., $v(\omega) = \omega$ and $\pi = p(\omega)$. 
-However, for deviations from EV maximization, at least one of the equations should not hold.
+(ref:weighting) Probability Weighting Function of @goldsteinExpressionTheoryPreference1987 for Different Values of the Curvature Parameter $\gamma$ and the Elevation Parameter $\delta$.
+
+```{r fig.cap="(ref:weighting)"}
+wf <- tibble(gamma = seq(.1, 2, .1)) %>%
+  expand_grid(delta = c(.1, .5, 1, 2, 5, 10),
+              prob = seq(0, 1, .01)) %>%
+  mutate(w = (delta*(prob^gamma))/((delta*prob^gamma)+(1-prob)^gamma))
+
+ggplot(wf) +
+  geom_line(aes(prob, w, group = gamma, color = gamma)) +
+  geom_segment(x = 0, xend = 1, y =  0, yend = 1, linetype = "dashed") +
+  scale_color_scico(palette = "acton") + 
+  scale_x_continuous(breaks = seq(0, 1, .2)) +
+  scale_y_continuous(breaks = seq(0, 1, .2)) + 
+  labs(x = expression(paste("p(", omega, ")")),
+       y = expression(paste("w(p(", omega, "))")), 
+       color = expression(gamma)) + 
+  facet_wrap(~delta, scales = "fixed") + 
+  theme_apa() 
+```
+
+Research on choices in DfD and DfE 
+Specifically, when people make DfD, decision weights are typically estimated to be larger than the objective probabilities in the lower probability range.
+However, for DfE, this pattern reverses and decisions weights are typically estimated to be smaller than the objective probabilities in the lower probability range [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; also see @wulffMetaanalyticReviewTwo2018].  
 
 The value function 
 $$
@@ -176,34 +240,8 @@ $$
 \end{aligned}
 \tag{4}
 $$ 
-where $a \in [0,1]$ and $\lambda > 1$ [but see @stottCumulativeProspectTheory2006, for alternative functional forms], transforms the objective outcomes $\omega$ into subjective values $v(\omega)$.
-The *probability weighting function*, for which several functional forms have been proposed [e.g., @goldsteinExpressionTheoryPreference1987, see also Equation 5]  
-$$
-w
-\tag{5}
-$$ 
-transforms the cumulative distribution function of the objective probabilities to derive the subjective decision weights.
 
-The shape of the probability weighting function lead to the common interpretation that people choose as if they were over- or underweighting outcomes of certain probability (see Figure 1). 
-
-```{r}
-wf <- tibble(gamma = seq(.1, 2, .1)) %>%
-  expand_grid(delta = c(.1, .5, 1, 2, 5, 10),
-              prob = seq(0, 1, .01)) %>%
-  mutate(w = (delta*prob^gamma)/((delta*prob^gamma)+(1-prob)^gamma))
-
-ggplot(wf) +
-  geom_line(aes(prob, w, group = gamma, color = gamma)) +
-  geom_segment(x = 0, xend = 1, y =  0, yend = 1, linetype = "dashed") +
-  scale_color_scico(palette = "cork") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .2)) + 
-  labs(x = expression(paste("p(", omega, ")")),
-       y = expression(pi), 
-       color = expression(gamma)) + 
-  facet_wrap(~delta, scales = "fixed") + 
-  theme_apa() 
-```
+<!-- old -->
 
 Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
@@ -511,8 +549,8 @@ cpt_long %>%
   filter(parameter == "gamma" | parameter == "delta") %>% 
   ggplot(aes(x = s, y = mean)) +
   geom_density_2d_filled(contour_var = "ndensity") + 
-  scale_fill_scico_d(palette = "grayC") +
-  scale_color_scico_d(palette = "grayC") + 
+  scale_fill_scico_d(palette = "acton") +
+  scale_color_scico_d(palette = "acton") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) + 
   scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
   labs(x ="Switching Probability",
