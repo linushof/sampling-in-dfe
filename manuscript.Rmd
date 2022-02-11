@@ -65,13 +65,13 @@ pacman::p_load(papaja,
 <!-- Introduction -->
 
 The human mind is a cognitive system that operates on inputs from an environment or memory.
-In the domain of decision making, such inputs provide information about the choice alternatives among which people can choose, the latter being hereafter treated as elements $c$ of the set $C$.
+In the domain of decision making, such inputs provide information about the choice alternatives among which people can choose, hereafter treated as elements $c$ of the set $C$.
 That is, each choice alternative $c \in C$ is assigned some information from the inputs and this information may be used by the mind to learn about the *properties* of the respective alternative.
 In turn, decision making can be considered an information processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
 $$
 \begin{aligned}
   \iota : C' &\to C \\
-  c &\mapsto c  \quad \text{for all} \ c \in C'
+  c &\mapsto c  \quad \forall c \in C'
 \end{aligned}
 \tag{1}
 $$
@@ -83,7 +83,7 @@ Indeed, irrespective of their exact mathematical specification or computational 
 # The Description of Choices in Cumulative Prospect Theory
 
 Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from decisions between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two *prospects* [@kahnemanProspectTheoryAnalysis1979, see below], it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See @knightRiskUncertaintyProfit1921, Chapter 1, for a timeless discussion of the reasonableness of such abstractions.] 
+Rather, with the choice between at least two *prospects* [see @kahnemanProspectTheoryAnalysis1979, see also below], it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See @knightRiskUncertaintyProfit1921, Chapter 1, for a timeless discussion of the reasonableness of such abstractions.] 
 These fundamental properties are considered to be the possible outcomes of a choice alternative---hereafter denoted by $x$---and the probabilities with which these outcomes occur following the choice of the alternative---hereafter $p_X(x)$.
 Roughly speaking, then, all choice alternatives that can be fully described by their outcomes and probabilities are prospects (or: gambles), which are exclusively considered below. 
 <!--For illustration, take the choice alternatives in the following example with monetary outcomes: 
@@ -127,24 +127,26 @@ $$
 \tag{4}
 $$
 where $(\Omega', \mathcal{F'})$ is a measurable space with each element $x \in \Omega'$ being a possible outcome of a prospect and each element $A' \in \mathcal{F'}$ being a subset of $\Omega'$.
-An outcome's probability $p(x)$ is then provided by the probability measure
+An outcome's probability $p_X(x)$ is then provided by the probability measure
 $$
 P_X : \mathcal{F'} \to [0,1]
 \tag{5}
 $$
 with 
 $$
-P_X(A' \in \mathcal{F'}) := P(X^{-1} \times A') = P(\{\omega: X(\omega) \in A'\})
+P_X(A' \in \mathcal{F'}) := P(X^{-1} \times A') = P(\{\omega: X(\omega) = x \in A'\})
 \tag{6}
 $$
 [see @kolmogorovFoundationsTheoryProbability1950, p. 21; see also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1, for a comprehensive introduction to random variables].
+That is, the set consisting of a single outcome $x$ can be treated as a subset $\{x\} \in \mathcal{F'}$ and one therefore obtains $p_X(x) = P(X(\omega) = x)$.
+Note that the probability measure in (5) and (6), respectively, is the discrete random variable's distribution and therefore a prospect.
 To summarize and simplify, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
 $$
 C = \{P_{X_1}, ... , P_{X_k}\}
-\tag{6}
+\tag{7}
 $$
 with each element $c \in C$ being a distribution $P_X$ of a random variable defined on a different probability space.
-Accordingly, each $c$ can itself be considered a set of outcome-probability pairs $(x_i, p(x_i)) \in \{(x_1, p(x_1)), ..., (x_n, p(x_n))\}$.
+Accordingly, each $c$ can itself be considered a set of outcome-probability pairs $(x_i, p_X(x_i)) \in \{(x_1, p_X(x_1)), ..., (x_n, p_X(x_n))\}$.
 
 However, rarely in peoples' daily life, inputs take the form of explicit descriptions of all outcomes-probability pairs<!--(as in Example 1)-->.
 In such cases, people would make *decisions from description* (DfD), since the information from which the mind learns about the prospects are complete descriptions thereof.
@@ -163,56 +165,58 @@ sample(a2_outcomes, size = 10, prob = a2_prob, replace = TRUE)
 
 \noindent
 One may now make an inference from the sample about the possible outcomes of alternative A2 and their probabilities. 
-However, this inference is only probable, since the relative frequencies of outcomes will almost surely change with increasing sample size.-->
+However, this inference is only probable, since the relative frequencies of outcomes will almost surely change with increasing sample size.
 
-More formally, let the sample of a prospect be a set of realizations of independent and identically distributed (i.i.d.) random variables.^[Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, whi
-ch is out of the scope of this paper.]
-Accordingly, for the choice between $1, ..., k$ prospects, the inputs to DfE are generated by the following set of stochastic processes:
+-->
+More formally, let the sample of a prospect be a set of realizations of the respective random variable $X$ according to its distribution $P_X$.
+Accordingly, for the choice between $1, ..., k$ prospects, the inputs to DfE are generated by a set $S$ of stochastic processes
 $$
 S = \{X_{1t}, ... , X_{kt}\}
-\; ,
-\tag{6}
+\tag{8}
 $$
-with $t \in \{1, ..., N\}$ denoting a sequence of realizations of $X_c$ and $N$ denoting the size of the respective sequence. 
+with $t \in \{1, ..., N\}$ denoting a sequence of independent and identically distributed (i.i.d.) random variables and $N$ denoting the size of the respective sequence.^[Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
+The sets of realizations that result from these stochastic processes may then be used to make an uncertain inference about the respective sets of outcome-probability pairs in (7).  
 
-The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from expected value (EV) maximization, where the EV is given by 
+The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from expected value (EV) maximization, where the EV of a prospect is given by 
 $$
-EV = \sum_i^n x_i \times P(X = x_i)
+EV = \sum_i^n x_i \times p_X(x_i)
 \; .
-\tag{7}
+\tag{9}
 $$ 
-That is, following the principle of EV maximization, one would first calculate the prospects' EV according to (7) and thereafter chose the prospect with the largest EV.
-To *describe* how peoples' choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data with a combination of two parameterized functions that may replace the objective outcomes and probabilities in (7) by nonlinear transformations thereof. 
-That is, the models of CPT fit choice data by maximizing the value 
+That is, following the principle of EV maximization, one would first calculate the prospects' EV according to (9) and thereafter chose the prospect with the largest EV.
+To *describe* how peoples' choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data with a combination of two parameterized, monotonic functions that may replace the objective outcomes and probabilities in (9) by nonlinear transformations thereof. 
+More specifically, the models of CPT fit choice data by maximizing the value 
 $$
 V = \sum_i^n v(x_i) \times \pi_i
 \; ,
-\tag{8}
+\tag{10}
 $$ 
-with subjective values $v(x_i)$ derived from a *value function* $v$ that may transform the objective outcomes, and decision weights $\pi_i$ derived from the objective probabilities' cumulative distribution function that may be transformed by a *probability weighting function* $w$.^[Note that CPT or other originally deterministic decision models may be amended by a stochastic choice function to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].] 
+with objective outcomes $x_i$ being transformed by a *value function* $v$, and cumulative decision weights $\pi_i$ being derived from cumulative probabilities of the distribution $P_X$ that may be transformed by a *weighting function* $w$ (see (11) and (12) below).^[Note that in CPT, the value and weighting functions are sign-dependent. Accordingly, two value and weighting functions are needed for prospects with positive and negative outcomes, respectively [see @tverskyAdvancesProspectTheory1992]. Note further that CPT or other originally deterministic decision models may be amended by a stochastic choice function to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].]
 
 ## Probability Weighting and The Description-Experience Gap
 
-Since the nonlinear probability weighting function may redistribute the entire probability mass of $P(\Omega) = 1$ [@zilkerNonlinearProbabilityWeighting2021], the estimated decision weights 
+According to @tverskyAdvancesProspectTheory1992, let the cumulative decision weights be defined by
 $$
 \pi_i =
   \begin{cases}
-     w(P(X \geq \omega_i)) - w(P(X > \omega_i)) \quad \text{for} \ \omega \geq 0, \\
-     w(P(X \leq \omega_i)) - w(P(X < \omega_i)) \quad \text{else}, 
+     w^+(P(X \geq x_i)) - w^+(P(X > x_i)) \quad \forall x \geq 0, \\
+     w^-(P(X \leq x_i)) - w^-(P(X < x_i)) \quad \text{else}, 
   \end{cases}
-\tag{9}
+\tag{11}
 $$
-may deviate---i.e., they may be smaller or greater---from the respective objective probabilities<!-- and these deviations are usually regressive-->.
-Although the possible deviation patterns, which span the entire probability scale, depend on the exact parameterization of the probability weighting function [e.g., @goldsteinExpressionTheoryPreference1987; @prelecProbabilityWeightingFunction1998; see also @stottCumulativeProspectTheory2006], they allow the adoption of an as-if weighting terminology for the description of choice behavior, which was originally introduced outside of the CPT models [see @pachurWeightUncertainEvents2019].
+with $w^+(0) = w^-(0) = 0$ and $w^+(1) = w^-(1) = 1$.
+Now, given that $w(P_X(\Omega')) = w(1) = 1$, it follows from (11) that for any prospect that is strictly positive or strictly negative, the weighting function may redistribute the entire probability mass $P_X(\Omega') = 1$ across outcomes [see @zilkerNonlinearProbabilityWeighting2021]. 
+As a consequence, the decision weights may deviate---i.e., they may be smaller or greater---from the respective objective probabilities<!-- and these deviations are usually regressive-->.
+Although the possible deviation patterns, which span the entire probability scale, depend on the exact parameterization of the weighting function [e.g., @goldsteinExpressionTheoryPreference1987; @tverskyAdvancesProspectTheory1992; @prelecProbabilityWeightingFunction1998; see also @stottCumulativeProspectTheory2006], they allow the adoption of an as-if weighting terminology for the description of choice behavior, which was originally introduced outside of the CPT models [see @pachurWeightUncertainEvents2019].
 Figure 1 illustrates such a description in CPT with different parameter settings for the two-parameter probability weighting function of @goldsteinExpressionTheoryPreference1987 with
 $$
 \begin{aligned}
   w : [0,1] &\to [0,1] \\
-  p(\omega) &\mapsto \frac{\delta \times p(\omega)^{\gamma}}
-  {\delta \times p(\omega)^{\gamma} + (1-p(\omega))^{\gamma}}
+  p_X(x) &\mapsto \frac{\delta \times p_X(x)^{\gamma}}
+  {\delta \times p_X(x)^{\gamma} + (1-p_X(x))^{\gamma}}
   \; ,
 \end{aligned}
-\tag{10}
+\tag{12}
 $$
 where $\gamma \in [0,2]$ and $\delta \geq 0$ determine the function's curvature and elevation, respectively.
 Essentially, if the estimate of a decision weight is larger (smaller) than the objective probability from which it is derived, the weighting function runs above (below) the dashed identity line.
@@ -229,8 +233,8 @@ wf <- tibble(gamma = seq(.1, 2, .1)) %>%
 
 ggplot(wf) +
   geom_line(aes(prob, w, group = gamma, color = gamma)) +
-  geom_segment(x = 0, xend = 1, y =  0, yend = 1, linetype = "dashed") +
-  scale_color_scico(palette = "acton") + 
+  geom_segment(x = 0, xend = 1, y =  0, yend = 1, linetype = "dashed", size = .3) +
+  scale_color_scico(palette = "cork") + 
   scale_x_continuous(breaks = seq(0, 1, .2)) +
   scale_y_continuous(breaks = seq(0, 1, .2)) + 
   labs(x = expression(paste("p(", omega, ")")),
