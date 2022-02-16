@@ -64,11 +64,12 @@ pacman::p_load(papaja,
 
 <!-- Introduction -->
 
-The human mind is a cognitive system that operates on inputs from an environment or memory.
-In the domain of decision making, such inputs provide information about the *properties* of the choice alternatives among which people can choose.
-Hereafter, let us treat these alternatives as elements $c$ of the set $C$.
+The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the *properties* of the choice alternatives between which people can choose.
+In fact, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
+
+Now, more formally,^[Paragraphs with this beginning usually formalize the main ideas of the preceding paragraphs or elaborate on them by using mathematical expressions and concepts. Although important, the gist of this paper should be captured despite skipping these paragraphs.] let us treat the choice alternatives as elements $c$ of the set $C$.
 To each $c \in C$ is then assigned some information from the inputs and this information may be used by the mind to learn about the properties of the respective alternative.
-Accordingly, decision making can be considered an information processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
+Accordingly, decision making can be considered an information-processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
 $$
 \begin{aligned}
   \iota : C' &\to C \\
@@ -77,23 +78,28 @@ $$
 \tag{1}
 $$
 [@jostMathematicalConcepts2015, p. 15], containing only the chosen alternatives.
-Indeed, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
 
-Importantly, information about the choice alternatives can come in many formats.
+Importantly, the information that is provided about the choice alternatives can come in many forms.
 In *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all relevant properties of the choice alternatives.
-In *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], inputs take the form of *samples* (see below).
-In this latter case---perhaps, the one that more closely resembles decisions in people's daily life---the properties of the choice alternatives are not described and therefore not known with certainty, but they must be inferred from the consequences that occurred or were absent after the alternatives were chosen in similar decisions in the past.
-Although these different formats may in principle carry the same information about given choice alternatives, behavioral decision research has yet produced a large body of papers indicating that, taking a quite general perspective, there are robust differences between the choices that are made in DfD and DfE.
-That is, all other things being equal, empirical choice patterns across studies indicate that in DfD people choose *as if* a rare consequence of a choice alternative has more impact on the latter's evaluation than would be objectively warranted by the principle of mathematical expectation (see below); in turn, in DfE, people choose *as if* the same rare consequence has less impact on the evaluation than warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @hauDescriptionexperienceGapRisky2008; @rakowBiasedSamplesNot2008; @ungemachAreProbabilitiesOverweighted2009; @camilleriWhenWhyRare2011; @kellenHowVariantAre2016; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructBehaviorGap2017; see also @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], inputs take the form of *samples*.
+In this latter case, the properties of the choice alternatives are not described and therefore not known with certainty, but they must be inferred from the outcomes that occurred when the alternatives were chosen in similar past decisions.
+Although these distinct input forms may in principle carry the same information about a given set of choice alternatives, behavioral decision research has so far produced a large body of papers indicating that---if a quite general perspective is taken---there are robust differences between the choices that are made in DfD and DfE.
+That is, ceteris paribus, empirical choice patterns across studies indicate that in DfD people choose *as if* a rare outcome is given more weight in the evaluation of a choice alternative than would be objectively warranted by the principle of mathematical expectation (see below); in turn, in DfE, people choose *as if* the same rare outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @hauDescriptionexperienceGapRisky2008; @rakowBiasedSamplesNot2008; @ungemachAreProbabilitiesOverweighted2009; @camilleriWhenWhyRare2011; @kellenHowVariantAre2016; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructBehaviorGap2017].
+Hereafter, we refer to these patterns as the as-if overweighting and underweighting of rare outcomes, respectively.
 
-This paper uses the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009] as an entry point for a closer inquiry into the sampling process as an essential part of sample-based decision making.  
+This paper uses the choice pattern in DfE as an entry point for an inquiry into the sampling process as a consequential part of the information processing upfront choices in DfE.
+More specifically, it will be discussed and demonstrated in a simulation how changes to the strategy of sequentially generating outcomes and integrating them into samples (hereafter: sampling strategies) can produce distinct choice patterns in DfE---among them, the as-if underweighting of rare outcomes [see @hillsInformationSearchDecisions2010, for the original formulation of this idea]. 
 
-<!--
-The paper is structured as follows: 
-...
-
-All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
--->
+The rest of the paper is structured as follows.
+In the first brief section, a formal definition of DfE is provided.
+In the subsequent section, cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] is reviewed as a data model that can be used to describe choices in DfE in terms of deviations from the principle of mathematical expectation.
+<!-- Outline of the section -->
+In the section that follows, sampling strategies are treated in quite some detail.
+<!-- Outline of the section -->
+Thereafter, a simulation is presented in which the theoretical claims that are made in the preceding section are implemented in a computational model to simulate choice data in DfE.
+The predictions of the model are summarized by fitting the choice data in CPT.
+The paper closes with a summary and a conclusion.
+Note that this paper, including the simulations and data analyses, is reproducible---materials and instructions can be found on the GitHub repository.
 
 # Prospects, Decisions from Description, and Decisions from Experience
 
@@ -116,7 +122,7 @@ a2_prob <- c(.1, .9)
 ```
 -->
 
-Now, more formally,^[Paragraphs with this beginning usually formalize the main ideas of the preceding paragraphs or elaborate on them by using mathematical expressions and concepts. Although important, the gist of this paper should be captured despite skipping these paragraphs.]  let the axiomatic definition of a prospect be that of a discrete random variable's distribution.
+Now, more formally, let the axiomatic definition of a prospect be that of a discrete random variable's distribution.
 Let therefore the tuple $(\Omega, \mathcal{F}, P)$ be a probability space. 
 Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ is the sample space containing a finite set of elements
 $$
@@ -179,11 +185,11 @@ with $t \in \{1, ..., N\}$ denoting a sequence of independent and identically di
 The sets of realizations that result from these stochastic processes may then be used to make an uncertain inference about the respective sets of outcome-probability pairs in (7).
 
 Of course, the accuracy of such inferences depends, ceteris paribus, on the size of the samples, since from the laws of large numbers it follows that the relative frequency with which an outcome occurs in a sample converges to the outcome's objective probability only as the size of a sample increases [see @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 5].
-However, if the choices that people actually make between prospects are described, robust differences can be found between the choices in DfD and DfE, and the size of samples in DfE provides just one and only a partial explanation for this *description-experience gap* [see @hertwigDescriptionexperienceGapRisky2009; @wulffMetaanalyticReviewTwo2018]. 
+However, if the choices that people actually make between prospects are described, robust differences can be found between the choices in DfD and DfE, and the size of samples in DfE provides just one and only a partial explanation for this *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009; see also @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-anayltic review]. 
 The following section briefly addresses how choices between prospects in general and the description-experience gap in particular can be described using cumulative prospect theory's [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] *weighting function*.^[This paper also considers CPT's value function, but emphasis is put on the weighting function.]
 <!-- The two sections thereafter ... --> 
 
-# The Description of Choices in CPT and the Description-Experience Gap
+# The Description of Choices in CPT and As-If Underweighting in DfE
 
 The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from expected value (EV) maximization, where the EV of a prospect is given by 
 $$
@@ -264,12 +270,9 @@ Research on choices in DfD and DfE
 Specifically, when people make DfD, decision weights are typically estimated to be larger than the objective probabilities in the lower probability range.
 However, for DfE, this pattern reverses and decisions weights are typically estimated to be smaller than the objective probabilities in the lower probability range [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; also see @wulffMetaanalyticReviewTwo2018].  
 
-# Explanations for Underweighting in DfE
+# Sampling Strategies
 
-
-# Decision and Sampling Strategies
-
-<!-- old -->
+<!-- Old
 
 Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
 In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
@@ -339,7 +342,8 @@ Note that a selection criterion may refer to a property for which the raw input,
 Even more so, it has been repeatedly stated that for quite many decisions the mind faces, it is simply not possible to draw on direct descriptions of the properties, since they are part of the distal environment  [e.g., @brunswikOrganismicAchievementEnvironmental1943; @fiedlerExplainingSimulatingJudgment1996; @hertwigDescriptionexperienceGapRisky2009; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956; @kozyrevaInterpretationUncertaintyEcological2021].
 In either case, some form of description must be inferred from whatever information the input provides about the property in question.
 Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
-Since all information about the prospect is given, one may in principle consider the input complete, yet, the tuple implies properties of the prospect which are not explicitly described.
+Since all information about the prospect is given, one may in principle consider the input complete, yet, 
+the tuple implies properties of the prospect which are not explicitly described.
 For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
 In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20].
 
@@ -403,13 +407,7 @@ where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables
 Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
 Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
 
-# Evaluation of Choice Alternatives and Outputs of the Decision Making Process
-
-...
-
-# Sampling Strategies as Representation Systems
-
-...
+-->
 
 # Simulation Study
 
@@ -421,7 +419,7 @@ The two boundary parameters resemble the concept of a decision threshold, i.e., 
 The boundary type is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
 The boundary value $a$ is varied between 1 to 5 in increments of 1.
 
-## Test set
+<!-- Test set-->
 
 For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
 In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
@@ -432,7 +430,7 @@ Table A1 in [Appendix 2][Appendix 2: Choice Problems] contains the test set of 6
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
 
-## Results
+<!-- Results -->
 
 ...
 
@@ -456,8 +454,7 @@ To reduce potential autocorrelation during the sampling process, we only kept ev
 The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(gel_92$Rhat), 3)` for all parameters, indicating good convergence.
 The minimum effective sample size was `r min(gel_92$n.eff)`.
 
-
-### Plausibility Check: Relationship between Switching Probability and Trial Length
+<!-- Plausibility Check: Relationship between Switching Probability and Trial Length -->
 
 ```{r include=FALSE}
 
@@ -509,7 +506,7 @@ trial_length %>%
   theme_apa()
 ```
 
-### Probability Weighting Function
+<!-- Weighting function -->
 
 ```{r eval=FALSE}
 
@@ -687,7 +684,7 @@ fr_rates %>%
   theme_minimal()
 ```
 
-### Value Function 
+<!-- Weighting function -->
 
 ```{r eval=FALSE}
 
@@ -764,7 +761,8 @@ cpt_wide %>%
   theme_minimal()
 ```
 
-# Discussion and Conclusion
+# Summary and Conclusion
 
+# Acknowledgement
 
 # References
