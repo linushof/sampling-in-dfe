@@ -67,7 +67,8 @@ pacman::p_load(papaja,
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the *properties* of the choice alternatives between which people can choose.
 In fact, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
 
-Now, more formally,^[Paragraphs with this beginning usually formalize the ideas of the preceding paragraphs or elaborate on them by using mathematical expressions and concepts. Although I consider these paragraphs important, the major propositions of this paper should be captured despite skipping them.] let us treat the choice alternatives as elements $c$ of the set $C$.
+Now, more formally,^[<!--Open footnote-->Paragraphs with this beginning usually formalize the ideas of the preceding paragraphs or elaborate on them by using mathematical expressions and concepts. Although I consider these paragraphs important, the major propositions of this paper should be captured despite skipping them.<!--Close footnote-->]
+let us treat the choice alternatives as elements $c$ of the set $C$.
 To each $c \in C$ is then assigned some information from the inputs and this information may be used by the mind to learn about the properties of the respective alternative.
 Accordingly, decision making can be considered an information-processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
 $$
@@ -85,7 +86,7 @@ Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004]
 In this latter case, the properties of the choice alternatives are not described and therefore not known with certainty, but they must be inferred from the outcomes that occurred when the alternatives were chosen in similar past decisions.
 Although these distinct input forms may in principle carry the same information about a given set of choice alternatives, behavioral decision research has so far produced a large body of papers indicating that---if a quite general perspective is taken---there are robust differences between the choices that are made in DfD and DfE.
 That is, ceteris paribus, empirical choice patterns across studies indicate that in DfD people choose *as if* a rare outcome is given more weight in the evaluation of a choice alternative than would be objectively warranted by the principle of mathematical expectation (see below); in turn, in DfE, people choose *as if* the same rare outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @hauDescriptionexperienceGapRisky2008; @rakowBiasedSamplesNot2008; @ungemachAreProbabilitiesOverweighted2009; @camilleriWhenWhyRare2011; @kellenHowVariantAre2016; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructBehaviorGap2017].
-Hereafter, we refer to these patterns as the as-if overweighting and underweighting of rare outcomes, respectively.
+Hereafter, we refer to these choice patterns as the as-if overweighting and underweighting of rare outcomes, respectively.
 
 This paper uses the as-if underweighting of rare outcomes as a starting point for an inquiry into the sampling process upfront choices in DfE.
 Essentially, it discusses and demonstrates in a simulation how different strategies of sequentially generating outcomes and integrating them into samples (hereafter: sampling strategies) can produce distinct choice patterns in DfE---among them, the as-if underweighting of rare outcomes [see @hillsInformationSearchDecisions2010, for the original formulation of this claim].
@@ -105,23 +106,9 @@ Note that this paper, including the simulations and data analyses, is reproducib
 # Prospects, Decisions from Description, and Decisions from Experience
 
 Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from decisions between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two *prospects* (see below), it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[See @knightRiskUncertaintyProfit1921, Chapter 1, for a discussion of the reasonableness of such abstractions.] 
+Rather, with the choice between at least two *prospects* (see below), it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].^[<!--Open footnote-->See @knightRiskUncertaintyProfit1921, Chapter 1, for a discussion of the reasonableness of such abstractions.<!--Close footnote-->]
 These fundamental properties are considered the possible outcomes of a choice alternative (hereafter: $x_i$) and the probabilities with which these outcomes occur following the choice of the alternative (hereafter: $p_X(x_i)$).
 Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs $(x_i, p_X(x_i))$ are prospects (or: gambles), which are exclusively considered below. 
-<!--For illustration, take the choice alternatives in the following example with monetary outcomes: 
-
-\noindent
-**Example 1.** 
-```{r echo=TRUE}
-# Alternative 1
-a1_outcomes <- 1 
-a1_prob <- 1 
-
-# Alternative 2
-a2_outcomes <- c(10, 0)
-a2_prob <- c(.1, .9)
-```
--->
 
 Now, more formally, let the axiomatic definition of a prospect be that of a discrete random variable's distribution.
 Let therefore the tuple $(\Omega, \mathcal{F}, P)$ be a probability space. 
@@ -131,7 +118,7 @@ $$
 \; .
 \tag{2}
 $$ 
-$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$ with each element $A \in P(\Omega) = \mathcal{F}$ being a subset of $\Omega$.^[Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].] 
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$ with each element $A \in P(\Omega) = \mathcal{F}$ being a subset of $\Omega$.^[<!--Open footnote-->Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].<!--Close footnote-->]
 $P$ is a probability measure
 $$
 P: \mathcal{F} \to [0,1]
@@ -159,7 +146,7 @@ $$
 P_X(A' \in \mathcal{F'}) := P(X^{-1} \ A') = P(\{\omega: X(\omega) = x \in A'\})
 \tag{6}
 $$
-[see @kolmogorovFoundationsTheoryProbability1950, p. 21-22].^[See also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1, for a comprehensive yet accessible introduction to random variables.]
+[see @kolmogorovFoundationsTheoryProbability1950, p. 21-22].^[<!--Open footnote-->See also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1, for a comprehensive yet accessible introduction to random variables.<!--Close footnote-->]
 That is, the set consisting of a single outcome $x$ can be treated as a subset $\{x\} \in \mathcal{F'}$ and we therefore obtain $p_X(x) = P(X(\omega) = x)$.
 Note that the probability measure in (5) and (6), respectively, is a discrete random variable's distribution and therefore a prospect.
 To summarize and simplify, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
@@ -176,7 +163,7 @@ Yet, rather often, people make decisions from experience (DfE), where the mind c
 That is, people may have experienced the possible outcomes of a prospect when they themselves or others have made the same decision repeatedly in the past, and the record of experienced outcomes for this particular prospect is a rough description of a sample.
 The mind may then infer from the relative frequency with which an outcome occurred in such a sample of past decisions its probability of occurrence following a future decision.
 
-Now, more formally, let the sample of a prospect be a set of realizations of the respective random variable $X$ according to its distribution $P_X$.^[Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
+Now, more formally, let the sample of a prospect be a set of realizations of the respective random variable $X$ according to its distribution $P_X$.^[<!--Open footnote-->Note that this paper considers the counterfactual case where samples are random, although it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.<!--Close footnote-->]
 So, for the choice between $1, ..., k$ prospects, the inputs to DfE are generated by a set $S$ of stochastic processes
 $$
 S = \{X_{1t}, ... , X_{kt}\}
@@ -185,34 +172,41 @@ $$
 with $t \in \{1, ..., N\}$ denoting a sequence of independent and identically distributed (i.i.d.) random variables and $N$ denoting the length of the respective sequence.
 The sets of realizations that result from these stochastic processes may then be used to make an uncertain inference about the respective sets of outcome-probability pairs in (7).
 
-Of course, the accuracy of such inferences depends, ceteris paribus, on the size of the samples, since from the laws of large numbers [see, e.g., @kolmogorovFoundationsTheoryProbability1950] it follows that the relative frequency with which an outcome occurs in a sample converges to the outcome's objective probability only as the size of a sample increases.
-Yet, if the choices that people actually make between prospects in DfD and in DfE are described, the differences that were already outlined in the introduction are found, and the size of samples in DfE provides just one and only a partial explanation for this so-called *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009; see also @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-This paper will address this issue<!-- review-->.
-Before that, however, the following section reviews how choices between prospects can be described using cumulative prospect theory's (CPT) *weighting function*.^[This paper also considers CPT's value function, but emphasis is put on the weighting function.]
+Of course, the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950] apply perfectly well to DfE and it follows that the accuracy of such inferences from a sample to a prospect depends, ceteris paribus, on the size of the samples.
+Yet, when describing the choices that people actually make between prospects in DfD and in DfE, the differences outlined in the introduction are robustly found---i.e., as-if overweighting (underweighting) of rare outcomes in DfD (DfE)---and the size of samples in DfE provides just one and only a partial explanation for this so-called *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009; see also @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+More so, despite the LLN, the description-experience gap need not decrease at all, even for ever increasing sample sizes that DfE fully take into account.
+<!--Add outlook-->>
+Before so doing, however, the following section reviews in general how choices between prospects are described in cumulative prospect theory (CPT), and in particular how CPT's *weighting function* captures as-if weighting patterns.
 
 # The Description of Choices in CPT and the As-If Underweighting in DfE
 
-The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from expected value (EV) maximization, where the EV of a prospect is given by 
+The choices people actually make between prospects---be that in DfD or DfE---are often described in terms of deviations from the principle of mathematical expectation, according to which the prospect with the largest expected value (EV)
 $$
 EV = \sum_i^n x_i \times p_X(x_i)
 \; .
 \tag{9}
 $$ 
-That is, following the principle of EV maximization, one would calculate the prospects' EV---each by first multiplying its outcomes $x_i$ by their respective probabilities $p_X(x_i)$ and then summing the resulting products---to subsequently choose the prospect with the largest EV.
-To *describe* how people's actual choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of CPT [@tverskyAdvancesProspectTheory1992] and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing the value
+should be chosen.
+To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of CPT [@tverskyAdvancesProspectTheory1992] and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing^[<!--Open footnote-->Note that CPT or other originally deterministic decision models may be amended by a stochastic choice rule to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].<!--Close footnote-->]
+the value
 $$
 V = \sum_i^n v(x_i) \times \pi_i
 \; ,
 \tag{10}
 $$ 
-with objective outcomes $x_i$ being transformed by a *value function* $v$, and *cumulative decision weights* $\pi_i$ being determined by the difference between transformed cumulative probabilities of the distribution $P_X$.^[Note that CPT or other originally deterministic decision models may be amended by a stochastic choice function to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].]
-Importantly, the transformation of cumulative probabilities is carried out by a weighting function $w$ (see (11) and (12) below).
-More specifically, CPT proposes cumulative decision weights as replacements for objective probabilities to account for empirical regularities in the deviations from EV maximization in DfD^[@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects such as the *certainty effect* and the *reflection effect* that were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the EV principle and the expected utility (EU) principle [see @bernoulliExpositionNewTheory1954\/1738].] that cannot be captured by the transformation of objective outcomes into subjective values $v(x)$ alone (see Footnote 6).
-In essence, to provide a proper description of people's choices between prospects in terms of their deviation from EV maximization, the proposed model is such that the inferred cumulative decision weights may be larger or smaller than the respective objective probabilities in (9); and they may therefore give more or less weight to subjective values for the overall valuation of a prospect in CPT than would be objectively warranted.
-In other words, for an inferred cumulative decision weight that is greater (smaller) than the objective probability it replaces, the respective outcome is overweighted (underweighted) in CPT.
-Accordingly one may adopt an as-if weighting terminology for the description of choices by stating that people decide *as if* they maximized the value in (10) and applied the inferred over- and underweighting pattern [@pachurWeightUncertainEvents2019].
-Importantly, the as-if prefix indicates that it cannot be concluded from the inferred cumulative decision weights that the mind does indeed perform any of the computations associated with the weighting of outcomes in CPT; rather, it processes the inputs in a way that the outputs, i.e., the resulting choice patterns, approximate the solutions from the inferred CPT model [see, e.g., @griffithsRationalUseCognitive2015]. 
-Below, CPT will therefore only be used as a data model to describe choices between prospects and it will be discussed---and demonstrated in a simulation---how distinct strategies of generating and integrating samples in DfE can contribute to weighting patterns that are commonly inferred when modeling respective empirical choice data.
+with objective outcomes $x_i$ being transformed by a *value function* $v$, and *cumulative decision weights* $\pi_i$ being determined by the difference between transformed cumulative probabilities of the distribution $P_X$.
+Importantly, the transformation of cumulative probabilities---i.e., either the probability of obtaining a positive (negative) outcome equal to or greater (smaller) than a respective outcome $x_i$, or the probability of obtaining a strictly greater (smaller) outcome---is carried out by a weighting function $w$ (see (11) and (12) below).
+
+Let us break down (9) and (10) and provide some further background to the as-if weighting terminology in the description of choices, first by omitting mathematical detail and much of the modeling jargon:^[<!--Open footnote-->See, @farrellComputationalModelingCognition2018, for an accessible introduction to fundamental modeling concepts.<!--Close footnote-->] 
+Following the principle of mathematical expectation, one would calculate the prospects' EVs according to (9) to subsequently choose the prospect with the greatest EV (EV maximization).
+However, in quite many occasions, people do not choose the prospect with the greatest EV [e.g., @erevAnomaliesForecastsDescriptive2017; @kahnemanProspectTheoryAnalysis1979].
+To describe people's actual choices in a way that effectively captures the deviations from the principle of mathematical expectation,^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, that were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the principle of mathematical expectation and the expected utility (EU) principle [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
+CPT uses a value function $v$ and a weighting function $w$ to estimate how the objective outcomes and probabilities in (9) can be adjusted, i.e., replaced by subjective values $v(x_i)$ and cumulative decision weights $\pi_i$, respectively, so that the maximization of the value in (10) would produce synthetic choice data that is, roughly speaking, similar to the actual choice data.
+Essentially, the proposed model is such that the estimated cumulative decision weights in (10) may be greater or smaller than the respective objective probabilities in (9); and they may therefore give more or less weight to the subjective values than would be warranted by the objective probability.
+In other words, for a cumulative decision weight that is greater (smaller) than the objective probability it replaces, the respective outcome---which is transformed into a subjective value---is overweighted (underweighted) *in* CPT.
+Accordingly, to describe an empirical choice pattern, one may adopt the as-if weighting terminology which was already used in the introduction by stating that people decide *as if* they maximized the value in (10) and applied the over- and underweighting pattern that was estimated in CPT [@pachurWeightUncertainEvents2019].
+Notably, the as-if prefix indicates that it cannot be concluded from the estimated cumulative decision weights that the mind does indeed perform any of the computations associated with the weighting of subjective values in CPT; rather, it processes the inputs in a way that the outputs, i.e., the actual choice patterns, approximate the solutions from the estimated CPT model [see, e.g., @griffithsRationalUseCognitive2015].
+Therefore, this paper uses CPT merely as a data model to describe choices between prospects and it discusses---and demonstrates in a simulation---how different strategies of sequentially generating outcomes and integrating them into samples can produce weighting patterns in CPT resembling those that were estimated for empirical choice data from DfE.
 
 Now, more formally, cumulative decision weights in CPT take the form
 $$
@@ -221,13 +215,12 @@ $$
      w^+(P(X \geq x_i)) - w^+(P(X > x_i)) \quad \forall x_i \geq 0, \\
      w^-(P(X \leq x_i)) - w^-(P(X < x_i)) \quad \text{else}, 
   \end{cases}
-\tag{11}
+\tag{12}
 $$
 where $w$ is a monotonic, nonlinear function satisfying $w^+(0) = w^-(0) = 0$ and $w^+(1) = w^-(1) = 1$ [@tverskyAdvancesProspectTheory1992].
 From the transformation of cumulative probabilities in (11), it follows that the replacement of objective probabilities by cumulative decision weights depends on the rank of the outcome to which the decision weight is assigned and the shape of the weighting function, which itself depends on the exact parameterization of the function [e.g., @goldsteinExpressionTheoryPreference1987; @tverskyAdvancesProspectTheory1992; @prelecProbabilityWeightingFunction1998; see also @stottCumulativeProspectTheory2006]. 
 That is, the shape of the weighting function determines over which interval on the probability scale [0, 1] cumulative probabilities are overweighted or underweighted.
 In turn, the same difference in the objective cumulative probability ... 
-
 
 Now, although the possible deviation patterns, which span the entire probability scale, depend on the exact parameterization of the cumulative weighting function, they allow the adoption of an as-if weighting terminology for the description of choice behavior, which was originally introduced outside of the CPT models [see @pachurWeightUncertainEvents2019].
 
@@ -239,7 +232,7 @@ $$
   {\delta \times p_X(x)^{\gamma} + (1-p_X(x))^{\gamma}}
   \; ,
 \end{aligned}
-\tag{12}
+\tag{13}
 $$
 where $\gamma \in [0,2]$ and $\delta \geq 0$ determine the function's curvature and elevation, respectively.
 In essence, if the estimate of a cumulative decision weight is larger (smaller) than the objective probability from which it is derived, the weighting function runs above (below) the dashed identity line.
