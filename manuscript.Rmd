@@ -172,10 +172,10 @@ $$
 with $t \in \{1, ..., N\}$ denoting a sequence of independent and identically distributed (i.i.d.) random variables and $N$ denoting the length of the respective sequence.
 The sets of realizations that result from these stochastic processes may then be used to make an uncertain inference about the respective sets of outcome-probability pairs in (7).
 
-Of course, the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950] apply perfectly well to DfE and it follows that the accuracy of such inferences from a sample to a prospect depends, ceteris paribus, on the size of the samples.
+Of course, the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950] apply to DfE and it follows that the accuracy of inferences from a sample to a prospect depends, ceteris paribus, on the size of the samples.
 Yet, when describing the choices that people actually make between prospects in DfD and in DfE, the differences outlined in the introduction are robustly found---i.e., as-if overweighting (underweighting) of rare outcomes in DfD (DfE)---and the size of samples in DfE provides just one and only a partial explanation for this so-called *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009; see also @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-More so, despite the LLN, the description-experience gap need not decrease at all, even for ever increasing sample sizes that DfE fully take into account.
-<!--Add outlook-->>
+More so, despite the LLN, the description-experience gap need not decrease at all, even for ever increasing sample sizes in DfE that are fully taken into account.
+Below, this paper discusses---and demonstrates in a simulation---how different strategies of sequentially generating outcomes and integrating them into samples interact with the LLN to produce distinct as-if weighting patterns, including the underweighting of rare outcomes, which may stabilize as the sample size increases.
 Before so doing, however, the following section reviews in general how choices between prospects are described in cumulative prospect theory (CPT), and in particular how CPT's *weighting function* captures as-if weighting patterns.
 
 # The Description of Choices in CPT and the As-If Underweighting in DfE
@@ -186,8 +186,8 @@ EV = \sum_i^n x_i \times p_X(x_i)
 \; .
 \tag{9}
 $$ 
-should be chosen.
-To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of CPT [@tverskyAdvancesProspectTheory1992] and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing^[<!--Open footnote-->Note that CPT or other originally deterministic decision models may be amended by a stochastic choice rule to account for the probabilistic nature of choices [see, e.g., @rieskampProbabilisticNaturePreferential2008].<!--Close footnote-->]
+should be chosen (EV maximization).
+To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations], the models of CPT [@tverskyAdvancesProspectTheory1992] and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing^[<!--Open footnote-->Note that CPT may be amended by a stochastic choice rule to account for the probabilistic nature of choices [@rieskampProbabilisticNaturePreferential2008]. Most choice rules [@stottCumulativeProspectTheory2006, for an overview] are functions of the prospects' values $V$ and make a choice of a prospect with a greater $V$ only probable but not deterministic.<!--Close footnote-->]
 the value
 $$
 V = \sum_i^n v(x_i) \times \pi_i
@@ -195,46 +195,72 @@ V = \sum_i^n v(x_i) \times \pi_i
 \tag{10}
 $$ 
 with objective outcomes $x_i$ being transformed by a *value function* $v$, and *cumulative decision weights* $\pi_i$ being determined by the difference between transformed cumulative probabilities of the distribution $P_X$.
-Importantly, the transformation of cumulative probabilities---i.e., either the probability of obtaining a positive (negative) outcome equal to or greater (smaller) than a respective outcome $x_i$, or the probability of obtaining a strictly greater (smaller) outcome---is carried out by a weighting function $w$ (see (11) and (12) below).
+Importantly, the transformation of cumulative probabilities is carried out by a nonlinear weighting function $w$ (see (12) and (13) below).
 
-Let us break down (9) and (10) and provide some further background to the as-if weighting terminology in the description of choices, first by omitting mathematical detail and much of the modeling jargon:^[<!--Open footnote-->See, @farrellComputationalModelingCognition2018, for an accessible introduction to fundamental modeling concepts.<!--Close footnote-->] 
+To break down (9) and (10) and give some further background on the as-if weighting terminology in the description of choices, leaving out mathematical detail and much of the modeling jargon for now:^[<!--Open footnote-->See, @farrellComputationalModelingCognition2018, for an accessible introduction to fundamental modeling concepts.<!--Close footnote-->] 
 Following the principle of mathematical expectation, one would calculate the prospects' EVs according to (9) to subsequently choose the prospect with the greatest EV (EV maximization).
 However, in quite many occasions, people do not choose the prospect with the greatest EV [e.g., @erevAnomaliesForecastsDescriptive2017; @kahnemanProspectTheoryAnalysis1979].
 To describe people's actual choices in a way that effectively captures the deviations from the principle of mathematical expectation,^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, that were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the principle of mathematical expectation and the expected utility (EU) principle [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
-CPT uses a value function $v$ and a weighting function $w$ to estimate how the objective outcomes and probabilities in (9) can be adjusted, i.e., replaced by subjective values $v(x_i)$ and cumulative decision weights $\pi_i$, respectively, so that the maximization of the value in (10) would produce synthetic choice data that is, roughly speaking, similar to the actual choice data.
+CPT uses a value function $v$ and a weighting function $w$ to estimate how the objective outcomes and probabilities in (9) can be adjusted, i.e., replaced by subjective values $v(x_i)$ and cumulative decision weights $\pi_i$, respectively, so that the maximization of the value in (10) would produce model-implied choice data that is, roughly speaking, similar to the actual choice data.
 Essentially, the proposed model is such that the estimated cumulative decision weights in (10) may be greater or smaller than the respective objective probabilities in (9); and they may therefore give more or less weight to the subjective values than would be warranted by the objective probability.
 In other words, for a cumulative decision weight that is greater (smaller) than the objective probability it replaces, the respective outcome---which is transformed into a subjective value---is overweighted (underweighted) *in* CPT.
-Accordingly, to describe an empirical choice pattern, one may adopt the as-if weighting terminology which was already used in the introduction by stating that people decide *as if* they maximized the value in (10) and applied the over- and underweighting pattern that was estimated in CPT [@pachurWeightUncertainEvents2019].
-Notably, the as-if prefix indicates that it cannot be concluded from the estimated cumulative decision weights that the mind does indeed perform any of the computations associated with the weighting of subjective values in CPT; rather, it processes the inputs in a way that the outputs, i.e., the actual choice patterns, approximate the solutions from the estimated CPT model [see, e.g., @griffithsRationalUseCognitive2015].
-Therefore, this paper uses CPT merely as a data model to describe choices between prospects and it discusses---and demonstrates in a simulation---how different strategies of sequentially generating outcomes and integrating them into samples can produce weighting patterns in CPT resembling those that were estimated for empirical choice data from DfE.
+Accordingly, to describe an empirical choice pattern, one may adopt the as-if weighting terminology which was already used in the introduction by stating that people decide *as if* they maximized the value in (10) and applied the over- and underweighting pattern that was estimated in CPT [see @pachurWeightUncertainEvents2019].
+<!--Notably, the as-if prefix indicates that it cannot be concluded from the estimated cumulative decision weights that the mind does indeed perform any of the computations associated with the weighting of subjective values in CPT; rather, it processes the inputs in a way that the outputs, i.e., the actual choice patterns, approximate the solutions from the estimated CPT model [see, e.g., @griffithsRationalUseCognitive2015].
+Therefore, this paper uses CPT merely as a data model to describe choices between prospects and to demonstrate how different sampling strategies can produce weighting patterns in CPT resembling those that were estimated for empirical choice data from DfE.-->
 
-Now, more formally, cumulative decision weights in CPT take the form
+Now, more formally, following @tverskyAdvancesProspectTheory1992, the objective outcomes are transformed by a value function
+$$
+\begin{aligned}
+  v : \Omega' &\to \mathbb{R} \\
+  x &\mapsto 
+  \begin{cases}
+     x_i^\alpha &\forall x_i \geq 0, \\
+     -\lambda \times |x_i|^\alpha &\text{else}
+     \; ,
+  \end{cases}
+\end{aligned}
+\tag{11}
+$$
+with $\alpha \in [0,1]$ determining the degree of the function's concavity (convexity) over the positive (negative) outcome interval, and $\lambda > 1$ increasing the function's slope over the negative outcome interval only.
+Each subjective value $v(x)$ is then multiplied (or: weighted) with a cumulative decision weight that takes the form
 $$
 \pi_i =
   \begin{cases}
      w^+(P(X \geq x_i)) - w^+(P(X > x_i)) \quad \forall x_i \geq 0, \\
-     w^-(P(X \leq x_i)) - w^-(P(X < x_i)) \quad \text{else}, 
+     w^-(P(X \leq x_i)) - w^-(P(X < x_i)) \quad \text{else}
+     \; , 
   \end{cases}
 \tag{12}
 $$
-where $w$ is a monotonic, nonlinear function satisfying $w^+(0) = w^-(0) = 0$ and $w^+(1) = w^-(1) = 1$ [@tverskyAdvancesProspectTheory1992].
-From the transformation of cumulative probabilities in (11), it follows that the replacement of objective probabilities by cumulative decision weights depends on the rank of the outcome to which the decision weight is assigned and the shape of the weighting function, which itself depends on the exact parameterization of the function [e.g., @goldsteinExpressionTheoryPreference1987; @tverskyAdvancesProspectTheory1992; @prelecProbabilityWeightingFunction1998; see also @stottCumulativeProspectTheory2006]. 
-That is, the shape of the weighting function determines over which interval on the probability scale [0, 1] cumulative probabilities are overweighted or underweighted.
-In turn, the same difference in the objective cumulative probability ... 
+where $w$ is a monotonic increasing, nonlinear function $w: [0,1] \to [0,1]$ satisfying $w^+(0) = w^-(0) = 0$ and $w^+(1) = w^-(1) = 1$.
+Several consequences for the weighting pattern that can be estimated in CPT follow from (12) and are reviewed one by one next: 
 
-Now, although the possible deviation patterns, which span the entire probability scale, depend on the exact parameterization of the cumulative weighting function, they allow the adoption of an as-if weighting terminology for the description of choice behavior, which was originally introduced outside of the CPT models [see @pachurWeightUncertainEvents2019].
+* From the transformation of cumulative probabilities it necessarily follows that the value of a cumulative decision weight $\pi$ depends on the rank of the outcome $x$ for which $\pi$ is determined.
 
-Figure 1 illustrates such a description in CPT with different parameter settings for the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987 with
+* The value of a cumulative decision weight depends on the estimated shape of $w$.
+That is, the shape of $w$ determines over which interval on the cumulative probability scale $[0,1]$ the images of $w$ take values that are greater or smaller than the respective cumulative probabilities---i.e., the preimages---and how much greater or smaller these image values are.
+Hence, assuming a nonlinear shape of $w$, the same numerical difference between objective cumulative probabilities may translate to cumulative decision weights of different value.
+
+* For prospects containing either only positive or only negative outcomes, $\sum_i^n\pi_i = 1$ is satisfied.
+Accordingly, for such prospects, the replacement of objective probabilities as in (9) by cumulative decision weights as in (10) may be roughly understood as a redistribution of the entire probability mass of $P(\Omega') = 1$ across outcomes [@zilkerNonlinearProbabilityWeighting2021].
+
+\noindent
+Given that the value of each cumulative decision weight depends on the two respective cumulative probabilities in (12)---i.e., the probability of obtaining a positive (negative) outcome equal to or greater (smaller) than a respective outcome $x$, and the probability of obtaining a strictly greater (smaller) outcome---the remaining consequences for the weighting pattern in CPT may be reviewed by considering the actual shape of the weighting function.
+Therefore, Figure 1 illustrates some of the possible shapes of the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987, which, however, is just one of several parameterizations that have been proposed [e.g., @prelecProbabilityWeightingFunction1998; @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview].
+Now, let each $p$ on the abscissa be one of the four cumulative probabilities from (12). 
+Then each graph in Figure 1 illustrates the shape of the weighting function
 $$
 \begin{aligned}
   w : [0,1] &\to [0,1] \\
-  p_X(x) &\mapsto \frac{\delta \times p_X(x)^{\gamma}}
-  {\delta \times p_X(x)^{\gamma} + (1-p_X(x))^{\gamma}}
+  p &\mapsto \frac{\delta \times p^{\gamma}}
+  {\delta \times p^{\gamma} + (1-p)^{\gamma}}
   \; ,
 \end{aligned}
 \tag{13}
 $$
-where $\gamma \in [0,2]$ and $\delta \geq 0$ determine the function's curvature and elevation, respectively.
+for the respective values of $\gamma \in [0,2]$ and $\delta > 0$.
+
+
 In essence, if the estimate of a cumulative decision weight is larger (smaller) than the objective probability from which it is derived, the weighting function runs above (below) the dashed identity line.
 The choice data are then described *as if* people maximized the value in (8) and applied the over- and underweighting pattern indicated by the estimated shape of the overall probability weighting function.
 
@@ -260,9 +286,8 @@ ggplot(wf) +
   theme_minimal()
 ```
 
-Research on choices in DfD and DfE 
-Specifically, when people make DfD, decision weights are typically estimated to be larger than the objective probabilities in the lower probability range.
-However, for DfE, this pattern reverses and decisions weights are typically estimated to be smaller than the objective probabilities in the lower probability range [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; also see @wulffMetaanalyticReviewTwo2018].  
+<!-- Brief review of CPT in DfE: Specifically, when people make DfD, decision weights are typically estimated to be larger than the objective probabilities in the lower probability range.
+However, for DfE, this pattern reverses and decisions weights are typically estimated to be smaller than the objective probabilities in the lower probability range [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; also see @wulffMetaanalyticReviewTwo2018]. -->
 
 # Sampling Strategies
 
