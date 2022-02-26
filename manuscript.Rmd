@@ -59,7 +59,7 @@ pacman::p_load(papaja,
                dplyr,
                ggplot2,
                viridis,
-               scico,
+               ggpubr,
                latex2exp)
 ```
 
@@ -254,7 +254,7 @@ As a consequence from (12) then, each combination of parameters implies a partic
 
 (ref:weighting) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
 
-```{r w-shapes, fig.cap="(ref:weighting)"}
+```{r w-shapes, fig.cap="(ref:weighting)", fig.height=7, fig.width=10}
 
 # prepare vector with cumulative probabilities
 p <- tibble(p = seq(0, 1, .01))
@@ -279,8 +279,8 @@ ggplot(wf, aes(p, wp, group = gamma)) +
        color = expression(gamma)) + 
   theme_apa() + 
   geom_line(aes(color = gamma)) +
-  scale_color_scico(palette = "berlin") + 
-  geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed", size = 1) # identity line
+  scale_color_viridis(option = "plasma") + 
+  geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed") # identity line
 ```
 
 To begin with, the gray-dashed identity lines in Figure\ \@ref(fig:w-shapes) imply a linear weighting pattern.
@@ -465,10 +465,9 @@ The two boundary parameters resemble the concept of a decision threshold, i.e., 
 The boundary type is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
 The boundary value $a$ is varied between 1 to 5 in increments of 1.
 
+(ref:fr-rates-p) Effect of Switching Probability on Rates of False Risky and False Safe Choices for 2-Outcome Prospects with High Rank Outcomes of Different Probability
 
-
-
-```{r}
+```{r fig.cap="(ref:fr-rates-p)", fig.height=7, fig.width=10}
 cols <- list(.default = col_double(),
              boundary = col_factor(),
              gamble = col_factor(),
@@ -477,59 +476,69 @@ cols <- list(.default = col_double(),
              choice = col_factor())
 choices_p <- read_csv("data/choices/choices.csv", col_types = cols) # piecewise integration
 
-# Choices
+# false response (fr) rates
 
-# determine normative choice objective and experienced
+## determine normative choice according to latent and sampled EV
 fr_rates_p <- choices_p %>%
-  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"), # normative choice objective EV
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"), # normative choice latent EV
          ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2),
-         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) # normative choice experienced EV / mean
+         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) # normative choice sampled EV
 
-# objective
+# fr rates latent EV
 fr_rates_p_o <- fr_rates_p %>%
-  filter(!is.na(norm)) %>%
-  group_by(s, boundary, a, rare, norm, choice) %>%
-  summarise(n = n()) %>%
-  mutate(rate = round(n/sum(n), 2), # false response rates
-         type = case_when(norm == "A" & choice == "B" ~ "Safe", norm == "B" & choice == "A" ~ "Risky")) %>%
+  filter(!is.na(norm)) %>% # exclude choices under EV equality
+  group_by(s, boundary, a, rare, norm, choice) %>% # to distinguish type of rare event and type of false response
+  summarise(n = n()) %>% # determine absolute number of responses per category
+  mutate(rate = round(n/sum(n), 2), # determine correct and false response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", norm == "B" & choice == "A" ~ "Risky")) %>% # type false response
   ungroup() %>%
-  filter(!is.na(type)) %>% # remove correct responses
-  select(-c(norm, n)) %>% 
-  mutate(norm = "Latent")
+  filter(!is.na(type)) %>% # remove correct response rates
+  select(-c(norm, choice, n)) %>%
+  mutate(norm_ev = "Latent")
 
-# experienced
+# fr rates sampled EV
 fr_rates_p_e <- fr_rates_p %>%
   filter(!is.na(norm_exp)) %>%
   group_by(s, boundary, a, rare, norm_exp, choice) %>%
   summarise(n = n()) %>%
-  mutate(rate = round(n/sum(n), 2), # false response rates
+  mutate(rate = round(n/sum(n), 2),
          type = case_when(norm_exp == "A" & choice == "B" ~ "Safe", norm_exp == "B" & choice == "A" ~ "Risky")) %>%
   ungroup() %>%
-  filter(!is.na(type)) %>%  # remove correct responses
-  select(-c(norm_exp, n)) %>% 
-  mutate(norm = "Sample")
+  filter(!is.na(type)) %>%
+  select(-c(norm_exp, choice, n)) %>%
+  mutate(norm_ev = "Sample")
 
 # merge data frame
-fr_rates_p <- bind_rows(fr_rates_p_o, fr_rates_p_e) %>% 
-  mutate(rare = case_when(rare == "none" ~ "Middle",
-                          rare == "attractive" ~ "High", 
-                          rare == "unattractive" ~ "Low"))
+fr_rates_p <- bind_rows(fr_rates_p_o, fr_rates_p_e) %>%
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]",
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)")) # Change fact labels
 
+# labeller function for LaTeX math expressions in facet labels
 labeller_a <- function(string) {
-  TeX(paste("$\\a=$", string, sep = ""))  
+  TeX(paste("$\\a=$", string, sep = ""))
 }
 
-fr_rates_p %>% 
-  ggplot(aes(s, rate)) +
-  geom_point(aes(color = norm, shape = type)) +
-  facet_grid(rare~a, labeller = labeller(rare = label_value, a = as_labeller(labeller_a, default = label_parsed))) + 
-  scale_color_scico_d(palette = "berlin")+ 
-  scale_x_continuous(limits = c(0, 1), breaks = c(0, .5, 1)) + 
-  scale_y_continuous(limits = c(0, 1), breaks = c(0, .5, 1)) +
+
+labeller_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = ""))
+}
+
+ggplot(fr_rates_p, aes(s, rate)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(labeller_rare, default = label_parsed), a = as_labeller(labeller_a, default = label_parsed))) +
   labs(x = "s",
-       y = "False Response Rate", 
+       y = "False Response Rate",
        color = "Normative\nEV",
        shape = "False\nResponse") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  labs(x = "Switching Probability",
+       y = "False Response Rate",
+       color = "Normative\nExpected\nValue",
+       shape = "False\nResponse\nType") +
+  geom_point(aes(color = norm_ev, shape = type)) +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_color_viridis_d(option = "plasma", end = .7) +
   theme_apa()
 ```
 
@@ -545,9 +554,155 @@ Table A1 in [Appendix 2][Appendix 2: Choice Problems] contains the test set of 6
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
 
-<!-- Results -->
 
-...
+(ref:weighting-parameters) Parameter Estimates of the Weighting Function of @goldsteinExpressionTheoryPreference1987 for Different Simulation Parameters
+
+```{r fig.cap="(ref:weighting-parameters)", fig.height=7, fig.width=10}
+
+# load data
+
+cols <- list(.default = col_double(),
+             boundary = col_factor(),
+             a = col_factor(),
+             parameter = col_factor())
+cpt_p <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols) # piecewise integration
+cpt_p <- cpt_p %>% mutate(boundary = if_else(boundary == "absolute", "Absolute", "Relative"))
+
+gamma <- cpt_p %>%
+  filter(parameter == "gamma") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  labs(x = "Switching Probability",
+       y = expression(gamma),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
+  theme_apa() + 
+  theme(axis.title.x = element_blank())
+
+delta <- cpt_p %>%
+  filter(parameter == "delta") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  facet_wrap(~a, nrow = 1) + 
+  labs(x = "Switching Probability",
+       y = expression(delta),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
+```
+
+(ref:value-choice-parameters) Parameter Estimates of the Value Function of @tverskyAdvancesProspectTheory1992 and of the Logit Choice Rule for Different Simulation Parameters
+
+```{r fig.cap="(ref:value-choice-parameters)", fig.height=7, fig.width=10}
+
+alpha <- cpt_p %>%
+  filter(parameter == "alpha") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  labs(x = "Switching Probability",
+       y = expression(alpha),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
+  theme_apa() + 
+  theme(axis.title.x = element_blank())
+
+rho <- cpt_p %>%
+  filter(parameter == "rho") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1,.5)) +
+  labs(x = "Switching Probability",
+       y = expression(rho),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
+```
+
+(ref:shapes) Estimated Graphical Shapes of the Weighting and Value Function for Different Simulation Parameters
+
+```{r fig.cap="(ref:shapes)", fig.height=7, fig.width=10}
+
+## weighting function
+
+wf_p <- cpt_p %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(alpha, rho)) %>%
+  expand_grid(p = seq(0, 1, .05)) %>%
+  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
+
+wf_p_a <- wf_p %>%
+  filter(boundary == "Absolute")
+wf_p_r <- wf_p %>%
+  filter(boundary == "Relative")
+weight <- ggplot(wf_p_a, aes(x = p, y = w, group = s, color = s)) +
+  geom_line(size = .5) +
+  geom_line(data = wf_p_r, size = .5) + 
+  scale_color_viridis(option = "plasma") +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
+  labs(x = "Experienced Probability",
+       y = "Decision Weight",
+       color = "Switching\nProbability") +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+
+vf_p <- cpt_p %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(gamma, delta, rho)) %>%
+  expand_grid(x = seq(0, 20, .5)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+vf_p_a <- vf_p %>%
+  filter(boundary == "Absolute")
+vf_p_r <- vf_p %>%
+  filter(boundary == "Relative")
+value <- ggplot(vf_p_a, aes(x = x, y = v, group = s, color = s)) +
+  geom_line(size = .5) +
+  geom_line(data = vf_p_r, size = .5) + 
+  scale_color_viridis(option = "plasma") +
+  scale_x_continuous(breaks = seq(0, 20, 10)) +
+  scale_y_continuous(breaks = seq(0, 20, 10)) +
+  labs(x = "Objective Outcome",
+       y = "Subjective Value",
+       color="Switching\nProbability") +
+  facet_wrap(~a, nrow = 1)+ 
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+ggarrange(weight, value, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
+```
+
+
+
+
 
 ```{r}
 
