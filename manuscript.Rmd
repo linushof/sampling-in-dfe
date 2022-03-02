@@ -65,12 +65,9 @@ pacman::p_load(papaja,
 
 <!-- Introduction -->
 
-The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the *properties* of the choice alternatives between which people can choose.
-In fact, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives to return a subset thereof as outputs [@heOntologyDecisionModels2020].
-
-Now, more formally, let us treat the choice alternatives as elements $c$ of the set $C$.
-To each $c \in C$ is then assigned some information from the inputs and this information may be used by the mind to learn about the properties of the respective alternative.
-Accordingly, decision making can be considered an information-processing problem which starts from the set $C$, containing all choice alternatives, and stops at a proper subset $C' \subset C$ with the inclusion map
+The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the choice alternatives between which people can choose.
+In fact, irrespective of their exact specification, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and returns a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
+Let us therefore treat the choice alternatives as elements $c$ of the set $C$, and decision making as an information-processing problem starting from $C$ and stopping at a proper subset $C' \subset C$ with the inclusion map
 $$
 \begin{aligned}
   \iota : C' &\to C \\
@@ -78,44 +75,51 @@ $$
 \end{aligned}
 \tag{1}
 $$
-[@jostMathematicalConcepts2015, p. 15], containing only the chosen alternatives.
+[cf. @jostMathematicalConcepts2015, p. 15].
 
-Importantly, the information that is provided about the choice alternatives can come in many forms.
-For example, in *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all relevant properties of the choice alternatives.
-Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], the properties of the choice alternatives are latent---i.e., not described---and therefore not known with certainty, but they must be inferred from the consequences (hereafter: outcomes) that occurred when the alternatives were chosen in similar past decisions.
-Although these distinct input forms may in principle carry the same information about a given set of choice alternatives, behavioral decision research has so far produced a large body of papers indicating that---if a quite general perspective is taken---there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
-In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a rare outcome is given more weight in the evaluation of a choice alternative than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same rare outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-Hereafter, these choice patterns are referred to as the as-if overweighting and underweighting of rare outcomes, respectively.
+Now, let a *prospect* be a choice alternative that possesses only two kinds of properties: the possible outcomes of the alternative and the probabilities with which these outcomes occur following its choice.
+Importantly, the information that inputs provide about the properties of a prospect can come in different forms.
+For example, in *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
+Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], these properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred when the prospect was chosen in past decisions.
+The inputs to DfE therefore take the form of samples.
+Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
+In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
-This paper uses the as-if underweighting of rare outcomes as a starting point for an inquiry into the sampling process upfront choices in DfE.
-Essentially, it discusses and demonstrates in a simulation how different strategies of sequentially generating outcomes and integrating them into *samples* (hereafter: sampling strategies) can produce distinct choice patterns in DfE---among them, the as-if underweighting of rare outcomes [see @hillsInformationSearchDecisions2010, for the original formulation of this claim].
+Similar to other behavioral phenomena that can be explained by the mind being sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE can be explained by the tendency to rely on small samples [see, e.g., @hertwigDecisionsExperienceEffect2004; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequency with which a prospect's outcome occurs in a sample of infinite size converges almost surely to its objective probability.
+In such a case, but also in the less strict case of large samples, then, the binomial distribution of each prospect's outcome can be approximated by a symmetric normal distribution [see @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
+However, for small samples, the binomial distribution of small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
+Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
+As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities---without correction of sampling error---and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes. 
+Since the same line of reasoning applies would the mind approximate the principle of mathematical expectation by choosing the prospect that produced the greater sample mean, the following discussion focuses on choices in DfE that are based on comparisons of sampled means.
+The relevance of making the inference about latent properties explicit, however, is addressed in the last section of this paper. 
 
-The rest of the paper is therefore structured as follows.
-In the first brief section, a formal definition of DfE is provided.
-In the subsequent section, cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] is reviewed as a data model that can be used to describe choices in DfE in terms of deviations from the principle of mathematical expectation.
-In the section that follows, sampling strategies are treated.
-<!-- Outline of the section -->
-Thereafter, a simulation is presented in which the theoretical claims that are made in the preceding section are implemented in a computational model to simulate choice data in DfE.
-The predictions of the model are summarized and fitted in CPT.
+Now, this paper uses the outlined effect of small samples as a starting point for an inquiry into the sampling process upfront choices in DfE.
+Specifically, in one paradigm used to study DfE, i.e., the sampling paradigm [see @weberPredictingRiskSensitivity2004], before making a single choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
+Considering this paradigm, the current paper discusses how different strategies of sampling and integrating the prospects' outcomes (hereafter: *sampling strategies*) can produce distinct choice patterns in DfE by altering the number and size of the samples that are used by the mind to accumulate evidence over time [see @hillsInformationSearchDecisions2010, for the original formulation of this claim].
+The paper proceeds as follows:
+In the first section, a formal definition of DfE is provided.
+In the subsequent section, cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] is reviewed as a data model that can be used to describe choices between prospects in terms of deviations from the principle of mathematical expectation.
+In the section that follows, using an evidence accumulation approach, different sampling strategies are discussed, how they produce distinct choice patterns in DfE, and how these patterns may be captured in the parameters of CPT.
+Thereafter, a simulation is presented in which these sampling strategies are implemented in a computational model to simulate choices between a safe and a two-outcome prospect.
+By proposing distinct links between the parameter capturing different sampling strategies, the resulting choices, and the estimated CPT parameters, the simulation substantiates the core claim of this paper, namely, that sampling effects on choices in DfE may not be reduced to the overall number of sampled outcomes.
+That is, the simulation demonstrates how the overall number of sampled outcomes can increase without the underweighting of rare outcomes fading, assuming that the sampling strategy translates this increase in overall number into a greater number of samples over which evidence is accumulated, but not samples of greater size.
+The last section supplements the rather technical inquiry into the sampling process and its consequences with a theoretical inroad into the question how the idea of sampling strategies can be integrated into the broader study of the computationally limited mind as an adaptive cognitive system.
 The paper closes with a summary and a conclusion.
 Note that this paper, including the simulations and data analyses, is reproducible---materials and instructions can be found on the GitHub repository.
 
 # Prospects, Decisions from Description, and Decisions from Experience
 
-Since there is an uncountable number of decisions people confront in the natural world, behavioral decision research routinely abstracts from decisions between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two *prospects* (see below), it studies a case which is counterfactual in that it omits the many particularities of each decision, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess [@lopesThoughtsPsychologicalConcept1983].
-These fundamental properties are considered the possible outcomes of a choice alternative (hereafter: $x_i$) and the probabilities with which these outcomes occur following the choice of the alternative (hereafter: $p_X(x_i)$).
-Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs $(x_i, p_X(x_i))$ are prospects (or: gambles), which are exclusively considered below. 
-
-Now, more formally, let the axiomatic definition of a prospect be that of a discrete random variable's distribution.
+To begin with, let the axiomatic definition of a prospect be that of a discrete random variable's distribution [see @tverskyAdvancesProspectTheory1992].
 Let therefore the tuple $(\Omega, \mathcal{F}, P)$ be a probability space. 
-Following the @kolmogorovFoundationsTheoryProbability1950 axioms, $\Omega$ is the sample space containing a finite set of elements, one of which results from choosing the respective prospect:
+Following the @kolmogorovFoundationsTheoryProbability1950 axioms and the notation of @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, $\Omega$ is the sample space containing a finite set of elements, one of which results from choosing the respective prospect:
 $$
 \omega_i \in \{\omega_1, ..., \omega_n\} = \Omega
 \; .
 \tag{2}
 $$ 
-$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$ with each element $A \in P(\Omega) = \mathcal{F}$ being a subset of $\Omega$.^[<!--Open footnote-->Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].<!--Close footnote-->]
+$\mathcal{F}$ is the set of all possible subsets of $\Omega$, i.e., the power set $\mathcal{P}(\Omega)$, where each element $A \in \mathcal{P}(\Omega) = \mathcal{F}$ is a subset of $\Omega$.^[<!--Open footnote-->Note that this paper considers only the case of finite sample spaces. The exact axiomatic definition of $\mathcal{F}$, which can be found in Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, pp. 2-3 and 14-15], also covers infinite sample spaces and is that of a $\sigma$-algebra. For the finite case, however, $\mathcal{P}(\Omega)$ can be considered as such [@georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1.1].<!--Close footnote-->]
 $P$ is a probability measure
 $$
 P: \mathcal{F} \to [0,1]
@@ -123,7 +127,8 @@ P: \mathcal{F} \to [0,1]
 \tag{3}
 $$
 which assigns each subset $A \in \mathcal{F}$ a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.<!--^[The probabilities $p(\omega)$ are determined by the probability mass function $p : \Omega \to [0,1]$, which is used to construct the probability measures $P(A) = \sum_{\omega \in A} p(\omega)$ for all $A \in \mathcal{F}$.]-->
-The random variable $X$ is the measurable function
+According to Kolmogorov [-@kolmogorovFoundationsTheoryProbability1950, p. 21-22],^[<!--Open footnote-->See also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1, for a comprehensive yet accessible introduction to random variables.<!--Close footnote-->]
+the random variable $X$ is the measure
 $$
 \begin{aligned}
   X : (\Omega, \mathcal{F}) &\to (\Omega', \mathcal{F'})  \\
@@ -133,7 +138,7 @@ $$
 \tag{4}
 $$
 where $(\Omega', \mathcal{F'})$ is a measurable space with each element $x \in \Omega'$ being a possible outcome of a prospect and each element $A' \in \mathcal{F'}$ being a subset of $\Omega'$.
-An outcome's probability $p_X(x)$ is then provided by the probability measure
+An outcome's probability $p_X(x)$ is then provided by the pushforward probability measure
 $$
 P_X : \mathcal{F'} \to [0,1]
 \tag{5}
@@ -141,10 +146,10 @@ $$
 with 
 $$
 P_X(A' \in \mathcal{F'}) := P(X^{-1} \ A') = P(\{\omega: X(\omega) = x \in A'\})
+\; .
 \tag{6}
 $$
-[see @kolmogorovFoundationsTheoryProbability1950, p. 21-22].^[<!--Open footnote-->See also @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, Chapter 1, for a comprehensive yet accessible introduction to random variables.<!--Close footnote-->]
-That is, the set consisting of a single outcome $x$ is a subset $\{x\} \in \mathcal{F'}$ and we therefore obtain $p_X(x) = P(X(\omega) = x)$.
+That is, the set consisting of a single outcome $x$ is a subset $\{x\} \in \mathcal{F'}$ and we therefore obtain $p_X(x) = P(\{\omega : X(\omega) = x \in \{x\}\})$.
 Note that the probability measure in (5) and (6), respectively, is a discrete random variable's distribution and therefore a prospect.
 To summarize and simplify, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
 $$
@@ -154,28 +159,20 @@ $$
 with each element $c \in C$ being a distribution $P_X$ of a random variable defined on its own probability space.
 Accordingly, each $c$ can itself be considered a set of outcome-probability pairs $(x_i, p_X(x_i)) \in \{(x_1, p_X(x_1)), ..., (x_n, p_X(x_n))\}$.
 
-However, rarely in peoples' daily life, inputs take the form of explicit descriptions of all outcomes-probability pairs.
-In such cases, people would make DfD, since the information from which the mind learns about the prospects are complete descriptions thereof.
-Yet, rather often, people make DfE, where the mind can learn about the latent prospects only from a record of past experiences with them.
-That is, people may have experienced the possible outcomes of a prospect when they themselves or others have made the same decision repeatedly in the past, and the record of experienced outcomes for this particular prospect is a rough description of a sample.
-The mind may then infer from the relative frequency with which an outcome occurred in such a sample of past decisions its probability of occurrence following a future decision.
-
-Now, more formally, let the sample of a prospect be a set of realizations of the respective random variable according to its distribution $P_X$.
-That is, for the choice between $1, ..., k$ prospects, the inputs to DfE are generated by a set $S$ of stochastic processes
+However, only occasionally in peoples' daily life, inputs take the form of explicit descriptions of all outcome-probability pairs.
+In such cases, people would make DfD, since the information from which the mind learns about the properties of prospects are complete descriptions thereof.
+Yet, rather often, people make DfE, where the mind can learn about the latent properties of prospects only by experiental sampling over time [@hertwigDescriptionexperienceGapRisky2009, p. 517].
+Accordingly, considering the sampling paradigm,^[<!--Open footnote-->Note that it has been emphasized that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. See, e.g., @plonskyRelianceSmallSamples2015, who drop the i.i.d.-assumption for DfE.<!--Close footnote-->] 
+let a sample of a prospect be a set of realizations of the respective random variable.
+More specifically, for the choice between $1, ..., k$ prospects, the inputs to DfE---i.e., the sampled outcomes---are generated by a set $S$ of prospect-specific discrete-time stochastic processes
 $$
-S = \{X_{1t}, ... , X_{kt}\}
+S = \{\{X_{1t}\}, ... , \{X_{kt}\}\}
+\; ,
 \tag{8}
 $$
-with $t \in \{1, ..., N\}$ denoting a sequence of independent and identically distributed (i.i.d.) random variables and $N$ denoting the length of the respective sequence [but see, e.g., @plonskyRelianceSmallSamples2015, where the i.i.d.-assumption is dropped].
-So, given a stochastic process $s \in S$, the obtained realizations---i.e., the experienced outcomes---may be sequentially integrated into a sample of size $N$ or into multiple smaller samples.
-Then, the samples so obtained can serve probabilistic inferences about the properties of the latent prospects in (7), the sets of outcome-probability pairs respectively.
-
-Of course, the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950] apply to DfE and it follows that the accuracy of inferences from samples to latent prospects depend, ceteris paribus, on the size of the samples.
-In fact, one explanation for the as-if underweighting of rare outcomes in DfE and the description-experience gap outlined in the introduction is that people rely on too small samples, which, due to the skewness of the binomial distribution, cause the relative frequencies with which rare outcomes occur in the samples to be smaller than their objective probabilities [@hertwigDecisionsExperienceEffect2004; @rakowBiasedSamplesNot2008; see also @hertwigDecisionsExperienceWhy2010].
-The invoked argument is then that what may appear as if people were underweighting rare outcomes relative to what would be warranted on the basis of their objective probabilities---following the principle of mathematical expectation---may in fact be consistent with an as-if overweighting relative to what would be warranted on the basis of the experienced relative frequencies [@foxDecisionsExperienceSampling2006].
-Yet, it seems that the small size of samples in DfE provides just one and only a partial explanation for the description-experience gap [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
-More so, despite the LLN, the gap need not narrow at all, even for ever increasing sample sizes that are fully taken into account.
-Particularly, this paper discusses and demonstrates in a simulation how different strategies of sequentially generating outcomes and integrating them into samples interact with the LLN to produce distinct choice patterns in DfE---including the as-if underweighting of rare outcomes---that tend to stabilize as the sample size increases.
+where each $s \in S$ is a sequence of independent and identically distributed (i.i.d.) random variables, each $t \in \{t_1, ..., t_N\}$ corresponds to the position of the respective random variable in such a sequence, and $N$ denotes the length of the respective sequence, which corresponds to the overall number of sampled outcomes for this prospect.
+Now, one core assumption of this paper is that, for a stochastic process $s \in S$ of length $N$, the mind sequentially integrates the sampled outcomes into either one enumerated sample growing to the size $N$ or into multiple smaller enumerated samples, each corresponding to a unique sub-sequence of s.
+Assuming that the mind uses all samples so obtained during a process of evidence accumulation, this paper discusses and demonstrates how different sampling strategies that alter the number and size of these samples can produce distinct choice patterns in DfE.
 Before so doing, however, the following section reviews how CPT can be used as a data model that captures systematic deviations from the principle of mathematical expectation in the parameter estimates of a *value* and a *weighting function*. 
 
 # The Description of Choices and Weighting Patterns in CPT
@@ -318,152 +315,32 @@ Whereas CPT can be used to model choices in DfD and DfE, the information-process
 That is, inputs in the form of experienced outcomes require different algorithms to be processed than do descriptions of outcomes and their probabilities.
 Specifically, the mind must integrate the experienced outcomes into a sample in order to make an inference about the properties of the latent prospects, the outcome-probability pairs respectively. 
 
-<!-- Old
-
-Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
-In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
-
-Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated [cf. @brunswikRepresentativeDesignProbabilistic1955; see @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment]; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
-Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also, e.g., @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is sketched in Figure 1.  
-
-(ref:figure1) A rough computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
-
-```{r fig.cap= "(ref:figure1)"}
-knitr::include_graphics("images/dm-sketch.png")
-```
-
-In what follows, the paper elaborates on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
-Given that the mind is indeed sensitive to variations in the property values, the more accurately their descriptions are inferred, the more systematic the choices should become.
-Importantly, this principle is not restricted to any one specific property. 
-Rather, each selection criterion or combination thereof imposes constraints on the assessment of choice alternatives, leading to characteristic choice patterns that are eventually blurred by inaccurate property descriptions.
-
-For the sake of example, I argue that a choice pattern robustly emerging in *decisions from experience* (DfE), the apparent underweighting of small probability events [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @wulffMetaanalyticReviewTwo2018, for a meta-analytic review], may be caused by the assessment constraints associated with a round-wise decision strategy.
-This particular claim has already been made by @hillsInformationSearchDecisions2010 and follows quite directly from probability theory.
-However, the current paper suggests to subordinate decision strategies to the adoption of selection criteria and addresses in some detail two "problems" in the context of DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
-
-For one, there is an *induction problem*, well known from inferential statistics, according to which the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
-Yet, it follows that if an underweighting pattern is caused by the adoption of an arbitrary selection criterion, it is *a priori* predicted to become more stable with increasing sample size. 
-This prediction is in line with the principle already stated above, i.e., that selection-criteria-induced choice patterns should become more systematic as property descriptions become more accurate.
-Nevertheless, the prediction contrasts the explanation that underweighting is caused by the reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside of the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play, and that a rather important difference between these causal models resides in the selection criteria they incorporate.
-I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf., e.g., @griffithsRationalUseCognitive2015]. 
-
-For another, this paper approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [cf. @simonInvariantsHumanBehavior1990; @simonBehavioralModelRational1955]. 
-This may be considered a *representation problem* since the inference chains are constructed around explicit descriptions of the properties of choice alternatives and representations are the "formal schemes" of symbols and rules with which these descriptions are derived [@marrRepresentationRecognitionSpatial1978, p. 270]. 
-Specifically, representations differ in how they organize the information used to infer the descriptions of certain properties and these organizations determine the algorithms that can be built into the inference chain [@marrVisionComputationalInvestigation1982].
-In this paper, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
-Though most of my expositions on the role of sampling strategies remain speculative, the core idea is not new to decision research [see, e.g., @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
-By restating this idea and adopting some terms and concepts that have well defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory. 
-
-The theoretical arguments sketched in this introduction are substantiated by a simulation study. 
-For this purpose, the sampling and decision making processes are implemented in a computational model to simulate choice data from DfE.
-The simulated data is modeled in cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@goldsteinExpressionTheoryPreference1987; see also @tverskyAdvancesProspectTheory1992]. 
-All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
-
-# Inputs to the Decision Making Process and Property Descriptions 
-
-By defining decision making as an information processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
-To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2). 
-
-(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram visualizing the inclusion map $\iota : I' \mapsto I$. $\iota$ maps every element $i$ of the subset $I'$ to its image $i$, treated as element of the superset $I$.
-
-```{r fig.cap= "(ref:figure2)"}
-knitr::include_graphics("images/power-set.png")
-```
-
-Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates how different selection criteria can alter the consequential choice.
-That is, in rather abstract terms, selection criteria are statements regarding the properties of choice alternatives that the mind evaluates as either true or false during the decision making process; accordingly, the subset $I'$ only contains the alternatives for which the statement is evaluated to be true.
-It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
-
-## What Are the Choice Alternatives and Their Properties? 
-
-Given (3), it is evident that the prospects can only be distinguished by the elements of their tuples. 
-These elements are, generally speaking, symbols, some of which describe properties on their own, e.g., the outcome $\omega$, whereas other properties can only be described by collections of symbols, e.g., the sample space $\Omega$ by a set of outcomes as in (2.1), or more complex combinations thereof, e.g., the weighted average which is obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities in $P$ and then summing the resulting products.^[I do not refer to this quantity as expected value, since the term is reserved for random variables, which were not introduced so far.]
-In turn, for choices between prospects, selection criteria are statements about the elements of their tuples that are true or false and these statements imply relations among prospects that are at least nominal, but may also draw on other levels of measurement.  
-
-## Inferring Property Descriptions from Sampling Data
-
-Note that a selection criterion may refer to a property for which the raw input, i.e., the symbols, their organization, and the information they encode, do not yet provide an explicit description.
-Even more so, it has been repeatedly stated that for quite many decisions the mind faces, it is simply not possible to draw on direct descriptions of the properties, since they are part of the distal environment  [e.g., @brunswikOrganismicAchievementEnvironmental1943; @fiedlerExplainingSimulatingJudgment1996; @hertwigDescriptionexperienceGapRisky2009; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956; @kozyrevaInterpretationUncertaintyEcological2021].
-In either case, some form of description must be inferred from whatever information the input provides about the property in question.
-Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
-Since all information about the prospect is given, one may in principle consider the input complete, yet, 
-the tuple implies properties of the prospect which are not explicitly described.
-For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
-In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20].
-
-In natural world decisions, however, the properties of choice alternatives are often distal and amenable only through their probabilistic relation to proximal cues or samples, which provide the input to the decision making process [cf. @brunswikOrganismicAchievementEnvironmental1943].
-Such a proximal information basis is obtained by experience or, more technically, by *sampling*, and is neither consistent nor complete but varies in its degree of representativeness. 
-In turn, the mind is not merely required to transform the inputs but to draw inductive inferences to arrive at property descriptions which then, by definition, are only probable. 
-Importantly, the probability, or accuracy, of the description depends on both the sampling process that determines the representativeness of the sample and the use of the probabilistic information that is entailed in the sample [e.g., @fiedlerBewareSamplesCognitiveecological2000]. 
-
-To adapt (3) for the case of decisions from experience [@hertwigDecisionsExperienceEffect2004], the tuples $(\Omega, \mathcal{F}, P)$ must be replaced by samples, which in this paper are treated as collections of independent and identically distributed (i.i.d.) random variables $X$.^[Note that this paper considers the counterfactual case where samples are random, although it has been stated that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
-Specifically, random variables are defined as a measurable function 
-
-$$
-X: (\Omega, \mathcal{F})  \mapsto (\Omega', \mathcal{F'}) 
-\; ,
-\tag{4}
-$$
-
-where $\Omega'$ is a set of real numbered values $X$ can take and $\mathcal{F'}$ is a set of subsets of $\Omega'$. 
-I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathcal{F'}$ has a pre-image $X^{-1}A' \in \mathcal{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
-
-
-$$
-\begin{aligned}
-  & \iota : I' \mapsto I, \ \text{where} \ I = \{X_{1i}, ..., X_{ki}\} \\
-  & i \in \{1, ..., N\} 
-  \; .
-\end{aligned}
-\tag{5}
-$$
-
-
-To provide a formal definition of sampling in risky choice, we make use of the mathematical concept of a random variable and start by referring to a prospect as *"risky"* in the case where $p(\omega) \neq 1$ for all $\omega \in \Omega$.
-Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
-It is acceptable to speak of the occurrence of $\omega$ as a realization of a random variable $X$ defined on a prospect iff the following conditions (1) and (2) are met: 
-
-
-(2) The mapping is such that $X(\omega) = x \equiv \omega$. 
-
-In (2), $x \equiv \omega$ means that the realization of a random variable $X(\omega) = x$ is numerically equivalent to its pre-image $\omega$.  
-Given conditions (1) and (2), we denote any observation of $\omega$ as a *"single sample"*, or realization, of a random variable defined on a prospect and the act of generating a sequence of single samples in discrete time as *"sequential sampling"*. 
-Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect.
-Thus, long sample sequences in principle allow to obtain the same information about a prospect by sampling as by symbolic description.
-
-Consider now a choice between prospects $1, ..., k$.
-To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
-
-$$
-D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
-\;.
-$$
-
-Now, since in DfE no symbolic descriptions of the prospects are provided, the model must be restricted to the case where decisions are based on sequences of single samples originating from the respective prospects:
-
-$$
-D := f(X_{i1}, ..., X_{ik}) 
-\; ,
-$$
-
-where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
-
-Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
-Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
-
--->
-
 # Simulation Study
 
-...
+To demonstrate the impact of different sampling strategies on the inferences about the latent properties of prospects and the resulting choices in DfE, a simulation study was conducted.
+Therefore, computational models were implemented that generate and integrate samples from prospects according to varying parameters reflecting different sampling strategies.
+
+## Choice Problems
+
+We test a set of 2-prospect choice problems, where one of the prospects contains a safe outcome, i.e., $p(\omega) = 1$ and the other two outcomes where all $p(\omega) \neq 1$.
+Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the smaller outcome of the risky prospect.
+To omit dominant prospects within a choice problem, outcomes of the safe prospect always fall between both outcomes of the risky prospect.
+Table A1 in contains the test set of 60 choice problems, which were sampled from an initial set of 10,000.
+Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
+Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
+
+For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
+In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
+
+## Data Generation
 
 The switching probability $s$ is the probability with which agents draw a single sample from the prospect they did not get their most recent single sample from.
 $s$ is varied between .1 to 1 in increments of .1.
 The two boundary parameters resemble the concept of a decision threshold, i.e., if a prospect reaches a boundary, it is chosen by the synthetic agent.
 The boundary type is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
 The boundary value $a$ is varied between 1 to 5 in increments of 1.
+
+## Results
 
 (ref:fr-rates-p) Effect of Switching Probability on Rates of False Risky and False Safe Choices for 2-Outcome Prospects with High Rank Outcomes of Different Probability
 
@@ -545,14 +422,6 @@ ggplot(fr_rates_p, aes(s, rate)) +
 
 <!-- Test set-->
 
-For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
-In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
-We test a set of 2-prospect choice problems, where one of the prospects contains a safe outcome, i.e., $p(\omega) = 1$ and the other two outcomes where all $p(\omega) \neq 1$.
-Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the smaller outcome of the risky prospect.
-To omit dominant prospects within a choice problem, outcomes of the safe prospect always fall between both outcomes of the risky prospect.
-Table A1 in [Appendix 2][Appendix 2: Choice Problems] contains the test set of 60 choice problems, which were sampled from an initial set of 10,000.
-Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
-Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
 
 
 (ref:weighting-parameters) Parameter Estimates of the Weighting Function of @goldsteinExpressionTheoryPreference1987 for Different Simulation Parameters
@@ -1041,6 +910,145 @@ cpt_wide %>%
        color="Switching Probability") + 
   theme_minimal()
 ```
+
+# Discussion
+
+<!-- Old
+
+Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
+In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
+
+Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated [cf. @brunswikRepresentativeDesignProbabilistic1955; see @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment]; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
+Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also, e.g., @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
+Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is sketched in Figure 1.  
+
+(ref:figure1) A rough computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
+
+```{r fig.cap= "(ref:figure1)"}
+knitr::include_graphics("images/dm-sketch.png")
+```
+
+In what follows, the paper elaborates on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
+Given that the mind is indeed sensitive to variations in the property values, the more accurately their descriptions are inferred, the more systematic the choices should become.
+Importantly, this principle is not restricted to any one specific property. 
+Rather, each selection criterion or combination thereof imposes constraints on the assessment of choice alternatives, leading to characteristic choice patterns that are eventually blurred by inaccurate property descriptions.
+
+For the sake of example, I argue that a choice pattern robustly emerging in *decisions from experience* (DfE), the apparent underweighting of small probability events [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @wulffMetaanalyticReviewTwo2018, for a meta-analytic review], may be caused by the assessment constraints associated with a round-wise decision strategy.
+This particular claim has already been made by @hillsInformationSearchDecisions2010 and follows quite directly from probability theory.
+However, the current paper suggests to subordinate decision strategies to the adoption of selection criteria and addresses in some detail two "problems" in the context of DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
+
+For one, there is an *induction problem*, well known from inferential statistics, according to which the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
+Yet, it follows that if an underweighting pattern is caused by the adoption of an arbitrary selection criterion, it is *a priori* predicted to become more stable with increasing sample size. 
+This prediction is in line with the principle already stated above, i.e., that selection-criteria-induced choice patterns should become more systematic as property descriptions become more accurate.
+Nevertheless, the prediction contrasts the explanation that underweighting is caused by the reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside of the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play, and that a rather important difference between these causal models resides in the selection criteria they incorporate.
+I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf., e.g., @griffithsRationalUseCognitive2015]. 
+
+For another, this paper approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [cf. @simonInvariantsHumanBehavior1990; @simonBehavioralModelRational1955]. 
+This may be considered a *representation problem* since the inference chains are constructed around explicit descriptions of the properties of choice alternatives and representations are the "formal schemes" of symbols and rules with which these descriptions are derived [@marrRepresentationRecognitionSpatial1978, p. 270]. 
+Specifically, representations differ in how they organize the information used to infer the descriptions of certain properties and these organizations determine the algorithms that can be built into the inference chain [@marrVisionComputationalInvestigation1982].
+In this paper, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
+Though most of my expositions on the role of sampling strategies remain speculative, the core idea is not new to decision research [see, e.g., @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
+By restating this idea and adopting some terms and concepts that have well defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory. 
+
+The theoretical arguments sketched in this introduction are substantiated by a simulation study. 
+For this purpose, the sampling and decision making processes are implemented in a computational model to simulate choice data from DfE.
+The simulated data is modeled in cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@goldsteinExpressionTheoryPreference1987; see also @tverskyAdvancesProspectTheory1992]. 
+All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
+
+# Inputs to the Decision Making Process and Property Descriptions 
+
+By defining decision making as an information processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
+To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2). 
+
+(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram visualizing the inclusion map $\iota : I' \mapsto I$. $\iota$ maps every element $i$ of the subset $I'$ to its image $i$, treated as element of the superset $I$.
+
+```{r fig.cap= "(ref:figure2)"}
+knitr::include_graphics("images/power-set.png")
+```
+
+Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
+The concept of the power set thereby illustrates how different selection criteria can alter the consequential choice.
+That is, in rather abstract terms, selection criteria are statements regarding the properties of choice alternatives that the mind evaluates as either true or false during the decision making process; accordingly, the subset $I'$ only contains the alternatives for which the statement is evaluated to be true.
+It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
+
+## What Are the Choice Alternatives and Their Properties? 
+
+Given (3), it is evident that the prospects can only be distinguished by the elements of their tuples. 
+These elements are, generally speaking, symbols, some of which describe properties on their own, e.g., the outcome $\omega$, whereas other properties can only be described by collections of symbols, e.g., the sample space $\Omega$ by a set of outcomes as in (2.1), or more complex combinations thereof, e.g., the weighted average which is obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities in $P$ and then summing the resulting products.^[I do not refer to this quantity as expected value, since the term is reserved for random variables, which were not introduced so far.]
+In turn, for choices between prospects, selection criteria are statements about the elements of their tuples that are true or false and these statements imply relations among prospects that are at least nominal, but may also draw on other levels of measurement.  
+
+## Inferring Property Descriptions from Sampling Data
+
+Note that a selection criterion may refer to a property for which the raw input, i.e., the symbols, their organization, and the information they encode, do not yet provide an explicit description.
+Even more so, it has been repeatedly stated that for quite many decisions the mind faces, it is simply not possible to draw on direct descriptions of the properties, since they are part of the distal environment  [e.g., @brunswikOrganismicAchievementEnvironmental1943; @fiedlerExplainingSimulatingJudgment1996; @hertwigDescriptionexperienceGapRisky2009; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956; @kozyrevaInterpretationUncertaintyEcological2021].
+In either case, some form of description must be inferred from whatever information the input provides about the property in question.
+Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
+Since all information about the prospect is given, one may in principle consider the input complete, yet, 
+the tuple implies properties of the prospect which are not explicitly described.
+For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
+In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20].
+
+In natural world decisions, however, the properties of choice alternatives are often distal and amenable only through their probabilistic relation to proximal cues or samples, which provide the input to the decision making process [cf. @brunswikOrganismicAchievementEnvironmental1943].
+Such a proximal information basis is obtained by experience or, more technically, by *sampling*, and is neither consistent nor complete but varies in its degree of representativeness. 
+In turn, the mind is not merely required to transform the inputs but to draw inductive inferences to arrive at property descriptions which then, by definition, are only probable. 
+Importantly, the probability, or accuracy, of the description depends on both the sampling process that determines the representativeness of the sample and the use of the probabilistic information that is entailed in the sample [e.g., @fiedlerBewareSamplesCognitiveecological2000]. 
+
+To adapt (3) for the case of decisions from experience [@hertwigDecisionsExperienceEffect2004], the tuples $(\Omega, \mathcal{F}, P)$ must be replaced by samples, which in this paper are treated as collections of independent and identically distributed (i.i.d.) random variables $X$.^[Note that this paper considers the counterfactual case where samples are random, although it has been stated that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
+Specifically, random variables are defined as a measurable function 
+
+$$
+X: (\Omega, \mathcal{F})  \mapsto (\Omega', \mathcal{F'}) 
+\; ,
+\tag{4}
+$$
+
+where $\Omega'$ is a set of real numbered values $X$ can take and $\mathcal{F'}$ is a set of subsets of $\Omega'$. 
+I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathcal{F'}$ has a pre-image $X^{-1}A' \in \mathcal{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
+
+
+$$
+\begin{aligned}
+  & \iota : I' \mapsto I, \ \text{where} \ I = \{X_{1i}, ..., X_{ki}\} \\
+  & i \in \{1, ..., N\} 
+  \; .
+\end{aligned}
+\tag{5}
+$$
+
+
+To provide a formal definition of sampling in risky choice, we make use of the mathematical concept of a random variable and start by referring to a prospect as *"risky"* in the case where $p(\omega) \neq 1$ for all $\omega \in \Omega$.
+Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
+It is acceptable to speak of the occurrence of $\omega$ as a realization of a random variable $X$ defined on a prospect iff the following conditions (1) and (2) are met: 
+
+
+(2) The mapping is such that $X(\omega) = x \equiv \omega$. 
+
+In (2), $x \equiv \omega$ means that the realization of a random variable $X(\omega) = x$ is numerically equivalent to its pre-image $\omega$.  
+Given conditions (1) and (2), we denote any observation of $\omega$ as a *"single sample"*, or realization, of a random variable defined on a prospect and the act of generating a sequence of single samples in discrete time as *"sequential sampling"*. 
+Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect.
+Thus, long sample sequences in principle allow to obtain the same information about a prospect by sampling as by symbolic description.
+
+Consider now a choice between prospects $1, ..., k$.
+To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
+
+$$
+D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
+\;.
+$$
+
+Now, since in DfE no symbolic descriptions of the prospects are provided, the model must be restricted to the case where decisions are based on sequences of single samples originating from the respective prospects:
+
+$$
+D := f(X_{i1}, ..., X_{ik}) 
+\; ,
+$$
+
+where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
+
+Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
+Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
+
+-->
 
 # Summary and Conclusion
 
