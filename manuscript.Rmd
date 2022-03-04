@@ -81,31 +81,40 @@ Now, let a *prospect* be a choice alternative that possesses only two kinds of p
 Importantly, the information that inputs provide about the properties of a prospect can come in different forms.
 For example, in *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
 Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], these properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred when the prospect was chosen in past decisions.
-The inputs to DfE therefore take the form of samples.
+The inputs to DfE therefore take the form of sets of sampled outcomes (hereafter: samples).^[<!--Open footnote-->Note that a sample is defined as a set, with each of its elements being a sampled outcome (or: observation). Accordingly, aside empty and infinite sets, a sample can contain one or finite many sampled outcomes.<!--Close footnote-->]
 Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
-Similar to other behavioral phenomena that can be explained by the mind being sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE can be explained by the tendency to rely on small samples [see, e.g., @hertwigDecisionsExperienceEffect2004; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+Similar to other behavioral phenomena that can be explained by the mind being sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE can be explained by the tendency to rely on small samples [see @hertwigDecisionsExperienceEffect2004; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
 That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequency with which a prospect's outcome occurs in a sample of infinite size converges almost surely to its objective probability.
-In such a case, but also in the less strict case of large samples, then, the binomial distribution of each prospect's outcome can be approximated by a symmetric normal distribution [see @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
-However, for small samples, the binomial distribution of small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
+In such a case, but also in the less strict case where the samples grow large, then, the binomial distribution associated with each prospect's outcome can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
+However, for small samples, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
-As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities---without correction of sampling error---and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes. 
-Since the same line of reasoning applies would the mind approximate the principle of mathematical expectation by choosing the prospect that produced the greater sample mean, the following discussion focuses on choices in DfE that are based on comparisons of sampled means.
-The relevance of making the inference about latent properties explicit, however, is addressed in the last section of this paper. 
 
-Now, this paper uses the outlined effect of small samples as a starting point for an inquiry into the sampling process upfront choices in DfE.
-Specifically, in one paradigm used to study DfE, i.e., the sampling paradigm [see @weberPredictingRiskSensitivity2004], before making a single choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
-Considering this paradigm, the current paper discusses how different strategies of sampling and integrating the prospects' outcomes (hereafter: *sampling strategies*) can produce distinct choice patterns in DfE by altering the number and size of the samples that are used by the mind to accumulate evidence over time [see @hillsInformationSearchDecisions2010, for the original formulation of this claim].
-The paper proceeds as follows:
+Different approaches linking the sampling process to the choices in DfE can explain the as-if underweighting of rare outcomes by the reliance on small samples.
+That is, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a single choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
+To couple the sampling process with the decision-making process, sequential sampling models [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004] propose that evidence is accumulated over time.
+The core assumption shared by these models is that the sampled outcomes are sequentially integrated into one or more dynamic decision variables (or: preference states), and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
+Here, the overall number of sample outcomes decreases with threshold values, which can explain an as-if underweighting of rare outcomes [see @markantModelingChoiceSearch2015].
+
+In another approach, @hillsInformationSearchDecisions2010 propose a dependency between sampling patterns and decision strategies.
+This approach distinguishes sampling patterns along the frequency of switches between prospects during the sampling phase.
+Depending on the decision strategy, then, all outcomes sampled for a prospect are integrated into either the same sample or integrated into multiple, non-overlapping smaller samples, each of which is used for an independent (mean-based) comparison with a sample of another prospect.
+Accordingly, the choice is determined by the number of won comparisons.
+Here, the core assumption is that a high switching frequency coincides with a larger number of comparisons based on respectively smaller samples, which can explain an as-if underweighting of rare outcomes despite a large overall number of sampled outcomes.
+Indeed, some studies have found the description-experience gap to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+
+Now, considering the sampling paradigm, this paper discusses and demonstrates in a simulation how an integration of both outlined approaches can explain distinct sampling effects on choices in DfE.
+The paper therefore proceeds as follows:
 In the first section, a formal definition of DfE is provided.
 In the subsequent section, cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] is reviewed as a data model that can be used to describe choices between prospects in terms of deviations from the principle of mathematical expectation.
-In the section that follows, using an evidence accumulation approach, different sampling strategies are discussed, how they produce distinct choice patterns in DfE, and how these patterns may be captured in the parameters of CPT.
-Thereafter, a simulation is presented in which these sampling strategies are implemented in a computational model to simulate choices between a safe and a two-outcome prospect.
-By proposing distinct links between the parameter capturing different sampling strategies, the resulting choices, and the estimated CPT parameters, the simulation substantiates the core claim of this paper, namely, that sampling effects on choices in DfE may not be reduced to the overall number of sampled outcomes.
-That is, the simulation demonstrates how the overall number of sampled outcomes can increase without the underweighting of rare outcomes fading, assuming that the sampling strategy translates this increase in overall number into a greater number of samples over which evidence is accumulated, but not samples of greater size.
-The last section supplements the rather technical inquiry into the sampling process and its consequences with a theoretical inroad into the question how the idea of sampling strategies can be integrated into the broader study of the computationally limited mind as an adaptive cognitive system.
+In the section that follows, a computational model is proposed that integrates the assumption of evidence accumulation over time and of a link between sampling patterns and decision strategies. 
+More specifically, the model sequentially accumulates evidence obtained from ordinal comparisons between the prospects' samples, with different strategies of sampling and integrating the prospects outcomes (hereafter: *sampling strategies*) altering the size of these samples.
+Thereafter, choices between a safe and a two-outcome prospect are simulated from the model.
+The simulations demonstrate how different sampling strategies and thresholds interact with the LLN to produce distinct choice patterns in DfE that can be captured in the parameters of CPT.
+In this regard, one key prediction of the model is that the overall number of sampled outcomes can increase without the underweighting of rare outcomes fading, given the sampling strategy translates this increase into a greater number of samples over which evidence is accumulated, but not samples of greater size.
+<!--The last section supplements the rather technical inquiry into the sampling process and its consequences with a theoretical inroad into the question how the idea of sampling strategies can be integrated into the broader study of the computationally limited mind as an adaptive cognitive system.-->
 The paper closes with a summary and a conclusion.
 Note that this paper, including the simulations and data analyses, is reproducible---materials and instructions can be found on the GitHub repository.
 
@@ -225,7 +234,7 @@ Now, several consequences for the weighting pattern that can be estimated in CPT
 * From the transformation of cumulative probabilities it necessarily follows that the value of a cumulative decision weight $\pi$ depends on the rank of the outcome $x$ for which $\pi$ is determined.
 
 * The value of a cumulative decision weight depends on the estimated shape of the graph of $w$, the weighting function's parameters respectively.
-That is, the shape of the graph of $w$ displays in which interval on the cumulative probability scale $[0,1]$ the images of $w$, $w(p)$ take values that are greater or smaller than the respective cumulative probabilities and how much greater or smaller these images are.
+That is, the shape of the graph of $w$ displays in which interval on the cumulative probability scale $[0,1]$ the images of $w$, $w(p)$, take values that are greater or smaller than the respective cumulative probabilities and how much greater or smaller these images are.
 Hence, assuming a nonlinear graphical shape of $w$, the same numerical difference between objective cumulative probabilities may translate to cumulative decision weights of different value.
 
 * For prospects containing either only positive or only negative outcomes, $\sum_i^n\pi_i = 1$ is satisfied.
@@ -280,7 +289,7 @@ ggplot(wf, aes(p, wp, group = gamma)) +
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed") # identity line
 ```
 
-To begin with, the gray-dashed identity lines in Figure\ \@ref(fig:w-shapes) imply a linear weighting pattern.
+In some more detail, the gray-dashed identity lines in Figure\ \@ref(fig:w-shapes) imply a linear weighting pattern.
 That is, since the images of $w$, $w(p)$, are equal to the respective cumulative probabilities $p$, all cumulative decision weights $\pi$ that are derived according to (12) would be equal to the differences between the respective objective cumulative probabilities and therefore also to the objective probabilities of the outcomes for which the weights are determined.
 Such a linear weighting pattern is implied by $\gamma = 1$ and $\delta = 1$. 
 Now, both deviations from $\gamma = 1$ and $\delta = 1$ produce a nonlinear graphical shape.
@@ -304,16 +313,42 @@ For the description of such choices, one may then adopt the as-if weighting term
 To be clear, however, the as-if prefix indicates that it cannot be concluded from the estimated weighting pattern that the mind does indeed perform any of the computations associated with the weighting of subjective values in CPT; rather, the mind processes the information about the choice alternatives in a way that the resulting choices translate to the estimated CPT model.
 The as-if weighting terminology is therefore reminiscent of the distinction between different levels of explanation [@marrVisionComputationalInvestigation1982].
 That is, CPT may be considered a computational-level theory that specifies the computational problem the mind faces during decisions between prospects, and how this problem may be solved by the abstract calculus reviewed above.
-However, as such, CPT cannot substitute algorithmic-level theories that make claims about how exactly the mind transforms the inputs to the decision making process into outputs---i.e., into choices---which approximate the solutions of CPT's calculus [see @zilkerMeasuringModelingConstruction2020; see also @griffithsProbabilisticModelsCognition2010].
+However, as such, CPT cannot substitute algorithmic-level theories that make claims about how exactly the mind transforms the inputs to the decision making process into outputs which approximate the solutions of CPT's calculus [see @zilkerMeasuringModelingConstruction2020; see also @griffithsProbabilisticModelsCognition2010].
 Therefore, this paper uses CPT merely as a data model and continues to inquire how on the algorithmic level the mind may integrate sampling strategies into the information-processing chain upfront choices in DfE.
 More specifically, the following two sections discuss and demonstrate how different strategies of generating outcomes and integrating them into samples produce distinct choice patterns in DfE, and how these choice patterns translate to the weighting pattern in CPT.^[<!--Open footnote-->CPT's value function will also be considered but emphasis is put on the weighting function.<!--Close footnote-->]
 
 # Sampling Strategies in DfE
 
-The need to distinguish between the computational and the algorithmic level in the domain of decision making is exemplified by the fact that information about prospects may come in the form of descriptions or samples.
-Whereas CPT can be used to model choices in DfD and DfE, the information-processing chains upfront choices in DfE cannot be identical to those in DfD.
-That is, inputs in the form of experienced outcomes require different algorithms to be processed than do descriptions of outcomes and their probabilities.
-Specifically, the mind must integrate the experienced outcomes into a sample in order to make an inference about the properties of the latent prospects, the outcome-probability pairs respectively. 
+The need to distinguish between the computational and the algorithmic level in the domain of decision making is exemplified by the fact that information about prospects may come in the form of descriptions or sampled outcomes.
+Whereas CPT can be used to model choices in DfD and DfE, the actual information-processing chains that the mind may execute upfront choices in DfE cannot be identical to those in DfD.
+That is, inputs in the form of sampled outcomes require different algorithms to be processed than do descriptions of outcomes and their probabilities.
+
+For DfE, several approaches have been proposed to link the sampling process to the final choice. 
+One such approach is captured by sequential sampling models which approach the information-processing chain as an evidence accumulation process. 
+One core assumption of these models applied to choices between prospects [see, e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015] is that the sampled outcomes are used to sequentially accumulate evidence for or against the respective prospect as the sequences described in (8) grow.
+More specifically, sequential sampling models assume that the values of the sampled outcomes are sequentially integrated into a dynamic decision variable.
+Once the value of the decision variable reaches a threshold, the respective prospect is chosen. 
+
+In contrast, @hillsInformationSearchDecisions2010, proposed another potential link between the sampling and the decision process in DfE.
+Specifically, the authors suppose that the sampling pattern may be linked to the choice strategy that people apply. 
+That is, if single samples originating from different prospects are generated in direct succession (piecewise sampling), the evaluation of prospects is based on multiple ordinal comparisons of single samples (round-wise decisions).
+In contrast, if single samples originating from the same prospect are generated in direct succession (comprehensive sampling), it is supposed that the evaluation of prospects is based on a single ordinal comparison of long sequences of single samples (summary decisions).
+Indeed, they found some evidence that people who switch more often, make more choices in line with a piecewise strategy and people who switch rarely make more choices in line with a comprehensive strategy [but see @wulffHowShortLongrun2015].
+
+In this paper, these two ideas are integrated, including speed accuracy tradeoffs etc. with the idea of a link between sampling and decision-making. 
+Specifically, it is assumed that evidence is accumulated over time with a decision variable approaching a threshold, however, the model allows for the possibility that evidence accumulation works not necessarily across the single sampled outcomes but over samples thereof. 
+We model the processs as one where evidence is accumulated over multiple ordinal comparisons of samples---their means---respectively, rather than over the raw sampled outcomes. 
+We therefore combine all thing. 
+We show that each follows a Bernoulli distribution: 
+
+$$
+D \sim \mathcal{B}\left( p \left(\overline{X}_{N_X} - \overline{Y}_{N_Y} > 0\right), n\right) \; ,
+$$
+## CPT Patterns 
+
+Given that, ... 
+
+
 
 # Simulation Study
 
@@ -328,6 +363,7 @@ To omit dominant prospects within a choice problem, outcomes of the safe prospec
 Table A1 in contains the test set of 60 choice problems, which were sampled from an initial set of 10,000.
 Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
 Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
+
 
 For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
 In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
