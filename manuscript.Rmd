@@ -76,7 +76,7 @@ Now, let a *prospect* be a choice alternative that possesses only two kinds of p
 Importantly, the information that inputs provide about the properties of a prospect can come in different forms.
 For example, in *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
 Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], these properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred when the prospect was chosen in past decisions.
-The inputs to DfE therefore take the form of sets of sampled outcomes (hereafter: samples).^[<!--Open footnote-->Note that a sample is defined as a set of sampled outcomes. Aside empty and infinite sets, a sample can therefore contain one or finite many sampled outcomes (see also below).<!--Close footnote-->]
+The inputs to DfE therefore take the form of sets of sampled outcomes (hereafter: samples).
 Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
@@ -86,13 +86,17 @@ That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFo
 In such a case, then, according to the de Moivre-Laplace theorem, the binomial distribution associated with each prospect's outcome can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
 However, for small samples, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
+As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes.
 
-Consistent with this statistical regularity, sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004] assume that the information-processing chain upfront choices in DfE takes the form of an evidence accumulation process over time, with choices becoming more accurate the more evidence must be accumulated.
-Specifically, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
-To relate the sampling process to the choice, sequential sampling models assume that the sampled outcomes are sequentially accumulated into one or more dynamic decision variables, and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
-Accordingly, the number of outcomes required to sample decreases with thresholds, which could account for an as-if underweighting of rare outcomes [see @markantModelingChoiceSearch2015].
+One class of process models that link the actual sampling process to the decision-making process and can account for the as-if underweighting of rare outcomes by assuming a reliance on small samples, are sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004].
+That is, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
+To relate the sampling process to the final choice, sequential sampling models assume that the information-processing chain upfront the final choice takes the form of an evidence accumulation process over time, with choices becoming more accurate the more evidence must be accumulated.
+Specifically, the models assume that the sampled outcomes are sequentially accumulated into one or more dynamic decision variables and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
+Now, since the thresholds determine how much (more) evidence a prospect must accumulate in order to be chosen and since the amount of evidence for either prospect can only increase by sampling, these models predict, ceteris paribus, an as-if underweighting of rare outcomes for low thresholds [see @markantModelingChoiceSearch2015].
+In other words, a decrease in the threshold leads to a decrease in the number of sampled outcomes that are required to reach this threshold. 
+Accordingly, for low thresholds, small-probability outcomes are predicted to contribute less to the accumulated evidence than warranted by their objective probability. 
 
-However, some studies found the as-if underweighting of rare outcomes in DfE to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+Yet, some studies found the as-if underweighting of rare outcomes in DfE to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
 While this finding demonstrates that the as-if underweighting of rare outcomes in DfE cannot be reduced to a small overall number of sampled outcomes, it may still be the case that the respective deviations from the principle of mathematical expectation were caused by the reliance on small samples.
 For example, given a large overall number of sampled outcomes, an as-if underweighting of rare outcomes could be explained, if only a small subset of all the sampled outcomes was considered for the assessment of prospects.
 <!---->
@@ -853,3 +857,8 @@ ggarrange(weight_c, value_c, ncol = 1, nrow = 2, common.legend = TRUE, legend = 
 \newpage
 
 # References
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('manuscript_appendix.Rmd')
+```
+
