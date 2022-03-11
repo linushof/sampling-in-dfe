@@ -3,11 +3,6 @@
 .RData
 .Ruserdata
 *.tex
-*.aux
-*.html
 *.csl
-*.pptx
-supplements/
+notes/
 manuscript_files/
-notebook.md
-manuscript.pdf
