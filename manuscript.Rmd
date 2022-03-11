@@ -28,8 +28,9 @@ abstract: |
 keywords          : ""
 wordcount         : ""
 
-bibliography      : ["references_sampling-in-dfe.bib"]
-csl               : apa.csl
+bibliography      : references_sampling-in-dfe.bib
+csl               : /Users/Linus Hof/Documents/Psychologie/ARC/sampling-in-dfe/apa.csl
+appendix          : manuscript_appendix.Rmd
 
 figurelist        : no
 tablelist         : no
@@ -41,18 +42,21 @@ draft             : no
 
 classoption       : "man"
 documentclass     : "apa7"
-output            : papaja::apa6_pdf
+output: papaja::apa6_pdf
 
 header-includes:
    - \usepackage[capposition=top]{floatrow}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = F, fig.pos = "t", fig.align = "l")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, #omit messages
+                      fig.align = "l", #align figures to left margin
+                      fig.pos = "t"
+                      )
 ```
 
-```{r packages}
-# load required packages
+```{r packages, include=FALSE}
+#load required packages
 pacman::p_load(papaja,
                readr,
                tidyr, 
@@ -77,25 +81,26 @@ Although these distinct input forms may in principle carry the same information 
 In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
-Similar to other behavioral phenomena that can be explained by the mind being sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE can be explained by peoples' tendency to rely on small samples [@hertwigDecisionsExperienceEffect2004; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+Similar to other behavioral phenomena that could be explained by assuming that the mind is sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE could be explained by assuming that the mind is sensitive to the information provided by the small samples that people tend to rely on [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
 That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequency with which a prospect's outcome occurs in a sample of infinite size converges almost surely to its objective probability.
-In such a case, then, the binomial distribution associated with each prospect's outcome can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
+In such a case, then, according to the de Moivre-Laplace theorem, the binomial distribution associated with each prospect's outcome can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
 However, for small samples, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
-As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes.
 
-Aside this computational-level explanation, different algorithmic approaches linking the sampling process to the choices in DfE can explain the as-if underweighting of rare outcomes by the reliance on small samples.
-That is, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a single choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
-To couple the sampling with the decision-making process, sequential sampling models [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004] propose that evidence is accumulated over time.
-The core assumption shared by these models is that the sampled outcomes are sequentially integrated into one or more dynamic decision variables, and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
-Moreover, these models use differences in thresholds to explain speed-accuracy trade-offs in decision making, with higher thresholds requiring more evidence in favor of a prospect to be sampled.
-Hence, since the overall number of sampled outcomes decreases with thresholds, the adoption of low thresholds can be used to explain an as-if underweighting of rare outcomes [see @markantModelingChoiceSearch2015].
+Consistent with this statistical regularity, sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004] assume that the information-processing chain upfront choices in DfE takes the form of an evidence accumulation process over time, with choices becoming more accurate the more evidence must be accumulated.
+Specifically, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
+To relate the sampling process to the choice, sequential sampling models assume that the sampled outcomes are sequentially accumulated into one or more dynamic decision variables, and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
+Accordingly, the number of outcomes required to sample decreases with thresholds, which could account for an as-if underweighting of rare outcomes [see @markantModelingChoiceSearch2015].
+
+However, some studies found the as-if underweighting of rare outcomes in DfE to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+While this finding demonstrates that the as-if underweighting of rare outcomes in DfE cannot be reduced to a small overall number of sampled outcomes, it may still be the case that the respective deviations from the principle of mathematical expectation were caused by the reliance on small samples.
+For example, given a large overall number of sampled outcomes, an as-if underweighting of rare outcomes could be explained, if only a small subset of all the sampled outcomes was considered for the assessment of prospects.
+<!---->
 
 Yet, in another approach, @hillsInformationSearchDecisions2010 propose a dependency between sampling patterns and decision strategies.
 Considering the choice between two prospects, this approach distinguishes sampling patterns along the frequency of switches between the prospects during the sampling phase and assumes that only outcomes that were sampled from the same prospect between switches are integrated into the same sample. 
 Then, it is assumed that each time after a new sample for both prospects was generated, their means are compared, and the choice is determined by the number of won comparisons.^[<!--Open footnote-->Note that @hillsInformationSearchDecisions2010 describe only the two paradigmatic cases, where prospects are either switched just once (comprehensive sampling) or after each sampled outcome (piecewise sampling). Accordingly, in the former case choices depend on a single comparison between the means of samples that contain all outcomes sampled for the respective prospect (summary strategy); in the latter case, however, choices depend on multiple comparisons between samples that contain only one sampled outcome (round-wise strategy). Nevertheless, Hills and Hertwig [-@hillsInformationSearchDecisions2010, p. 1788] acknowledge that "many [sampling] strategies will fall on the continuum between [these cases]", which is why the general description is used above.<!--Close footnote-->]
-Since each comparison is weighted equally, such a link between sampling patterns and decision strategies can explain an as-if underweighting of rare outcomes despite a large overall number of sampled outcomes.
-Indeed, some studies have found the description-experience gap to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+Since each comparison is weighted equally, such a link between sampling patterns and decision strategies can explain an as-if underweighting of rare outcomes despite a large overall number of sampled outcomes being considered.
 More specifically, while the probability of a rare outcome to be sampled increases with the overall number of sampled outcomes, an increasing switching frequency causes the rare outcome not to be considered in an increasing number of comparisons.
 
 Now, this paper integrates both approaches to discuss in some more detail how the effect of small samples may exert its influence on the choices between two prospects in DfE.
@@ -113,13 +118,6 @@ That is, for a decreasing switching probability, the number of outcomes that are
 Accordingly, the model shows how with decreasing switching probability a mean comparison becomes more indicative for differences of the prospects in their expected values.
 In turn, for an increasing switching probability, the number of outcomes that are successively sampled from a given prospect decreases such that the size of the sample decreases.
 Accordingly, the growing sequence of sample comparisons becomes more indicative for which prospect produces the higher outcomes most of the time.
-
-The paper proceeds as follows:
-The first section provides a formal definition of prospects and reviews cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993] as a data model that can be used to describe choices between prospects in terms of deviations from the principle of mathematical expectation.
-In the section that follows, a computational model is proposed that integrates the assumption of evidence accumulation over time and of a link between sampling patterns and decision strategies.
-
-The paper closes with a summary and a conclusion.
-
 
 # The Description of Choices in CPT
 
@@ -218,9 +216,9 @@ Accordingly, for such prospects, the weighting of subjective values with cumulat
 
 \noindent
 Given that the value of each cumulative decision weight depends on the two transformed cumulative probabilities in (12)---i.e., the probability of obtaining a positive (negative) outcome equal to or greater (smaller) than a respective outcome $x$, and the probability of obtaining a strictly greater (smaller) outcome---the remaining consequences for the weighting pattern are reviewed by considering the actual weighting function.
-Therefore, Figure\ \@ref(fig:w-shapes) illustrates some of the possible graphical shapes of the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987, which, however, is just one of several parameterizations that have been proposed [e.g., @prelecProbabilityWeightingFunction1998; @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview].
+Therefore, Figure\ \@ref(fig:weighting-function) illustrates some of the possible graphical shapes of the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987, which, however, is just one of several parameterizations that have been proposed [e.g., @prelecProbabilityWeightingFunction1998; @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview].
 Now, let each $p$ on the abscissa be one of the four cumulative probabilities from (12). 
-Then each graph in Figure\ \@ref(fig:w-shapes) displays the graphical shape of the weighting function
+Then each graph in Figure\ \@ref(fig:weighting-function) displays the graphical shape of the weighting function
 $$
 \begin{aligned}
   w : [0,1] &\to [0,1] \\
@@ -234,26 +232,24 @@ for the respective values of the parameters $\gamma \in [0,2]$ and $\delta > 0$.
 Evidently, both parameters have distinct effects on the graphs' shape, with $\gamma$ affecting the curvature and $\delta$ the elevation.
 As a consequence from (12) then, each combination of parameters implies a particular weighting pattern, with some of them being similar and others being rather distinct.
 
-(ref:weighting) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
+(ref:weighting-function) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
 
-```{r w-shapes, fig.cap="(ref:weighting)", fig.height=7, fig.width=10}
+```{r weighting-function, fig.cap="(ref:weighting-function)", fig.height=7, fig.width=10}
+#compute images of weighting function (wf)
+wf <- tibble(p = seq(0, 1, .01)) %>%  #cumulative probabilities
+  expand_grid(gamma = seq(.1, 2, .1), #gamma values
+              delta = c(.1, .5, 1, 2, 5, 10)) %>% #delta values
+  mutate(wp = (delta*(p^gamma))/((delta*p^gamma)+(1-p)^gamma)) #images of wf
 
-# prepare vector with cumulative probabilities
-p <- tibble(p = seq(0, 1, .01))
-
-# compute weighting function for different combinations of gamma and delta 
-wf <- p %>% expand_grid(gamma = seq(.1, 2, .1), 
-                        delta = c(.1, .5, 1, 2, 5, 10)) %>%
-  mutate(wp = (delta*(p^gamma))/((delta*p^gamma)+(1-p)^gamma))
-
-# labeller function for LaTeX math expressions in facet labels 
-labeller_delta <- function(string) {
+#labeller function for facet labels with LateX math expressions 
+label_delta <- function(string) {
   TeX(paste("$\\delta=$", string, sep = ""))  
 }
 
-# plot
-ggplot(wf, aes(p, wp, group = gamma)) +
-  facet_wrap(~delta, labeller = as_labeller(labeller_delta, default = label_parsed)) + 
+#plot shapes of weighting function
+wf %>% 
+  ggplot(aes(p, wp, group = gamma)) +
+  facet_wrap(~delta, labeller = as_labeller(label_delta, default = label_parsed)) + 
   scale_x_continuous(breaks = seq(0, 1, .2)) +
   scale_y_continuous(breaks = seq(0, 1, .2)) + 
   labs(x = expression(p),
@@ -262,10 +258,10 @@ ggplot(wf, aes(p, wp, group = gamma)) +
   theme_apa() + 
   geom_line(aes(color = gamma)) +
   scale_color_viridis(option = "plasma") + 
-  geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed") # identity line
+  geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
 
-In some more detail, the gray-dashed identity lines in Figure\ \@ref(fig:w-shapes) imply a linear weighting pattern.
+In some more detail, the gray-dashed identity lines in Figure\ \@ref(fig:weighting-function) imply a linear weighting pattern.
 That is, since the images of $w$, $w(p)$, are equal to the respective cumulative probabilities $p$, all cumulative decision weights $\pi$ that are derived according to (12) would be equal to the differences between the respective objective cumulative probabilities and therefore also to the objective probabilities of the outcomes for which the weights are determined.
 Such a linear weighting pattern is implied by $\gamma = 1$ and $\delta = 1$. 
 Now, both deviations from $\gamma = 1$ and $\delta = 1$ produce a nonlinear graphical shape.
@@ -301,7 +297,6 @@ That is, inputs in the form of sampled outcomes require different algorithms to 
 More specifically, the core difference between DfD and DfE is that in the latter case, the properties must be inferred. 
 However, as has been outlined in the introduction, for such an inference rather many sampled outcomes must be integrated. 
  
-
 However, only rarely in peoples' daily life, inputs take the form of explicit descriptions of all outcome-probability pairs.
 In such cases, people would make DfD, since the information from which the mind learns about the properties of prospects are complete descriptions thereof.
 Yet, rather often, people make DfE, where the mind can learn about the latent properties of prospects only by experiental sampling over time [@hertwigDescriptionexperienceGapRisky2009, p. 517].
@@ -316,8 +311,6 @@ Then, in other words, each stochastic process produces a sequence sampled outcom
 Now, one core assumption of this paper is that, in order to infer the latent properties of a prospect, the mind sequentially integrates the sampled outcomes into either one sample or into multiple smaller samples.
 Assuming that the mind uses all samples so obtained during a process of evidence accumulation, this paper discusses and demonstrates how different sampling strategies that alter the number and size of these samples can produce distinct choice patterns in DfE.
 Before so doing, however, the following section reviews how CPT can be used as a data model that captures systematic deviations from the principle of mathematical expectation in the parameter estimates of a *value* and a *weighting function*. 
-
-
 
 ## The model 
 
@@ -335,8 +328,6 @@ That is, if single samples originating from different prospects are generated in
 In contrast, if single samples originating from the same prospect are generated in direct succession (comprehensive sampling), it is supposed that the evaluation of prospects is based on a single ordinal comparison of long sequences of single samples (summary decisions).
 Indeed, they found some evidence that people who switch more often, make more choices in line with a piecewise strategy and people who switch rarely make more choices in line with a comprehensive strategy [but see @wulffHowShortLongrun2015].
 However, in this approach no causal claims are made.
-
-
 
 Therefore, model assumes that evidence is accumulated over a sequence of mean-based comparisons between the samples.
 The results of each comparison is defined as a random variable
@@ -358,348 +349,289 @@ $$
 D_n = \sum_t^n Z_t \quad n \in \mathbb N
 $$
 
-
 # Simulation Study
-
-To demonstrate the impact of different sampling strategies on the inferences about the latent properties of prospects and the resulting choices in DfE, a simulation study was conducted.
-Therefore, computational models were implemented that generate and integrate samples from prospects according to varying parameters reflecting different sampling strategies.
 
 ## Choice Problems
 
-We test a set of 2-prospect choice problems, where one of the prospects contains a safe outcome, i.e., $p(\omega) = 1$ and the other two outcomes where all $p(\omega) \neq 1$.
-Both outcomes and probabilities are drawn from uniform distributions, ranging from 0 to 20 for outcomes and from .01 to .99 for probabilities of the smaller outcome of the risky prospect.
-To omit dominant prospects within a choice problem, outcomes of the safe prospect always fall between both outcomes of the risky prospect.
-Table A1 in contains the test set of 60 choice problems, which were sampled from an initial set of 10,000.
-Sampling of gambles was stratified, randomly drawing an equal number of 20 gambles with no, an attractive, and an unattractive rare outcome.
-Risky outcomes are considered *"rare"* if their probability is $p < .2$ and *"attractive"* (*"unattractive"*) if they are higher (lower) than the safe outcome.
-
-
-For each parameter combination of the generating model, 100 synthetic agents are presented with 60 choices problems.
-In sum, 100 (parameter combinations) x 100 (agents) x 60 (choices) = 600,000 choices are simulated.
+The test set of $60$ choice problems, each consisting of a safe prospect and a two-outcome prospect, was obtained by stratified sampling from an initial set of $10,000$ choice problems.
+The stratification was used to assure that some of the choice problems contain a small (high) outcome of a probability smaller than $.20$.
+The exact procedure was as follows:
+For each of the $10.000$ problems in the initial set, three outcomes were randomly drawn from a uniform distribution over the interval $[0, 20]$, with the smallest and highest of these three outcomes being assigned to the risky prospect in order to omit the case of dominant prospects.
+The probability for the smaller outcome of the risky prospect, $p_{small}$, was drawn from a uniform distribution over the interval $[.01, .99]$, with the probability of the higher outcome being set to $p_{high} = 1-p_{small}$.
+To obtain the $60$ choice problems of the test set, the initial set was divided into three subsets, where each subset contained either all problems with $p_{high} \in (0,.2)$ or $p_{high} \in [.2,.8]$ or $p_{high} \in (.8,1)$.
+From each of these subset, then, $20$ choice problems were randomly sampled.
 
 ## Data Generation
 
-The switching probability $s$ is the probability with which agents draw a single sample from the prospect they did not get their most recent single sample from.
-$s$ is varied between .1 to 1 in increments of .1.
-The two boundary parameters resemble the concept of a decision threshold, i.e., if a prospect reaches a boundary, it is chosen by the synthetic agent.
-The boundary type is either the minimum number of comparisons any prospect must win (absolute boundary) or the minimum difference between the number of won comparisons (relative boundary).
-The boundary value $a$ is varied between 1 to 5 in increments of 1.
+The evidence accumulation model presented in this paper was implemented as a computational model to simulate the sampling process and the final choice for each of the $60$ choice problems in the test set.
+All of the following parameter values were combined with each other:
 
+* **Switching probability**: 
+The switching probability $s$, defined as the probability of sampling outcomes from different prospects in direct succession, was varied in the interval $[.1, 1]$ in increments of $.1$.
 
+* **Decision variable**: The decision variable of a prospect either counts the absolute number of won comparisons or how much more comparisons were won relative to the other prospect.
+
+* **Threshold**: 
+The value of the threshold $\theta$, determining how much (more) comparisons a prospect must win, was varied in the interval $[1,5]$ in increments of 1. 
+
+\noindent
+In sum, 100 (parameter combinations) x 60 (choices) x 100 (agents) = 600,000 sampling processes and choices were simulated. 
 
 ## Results
 
-(ref:fr-rates-p) Effect of Switching Probability on Rates of False Risky and False Safe Choices for 2-Outcome Prospects with High Rank Outcomes of Different Probability
+```{r data, include=FALSE}
+#load choice data
+cols_choices <- list(.default = col_double(),
+                     boundary = col_factor(),
+                     gamble = col_factor(),
+                     rare = col_factor(),
+                     agent = col_factor(),
+                     choice = col_factor())
+choices <- read_csv("data/choices/choices.csv", col_types = cols_choices)
 
-```{r fig.cap="(ref:fr-rates-p)", fig.height=7, fig.width=10}
-cols <- list(.default = col_double(),
-             boundary = col_factor(),
-             gamble = col_factor(),
-             rare = col_factor(),
-             agent = col_factor(),
-             choice = col_factor())
-choices_p <- read_csv("data/choices/choices.csv", col_types = cols) # piecewise integration
+#load CPT estimates
+cols_cpt <- list(.default = col_double(),
+                 boundary = col_factor(),
+                 a = col_factor(),
+                 parameter = col_factor())
+cpt <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols_cpt)
+```
 
-# false response (fr) rates
+<!-- Plots choice rates -->
 
-## determine normative choice according to latent and sampled EV
-fr_rates_p <- choices_p %>%
-  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"), # normative choice latent EV
+(ref:choice-rates) Effect of Switching Probability on Rates of False Risky and False Safe Choices for 2-Outcome Prospects with High Rank Outcomes of Different Probability
+
+```{r choice-rates, fig.cap="(ref:choice-rates)", fig.height=7, fig.width=10}
+#prepare data
+
+##determine normative choice according to latent and sampled EV
+fr_rates <- choices %>%
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"), #normative choice latent EV
          ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2),
-         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) # normative choice sampled EV
+         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) #normative choice sampled EV
 
-# fr rates latent EV
-fr_rates_p_o <- fr_rates_p %>%
-  filter(!is.na(norm)) %>% # exclude choices under EV equality
-  group_by(s, boundary, a, rare, norm, choice) %>% # to distinguish type of rare event and type of false response
-  summarise(n = n()) %>% # determine absolute number of responses per category
-  mutate(rate = round(n/sum(n), 2), # determine correct and false response rates
-         type = case_when(norm == "A" & choice == "B" ~ "Safe", norm == "B" & choice == "A" ~ "Risky")) %>% # type false response
+##compute false response rates  
+
+###latent EV
+fr_rates_l <- fr_rates %>%
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
   ungroup() %>%
-  filter(!is.na(type)) %>% # remove correct response rates
+  filter(!is.na(type)) %>% #remove correct responses
   select(-c(norm, choice, n)) %>%
-  mutate(norm_ev = "Latent")
+  mutate(norm_ev = "Latent") #assign facet label
 
-# fr rates sampled EV
-fr_rates_p_e <- fr_rates_p %>%
+###sampled EV
+fr_rates_s <- fr_rates %>%
   filter(!is.na(norm_exp)) %>%
   group_by(s, boundary, a, rare, norm_exp, choice) %>%
   summarise(n = n()) %>%
   mutate(rate = round(n/sum(n), 2),
-         type = case_when(norm_exp == "A" & choice == "B" ~ "Safe", norm_exp == "B" & choice == "A" ~ "Risky")) %>%
+         type = case_when(norm_exp == "A" & choice == "B" ~ "Safe",
+                          norm_exp == "B" & choice == "A" ~ "Risky")) %>%
   ungroup() %>%
   filter(!is.na(type)) %>%
   select(-c(norm_exp, choice, n)) %>%
   mutate(norm_ev = "Sample")
 
-# merge data frame
-fr_rates_p <- bind_rows(fr_rates_p_o, fr_rates_p_e) %>%
-  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]",
+### merge latent and sampled data
+fr_rates <- bind_rows(fr_rates_l, fr_rates_s) %>%
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
                           rare == "attractive" ~ "\\in (0,.2)",
-                          rare == "unattractive" ~ "\\in (.8,1)")) # Change fact labels
+                          rare == "unattractive" ~ "\\in (.8,1)"))
 
-# labeller function for LaTeX math expressions in facet labels
-labeller_a <- function(string) {
-  TeX(paste("$\\a=$", string, sep = ""))
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
 }
 
-
-labeller_rare <- function(string) {
-  TeX(paste("$\\p_{High}$", string, sep = ""))
+label_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
 }
 
-ggplot(fr_rates_p, aes(s, rate)) +
-  facet_grid(rare~a, labeller = labeller(rare = as_labeller(labeller_rare, default = label_parsed), a = as_labeller(labeller_a, default = label_parsed))) +
-  labs(x = "s",
-       y = "False Response Rate",
-       color = "Normative\nEV",
-       shape = "False\nResponse") +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
-  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+#plot
+fr_rates %>%
+  ggplot(aes(s, rate)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
+                                         a = as_labeller(label_theta, default = label_parsed))) +
   labs(x = "Switching Probability",
        y = "False Response Rate",
        color = "Normative\nExpected\nValue",
        shape = "False\nResponse\nType") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
   geom_point(aes(color = norm_ev, shape = type)) +
   scale_shape_manual(values = c(4, 16)) +
   scale_color_viridis_d(option = "plasma", end = .7) +
   theme_apa()
 ```
 
-
-<!-- Test set-->
-
-
+<!-- Plots CPT -->
 
 (ref:weighting-parameters) Parameter Estimates of the Weighting Function of @goldsteinExpressionTheoryPreference1987 for Different Simulation Parameters
 
-```{r fig.cap="(ref:weighting-parameters)", fig.height=7, fig.width=10}
+```{r weighting-parameters, fig.cap="(ref:weighting-parameters)", fig.height=7, fig.width=10}
+#prepare data
+cpt <- cpt %>% mutate(boundary = if_else(boundary == "absolute", "Absolute", "Relative"))
 
-# load data
+#plot estimates
 
-cols <- list(.default = col_double(),
-             boundary = col_factor(),
-             a = col_factor(),
-             parameter = col_factor())
-cpt_p <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols) # piecewise integration
-cpt_p <- cpt_p %>% mutate(boundary = if_else(boundary == "absolute", "Absolute", "Relative"))
-
-gamma <- cpt_p %>%
-  filter(parameter == "gamma") %>% 
+##gamma
+gamma <- cpt %>%
+  filter(parameter == "gamma") %>%
   ggplot(aes(s, mean, color = s, shape = boundary)) +
-  geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_color_viridis(option = "plasma") +
-  scale_shape_manual(values = c(4, 16)) +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
-  labs(x = "Switching Probability",
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = element_blank(), #omit axis title
        y = expression(gamma),
        color = "Switching\nProbability",
        shape = "Boundary") +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
-  theme_apa() + 
-  theme(axis.title.x = element_blank())
-
-delta <- cpt_p %>%
-  filter(parameter == "delta") %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
   geom_point() +
   geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_color_viridis(option = "plasma") +
   scale_shape_manual(values = c(4, 16)) +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  scale_color_viridis(option = "plasma") +
+  theme_apa() 
+
+##delta
+delta <- cpt %>%
+  filter(parameter == "delta") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
   facet_wrap(~a, nrow = 1) + 
   labs(x = "Switching Probability",
        y = expression(delta),
        color = "Switching\nProbability",
        shape = "Boundary") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
   theme_apa() + 
-  theme(strip.text.x = element_blank())
+  theme(strip.text.x = element_blank()) #omit facet labels
 
+##merge figures
 ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
 ```
 
-(ref:value-choice-parameters) Parameter Estimates of the Value Function of @tverskyAdvancesProspectTheory1992 and of the Logit Choice Rule for Different Simulation Parameters
+(ref:value-parameters) Parameter Estimates of the Value Function of @tverskyAdvancesProspectTheory1992 and of the Logit Choice Rule for Different Simulation Parameters
 
-```{r fig.cap="(ref:value-choice-parameters)", fig.height=7, fig.width=10}
+```{r value-parameters, fig.cap="(ref:value-parameters)", fig.height=7, fig.width=10}
+#plot estimates
 
-alpha <- cpt_p %>%
+##alpha
+alpha <- cpt %>%
   filter(parameter == "alpha") %>% 
   ggplot(aes(s, mean, color = s, shape = boundary)) +
-  geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_color_viridis(option = "plasma") +
-  scale_shape_manual(values = c(4, 16)) +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
-  labs(x = "Switching Probability",
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = element_blank(),
        y = expression(alpha),
        color = "Switching\nProbability",
        shape = "Boundary") +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
-  theme_apa() + 
-  theme(axis.title.x = element_blank())
-
-rho <- cpt_p %>%
-  filter(parameter == "rho") %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
   geom_point() +
   geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   scale_color_viridis(option = "plasma") +
   scale_shape_manual(values = c(4, 16)) +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1,.5)) +
+  theme_apa()
+
+##rho
+rho <- cpt %>%
+  filter(parameter == "rho") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  facet_wrap(~a, nrow = 1) + 
   labs(x = "Switching Probability",
        y = expression(rho),
        color = "Switching\nProbability",
        shape = "Boundary") +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
   theme_apa() + 
   theme(strip.text.x = element_blank())
 
+##merge figure
 ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
 ```
 
-(ref:shapes) Estimated Graphical Shapes of the Weighting and Value Function for Different Simulation Parameters
+(ref:cpt-graphs) Estimated Graphical Shapes of the Weighting and Value Function for Different Simulation Parameters
 
-```{r fig.cap="(ref:shapes)", fig.height=7, fig.width=10}
+```{r cpt-graphs, fig.cap="(ref:cpt-graphs)", fig.height=7, fig.width=10}
+#prepare data
 
-## weighting function
+##compute images of weighting and value function
 
-wf_p <- cpt_p %>%
+###weighting function
+wf <- cpt %>%
   select(s, boundary, a, parameter, mean) %>%
   pivot_wider(names_from = parameter, values_from = mean) %>%
   select(-c(alpha, rho)) %>%
   expand_grid(p = seq(0, 1, .05)) %>%
   mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
 
-wf_p_a <- wf_p %>%
-  filter(boundary == "Absolute")
-wf_p_r <- wf_p %>%
-  filter(boundary == "Relative")
-weight <- ggplot(wf_p_a, aes(x = p, y = w, group = s, color = s)) +
-  geom_line(size = .5) +
-  geom_line(data = wf_p_r, size = .5) + 
-  scale_color_viridis(option = "plasma") +
-  scale_x_continuous(breaks = seq(0, 1, .5)) +
-  scale_y_continuous(breaks = seq(0, 1, .5)) +
-  labs(x = "Experienced Probability",
-       y = "Decision Weight",
-       color = "Switching\nProbability") +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(labeller_a, default = label_parsed))) + 
-  theme_apa() + 
-  theme(strip.text.x = element_blank())
-
-
-vf_p <- cpt_p %>%
+###value function
+vf <- cpt %>%
   select(s, boundary, a, parameter, mean) %>%
   pivot_wider(names_from = parameter, values_from = mean) %>%
   select(-c(gamma, delta, rho)) %>%
   expand_grid(x = seq(0, 20, .5)) %>%  
   mutate(v = round(x^alpha, 2)) 
 
-vf_p_a <- vf_p %>%
-  filter(boundary == "Absolute")
-vf_p_r <- vf_p %>%
-  filter(boundary == "Relative")
-value <- ggplot(vf_p_a, aes(x = x, y = v, group = s, color = s)) +
+##split data to avoid passing two y-values to the same x-value in geom_line()
+wf_a <- wf %>% filter(boundary == "Absolute")
+wf_r <- wf %>% filter(boundary == "Relative")
+vf_a <- vf %>% filter(boundary == "Absolute")
+vf_r <- vf %>% filter(boundary == "Relative")
+
+#plots 
+
+##weighting function
+weight <- wf_a %>% #graphs for absolute boundary
+  ggplot(aes(p, w, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Experienced Probability",
+       y = "Decision Weight",
+       color = "Switching\nProbability") +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
   geom_line(size = .5) +
-  geom_line(data = vf_p_r, size = .5) + 
+  geom_line(data = wf_r, size = .5) +  #add curves for relative boundary
   scale_color_viridis(option = "plasma") +
-  scale_x_continuous(breaks = seq(0, 20, 10)) +
-  scale_y_continuous(breaks = seq(0, 20, 10)) +
+  theme_apa()
+
+##value function
+value <- vf_a %>% 
+  ggplot(aes(x, v, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1)+ 
   labs(x = "Objective Outcome",
        y = "Subjective Value",
        color="Switching\nProbability") +
-  facet_wrap(~a, nrow = 1)+ 
+  scale_x_continuous(breaks = seq(0, 20, 10)) +
+  scale_y_continuous(breaks = seq(0, 20, 10)) +
+  geom_line(size = .5) +
+  geom_line(data = vf_r, size = .5) + 
+  scale_color_viridis(option = "plasma") +
   theme_apa() + 
   theme(strip.text.x = element_blank())
 
+##merge figures
 ggarrange(weight, value, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
-```
-
-
-
-
-
-```{r}
-
-# read cpt data
-
-cols <- list(.default = col_double(),
-             boundary = col_factor(),
-             a = col_factor(),
-             parameter = col_factor())
-cpt_long <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols)
-
-# store convergence diagnostics
-
-gel_92 <- cpt_long %>% select(s, boundary, a, parameter, Rhat, n.eff) 
 ```
 
 For each distinct parameter combination, we ran 20 chains of 40,000 iterations each, after a warm-up period of 1000 samples.
 To reduce potential autocorrelation during the sampling process, we only kept every 20th sample (thinning).
-The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(gel_92$Rhat), 3)` for all parameters, indicating good convergence.
-The minimum effective sample size was `r min(gel_92$n.eff)`.
+The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(cpt$Rhat), 3)` for all parameters, indicating good convergence.
+The minimum effective sample size was `r min(cpt$n.eff)`.
 
-<!-- Plausibility Check: Relationship between Switching Probability and Trial Length -->
-
-```{r include=FALSE}
-
-# read choice data 
-
-cols <- list(.default = col_double(),
-             boundary = col_factor(),
-             gamble = col_factor(),
-             rare = col_factor(),
-             agent = col_factor(),
-             choice = col_factor())
-choices <- read_csv("data/choices/choices.csv", col_types = cols)
-
-# get median trial length for each parameter combination
-trial_length <- choices %>% 
-  group_by(s, boundary, a) %>% 
-  summarise(med = median(n_sample))
-```
-
-The median length of trials, i.e., the number of single samples drawn in a trial, generated by different parameter combinations ranged from `r min(trial_length$med)` to `r max(trial_length$med)`.
 As expected, the scatter plot below shows an inverse relationship between switching probability and trial length.
 I.e., the lower the switching probability, the larger become the sample sequences on which each comparison between prospects is based, which in turn leads to longer trials.  
 This effect is particularly pronounced for low probabilities such that the increase in trial length accelerates as switching probability decreases.
 
-```{r eval=FALSE}
-
-# get median trial length for each switching probability 
-
-trial_length_s <- choices %>% 
-  group_by(s) %>%
-  summarise(med = median(n_sample))
-
-# plot
-
-trial_length %>%
-  ggplot(aes(x = s, y = med)) +
-  geom_jitter(color = "#CECECE", size = 3) +
-  geom_point(data = trial_length_s, aes(color = s), size = 3) +
-  geom_path(data = trial_length_s, aes(color = s)) +
-  scale_color_scico(palette = "acton") + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) + 
-  scale_y_continuous(breaks = seq(0, 120, 10)) +
-  labs(title = "Trial Length", 
-       x ="Switching Probability",
-       y = "Median Trial Length", 
-       color="Switching Probability") + 
-  theme_apa()
-```
-
-<!-- Weighting function -->
-
-```{r eval=FALSE}
-
-# tidy CPT data: parameters as separate columns 
-
-cpt_wide <- cpt_long %>% 
-  select(s, boundary, a, parameter, mean) %>% 
-  pivot_wider(names_from = parameter, values_from = mean)
-```
 
 The figures below display the estimates of the $\gamma$ and $\delta$ parameter of the probability weighting function [@prelecProbabilityWeightingFunction1998] fitted to DfE simulated for different parameter values of the generating model.
 The estimates are plotted against the switching probability, where each panel represents a distinct boundary type and level, i.e., number of comparisons. 
@@ -711,399 +643,213 @@ The resulting strong curvature leads to a compression of probabilities in the lo
 This pattern is robust for varying degrees of the boundary level, except for $a = 1$. 
 The latter deviation may be explained by the potential scale reduction factors for the respective parameter estimates, which indicate that the MCMC chains did not converge (see [Appendix 3][Appendix 3: Convergence Diagnostics for CPT Parameters]).   
 
-```{r eval=FALSE}
-cpt_long %>% 
-  filter(parameter == "delta", a!= 1) %>% 
-  ggplot(aes(x=s, y = mean, color = s)) +
-  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  geom_point(size = 2) +
-  scale_color_scico(palette = "acton") + 
-  scale_x_continuous(breaks = seq(0,1,.2)) +
-  facet_grid(boundary~a) + 
-  theme_minimal() 
+<!-- Plots Appendix -->
+
+```{r A-data, include=FALSE}
+#load choice data
+choices_c <- read_csv("data/choices/choices_comprehensive.csv", col_types = cols_choices)
+cpt_c <- read_csv("data/estimates/estimates_cpt_comprehensive.csv", col_types = cols_cpt)
 ```
 
+```{r A-choice-rates, fig.height=7, fig.width=10, include=FALSE}
+#prepare data
+fr_rates_c <- choices_c %>%
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"),
+         ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2),
+         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B"))
 
-```{r eval=FALSE}
+fr_rates_c_l <- fr_rates_c %>%
+  filter(!is.na(norm)) %>%
+  group_by(s, boundary, a, rare, norm, choice) %>% 
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2),
+         type = case_when(norm == "A" & choice == "B" ~ "Safe",
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>%
+  select(-c(norm, choice, n)) %>%
+  mutate(norm_ev = "Latent")
 
-# Density Plot 
+fr_rates_c_s <- fr_rates_c %>%
+  filter(!is.na(norm_exp)) %>%
+  group_by(s, boundary, a, rare, norm_exp, choice) %>%
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2),
+         type = case_when(norm_exp == "A" & choice == "B" ~ "Safe",
+                          norm_exp == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>%
+  select(-c(norm_exp, choice, n)) %>%
+  mutate(norm_ev = "Sample")
 
-cpt_long %>% 
-  filter(parameter == "gamma" | parameter == "delta") %>% 
-  ggplot(aes(x = s, y = mean)) +
-  geom_density_2d_filled(contour_var = "ndensity") + 
-  scale_fill_scico_d(palette = "acton") +
-  scale_color_scico_d(palette = "acton") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
-  labs(x ="Switching Probability",
-       y = "Parameter Value",  
-       fill="Density") + 
-  facet_grid(parameter~a) + 
+fr_rates_c <- bind_rows(fr_rates_c_l, fr_rates_c_s) %>%
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]",
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"))
+
+fr_rates_c %>%
+  ggplot(aes(s, rate)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
+                                         a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = "Switching Probability",
+       y = "False Response Rate",
+       color = "Normative\nExpected\nValue",
+       shape = "False\nResponse\nType") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  geom_point(aes(color = norm_ev, shape = type)) +
+  scale_shape_manual(values = c(4, 16)) +
+  scale_color_viridis_d(option = "plasma", end = .7) +
   theme_apa()
 ```
 
-```{r eval=FALSE}
+```{r A-weighting-parameters, fig.height=7, fig.width=10, include=FALSE}
+#prepare data
+cpt_c <- cpt_c %>% mutate(boundary = if_else(boundary == "absolute", "Absolute", "Relative"))
 
-# Scatter Plots 
+#plot estimates
 
-# Gamma 
+##gamma
+gamma_c <- cpt_c %>%
+  filter(parameter == "gamma") %>%
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = element_blank(),
+       y = expression(gamma),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_shape_manual(values = c(4, 16)) +
+  scale_color_viridis(option = "plasma") +
+  theme_apa() 
 
-cpt_wide %>% 
-  ggplot(aes(x = s, y = gamma, color = s)) +
-  geom_point(size = 2) +
-  geom_line(size = 1) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(breaks = seq(0, 2, .2)) +
-  facet_grid(boundary~a) +
-  labs(title = expression(paste("Curvature ", gamma)),
-       x ="Switching Probability",
-       y = expression(gamma), 
-       color="Switching Probability") + 
-  theme_minimal()
-
-# Delta
-
-cpt_wide %>% 
-  ggplot(aes(x = s, y = delta, color = s)) +
-  geom_point(size = 2) +
-  geom_line(size = 1) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(breaks = seq(0, 2, .2)) +
-  facet_grid(boundary~a, switch = "y") +
-  labs(title = expression(paste("Curvature ", delta)),
-       x ="Switching Probability",
-       y = expression(delta), 
-       color="Switching Probability") + 
-  theme_minimal()
-```
-
-Below, the resulting probability weighting functions are displayed. 
-
-```{r eval=FALSE}
-
-# Weighting Functions 
-
-## compute decision weights 
-
-cpt_w <- cpt_wide %>% 
-  select(-c(alpha, rho)) %>% 
-  expand_grid(ep = seq(0, 1, .1)) %>% #
-  mutate(w = round(  (delta * ep^gamma)/ ((delta * ep^gamma)+(1-ep)^gamma), 2)) 
-
-## plot curves
-
-cpt_w %>% 
-  group_by(boundary, a, s) %>% 
-  ggplot(aes(x = ep, y = w, color = s)) +
-  geom_path() + 
-  scale_color_scico(palette = "tokyo") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .2)) + 
-  labs(x ="Experienced Probability",
-       y = "Probability Weighting", 
-       color="Switching Probability") + 
-  theme_minimal()
-
-cpt_w %>% 
-  group_by(boundary, a, s) %>% 
-  ggplot(aes(x = ep, y = w, color = s)) +
-  geom_path(size = 1) + 
-  scale_color_scico(palette = "tokyo") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .2)) + 
-  facet_grid(boundary~a) +
-  labs(x ="Experienced Probability",
-       y = "Probability Weighting", 
-       color="Switching Probability") + 
-  theme_dark()
-```
-
-The false response rates for different parameter values of the generating model reflect the probability weighting patterns from above. 
-That is, the strong curvature resulting from large switching probabilities produces an underweighting of small probabilities. This in turn has the effect that the rarity of an attractive (unattractive) outcome leads to higher rates of choosing the safe (risky) prospect although the risky (safe) prospect had a higher experienced expected value.
-
-```{r eval=FALSE}
-
-# compute false response rates
-
-fr_rates <- choices %>% 
-  mutate(ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2), # experienced EV (eEV)
-         norm = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) %>% # normative choice according to eEV
-  filter(!is.na(norm)) %>% # exclude trials with normative indifferent prospects
-  group_by(s, boundary, a, rare, norm, choice) %>% # group correct and incorrect responses
-  summarise(n = n()) %>% # absolute numbers 
-  mutate(rate = round(n/sum(n), 2), # response rates 
-         type = case_when(norm == "A" & choice == "B" ~ "false safe", norm == "B" & choice == "A" ~ "false risky")) %>% filter(!is.na(type))  # remove correct responses
-
-# violin scatter plot
-
-fr_rates %>% 
-  ggplot(aes(x = rare, y = rate, color = s)) +
-  geom_quasirandom(aes(shape = type), size = 3) +  
-  scale_y_continuous(breaks = seq(0, 1, .2)) +
-  scale_color_scico(palette = "buda") + 
-  scale_shape_manual(values=c(8, 16))+
-  labs(x = "Rare Event", 
-       y = "False Response Rate", 
-       color = "Switching Probability",
-       shape = "False Response") + 
-  theme_minimal() 
-```
-
-```{r eval=FALSE}
-fr_rates %>% 
-  ggplot(aes(a, s, fill = rate)) + 
-  geom_tile(colour="white", size=0.1) +
-  scale_fill_scico(palette = "buda") + 
-  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
-  scale_x_continuous(expand=c(0,0), breaks = seq(1, 5, 1)) +
-  scale_y_continuous(expand=c(0,0), breaks = seq(.1, 1, .1)) +
-  labs(title = "False Response Rates", 
-       x = "a", 
-       y= "s", 
-       fill = "% False Responses") + 
-  theme_minimal() 
-
-
-fr_rates %>% 
-  ggplot(aes(s, rate, color = s)) + 
-  facet_grid(type ~ fct_relevel(rare, "attractive", "none", "unattractive"), switch = "y") +
-  geom_jitter(size = 3) + 
-  scale_x_continuous(breaks = seq(0, 1, .1)) +
-  scale_y_continuous(breaks = seq(0, 1, .1)) +
-  scale_color_scico(palette = "buda") + 
-  labs(title = "False Response Rates", 
-       x = "s", 
-       y= "% False Responses", 
-       color = "a") + 
-  theme_minimal()
-```
-
-<!-- Weighting function -->
-
-```{r eval=FALSE}
-
-# Density Plot 
-
-cpt_wide %>%
-  ggplot(aes(x = s, y = alpha)) +
-  geom_density_2d_filled(contour_var = "ndensity") + 
-  scale_fill_scico_d(palette = "grayC") +
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(limits = c(0,2), breaks = seq(0, 2, .2)) +
-  labs(x ="Switching Probability",
-       y = "Parameter Value",  
-       fill="Density") + 
+##delta
+delta_c <- cpt_c %>%
+  filter(parameter == "delta") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
   facet_wrap(~a, nrow = 1) + 
-  theme_minimal()
+  labs(x = "Switching Probability",
+       y = expression(delta),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  theme_apa() + 
+  theme(strip.text.x = element_blank()) #omit facet labels
+
+##merge figures
+ggarrange(gamma_c, delta_c, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
 ```
 
-```{r eval=FALSE}
-# value function 
+```{r A-value-parameters, fig.height=7, fig.width=10, include=FALSE}
+#plot estimates
 
-## compute values 
+##alpha
+alpha_c <- cpt_c %>%
+  filter(parameter == "alpha") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = element_blank(),
+       y = expression(alpha),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  theme_apa()
 
-cpt_v <- cpt_wide %>% 
-  select(-c(gamma, delta, rho)) %>% 
-  expand_grid(x = seq(0, 20, 2)) %>%  
+##rho
+rho_c <- cpt_c %>%
+  filter(parameter == "rho") %>% 
+  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  facet_wrap(~a, nrow = 1) + 
+  labs(x = "Switching Probability",
+       y = expression(rho),
+       color = "Switching\nProbability",
+       shape = "Boundary") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1,.5)) +
+  geom_point() +
+  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  scale_color_viridis(option = "plasma") +
+  scale_shape_manual(values = c(4, 16)) +
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+##merge figure
+ggarrange(alpha_c, rho_c, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
+```
+
+```{r A-cpt-graphs, fig.height=7, fig.width=10, include=FALSE}
+#prepare data
+
+##compute images of weighting and value function
+
+###weighting function
+wf_c <- cpt_c %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(alpha, rho)) %>%
+  expand_grid(p = seq(0, 1, .05)) %>%
+  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
+
+###value function
+vf_c <- cpt_c %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(gamma, delta, rho)) %>%
+  expand_grid(x = seq(0, 20, .5)) %>%  
   mutate(v = round(x^alpha, 2)) 
 
-## plot curves
+##split data to avoid passing two y-values to the same x-value in geom_line()
+wf_c_a <- wf_c %>% filter(boundary == "Absolute")
+wf_c_r <- wf_c %>% filter(boundary == "Relative")
+vf_c_a <- vf_c %>% filter(boundary == "Absolute")
+vf_c_r <- vf_c %>% filter(boundary == "Relative")
 
-cpt_v %>% 
-  group_by(boundary, a, s) %>% 
-  ggplot(aes(x = x, y = v)) +
-  geom_path(aes(color = s)) +
-  scale_color_scico(palette = "grayC") + 
-  scale_x_continuous(breaks = seq(0, 20, 5)) +
-  scale_y_continuous(breaks = seq(0, 20, 5)) + 
-  labs(title = "Value Function",
-       x ="Objective Value",
-       y = "Subjective Value", 
-       color="Switching Probability") + 
-  theme_minimal()
+#plots 
 
-cpt_v %>% 
-  group_by(boundary, a, s) %>% 
-  ggplot(aes(x = x, y = v)) +
-  geom_path(aes(color = s)) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 20, 5)) +
-  scale_y_continuous(breaks = seq(0, 20, 5)) + 
-  facet_wrap(~a) +
-  labs(title = "Value Function",
-       x ="Objective Value",
-       y = "Subjective Value", 
-       color="Switching Probability") + 
-  theme_minimal()
+##weighting function
+weight_c <- wf_c_a %>% 
+  ggplot(aes(p, w, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Experienced Probability",
+       y = "Decision Weight",
+       color = "Switching\nProbability") +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
+  geom_line(size = .5) +
+  geom_line(data = wf_c_r, size = .5) + 
+  scale_color_viridis(option = "plasma") +
+  theme_apa()
+
+##value function
+value_c <- vf_c_a %>% 
+  ggplot(aes(x, v, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1)+ 
+  labs(x = "Objective Outcome",
+       y = "Subjective Value",
+       color="Switching\nProbability") +
+  scale_x_continuous(breaks = seq(0, 20, 10)) +
+  scale_y_continuous(breaks = seq(0, 20, 10)) +
+  geom_line(size = .5) +
+  geom_line(data = vf_c_r, size = .5) + 
+  scale_color_viridis(option = "plasma") +
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
+
+##merge figures
+ggarrange(weight_c, value_c, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right", labels = "AUTO") 
 ```
-
-```{r eval=FALSE}
-
-# alpha
-cpt_wide %>% 
-  ggplot(aes(x = s, y = alpha, color = s)) +
-  geom_point(size = 2) +
-  geom_line(size = 1) +
-  scale_color_scico(palette = "buda") + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) + 
-  scale_y_continuous(breaks = seq(0, 2, .2)) +
-  facet_grid(boundary~a, switch = "y") +
-  labs(title = expression(alpha),
-       x ="Switching Probability",
-       y = expression(alpha), 
-       color="Switching Probability") + 
-  theme_minimal()
-```
-
-<!-- Old
-
-Given that the choice is perfectly systematic---as opposed to random or noisy---the chosen alternatives in $I'$ should share some property or combination of several properties which the other alternatives in the complementary subset $I \setminus I'$ do not possess.
-In the following, I will refer to statements about properties that serve to distinguish between the chosen and non-chosen alternatives as *selection criteria*. 
-
-Often, however, the properties used by the mind to make a choice are not readily described and cannot be directly evaluated [cf. @brunswikRepresentativeDesignProbabilistic1955; see @brunswikPerceptionRepresentativeDesign1956, for a detailed treatment]; rather, proper descriptions must be inferred from whatever information the inputs provide about the properties of choice alternatives, using transformation rules, statistical generalizations, or both.
-Since how the inputs are represented determines the information that is made explicit and the costs at which certain operations can be carried out on that information, the feasibility and ease of these inferences depends greatly on the choice of *representation* [@marrVisionComputationalInvestigation1982; see also, e.g., @gigerenzerHowImproveBayesian1995; @griffithsProbabilisticModelsCognition2010; @kempStructuredStatisticalModels2009].
-Hence, to explain how the mind makes a selection among choice alternatives, one needs to understand the output controlling properties, i.e., the applied selection criteria, the representation that is used to describe these properties, and the costs of inferring the descriptions in that representation, including their susceptibility to distortions from uncertainty or noise. The process is sketched in Figure 1.  
-
-(ref:figure1) A rough computational level sketch of decision making as an information processing problem. To make a selection among choice alternatives on the basis of particular selection criteria, the mind requires explicit descriptions of the relevant properties before they can be evaluated. Descriptions are either readily available or must be inferred from the inputs.
-
-```{r fig.cap= "(ref:figure1)"}
-knitr::include_graphics("images/dm-sketch.png")
-```
-
-In what follows, the paper elaborates on the concepts touched upon thus far, certainly only a subset of the factors involved in the decision making process, yet central enough to illustrate a rather important principle:
-Given that the mind is indeed sensitive to variations in the property values, the more accurately their descriptions are inferred, the more systematic the choices should become.
-Importantly, this principle is not restricted to any one specific property. 
-Rather, each selection criterion or combination thereof imposes constraints on the assessment of choice alternatives, leading to characteristic choice patterns that are eventually blurred by inaccurate property descriptions.
-
-For the sake of example, I argue that a choice pattern robustly emerging in *decisions from experience* (DfE), the apparent underweighting of small probability events [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; see also @wulffMetaanalyticReviewTwo2018, for a meta-analytic review], may be caused by the assessment constraints associated with a round-wise decision strategy.
-This particular claim has already been made by @hillsInformationSearchDecisions2010 and follows quite directly from probability theory.
-However, the current paper suggests to subordinate decision strategies to the adoption of selection criteria and addresses in some detail two "problems" in the context of DfE, in which descriptions of the properties of choice alternatives must be inferred from sampling data.
-
-For one, there is an *induction problem*, well known from inferential statistics, according to which the sample size determines the margin of error within which any true property of a choice alternative can be inferred, given an otherwise perfect inference process. 
-Yet, it follows that if an underweighting pattern is caused by the adoption of an arbitrary selection criterion, it is *a priori* predicted to become more stable with increasing sample size. 
-This prediction is in line with the principle already stated above, i.e., that selection-criteria-induced choice patterns should become more systematic as property descriptions become more accurate.
-Nevertheless, the prediction contrasts the explanation that underweighting is caused by the reliance on small samples [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @rakowBiasedSamplesNot2008], highlighting that outside of the *statistical* models used to describe the choice data, *causal* decision making models of quite different nature may be at play, and that a rather important difference between these causal models resides in the selection criteria they incorporate.
-I will elaborate on this matter as I proceed, however, to be clear from the outset, what the mind does in neither case is performing a probability weighting computation in its literal sense, but it processes the inputs in a way that the outputs approximate the solutions of what can be considered probability weighting on an abstract computational level [cf., e.g., @griffithsRationalUseCognitive2015]. 
-
-For another, this paper approaches the problem of organizing the sampling data in such a way that it allows chains of inferences connecting the input set $I$ with the output set $I' \subset I$ that are algorithmically short and simple enough to be carried out by minds whose cognitive capacities are bounded [cf. @simonInvariantsHumanBehavior1990; @simonBehavioralModelRational1955]. 
-This may be considered a *representation problem* since the inference chains are constructed around explicit descriptions of the properties of choice alternatives and representations are the "formal schemes" of symbols and rules with which these descriptions are derived [@marrRepresentationRecognitionSpatial1978, p. 270]. 
-Specifically, representations differ in how they organize the information used to infer the descriptions of certain properties and these organizations determine the algorithms that can be built into the inference chain [@marrVisionComputationalInvestigation1982].
-In this paper, *sampling strategies* in DfE are considered as representation systems used to organize the samples in a way that subserves the property inferences required by the application of particular selection criteria.
-Though most of my expositions on the role of sampling strategies remain speculative, the core idea is not new to decision research [see, e.g., @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
-By restating this idea and adopting some terms and concepts that have well defined meaning in math and cognitive science, I hope to integrate it into the rich study of the computationally limited mind as an adaptive cognitive system whose processes interact with the information structures in the environment or memory. 
-
-The theoretical arguments sketched in this introduction are substantiated by a simulation study. 
-For this purpose, the sampling and decision making processes are implemented in a computational model to simulate choice data from DfE.
-The simulated data is modeled in cumulative prospect theory (CPT), a data model commonly used for describing decisions under risk and uncertainty [@goldsteinExpressionTheoryPreference1987; see also @tverskyAdvancesProspectTheory1992]. 
-All simulations and analyses are reproducible---materials and instructions can be found on the GitHub repository.
-
-# Inputs to the Decision Making Process and Property Descriptions 
-
-By defining decision making as an information processing problem whose solution requires a selection among choice alternatives of the form described in (1), much weight is given to the properties of choice alternatives---whatever those may be for the moment---since it is only through them that any necessary distinction between the alternatives or collections thereof can be made. 
-To stress this point, consider the power set $\mathcal{P}(I)$, which is the set of all possible subsets of $I$ (see example in Figure 2). 
-
-(ref:figure2) A. The power set of the set $I$ including the choice alternatives A, B, and C. Black (white) circles indicate that an alternative does (not) possess a property. Each column displays a possible subset that could result from assessing whether the alternatives posses a relevant property. The properties determine the various relations among the choice alternatives. Note that properties resulting in the empty set $\{\}$ and the subset $\{A,B,C\}$ do not discriminate between choice alternatives. B. A Venn diagram visualizing the inclusion map $\iota : I' \mapsto I$. $\iota$ maps every element $i$ of the subset $I'$ to its image $i$, treated as element of the superset $I$.
-
-```{r fig.cap= "(ref:figure2)"}
-knitr::include_graphics("images/power-set.png")
-```
-
-Each of the subsets $I' \in \mathcal{P}(I)$ corresponds to a possible distinction between the choice alternatives in $I$ that could result from assessing for each alternative whether it possesses an arbitrary property (collection) or not [cf. @jostMathematicalConcepts2015, p. 16]. 
-The concept of the power set thereby illustrates how different selection criteria can alter the consequential choice.
-That is, in rather abstract terms, selection criteria are statements regarding the properties of choice alternatives that the mind evaluates as either true or false during the decision making process; accordingly, the subset $I'$ only contains the alternatives for which the statement is evaluated to be true.
-It follows that if there is some variance in the properties across choice alternatives and the properties are not perfectly correlated, changing the selection criteria can eventually change the subset $I'$.
-
-## What Are the Choice Alternatives and Their Properties? 
-
-Given (3), it is evident that the prospects can only be distinguished by the elements of their tuples. 
-These elements are, generally speaking, symbols, some of which describe properties on their own, e.g., the outcome $\omega$, whereas other properties can only be described by collections of symbols, e.g., the sample space $\Omega$ by a set of outcomes as in (2.1), or more complex combinations thereof, e.g., the weighted average which is obtained by first multiplying all outcomes in $\Omega$ by their respective probabilities in $P$ and then summing the resulting products.^[I do not refer to this quantity as expected value, since the term is reserved for random variables, which were not introduced so far.]
-In turn, for choices between prospects, selection criteria are statements about the elements of their tuples that are true or false and these statements imply relations among prospects that are at least nominal, but may also draw on other levels of measurement.  
-
-## Inferring Property Descriptions from Sampling Data
-
-Note that a selection criterion may refer to a property for which the raw input, i.e., the symbols, their organization, and the information they encode, do not yet provide an explicit description.
-Even more so, it has been repeatedly stated that for quite many decisions the mind faces, it is simply not possible to draw on direct descriptions of the properties, since they are part of the distal environment  [e.g., @brunswikOrganismicAchievementEnvironmental1943; @fiedlerExplainingSimulatingJudgment1996; @hertwigDescriptionexperienceGapRisky2009; see also @brunswikRepresentativeDesignProbabilistic1955; @brunswikPerceptionRepresentativeDesign1956; @kozyrevaInterpretationUncertaintyEcological2021].
-In either case, some form of description must be inferred from whatever information the input provides about the property in question.
-Consider first the counterfactual case of the prospect whose tuple is not part of the distal environment but is directly described. 
-Since all information about the prospect is given, one may in principle consider the input complete, yet, 
-the tuple implies properties of the prospect which are not explicitly described.
-For example, to obtain the description of the prospect's weighted average, still a calculus according to the algebraic rules described in the preceding paragraph must be carried out. 
-In general, in cases like the one just considered, where the properties are not distal and all information about them is available, property inferences take the form of a mere transformation, where the symbols from the input are ordered and combined according to some transformation rules [cf. @marrVisionComputationalInvestigation1982, p. 20].
-
-In natural world decisions, however, the properties of choice alternatives are often distal and amenable only through their probabilistic relation to proximal cues or samples, which provide the input to the decision making process [cf. @brunswikOrganismicAchievementEnvironmental1943].
-Such a proximal information basis is obtained by experience or, more technically, by *sampling*, and is neither consistent nor complete but varies in its degree of representativeness. 
-In turn, the mind is not merely required to transform the inputs but to draw inductive inferences to arrive at property descriptions which then, by definition, are only probable. 
-Importantly, the probability, or accuracy, of the description depends on both the sampling process that determines the representativeness of the sample and the use of the probabilistic information that is entailed in the sample [e.g., @fiedlerBewareSamplesCognitiveecological2000]. 
-
-To adapt (3) for the case of decisions from experience [@hertwigDecisionsExperienceEffect2004], the tuples $(\Omega, \mathcal{F}, P)$ must be replaced by samples, which in this paper are treated as collections of independent and identically distributed (i.i.d.) random variables $X$.^[Note that this paper considers the counterfactual case where samples are random, although it has been stated that in the natural world samples are "virtually never random" [@fiedlerBewareSamplesCognitiveecological2000, p. 660]. To account for non-random sampling, e.g., in the form of sampling biases [e.g., @fiedlerBewareSamplesCognitiveecological2000] or dynamic information structures [e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015], the i.i.d-assumption would need to be dropped, which is out of the scope of this paper.]
-Specifically, random variables are defined as a measurable function 
-
-$$
-X: (\Omega, \mathcal{F})  \mapsto (\Omega', \mathcal{F'}) 
-\; ,
-\tag{4}
-$$
-
-where $\Omega'$ is a set of real numbered values $X$ can take and $\mathcal{F'}$ is a set of subsets of $\Omega'$. 
-I.e., $\Omega$ maps into $\Omega'$ such that correspondingly each subset $A' \in \mathcal{F'}$ has a pre-image $X^{-1}A' \in \mathcal{F}$, which is the set $\{\omega \in \Omega: X(\omega) \in A'\}$ [@kolmogorovFoundationsTheoryProbability1950, p. 21].
-
-
-$$
-\begin{aligned}
-  & \iota : I' \mapsto I, \ \text{where} \ I = \{X_{1i}, ..., X_{ki}\} \\
-  & i \in \{1, ..., N\} 
-  \; .
-\end{aligned}
-\tag{5}
-$$
-
-
-To provide a formal definition of sampling in risky choice, we make use of the mathematical concept of a random variable and start by referring to a prospect as *"risky"* in the case where $p(\omega) \neq 1$ for all $\omega \in \Omega$.
-Here, risky describes the fact that if agents would choose a prospect and any of its outcomes in $\Omega$ must occur, none of these outcomes will occur with certainty. 
-It is acceptable to speak of the occurrence of $\omega$ as a realization of a random variable $X$ defined on a prospect iff the following conditions (1) and (2) are met: 
-
-
-(2) The mapping is such that $X(\omega) = x \equiv \omega$. 
-
-In (2), $x \equiv \omega$ means that the realization of a random variable $X(\omega) = x$ is numerically equivalent to its pre-image $\omega$.  
-Given conditions (1) and (2), we denote any observation of $\omega$ as a *"single sample"*, or realization, of a random variable defined on a prospect and the act of generating a sequence of single samples in discrete time as *"sequential sampling"*. 
-Note that, since random variables defined on the same prospect are independent and identically distributed (iid), the weak law of the large number applies to the relative frequency of occurrence of an outcome $\omega$ in a sequence of single samples originating from the same prospect.
-Thus, long sample sequences in principle allow to obtain the same information about a prospect by sampling as by symbolic description.
-
-Consider now a choice between prospects $1, ..., k$.
-To construct a stochastic sampling model for DfE, we assume that agents base their decision on the information related to these prospects and define a decision variable as a function of the latter:
-
-$$
-D:= f((\Omega_1, \mathcal{F}_1, P_1), ..., (\Omega_k, \mathcal{F}_k, P_k))
-\;.
-$$
-
-Now, since in DfE no symbolic descriptions of the prospects are provided, the model must be restricted to the case where decisions are based on sequences of single samples originating from the respective prospects:
-
-$$
-D := f(X_{i1}, ..., X_{ik}) 
-\; ,
-$$
-
-where $i \in \{1, ..., N\}$ denotes a sequence of length $N$ of random variables that are iid.  
-
-Concerning the form of $f$ and the measures it utilizes, it is quite proper to say that they reflect our assumptions about the exact kind of information agents process and the way they do and that these choices should be informed by psychological theory and empirical protocols. 
-Taking the case of different sampling and decision strategies previously assumed to play a role in DfE, the following section demonstrates how such assumptions can be explicated in a stochastic model that builds on the sampling approach outlined so far.  
-
--->
 
 # Summary and Conclusion
 
 \newpage
 
 # References
-
-<div id="refs"></div>
-
-\newpage
-
-
-# Appendix
