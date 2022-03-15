@@ -1,5 +1,5 @@
 
-```{r A-setup, include=FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = F, #omit messages
                       fig.align = "l", #align figures to left margin
                       fig.pos = "t")

@@ -51,8 +51,7 @@ header-includes:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, #omit messages
                       fig.align = "l", #align figures to left margin
-                      fig.pos = "t"
-                      )
+                      fig.pos = "t")
 ```
 
 ```{r packages, include=FALSE}
@@ -72,46 +71,49 @@ pacman::p_load(papaja,
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the choice alternatives between which people can choose.
 In fact, irrespective of their exact specification, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and returns a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
 
-Now, let a *prospect* be a choice alternative that possesses only two kinds of properties: the possible outcomes of the alternative and the probabilities with which these outcomes occur following its choice.
+Now, let a *prospect* be a choice alternative that possesses only two kinds of primitive properties: the possible outcomes of the alternative and the probabilities with which these outcomes occur following its choice.
 Importantly, the information that inputs provide about the properties of a prospect can come in different forms.
 For example, in *decisions from description* (DfD), inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
 Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004], these properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred when the prospect was chosen in past decisions.
-The inputs to DfE therefore take the form of sets of sampled outcomes (hereafter: samples).
-Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
+The inputs to DfE therefore take the form of sampled outcomes.
+Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taken a rather general perspective---there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap, empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be objectively warranted by the principle of mathematical expectation; in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
-Similar to other behavioral phenomena that could be explained by assuming that the mind is sensitive to the composition of the samples on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE could be explained by assuming that the mind is sensitive to the information provided by the small samples that people tend to rely on [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
-That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequency with which a prospect's outcome occurs in a sample of infinite size converges almost surely to its objective probability.
-In such a case, then, according to the de Moivre-Laplace theorem, the binomial distribution associated with each prospect's outcome can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
+Similar to other behavioral phenomena that could be explained by assuming that the mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE could be explained by assuming that the mind is sensitive to the information provided by the small samples that people tend to rely on [see @hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+That is, following from the laws of large numbers [LLN, see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
+In such a case, or in the less strict case of large samples, then, the binomial distributions of the outcomes can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
 However, for small samples, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
-As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes.
 
-One class of process models that link the actual sampling process to the decision-making process and can account for the as-if underweighting of rare outcomes by assuming a reliance on small samples, are sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004].
+One class of process models that provide a mechanistic link between the actual sampling process, the reliance on small samples, and the as-if underweighting of rare outcomes are sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004].
 That is, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
-To relate the sampling process to the final choice, sequential sampling models assume that the information-processing chain upfront the final choice takes the form of an evidence accumulation process over time, with choices becoming more accurate the more evidence must be accumulated.
-Specifically, the models assume that the sampled outcomes are sequentially accumulated into one or more dynamic decision variables and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
-Now, since the thresholds determine how much (more) evidence a prospect must accumulate in order to be chosen and since the amount of evidence for either prospect can only increase by sampling, these models predict, ceteris paribus, an as-if underweighting of rare outcomes for low thresholds [see @markantModelingChoiceSearch2015].
-In other words, a decrease in the threshold leads to a decrease in the number of sampled outcomes that are required to reach this threshold. 
-Accordingly, for low thresholds, small-probability outcomes are predicted to contribute less to the accumulated evidence than warranted by their objective probability. 
+To relate the sampling process to the final choice, sequential sampling models assume that the information-processing chain upfront the choice takes the form of an evidence accumulation process over time, with choices becoming more accurate the more evidence must be accumulated.
+Specifically, these models assume that the sampled outcomes are sequentially accumulated into one or more dynamic decision variables and that a choice is made once a decision variable exceeds a threshold in favor for one of the prospects.
+Now, since the thresholds determine how much (more) evidence a prospect must accumulate in order to be chosen and since the amount of evidence for either prospect can only increase by sampling more outcomes, these models predict, ceteris paribus, an as-if underweighting of rare outcomes for low thresholds [see @markantModelingChoiceSearch2015].
+In other words, a decrease in the threshold leads to a decrease in the number of outcomes that must be sampled to reach this threshold.
+Because of the skewness of their binomial distribution, then, small-probability outcomes are predicted to contribute less to the accumulated evidence than would be warranted by their objective probabilities.
+In turn, the higher a threshold, and thus the higher the number of outcomes that must be sampled to reach this threshold, the more should the amount of evidence contributed by small-probability outcomes correspond to what would be objectively warranted.
 
-Yet, some studies found the as-if underweighting of rare outcomes in DfE to appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
-While this finding demonstrates that the as-if underweighting of rare outcomes in DfE cannot be reduced to a small overall number of sampled outcomes, it may still be the case that the respective deviations from the principle of mathematical expectation were caused by the reliance on small samples.
-For example, given a large overall number of sampled outcomes, an as-if underweighting of rare outcomes could be explained, if only a small subset of all the sampled outcomes was considered for the assessment of prospects.
-<!---->
+Yet, the as-if underweighting of rare outcomes in DfE may appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+While this suggests that the as-if underweighting of rare outcomes in DfE cannot be reduced to a small overall number of sampled outcomes, this paper emphasizes that it may still be the case that the respective deviations from the principle of mathematical expectation were caused by the reliance on small samples.
+That is, there may be a discrepancy between the overall number of sampled outcomes and the size of the samples that are actually used to evaluate the prospects or to make an inference about their latent properties, respectively.
+Accordingly, one approach to explain the as-if underweighting of rare outcomes in the light of a large overall number of sampled outcomes is to assume that some of the sampled outcomes are discounted or ignored in the evaluation of prospects.
+For example, some studies suggest that outcomes that were sampled more recently receive more weight in the evaluation of a prospect [see @hertwigDecisionsExperienceEffect2004] or that only those outcomes are considered right before a decision that followed some sequential pattern [see @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015].
 
-Yet, in another approach, @hillsInformationSearchDecisions2010 propose a dependency between sampling patterns and decision strategies.
-Considering the choice between two prospects, this approach distinguishes sampling patterns along the frequency of switches between the prospects during the sampling phase and assumes that only outcomes that were sampled from the same prospect between switches are integrated into the same sample. 
+
+Specifically, a core assumption of this paper is that any number of sampled outcomes from a prospect may either be integrated into the same sample or into multiple respectively smaller samples, and that each of these samples serves an independent evaluation of a prospect.
+Accordingly, to explain the as-if underweighting of rare outcomes in the light of a large overall number of sampled outcomes,  
+
+his paper presents a process model that can explain an as-if underweighting of rare outcomes, this approach differs in two respects from other approaches:
+It does not assume that the overall number of sampled outcomes is small and it does also not assume that some of the sampled outcomes are discounted or ignored.
+
+
+Rather, in another approach, @hillsInformationSearchDecisions2010 propose a dependency between sampling patterns and decision strategies that provides a link between the reliance on small samples and the as-if underweighting of rare outcomes that does not assume a discounting or omission of sampled outcomes. 
+Considering the choice between two prospects, this approach distinguishes sampling patterns along the frequency of switches between the prospects during the sampling phase and assumes that only outcomes that were sampled from the same prospect between switches are integrated into the same sample.
 Then, it is assumed that each time after a new sample for both prospects was generated, their means are compared, and the choice is determined by the number of won comparisons.^[<!--Open footnote-->Note that @hillsInformationSearchDecisions2010 describe only the two paradigmatic cases, where prospects are either switched just once (comprehensive sampling) or after each sampled outcome (piecewise sampling). Accordingly, in the former case choices depend on a single comparison between the means of samples that contain all outcomes sampled for the respective prospect (summary strategy); in the latter case, however, choices depend on multiple comparisons between samples that contain only one sampled outcome (round-wise strategy). Nevertheless, Hills and Hertwig [-@hillsInformationSearchDecisions2010, p. 1788] acknowledge that "many [sampling] strategies will fall on the continuum between [these cases]", which is why the general description is used above.<!--Close footnote-->]
 Since each comparison is weighted equally, such a link between sampling patterns and decision strategies can explain an as-if underweighting of rare outcomes despite a large overall number of sampled outcomes being considered.
 More specifically, while the probability of a rare outcome to be sampled increases with the overall number of sampled outcomes, an increasing switching frequency causes the rare outcome not to be considered in an increasing number of comparisons.
-
-Now, this paper integrates both approaches to discuss in some more detail how the effect of small samples may exert its influence on the choices between two prospects in DfE.
-The main argument here is that whereas the reliance on small samples generally explains the as-if underweighting of rare outcomes in DfE, this explanation cannot be equated with inaccurate inferences about the latent properties of prospects that carry over to the subsequent choices.
-Rather the opposite can be the case.
-That is, the latent properties may imply different relations among the prospects in the form that choices according to the differences in one latent property may not coincide with the choices according to the differences in another latent property.
-Hence, although technically the reliance on small samples caused deviations from the principle of mathematical expectation, these deviations may reflect an accurate assessment of differences in a latent property other than the expected values.
 
 To substantiate this claim, this paper defines a *sampling strategy* as the probability of sampling outcomes from different prospects in direct succession (hereafter: switching probability) and presents a sequential sampling model that accumulates the evidence obtained from the comparisons between sample means.
 More specifically, similar to @hillsInformationSearchDecisions2010, the model only integrates the outcomes that are sampled from the same prospect between switches into the same sample and each time after a new sample for both prospects was generated, their respective means are compared.
@@ -122,6 +124,14 @@ That is, for a decreasing switching probability, the number of outcomes that are
 Accordingly, the model shows how with decreasing switching probability a mean comparison becomes more indicative for differences of the prospects in their expected values.
 In turn, for an increasing switching probability, the number of outcomes that are successively sampled from a given prospect decreases such that the size of the sample decreases.
 Accordingly, the growing sequence of sample comparisons becomes more indicative for which prospect produces the higher outcomes most of the time.
+
+Now, this paper integrates both approaches to discuss in some more detail how the effect of small samples may exert its influence on the choices between two prospects in DfE.
+The main argument here is that whereas the reliance on small samples generally explains the as-if underweighting of rare outcomes in DfE, this explanation cannot be equated with inaccurate inferences about the latent properties of prospects that carry over to the subsequent choices.
+Rather the opposite can be the case.
+That is, the latent properties may imply different relations among the prospects in the form that choices according to the differences in one latent property may not coincide with the choices according to the differences in another latent property.
+Hence, although technically the reliance on small samples caused deviations from the principle of mathematical expectation, these deviations may reflect an accurate assessment of differences in a latent property other than the expected values.
+
+
 
 # The Description of Choices in CPT
 
@@ -857,6 +867,16 @@ ggarrange(weight_c, value_c, ncol = 1, nrow = 2, common.legend = TRUE, legend = 
 \newpage
 
 # References
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('manuscript_appendix.Rmd')
+```
+
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('manuscript_appendix.Rmd')
+```
+
 
 ```{r echo = FALSE, results = 'asis', cache = FALSE}
 papaja::render_appendix('manuscript_appendix.Rmd')
