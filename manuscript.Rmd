@@ -57,6 +57,7 @@ knitr::opts_chunk$set(echo = F, #omit messages
 ```{r packages, include=FALSE}
 #load required packages
 pacman::p_load(papaja,
+               knitr,
                readr,
                tidyr, 
                dplyr,
@@ -79,7 +80,7 @@ Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004]
 The inputs to DfE therefore take the form of sampled outcomes.
 Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructBehaviorGap2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-empirical choice patterns indicate that in DfD people choose as if a small-probability outcome is given more weight in the evaluation of a prospect than would be warranted by its objective probability, following the principle of mathematical expectation (see below);
+empirical choice patterns in DfD deviate from the principle of expected value (EV) maximization (see below) as if a small-probability outcome is given more weight than would be warranted by its objective probability;
 in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcome is given less weight than would be objectively warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
@@ -88,7 +89,7 @@ Specifically, following from the laws of large numbers [see, e.g., @kolmogorovFo
 In such a case, then, or in the less strict case of large samples, the binomial distributions of the outcomes can be approximated by a symmetric normal distribution [cf. @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015].
 However, for samples of small size, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
-As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities and to follow the principle of mathematical expectation, the reliance on small samples could explain the as-if underweighting of rare outcomes.
+As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities and to follow the principle of EV maximization, the reliance on small samples could explain the as-if underweighting of rare outcomes.
 
 <!--Now, sequential sampling models of decision making [e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993; @markantModelingChoiceSearch2015; @ratcliffComparisonSequentialSampling2004] form one class of process models that provide an algorithmic link between the actual sampling process and the choices in DfE.
 That is, in one paradigm used to study DfE, namely, the sampling paradigm [see @weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
@@ -126,14 +127,14 @@ Thus, the model presented in this paper is such that the higher (lower) the swit
 
 Moreover, this paper demonstrates in a computational analysis that the evaluation of prospects, while taking into account an increasing number of sampled outcomes, can rely on multiple small samples, causing an as-if underweighting of rare outcomes.
 Specifically, considering choices between a two-outcome prospect and a safe prospect, the proposed model is used to simulate the evidence accumulation process for different combinations of switching probabilities and threshold values.
-Then, on the basis of choice rates and parameter estimates of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993], it is shown that the simulated choices converge to the solutions of the principle of mathematical expectation for decreasing switching probabilities, but reflect an increasingly pronounced as-if underweighting of rare outcomes, the more the switching probabilities increase. 
+Then, on the basis of choice rates and parameter estimates of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993], it is shown that the simulated choices converge to the solutions of the principle of EV maximization for decreasing switching probabilities, but reflect an increasingly pronounced as-if underweighting of rare outcomes, the more the switching probabilities increase. 
 The analysis also shows that these differences between switching probabilities remain stable for different threshold values.
 Accordingly, the computational analysis substantiates the claim that the reliance on (multiple) small samples, but not necessarily the consideration of a small number of sampled outcomes, causes an as-if underweighting of rare outcomes in DfE.
 In other words, because the switching probabilities change the size of the samples underlying each mean comparison, the model predicts them to affect whether a low-probability outcome contributes to the majority of required mean comparisons about as much as would be warranted based on its objective probabilities, or whether they contribute rather less.
 Yet, since each comparison's contribution to the accumulated evidence is weighted equally in the form of round wins, the model does not predict the thresholds to have a similar effect.
 Rather, whatever systematic differences in the latent properties of prospects may be represented in a mean comparison, should be more accurately assessed as the thresholds---and therefore also the number of sampled outcomes that are taken into account during the evaluation of prospects---increase.
 To this end, this paper argues that the mind may rely on different sampling strategies or switching probabilities, respectively, to change for which differences in the latent properties of prospects evidence is accumulated.
-Before presenting the model and the computational analysis, the following section provides a formal definition of prospects and reviews how CPT can be used to describe choices between prospects in terms of deviations from the principle of mathematical expectation.
+Before presenting the model and the computational analysis, the following section provides a formal definition of prospects and reviews how CPT can be used to describe choices between prospects in terms of deviations from the principle of EV maximization.
 
 # Prospects and the Description of Choices in CPT
 
@@ -186,13 +187,13 @@ where each element $P'$ can itself be considered a set of outcome-probability pa
 
 ## CPT and the Concept of Probability Weighting
 
-The choices people actually make between prospects are often described in terms of deviations from the principle of mathematical expectation, according to which the prospect with the largest expected value (EV)
+The choices people actually make between prospects are often described in terms of deviations from the principle of EV maximization, according to which the prospect with the largest EV
 $$
 EV = \sum_i^n x_i \times p_X(x_i)
 \tag{6}
 $$ 
 should be chosen (EV maximization).
-To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, which were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the principle of mathematical expectation and the expected utility (EU) principle [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
+To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, which were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the principle of EV and expected utility (EU) maximization [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
 CPT and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing^[<!--Open footnote-->Note that CPT may be amended by a stochastic choice rule to account for the probabilistic nature of choices [@rieskampProbabilisticNaturePreferential2008]. Stochastic choice rules [@stottCumulativeProspectTheory2006, for an overview] make the choice of a prospect more probable the better its valuation relative to those of other prospects.<!--Close footnote-->]
 the value
 $$
@@ -283,7 +284,7 @@ wf %>%
        color = expression(gamma)) + 
   theme_apa() + 
   geom_line(aes(color = gamma)) +
-  scale_color_viridis(option = "plasma") + 
+  scale_color_viridis(option = "viridis") + 
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
 
@@ -301,7 +302,7 @@ That is, for $\delta < 1$, the interval on the cumulative probability scale over
 More specifically, $\delta$ shifts across the entire cumulative probability scale the intervals within which small differences between objective cumulative probabilities translate to either smaller or greater cumulative decision weights.
 In other words then, for any decrease (increase) in $\delta$, the underweighting of small probability outcomes extends to more outcomes at the lower (higher) end of the outcome range.
 
-To summarize the preceding paragraphs, CPT is data model that can be used to describe choices between prospects by capturing systematic deviations from the principle of mathematical expectation in the parameter estimates of its value and weighting function.
+To summarize the preceding paragraphs, CPT is data model that can be used to describe choices between prospects by capturing systematic deviations from the principle of EV maximization in the parameter estimates of its value and weighting function.
 Importantly, each estimated weighting function implies a weighting pattern.
 Although the possible weighting patterns depend on the exact parameterization of the weighting function [e.g., @goldsteinExpressionTheoryPreference1987], the latter's graph usually takes a more or less accentuated (inverse) S-shape, which implies a weighting pattern where small-probability outcomes of low and high rank are underweighted (overweighted) in CPT's overall evaluation of a prospect according to (7).
 Notably, for the case of choices between at most two-outcome prospects, the weighting pattern reduces to either an underweighting or overweighting of rare outcomes.
@@ -345,7 +346,7 @@ Now, since for a large overall number of sampled outcomes the summary strategy i
 
 ## Model 
 
-We consider the sampling paradigm and a choice between two prospects denoted by the distributions $P'^X$ and $P'^Y$ of the discrete random variables $X$ and $Y$, respectively.
+We consider the sampling paradigm and a choice between two prospects denoting the distributions $P'^X$ and $P'^Y$ of the discrete random variables $X$ and $Y$, respectively.
 The model assumes that the information-processing chain starts at random with a stochastic process on one of the two random variables.
 Specifically, it is assumed that an agent starts with equal probability to sample from one of the prospects, say $P'^X$, and generates a sequence of random variables $X_1, X_2,...$, where the mean over the sequence is computed or updated with each new outcome that is sampled.
 The respective stochastic process $\{S^X_n\}_{n \in \mathbb{N}}$ is defined by
@@ -357,8 +358,8 @@ $$
 and terminates as soon as an outcome is sampled from the other prospect.
 The switching probability $\psi \in (0,1]$, which is adopted prior the start of the information-processing chain and is fixed throughout, controls the probability with which outcomes from different prospects are sampled in direct succession.
 In other words, the switching probability is the probability with which the stochastic process on the current random variable stops and a new stochastic process on the other random variable starts with the subsequently sampled outcome.
-To implement an evidence accumulation process, the model assumes that each time after a new stochastic process was started and terminated on both random variables, their respective values are compared, with the prospect underlying the stochastic process with the greater final value receiving a round-win.
-Accordingly, for the prospect $P'^X$, this stage is modeled by the mapping
+To implement an evidence accumulation process, the model assumes that each time after a new stochastic process was started and terminated on both random variables, their respective values---i.e., the means over the sequences---are compared, with the prospect underlying the stochastic process with the greater final value receiving a round win.
+Accordingly, for the prospect $P'^X$, this stage is modeled as the mapping
 $$
 \begin{aligned}
   Z^X : \mathbb{R} &\to \mathbb{N} \\
@@ -372,7 +373,7 @@ $$
 \tag{13}
 $$
 where $Z^X$ is a random variable that takes only the two values $0$ and $1$, denoting a lost or won mean comparison, respectively. 
-The model assumes that a round consisting of two stochastic processes---i.e., one from each prospect---and the subsequent comparison of their values is repeated until the sum of round wins for one of the two prospects reaches a threshold $\theta \in \mathbb{N}$.
+The model assumes that a round consisting of a pair of stochastic processes---i.e., one for each prospect---and the subsequent comparison of their final values is repeated until the sum of round wins for one of the two prospects reaches a threshold $\theta \in \mathbb{N}$.
 Similar to the switching probability, it is assumed that the threshold is adopted prior the start of the information-processing chain and is fixed throughout.
 For $P'^X$, then, we obtain a sequence of independent comparisons $Z^X_1, Z^X_2, ...$ and model the respective evidence accumulation process as a random walk $\{D^X_m\}_{m \in \mathbb{N}}$ defined by 
 $$
@@ -389,6 +390,40 @@ Therefore, (13) may be adapted such that $Z$ takes the value $-1$ instead of $0$
 
 ### Model Predictions
 
+Below, the key predictions concerning the effects of the model parameters---i.e., the switching probability $\psi$ and the threshold $\theta$---on the length of the information-processing chain and the final choice are outlined.
+In addition, previous research has shown that differences as to how information about the properties of prospects is processed can translate to characteristic shapes of CPT's value and weighting function [see @pachurHowTwainCan2017; @zilkerNonlinearProbabilityWeighting2021].
+Respectively, this section also contains predictions about the potential relations between $\psi$ and $\theta$ and the CPT parameters.
+
+#### Length of Information-Processing Chain
+
+The model predicts the overall number of sampled outcomes to increase with thresholds.
+Specifically, the required number of independent mean comparisons increases with thresholds.
+Then, since each comparison is based on its own pair of stochastic processes, an increase in thresholds translates to a larger number of required stochastic processes and, ceteris paribus, therefore also to a larger overall number of sampled outcomes.
+In turn, the model predicts the overall number of sampled outcomes to decrease with increasing switching probabilities.
+Specifically, each stochastic process is predicted to terminate faster, the higher the probability that the subsequent outcome is sampled from the other prospect---i.e., the switching probability.
+Accordingly, an increase in the switching probability leads to shorter stochastic processes which translates, ceteris paribus, to a smaller overall number of sampled outcomes.
+
+#### Final Choice
+
+First note that the threshold and switching probability can be used to alter the degree to which the evidence accumulation process resembles the summary or the round-wise strategy.
+That is, for low thresholds and switching probabilities, only a few mean comparisons based on pairs of long stochastic processes---i.e., large samples---are carried out, thereby resembling the summary strategy.
+Accordingly, for such a parameter combination, the model tends to choose the prospect that possesses the larger EV.
+In turn, for high thresholds and switching probabilities, many mean comparisons based on pairs of short stochastic process---i.e., small samples---are carried out, thereby resembling the round-wise strategy.
+Accordingly, for such a parameter combination, the model tends to choose the prospect that is more likely to return a higher outcome.
+Yet, if the prospect that is more likely to return a higher outcome does not also possess the higher EV, the parameter combination resembling the round-wise strategy is predicted to cause a deviation form the principle of EV maximization.
+
+Now, more specifically, because the switching probability is predicted to alter the length of the stochastic processes underlying each mean comparison, the switching probability should affect whether a low-probability outcome contributes to the majority of the required mean comparisons about as much as would be warranted based on its objective probabilities, or whether it contributes rather less.
+Specifically, for short stochastic processes, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur over the course of such a process to be smaller rather than larger than their latent objective probabilities.
+Respectively, if the small-probability outcome is smaller (larger) than the expected value, high switching probabilities---and therefore pairs of short stochastic processes---cause the mean to be an inflated (deflated) estimate of the expected value.
+Thus, high switching probabilities are predicted to cause an as-if underweighting of rare outcomes that can translate to choices that deviate from the principle of EV maximization.
+In turn, low switching probabilities---and therefore pairs of long stochastic processes---cause the mean to closely correspond to the expected value, leading to choices that tend to conform the principle of EV maximization.
+
+Because each comparison’s contribution to the accumulated evidence is weighted equally, the predictions made for a given switching probability should become more robust as the thresholds and therefore the number of independent comparisons increases.
+The thresholds therefore serve to implement 
+
+
+#### Cumulative Prospect Theory
+
 ```{r eval=FALSE}
 predictions <- tibble("Simulation Pararameter" = c("s", "$\\theta$"),
                       "$\\gamma$" = c(0,0),
@@ -396,7 +431,6 @@ predictions <- tibble("Simulation Pararameter" = c("s", "$\\theta$"),
                       "$\\alpha$" = c(0,0))
 apa_table(predictions, caption = "Model Predictions", escape = FALSE)
 ```
-
 
 # Simulation Study
 
