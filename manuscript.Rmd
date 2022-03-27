@@ -71,7 +71,7 @@ pacman::p_load(papaja,
 
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the choice alternatives between which people can choose.
 Indeed, irrespective of their exact specification, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and return a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
-Therefore, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives.
+<!--Therefore, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives.-->
 
 Now, let a *prospect* be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
 Importantly, the information that the inputs provide about these properties can come in different forms.
@@ -80,21 +80,21 @@ Yet, in *decisions from experience* [DfE, @hertwigDecisionsExperienceEffect2004]
 The inputs to DfE therefore take the form of sampled outcomes.
 Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DfD and DfE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructBehaviorGap2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-empirical choice patterns in DfD deviate from the principle of expected value (EV) maximization (see below), as if people give more weight to small-probability outcomes than would be warranted by their objective probabilities;
-in turn, in DfE, ceteris paribus, people choose as if the same small-probability outcomes are given less weight than would be objectively warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+choice patterns in DfD deviate from the principle of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities;
+in turn, in DfE, choice patterns deviate from EV maximization as if the same small-probability outcomes are given less weight than would be objectively warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
 
-Similar to other behavioral phenomena that can be explained by assuming that the mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes in DfE can be explained by assuming that the mind is sensitive to the information provided by the small samples that people tend to rely on [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+Similar to other behavioral phenomena that can be explained by assuming that the mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [see @fiedlerBewareSamplesCognitiveecological2000], the as-if underweighting of rare outcomes can be explained by assuming that the mind is sensitive to the information provided by the small samples that people tend to rely on in DfE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
 More specifically, following from the laws of large numbers [see, e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
-In such a case or in the less strict case of large samples, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[<!--Open footnote-->The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large number of sampled outcomes. Respectively, for large samples, the relative relative frequencies with which an outcome occurs in the sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher and vice versa.<!--Close footnote-->]
+In such a case or in the less strict case of large samples, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[<!--Open footnote-->The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large number of sampled outcomes. Respectively, for large samples, the relative relative frequencies with which an outcome occurs in the sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.<!--Close footnote-->]
 However, for samples of small size, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 Thus, small-probability outcomes tend to be underrepresented in small samples and might not occur at all.
 As a consequence, were the mind to use the sampled relative frequencies of outcomes to infer their latent objective probabilities---without correcting for the sampling error---and to follow the principle of EV maximization, the reliance on small samples could explain the as-if underweighting of rare outcomes.
 
-Yet, studies show that the as-if underweighting of rare outcomes may appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes correspond closely to the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
-Respectively, in the current paper it is assumed that there may be a discrepancy between the overall number of sampled outcomes and the size of the samples that the mind relies on in the evaluation of prospects.
+Yet, some studies show that the as-if underweighting of rare outcomes may appear, even if the overall number of sampled outcomes is large and the relative frequencies across all sampled outcomes correspond closely to the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; see also @wulffMetaanalyticReviewTwo2018].
+Respectively, in the current paper it is assumed that there may be a disconnect between the overall number of sampled outcomes and the size of the samples the mind relies on in the evaluation of prospects.
 However, in contrast to other approaches, it is not assumed that some of the sampled outcomes are discounted [see, e.g., @hertwigDecisionsExperienceEffect2004, who assume recency effects] or ignored [see, e.g., @cohenEffectPerceivedPatterns2021; @plonskyRelianceSmallSamples2015, who assume that only outcomes that followed some sequential pattern are considered].
-Rather, assuming that any number of outcomes sampled from a prospect may either be integrated into the same sample or into multiple smaller samples, this paper presents a computational model that shows that---given a reliance on multiple small samples---an as-if underweighting of rare outcomes can occur, even if a large number of sampled outcomes is fully accounted for.
+Rather, assuming that any number of outcomes sampled from a prospect may either be integrated into the same sample or into multiple smaller samples, this paper presents an accumulation model that shows that---given a reliance on multiple or many small samples---an as-if underweighting of rare outcomes can occur, even if a large number of sampled outcomes is fully accounted for.
 
 Therefore, consider first the finding that *sampling strategies* were indicative for the final choice in DfE.
 Specifically, in one paradigm used to study DfE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
@@ -104,7 +104,7 @@ Respectively, in the current paper sampling strategies are defined as switching 
 <!--Close footnote-->] 
 and proposed two different decision strategies that people may adopt.
 That is, for a summary strategy, it is assumed that the prospect is chosen which produced the greater mean across all sampled outcomes.
-In turn, for a round-wise strategy, it is assumed that over multiple rounds one outcome from each of the two prospects is sampled and that the prospect is chosen for which in most of the rounds the higher outcome was sampled. 
+In turn, for a round-wise strategy, it is assumed that over multiple rounds two sampled outcomes---i.e., one from each of the prospects---are compared and that the prospect is chosen which won the comparison in most rounds.
 Then, @hillsInformationSearchDecisions2010 found that the choices of people who switched frequently between prospects during the sampling phase were better predicted by a round-wise strategy (rather than a summary strategy), and that this predictive pattern reversed for people who switched infrequently.
 
 Now, one explanation for such a reversed predictive pattern would be if the differences in the sampling strategies determine which of the two decision strategies is used.
@@ -112,12 +112,20 @@ To this end, this paper presents a computational model that provides a link betw
 Specifically, the proposed model accumulates the outcomes obtained from the comparisons between sample means, with switching probabilities determining the size of the samples underlying each mean comparison and thresholds determining how much (more) of such comparisons a prospect must win in order to be chosen.
 Accordingly, the model is such that the higher (lower) the switching probabilities and the higher (lower) the thresholds, the more the accumulation process resembles the round-wise (summary) strategy.
 
-Using the proposed model, this paper shows in a computational analysis that an as-if underweighting of rare outcomes can occur even if a large number of sampled outcomes is fully accounted for.
-Specifically, considering choices between a two-outcome prospect and a safe prospect, the model is used to simulate the accumulation process for different combinations of switching probabilities and thresholds.
-Considering choice rates and parameter estimates of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993], the analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
-Importantly, the analysis also shows that these differences between switching probabilities remain stable with increasing thresholds.
+The current paper discusses and demonstrates in a computational analysis how such a simple accumulation model can explain an as-if underweighting of rare outcomes, even if a large number of sampled outcomes is fully accounted for.
+More specifically, since the switching probabilities alter the size of the samples underlying each mean comparison, the model predicts the switching probabilities to affect whether a low-probability outcome contributes to the majority of required mean comparisons about as much as would be warranted by its objective probabilities, or whether it contributes rather less.
+Respectively, if the small-probability outcome is smaller (larger) than the EV, high switching probabilities cause the mean to be an inflated (deflated) estimate of the EV in most of the comparisons, which can translate to an as-if underweighting of rare outcomes, irrespective of what the thresholds determine the required number of mean comparisons to be.
+Yet, since the EV is not the only property which can be used to distinguish among the prospects, the proposed model shows how the mind may rely on different sampling strategies to change which differences in the latent properties of prospects evidence is accumulate for.
+Specifically, for low switching probabilities, the accumulation process unfolds over mean comparisons based on large samples and is therefore more indicative for differences in the EV; in turn, for high switching probabilities, the accumulation process unfolds over mean comparisons based on small samples and is therefore more indicative for differences in the probability to produce a higher outcome than the respective other prospect most of the time.
+In either case, then, the model implements a speed-accuracy trade-off of the form that the respective differences in the latent properties are more accurately assessed, the larger the thresholds are, i.e., the more evidence must be accumulated in favor of a prospect.
+
+To substantiate the discussion, the model is used to simulate the accumulation process for different combinations of switching probabilities and thresholds and to predict choices between a two-outcome prospect and a safe prospect, respectively.
+Considering choice rates and parameter estimates of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
+Importantly, the analysis also shows that the differences between switching probabilities become more pronounced with increasing thresholds.
 In other words, the proposed model predicts an as-if underweighting of rare outcomes to occur when high switching probabilities cause the accumulation process to unfold over mean comparisons that are based on small samples.
 Thus, the analysis substantiates the claim that not only the reliance on just a portion of a large number of sampled outcomes can explain an as-if underweighting of rare outcomes in DfE, but also the reliance on multiple or many small samples.
+Moreover, the analysis shows that an as-if underweighting of rare outcomes cannot be equated with inaccurate inferences about latent properties---e.g., the EVs---that carry over to the subsequent choices.
+Rather the opposite, an as-if underweighting of rare outcomes can also be caused by an accurate assessment of the differences among prospects in the latent probability to produce a higher outcome most of the time.
 Before presenting the model and the computational analysis, the following section provides a formal definition of prospects and reviews how CPT can be used to capture deviations from EV maximization.
 
 # Prospects and the Description of Choices in CPT
@@ -125,14 +133,14 @@ Before presenting the model and the computational analysis, the following sectio
 Since there is an uncountable number of choices people confront in the natural world, behavioral decision research routinely abstracts from choices between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
 Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
 These fundamental properties are considered the possible outcomes of a choice alternative and the probabilities with which these outcomes occur following the choice of the alternative.
-Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs are prospects (or: gambles).
+Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs are prospects.
 As such, prospects can be understood as the distribution of a discrete random variable, for which the following section briefly provides an axiomatic basis. 
 
 ## Formal Definition of Prospects
 
 Following @kolmogorovFoundationsTheoryProbability1950 and adopting the symbolic notation from @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, let the tuple $(\Omega, \mathcal{F}, P)$ be a probability space.
-Accordingly, $\Omega$ is a finite sample space with each element $\omega$ in $\Omega$ denoting a possible consequence of choosing the respective prospect.
-$\mathcal{F}$ is the power set $\mathcal{P}(\Omega)$ with each element $A$ in $\mathcal{F}$ being a subset of $\Omega$, also denoted a random event.
+Accordingly, $\Omega$ is a finite sample space with each element $\omega \in \Omega$ denoting a possible consequence of choosing the respective prospect.
+$\mathcal{F}$ is the power set $\mathcal{P}(\Omega)$ with each element $A \in \mathcal{F}$ being a subset of $\Omega$, also denoted a random event.
 $P$ is the probability measure
 $$
 P: \mathcal{F} \to [0,1]
@@ -167,7 +175,7 @@ $$
 \; ,
 \tag{5}
 $$
-where each element $P'$ can itself be considered a set of outcome-probability pairs $\{(x_i, p_X(x_i)\}$.
+where each element $P'$ can itself be considered a set of outcome-probability pairs $\{(x_i, p_X(x_i)\}_{i \in \mathbb{N}}$.
 
 ## CPT and the Concept of Probability Weighting
 
@@ -176,10 +184,9 @@ $$
 EV = \sum_i^n x_i \times p_X(x_i)
 \tag{6}
 $$ 
-should be chosen (EV maximization).
-To *describe* how people's actual choices deviate from this principle [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, which were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of the principle of EV and expected utility (EU) maximization [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
-CPT and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by maximizing^[<!--Open footnote-->Note that CPT may be amended by a stochastic choice rule to account for the probabilistic nature of choices [@rieskampProbabilisticNaturePreferential2008]. Stochastic choice rules [@stottCumulativeProspectTheory2006, for an overview] make the choice of a prospect more probable the better its valuation relative to those of other prospects.<!--Close footnote-->]
-the value
+should be chosen.
+To *describe* how people's actual choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, which were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of EV and expected utility (EU) maximization [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
+CPT and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by assuming that people maximize the value
 $$
 V = \sum_i^n v(x_i) \times \pi_i
 \; ,
