@@ -1,26 +1,35 @@
 ---
-title             : "Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation"
+title             : |
+  Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation
+  
 shorttitle        : "Sampling strategies"
 
 author: 
   - name          : "Linus Hof"
-    affiliation   : "1"
     corresponding : yes    
-    address       : "Department of Psychology, Heidelberg University, Hauptstraße 47-51, 69117 Heidelberg, Germany"
     email         : "linushof@posteo.de"
     
-affiliation:
-  - id            : "1"
-    institution   : "Heidelberg University"
+note: |
+    Unsubmitted draft created from the commit `r repro::current_hash()`
 
-note: | 
-  **Unsubmitted draft created from the commit with the hash**: ``r repro::current_hash()``
-  
+    
 authornote: |
- This is a dynamic document which can be reproduced from the accompanying GitHub repository: https://github.com/linushof/sampling-in-dfe. 
+ The article is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at
  
- The current version of this manuscript is prepared for submission as a master's thesis.
- Supervisors: Thorsten Pachur & Veronika Zilker.   
+ Heidelberg University
+ 
+ Faculty of Behavioural and Cultural Studies
+ 
+ Institute of Psychology
+   
+  \noindent
+  under the supervision of
+  
+  \indent
+  1. Prof. Dr. Thorsten Pachur, Technical University of Munich
+  
+  \indent
+  2. Dr. Veronika Zilker, Max Planck Institute for Human Development
  
 abstract: "In decisions from experience, systematic choices between prospects are based on the assessment of differences in their latent properties. Yet, distinct properties can be used to distinguish among the prospects and the choices may vary respectively. This paper presents a model that shows how the mind may rely on sampling strategies---i.e., the probability of sampling outcomes from different prospects in direct succession (switching probability)---to alter which differences in the latent properties evidence is accumulated for. Specifically, the model sequentially samples outcomes from two prospects and accumulates the results obtained from a sequence of ordinal comparisons between sample means, with switching probabilities determining the size of the samples underlying each comparison and thresholds determining how much comparisons a prospect must win to be chosen. In a computational analysis, the model is used to simulate the information-processing chain for choices between two prospects, while varying switching probabilities and thresholds. The analysis shows that the accumulation process provides evidence for differences in the expected values when low switching probabilities cause each comparison to be carried out on large samples. In turn, when high switching probabilities cause the accumulation process to unfold over comparisons based on small samples, evidence is accumulated for differences in the probability to produce a higher outcome most of the time. The respective choices for high switching probabilities reflect an as-if underweighting of rare outcomes that becomes more pronounced with increasing thresholds, demonstrating that the reliance on many small samples can explain the as-if underweighting of rare outcomes, while a large number of sampled outcomes is fully accounted for. The analysis also shows that the differences in the information-processing chain translate to systematic differences in the parameter estimates of cumulative prospect theory's value and weighting function."
   
@@ -49,8 +58,9 @@ header-includes:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, #omit messages
                       fig.align = "l", #align figures to left margin
-                      fig.pos = "t" # display figures at the top of a page
-                      )
+                      fig.pos = "t", # display figures at the top of a page
+                      fig.height=7, 
+                      fig.width=10)
 ```
 
 ```{r packages, include=FALSE}
@@ -257,7 +267,7 @@ As a consequence from (9) then, each combination of parameters implies a particu
 
 (ref:weighting-function) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
 
-```{r weighting-function, fig.cap="(ref:weighting-function)", fig.height=7, fig.width=10}
+```{r weighting-function, fig.cap="(ref:weighting-function)"}
 #compute images of weighting function (wf)
 wf <- tibble(p = seq(0, 1, .01)) %>%  #cumulative probabilities
   expand_grid(gamma = seq(.1, 2, .1), #gamma values
@@ -273,13 +283,13 @@ label_delta <- function(string) {
 wf %>% 
   ggplot(aes(p, wp, group = gamma)) +
   facet_wrap(~delta, labeller = as_labeller(label_delta, default = label_parsed)) + 
-  scale_x_continuous(breaks = seq(0, 1, .2)) +
-  scale_y_continuous(breaks = seq(0, 1, .2)) + 
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) + 
   labs(x = expression(p),
        y = expression(w(p)), 
        color = expression(gamma)) + 
   theme_apa() + 
-  geom_line(aes(color = gamma)) +
+  geom_line(aes(color = gamma), size = .5) +
   scale_color_viridis(option = "viridis") + 
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
@@ -545,6 +555,8 @@ cols_choices <- list(.default = col_double(),
                      agent = col_factor(),
                      choice = col_factor())
 choices <- read_csv("data/choices/choices.csv", col_types = cols_choices)
+choices <- choices %>% 
+  filter(boundary == "absolute")
 
 #load CPT estimates
 cols_cpt <- list(.default = col_double(),
@@ -552,6 +564,8 @@ cols_cpt <- list(.default = col_double(),
                  a = col_factor(),
                  parameter = col_factor())
 cpt <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols_cpt)
+cpt <- cpt %>% 
+  filter(boundary == "absolute")
 ```
 
 To estimate the posterior distributions of the parameters, Markov Chain Monte Carlo sampling was used, where 20 chains of 40,000 samples each were run after a warm-up period of 1000 samples.
@@ -561,16 +575,25 @@ The potential scale reduction factor $\hat{R}$ [see @gelmanInferenceIterativeSim
 
 ## Results
 
-```{r}
+We start by inspecting how the number of outcomes sampled over the course of a sampling and accumulation process changes with varying combinations of switching probabilities and thresholds.
+Figure\ \@ref(fig:chain-length) shows the respective median for each parameter combination.
+The model predicts an inverse relationship between the switching probability and the overall number of sampled outcomes, since the stochastic processes tend to terminate faster, the higher the switching probabilities.
+In other words, the higher the switching probability, the smaller the samples on which each mean comparison is based, resulting in a decreasing overall number of sampled outcomes.
+Since the relative change in the switching probability decreases as $\psi$ approaches certainty, the relative change in the number of sampled outcomes decreases respectively.
+Furthermore, because it determines the number of mean comparisons---and therefore stochastic processes---that must be carried out, any increase in the threshold leads to an increase in the number of sampled outcomes.
+
+(ref:chain-length) Lengths of Information-Processing Chains
+
+```{r chain-length, fig.cap="(ref:chain-length)"}
 choices %>%
   group_by(s, a) %>% 
   summarize(n_med = median(n_sample)) %>% 
   ggplot(aes(x = s, y = n_med, group = as.factor(a), color = as.factor(a))) + 
    labs(x = expression(psi),
-       y = "Sampled Outcomes",
+       y = "Median of Overall Sampled Outcomes",
        color = expression(theta)) +
   scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
-  scale_y_continuous(limits = c(0, 150), breaks = seq(0, 150, 50)) +
+  scale_y_continuous(limits = c(0, 120), breaks = seq(0, 150, 50)) +
   geom_point() +
   geom_line() + 
   scale_color_viridis_d(option = "viridis") +
@@ -578,23 +601,23 @@ choices %>%
 ```
 
 
-<!-- Plots choice rates -->
+### Final Choice
 
-(ref:choice-rates) Effect of Switching Probability on Rates of False Risky and False Safe Choices for 2-Outcome Prospects with High Rank Outcomes of Different Probability
+Figure\ \@ref(fig:choice-rates) displays the rates of choices that did not maximize the EV for each combination of the switching probabilities and thresholds.
+The top panel of the figure shows the rates for choice problems where the low-rank outcome of the risky prospect has a low probability.
+Respectively, for high switching probabilities and therefore short stochastic processes, the low-rank outcome is expected to occur less often over the course of a stochastic process than would be objectively warranted, leading to an inflation of the respective mean of the risky prospect.
+Accordingly, if the safe prospect possesses the higher EV, the number of false responses increases with the switching probability.
+However, if the risky prospect has the higher EV, the mean inflation causes the choices to be generally in line with EV maximization.
+Note from the middle panel that this pattern reverses, if the high-rank outcome has a small probability.
 
-```{r choice-rates, fig.cap="(ref:choice-rates)", fig.height=7, fig.width=10}
+(ref:choice-rates) Rates of False Risky and False Safe Choices
+
+```{r choice-rates, fig.cap="(ref:choice-rates)"}
 #prepare data
 
 ##determine normative choice according to latent and sampled EV
 fr_rates <- choices %>%
-  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B"), #normative choice latent EV
-         ev_ratio_exp = round(a_ev_exp/b_ev_exp, 2),
-         norm_exp = case_when(ev_ratio_exp > 1 ~ "A", ev_ratio_exp < 1 ~ "B")) #normative choice sampled EV
-
-##compute false response rates  
-
-###latent EV
-fr_rates_l <- fr_rates %>%
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
   filter(!is.na(norm)) %>% #exclude trials with equal EV
   group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
   summarise(n = n()) %>%
@@ -603,24 +626,7 @@ fr_rates_l <- fr_rates %>%
                           norm == "B" & choice == "A" ~ "Risky")) %>%
   ungroup() %>%
   filter(!is.na(type)) %>% #remove correct responses
-  select(-c(norm, choice, n)) %>%
-  mutate(norm_ev = "Latent") #assign facet label
-
-###sampled EV
-fr_rates_s <- fr_rates %>%
-  filter(!is.na(norm_exp)) %>%
-  group_by(s, boundary, a, rare, norm_exp, choice) %>%
-  summarise(n = n()) %>%
-  mutate(rate = round(n/sum(n), 2),
-         type = case_when(norm_exp == "A" & choice == "B" ~ "Safe",
-                          norm_exp == "B" & choice == "A" ~ "Risky")) %>%
-  ungroup() %>%
-  filter(!is.na(type)) %>%
-  select(-c(norm_exp, choice, n)) %>%
-  mutate(norm_ev = "Sample")
-
-### merge latent and sampled data
-fr_rates <- bind_rows(fr_rates_l, fr_rates_s) %>%
+  select(-c(norm, choice, n)) %>% 
   mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
                           rare == "attractive" ~ "\\in (0,.2)",
                           rare == "unattractive" ~ "\\in (.8,1)"))
@@ -636,117 +642,154 @@ label_rare <- function(string) {
 
 #plot
 fr_rates %>%
-  ggplot(aes(s, rate)) +
+  ggplot(aes(s, rate, group = type)) +
   facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
                                          a = as_labeller(label_theta, default = label_parsed))) +
-  labs(x = "Switching Probability",
+  labs(x = expression(psi),
        y = "False Response Rate",
-       color = "Normative\nExpected\nValue",
-       shape = "False\nResponse\nType") +
+       color = expression(psi),
+       shape = "False\nResponse") +
   scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
-  geom_point(aes(color = norm_ev, shape = type)) +
+  geom_line(aes(color = s, group = type)) + 
+  geom_point(aes(color = s, shape = type), size = 2) +
   scale_shape_manual(values = c(4, 16)) +
-  scale_color_viridis_d(option = "viridis", begin = .1, end = .7) +
+  scale_color_viridis(option = "viridis") +
   theme_apa()
 ```
 
-<!-- Plots CPT -->
+### Cumulative Prospect Theory
 
-(ref:weighting-parameters) Parameter Estimates of the Weighting Function of @goldsteinExpressionTheoryPreference1987 for Different Simulation Parameters
+(ref:weighting-parameters) Parameter Estimates and Graphical Shape of the Weighting Function
 
-```{r weighting-parameters, fig.cap="(ref:weighting-parameters)", fig.height=7, fig.width=10}
-#prepare data
-cpt <- cpt %>% mutate(boundary = if_else(boundary == "absolute", "Absolute", "Relative"))
+```{r weighting-parameters, fig.cap="(ref:weighting-parameters)"}
 
 #plot estimates
 
 ##gamma
 gamma <- cpt %>%
   filter(parameter == "gamma") %>%
-  filter(a != 1, boundary != "relative") %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  ggplot(aes(s, mean, color = s)) +
   facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
+  scale_y_continuous(limits = c(0,2), breaks = seq(0,2.0,1.0))+
   labs(x = element_blank(), #omit axis title
        y = expression(gamma),
-       color = "Switching\nProbability",
-       shape = "Boundary") +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+       color = expression(psi)) +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_shape_manual(values = c(4, 16)) +
   scale_color_viridis(option = "viridis") +
-  theme_apa() 
+  theme_apa() +
+  theme(axis.line.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank())
 
 ##delta
 delta <- cpt %>%
   filter(parameter == "delta") %>% 
-  filter(a != 1, boundary != "relative") %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  ggplot(aes(s, mean, color = s)) +
   facet_wrap(~a, nrow = 1) + 
-  labs(x = "Switching Probability",
+  scale_y_continuous(limits = c(0,10), breaks = seq(0,10,5)) +
+  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
+  labs(x = expression(psi),
        y = expression(delta),
-       color = "Switching\nProbability",
-       shape = "Boundary") +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+       color = expression(psi)) +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   scale_color_viridis(option = "viridis") +
-  scale_shape_manual(values = c(4, 16)) +
   theme_apa() + 
   theme(strip.text.x = element_blank()) #omit facet labels
 
+wf <- cpt %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(alpha, rho)) %>%
+  expand_grid(p = seq(0, 1, .05)) %>%
+  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
+
+##weighting function
+weight <- wf %>% #graphs for absolute boundary
+  ggplot(aes(p, w, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Experienced Probability",
+       y = expression(pi),
+       color = expression(psi)) +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
+  geom_line(size = .5) +
+  scale_color_viridis(option = "viridis") +
+  theme_apa() + 
+  theme(strip.text.x = element_blank()) #omit facet labels
+
+
 ##merge figures
-ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
+ggarrange(gamma, delta, weight, ncol = 1, nrow = 3, common.legend = TRUE, legend = "right")
 ```
 
-(ref:value-parameters) Parameter Estimates of the Value Function of @tverskyAdvancesProspectTheory1992 and of the Logit Choice Rule for Different Simulation Parameters
+(ref:value-parameters) Parameter Estimates and Graphical Shape of the Value Function
 
-```{r value-parameters, fig.cap="(ref:value-parameters)", fig.height=7, fig.width=10}
+```{r value-parameters, fig.cap="(ref:value-parameters)"}
 #plot estimates
 
 ##alpha
 alpha <- cpt %>%
   filter(parameter == "alpha") %>% 
-  filter(a != 1) %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  ggplot(aes(s, mean, color = s)) +
   facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
-  labs(x = element_blank(),
+  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
+  scale_y_continuous(limits = c(0,1), breaks = seq(0,1, .5)) + 
+  labs(x = expression(psi),
        y = expression(alpha),
-       color = "Switching\nProbability",
-       shape = "Boundary") +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0,1,.5)) +
+       color = expression(psi)) +
   geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   scale_color_viridis(option = "viridis") +
-  scale_shape_manual(values = c(4, 16)) +
   theme_apa()
+
+###value function
+vf <- cpt %>%
+  select(s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(gamma, delta, rho)) %>%
+  expand_grid(x = seq(0, 20, .5)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+value <- vf %>% 
+  ggplot(aes(x, v, group = s, color = s)) +
+  facet_wrap(~a, nrow = 1)+ 
+  labs(x = "Objective Outcome",
+       y = "Subjective Value",
+       color=expression(psi)) +
+  scale_x_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
+  scale_y_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
+  geom_line(size = .5) +
+  scale_color_viridis(option = "viridis") +
+  theme_apa() + 
+  theme(strip.text.x = element_blank())
 
 ##rho
 rho <- cpt %>%
   filter(parameter == "rho") %>% 
-  filter(a != 1) %>% 
   ggplot(aes(s, mean, color = s, shape = boundary)) +
   facet_wrap(~a, nrow = 1) + 
   labs(x = "Switching Probability",
        y = expression(rho),
        color = "Switching\nProbability",
        shape = "Boundary") +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1,.5)) +
+  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0, 1,.5)) +
   geom_point() +
-  geom_pointrange(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   scale_color_viridis(option = "viridis") +
   scale_shape_manual(values = c(4, 16)) +
   theme_apa() + 
   theme(strip.text.x = element_blank())
 
 ##merge figure
-ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
+ggarrange(alpha, value, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
 ```
 
 (ref:cpt-graphs) Estimated Graphical Shapes of the Weighting and Value Function for Different Simulation Parameters
 
-```{r cpt-graphs, fig.cap="(ref:cpt-graphs)", fig.height=7, fig.width=10}
+```{r cpt-graphs, fig.cap="(ref:cpt-graphs)", eval = FALSE}
 #prepare data
 
 ##compute images of weighting and value function
