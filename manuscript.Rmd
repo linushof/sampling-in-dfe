@@ -577,10 +577,12 @@ The potential scale reduction factor $\hat{R}$ [see @gelmanInferenceIterativeSim
 
 We start by inspecting how the number of outcomes sampled over the course of a sampling and accumulation process changes with varying combinations of switching probabilities and thresholds.
 Figure\ \@ref(fig:chain-length) shows the respective median for each parameter combination.
-The model predicts an inverse relationship between the switching probability and the overall number of sampled outcomes, since the stochastic processes tend to terminate faster, the higher the switching probabilities.
-In other words, the higher the switching probability, the smaller the samples on which each mean comparison is based, resulting in a decreasing overall number of sampled outcomes.
-Since the relative change in the switching probability decreases as $\psi$ approaches certainty, the relative change in the number of sampled outcomes decreases respectively.
-Furthermore, because it determines the number of mean comparisons---and therefore stochastic processes---that must be carried out, any increase in the threshold leads to an increase in the number of sampled outcomes.
+Since the two stochastic processes underlying a mean comparison tend to terminate faster the higher the switching probabilities are, the model predicts the overall number of sampled outcomes to decrease with increasing switching probabilities.
+As can be seen from the changing slopes of the lines in Figure\ \@ref(fig:chain-length), the decrease in the number of sampled outcomes diminishes as the relative increase in the switching probability diminishes.
+Moreover, the overall number of sampled outcomes increases with thresholds at a relatively constant rate, reflecting the latters impact on the number of required mean comparisons.
+Finally, consider the dashed horizontal line which displays the median number of 14 outcomes that @wulffMetaanalyticReviewTwo2018 found to be sampled in 10,712 trials involving a choice between a safe and a two-outcome prospect in the sampling paradigm.
+Notably, the parameter combinations that closely resemble the round-wise strategy---i.e., high switching probabilities and thresholds---or the summary strategy---i.e., low switching probabilities and thresholds---lead to overall numbers of sampled outcomes that come fairly close to this meta-analytic median.
+In turn, hybrids of both strategies produce overall numbers of sampled outcomes that are considerably lower or higher.
 
 (ref:chain-length) Lengths of Information-Processing Chains
 
@@ -596,6 +598,8 @@ choices %>%
   scale_y_continuous(limits = c(0, 120), breaks = seq(0, 150, 50)) +
   geom_point() +
   geom_line() + 
+  geom_hline(yintercept = 14, linetype = "dashed", color = "gray") +
+  annotate(geom="text", x=.95, y=16, label="Wulff et al. (2018)", color="gray") + 
   scale_color_viridis_d(option = "viridis") +
   theme_apa()
 ```
@@ -603,12 +607,18 @@ choices %>%
 
 ### Final Choice
 
-Figure\ \@ref(fig:choice-rates) displays the rates of choices that did not maximize the EV for each combination of the switching probabilities and thresholds.
-The top panel of the figure shows the rates for choice problems where the low-rank outcome of the risky prospect has a low probability.
-Respectively, for high switching probabilities and therefore short stochastic processes, the low-rank outcome is expected to occur less often over the course of a stochastic process than would be objectively warranted, leading to an inflation of the respective mean of the risky prospect.
-Accordingly, if the safe prospect possesses the higher EV, the number of false responses increases with the switching probability.
-However, if the risky prospect has the higher EV, the mean inflation causes the choices to be generally in line with EV maximization.
-Note from the middle panel that this pattern reverses, if the high-rank outcome has a small probability.
+Figure\ \@ref(fig:choice-rates) displays the rates of choices that did not maximize the latent EV (hereafter: false response rates) for each combination of switching probabilities and thresholds.
+Moreover, the rates are separated by the presence and rank of a small-probability outcome.
+Consider first the top panel which shows the false response rates across all problems where the low-rank outcome of the risky prospect has a small probability:
+Over the course of short stochastic processes, then, the low-rank outcomes tend to be sampled less often than would be objectively warranted, leading to an inflation of the respective means of the risky prospect.
+Accordingly, the top panels show that the rates of false choices of the risky prospect increase with the switching probability, but the rates of false safe choices remain generally low.
+More specifically, the higher the switching probabilities, the more severe should the inflation of the means---and the overestimation of the EVs---of the risky prospects be. 
+As a consequence, if the risky prospects possesses the smaller EV, an increase in the switching probability increases the risk to deviate from EV maximization by falsely choosing the risky prospects on the basis of mean comparisons.
+Importantly, these deviations take the form of an as-if underweighting of rare outcomes.
+In turn, if the risky prospects possess the larger EV, the inflation of their means decreases the risk to falsely choose the safe prospect.
+Note from the middle panel that the pattern of false response rates reverses across all problems where the high-rank outcome of the risky prospect has a small probability.
+In this case, then, the means of the risky prospects tend to be more deflated, the higher the switching probability is, which, however, again results in an as-if underweighting of rare outcomes.
+Furthermore, the differences between the switching probabilities concerning the false response rates tend to be more pronounced for high thresholds, showing that over the course of multiple mean comparisons the inflation and deflation of the means of the risky prospect is more robust.
 
 (ref:choice-rates) Rates of False Risky and False Safe Choices
 
@@ -659,6 +669,13 @@ fr_rates %>%
 ```
 
 ### Cumulative Prospect Theory
+
+Figure\ \@ref(fig:weighting-patterns) shows the means and the 95%-intervals of the posterior distributions of the curvature parameter $\gamma$ and elevation parameter $\delta$ as well as the resulting shape of the weighting function. 
+Note first that because the relative frequencies were supplied as probability information, the parameter estimates for the threshold value $\theta = 1$ in combination with high switching probabilities have large posterior intervals.
+The estimates substantiate the prediction that $\gamma$ takes values over $1$ and increases with the switching probability, resulting in an S-shaped weighting function. 
+Because the images of the function equal the decision weights, the estimates show that high switching probabilities translate to an underweighting of rare outcomes in CPT.
+The estimates of $\delta$ also tend to increase with increasing switching probabilities.
+
 
 (ref:weighting-parameters) Parameter Estimates and Graphical Shape of the Weighting Function
 
