@@ -8,7 +8,7 @@ cols <- list(.default = col_double(),
              rare = col_factor(),
              attended = col_factor(),
              choice = col_factor())
-simulation <- read_csv("data/simulation/simulation.csv", col_types = cols)
+simulation <- read_csv("data/simulation.csv", col_types = cols)
 
 # use hash to validate simulation data
 
@@ -40,7 +40,7 @@ if(hash_sim != "295e1a7b23402dd50a1dae5a54141f78"){
 
   # save data
   ## required: 60 gambles x 100 subjects x 100 parameter combinations = 600.000 choices
-  write_csv(choices, "data/choices/choices.csv")
+  write_csv(choices, "data/choices.csv")
 
 }
 

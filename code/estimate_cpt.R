@@ -1,5 +1,5 @@
 pacman::p_load(tidyverse, R2jags)
-source("R/fun_inits_MCMC.R") # call function creating initial values for MCMC
+source("code/fun_inits_MCMC.R") # call function creating initial values for MCMC
 
 # read choice data
 cols <- list(.default = col_double(),
@@ -8,7 +8,7 @@ cols <- list(.default = col_double(),
              rare = col_factor(),
              agent = col_factor(),
              choice = col_factor())
-choices <- read_csv("data/choices/choices.csv", col_types = cols)
+choices <- read_csv("data/choices.csv", col_types = cols)
 
 # prepare data for JAGS
 
@@ -72,4 +72,4 @@ for(set in seq_len(nrow(params_sim))){
 # save data
 
 estimates_cpt <- estimates_cpt %>% map_dfr(as.list)
-write_csv(estimates_cpt, "data/estimates/estimates_cpt.csv")
+write_csv(estimates_cpt, "data/cpt_paramters.csv")
