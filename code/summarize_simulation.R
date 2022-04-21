@@ -40,7 +40,7 @@ if(hash_sim != "295e1a7b23402dd50a1dae5a54141f78"){
 
   # save data
   ## required: 60 gambles x 100 subjects x 100 parameter combinations = 600.000 choices
-  write_csv(choices, "data/choices.csv")
+  write_csv(choices, "data/simulation_summary.csv")
 
 }
 

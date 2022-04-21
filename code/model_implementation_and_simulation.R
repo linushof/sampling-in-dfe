@@ -1,5 +1,5 @@
 pacman::p_load(tidyverse)
-source("R/fun_cumulative_stats.R") # call functions for computing cumulative stats
+source("R/fun_compute_cumulative_stats.R") # call functions for computing cumulative stats
 
 # test set
 gambles <- read_csv("data/choice_problems.csv")

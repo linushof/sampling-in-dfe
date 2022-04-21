@@ -1,5 +1,5 @@
 pacman::p_load(tidyverse)
-source("code/fun_generate_gambles.R") # call function for generating 2-outcome gambles
+source("code/fun_generate_choice_problems.R") # call function for generating 2-outcome gambles
 
 # generate 10,000 safe-risky gambles
 
