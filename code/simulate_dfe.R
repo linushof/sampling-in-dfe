@@ -2,7 +2,7 @@ pacman::p_load(tidyverse)
 source("R/fun_cumulative_stats.R") # call functions for computing cumulative stats
 
 # test set
-gambles <- read_csv("data/gambles/sr_subset.csv")
+gambles <- read_csv("data/choice_problems.csv")
 n_agents <- 100
 
 # simulation parameters
@@ -136,4 +136,4 @@ for (set in seq_len(nrow(theta))) {  # loop over parameter combinations
   param_list[[set]] <- expand_grid(theta[set, ], all_gambles)
 }
 simulation <- param_list %>% map_dfr(as.list)
-write_csv(simulation, "data/simulation/simulation.csv")
+write_csv(simulation, "data/simulation.csv")
