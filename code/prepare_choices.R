@@ -19,6 +19,7 @@ if(hash_sim != "295e1a7b23402dd50a1dae5a54141f78"){
 
   cat(green("Data is valid. Continuing preparation of choice data."))
 
+
   ## transform data to obtain trial summaries
 
   choices <- simulation %>%
