@@ -2,8 +2,7 @@
 title             : |
   Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation
   
-shorttitle        : |
-  Sampling strategies
+shorttitle        : "Sampling strategies"
 
 author: 
   - name          : "Linus Hof"
@@ -48,19 +47,7 @@ documentclass     : "apa7"
 output: papaja::apa6_pdf
 
 header-includes:
-   - |
-    \usepackage[capposition=top]{floatrow}
-    \makeatletter
-    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
-      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-      {-1em}%
-      {\normalfont\normalsize\bfseries\typesectitle}}
-    
-    \renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
-      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
-      {-\z@\relax}%
-      {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
-    \makeatother
+   - \usepackage[capposition=top]{floatrow}
 ---
 
 ```{r setup, include=FALSE}
