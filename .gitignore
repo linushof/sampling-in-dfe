@@ -3,8 +3,7 @@
 .RData
 .Ruserdata
 *.tex
-*.csl
 *.pdf
-*.bib
 notes/
 manuscript_files/
+supplements/
