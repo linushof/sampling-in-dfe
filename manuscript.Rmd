@@ -2,7 +2,8 @@
 title             : |
   Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation
   
-shorttitle        : "Sampling strategies"
+shorttitle        : |
+  Sampling strategies
 
 author: 
   - name          : "Linus Hof"
@@ -16,7 +17,7 @@ affiliation:
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash `r repro::current_hash()`, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
+ This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the GitHub repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash `r repro::current_hash()`, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
   
   \indent
   1. Prof. Dr. Thorsten Pachur, Technical University of Munich
@@ -24,12 +25,13 @@ authornote: |
   \indent
   2. Dr. Veronika Zilker, Max Planck Institute for Human Development
  
-abstract: "In decisions from experience, systematic choices between prospects are based on the assessment of differences in latent properties. Yet, several properties can be used to distinguish among the prospects. To this end, this paper presents a sampling and accumulation model that allows sampling  strategies—i.e., the probability of sampling outcomes from different prospects in direct succession (switching probability)—to alter which differences in the latent properties evidence is accumulated for. Specifically, the proposed model sequentially samples outcomes from two prospects and accumulates the results obtained from a sequence of ordinal comparisons between sample means, with switching probabilities determining the size of the samples underlying each comparison and thresholds determining how many comparisons a prospect must win in order to be chosen. A computational implementation of the model is used to simulate the respective information-processing chains upfront choices between a safe and a two-outcome prospect, while varying switching probabilities and thresholds. The analysis of the simulation data shows that, depending on whether the accumulation process unfolds over mean comparisons based on small or large samples, evidence is accumulated for differences either in the probability to produce a higher outcome most of the time or in the expected value. The respective choice patterns reflect an as-if underweighting of rare outcomes or expected value maximization, both of which become more robust with increasing thresholds. The analysis moreover shows how the distinct choice patterns resulting from differences in the information-processing chains translate to the parameters of cumulative prospect theory’s value and weighting function."
+abstract: |
+  In decisions from experience, the probability to produce a higher outcome most of the time and the expected value are two latent properties that can be used to distinguish among the prospects of choice. This paper sketches a sampling and accumulation model that allows sampling strategies—i.e., the probability of sampling outcomes from different prospects in direct succession (switching probability)—to alter the degree to which evidence is accumulated for either one of these properties. A computational implementation of the model is used to simulate the respective sampling and accumulation process upfront choices between a safe and a two-outcome prospect, while varying switching probabilities and evidence thresholds. The simulation data shows that, depending on which latent property evidence is accumulated for and to which extent, respectively, choice patterns reflect various degrees of an as-if underweighting of rare outcomes or expected value maximization. Both choice patterns become more robust the more evidence is sampled and translate to characteristic parameter estimates for cumulative prospect theory’s value and weighting function.
   
 keywords          : "risky choice, information sampling, evidence accumulation, cognitive modeling, cumulative prospect theory"
 wordcount         : ""
 
-bibliography      : references_sampling-in-dfe.bib
+bibliography      : references.bib
 csl               : apa.csl
 
 figurelist        : no
@@ -46,7 +48,19 @@ documentclass     : "apa7"
 output: papaja::apa6_pdf
 
 header-includes:
-   - \usepackage[capposition=top]{floatrow}
+   - |
+    \usepackage[capposition=top]{floatrow}
+    \makeatletter
+    \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-1em}%
+      {\normalfont\normalsize\bfseries\typesectitle}}
+    
+    \renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+      {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+      {-\z@\relax}%
+      {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+    \makeatother
 ---
 
 ```{r setup, include=FALSE}
@@ -70,8 +84,6 @@ pacman::p_load(papaja,
                latex2exp)
 ```
 
-<!-- Introduction -->
-
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the alternatives between which people can choose.
 In fact, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and return a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
 Respectively, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives.
@@ -83,9 +95,8 @@ Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004]
 The inputs to DFE therefore take the form of sampled outcomes.
 Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-choice patterns in DFD deviate from the solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities;
-in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-Hereafter, these choice patterns are referred to as the *as-if overweighting* and *as-if underweighting of rare outcomes*, respectively.
+choice patterns in DFD deviate from the solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
+in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 
 Similar to explanations for other behavioral phenomena that rest on the assumption that the mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [cf. @fiedlerBewareSamplesCognitiveecological2000], an explanation for the as-if underweighting of rare outcomes may be build on the assumption that the mind is sensitive to the information provided by small samples [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; see also @erevChoicePredictionCompetition2010; @erevAnomaliesForecastsDescriptive2017, for the performance of models assuming reliance on small samples in prediction competitions]:
 Specifically, following from the laws of large numbers [cf., e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
@@ -117,14 +128,14 @@ Notably, in this case, small-probability outcomes are predicted to contribute to
 In turn, for low switching probabilities, the accumulation process unfolds over mean comparisons based on large samples, thus resembling the summary strategy---for low thresholds, respectively---and accumulating evidence for differences in the EV.
 
 To substantiate the discussion, the model is used to simulate the sampling and accumulation process for choices between a safe and a two-outcome prospect, while systematically combining different switching probabilities and thresholds.
-Considering choice rates and parameter estimates of cumulative prospect theory [@tverskyAdvancesProspectTheory1992; @wakkerAxiomatizationCumulativeProspect1993], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
+Considering choice rates and parameter estimates of cumulative prospect theory [@tverskyAdvancesProspectTheory1992], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
 Importantly, the analysis also shows that these distinct choice patterns become more robust with increasing thresholds.
 Before presenting the model and the computational analysis, the following section provides a formal definition of prospects.
 
 # Formal Definition of Prospects
 
 Since there is an uncountable number of choices people confront in the natural world, behavioral decision research routinely abstracts from choices between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.^[<!--Open footnote-->See @knightRiskUncertaintyProfit1921, Chapter 1, for a timeless discussion on the reasonableness of such abstractions.<!--Close footnote-->]
+Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.^[<!--Open footnote-->See @knightRiskUncertaintyProfit1921, Chapter 1, for a discussion on the reasonableness of such abstractions.<!--Close footnote-->]
 These fundamental properties are considered the possible outcomes of a choice alternative and the probabilities with which these outcomes occur following the choice of the alternative.
 Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs are prospects.
 As such, prospects can be understood as the distribution of a discrete random variable.
@@ -188,7 +199,7 @@ To this end, sequential sampling models of decision making [e.g., @busemeyerDeci
 This class of process models thereby provides an algorithmic link between the actual sampling process and the choices in DFE, and has shown to explain some of the robust deviations from EV maximization [see @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993], including the as-if underweighting of rare outcomes in the sampling paradigm [see @markantModelingChoiceSearch2015].
 Moreover, these models implement speed-accuracy trade-offs, with the amount of evidence that must be sampled in favor for a prospect increasing with thresholds, leading to more (less) accurate but slower (faster) choices for high (low) thresholds.
 
-Yet, there are several distinct properties that can be used to assess differences between the prospects, among them the EV, for which the summary decision strategy is indicative, and the probability to produce a higher outcome most of the time, for which the round-wise decision strategy is indicative [see @hillsInformationSearchDecisions2010].
+Yet, there are several distinct properties that can be used to assess differences between the prospects, among them the EV, for which the summary decision strategy is indicative, and the probability to produce a higher outcome most of the time, for which the round-wise decision strategy is indicative [@hillsInformationSearchDecisions2010; see also @wulffHowShortLongrun2015].
 Respectively, in the following, both decision strategies are implemented into a common sampling and accumulation model to demonstrate how the mind may rely on different sampling strategies to alter the degree to which evidence is accumulated for differences in either one of these properties.
 More specifically, the proposed model accumulates the outcomes obtained from a sequence of comparisons between sample means, with the size of the samples underlying each mean comparison tending to be large (small) for low (high) switching probabilities.
 Accordingly, whereas the decision variables of the model capture how many comparisons a prospect has won, the unfolding accumulation process more closely resembles the summary strategy for low switching probabilities and the round-wise strategy for high switching probabilities.
@@ -450,7 +461,7 @@ Respectively, $\alpha$ is predicted to decrease with increases in $\psi$.
 # Simulation Study
 
 To substantiate and refine the predictions of the model, a computational implementation was used to simulate the sampling and accumulation process for a set of choices between a safe prospect and a two-outcome (risky) prospect.
-The computational model was written in `R` and is embodied in the `GitHub` repository accompanying this paper.
+The computational model was written in R and is embodied in the GitHub repository accompanying this paper.
 The simulation was conducted for varying combinations of $\psi$ and $\theta$.
 For each of these combinations, the simulated data was modeled with a stochastic version of CPT, using Bayesian parameter estimation.
 The simulated choices and estimated CPT parameters can be roughly understood as theory-implied data and data models, which remain to be tested against empirical data [see, e.g., @guestHowComputationalModeling2021; @haslbeckModelingPsychopathologyData2021].
@@ -501,7 +512,7 @@ where $p(P'^{safe})$ is the probability that the safe prospect is chosen over th
 $\rho$ governs how strongly the choice between prospects depends on the differences in the valuations of the prospects, i.e., the core CPT model.
 Specifically, $\rho = 0$ implies no sensitivity, and thus a random choice.
 In turn, for increasing values of $\rho$, the probability of choosing the prospect with the higher valuation increases.
-Note further that the valuation of the prospects were rescaled by $\frac{1}{\alpha}$, as proposed by @stewartPsychologicalParametersHave2018, to guard against possible parameter interdependencies between $\alpha$ and $\rho$ [@krefeld-schwalbStructuralParameterInterdependencies2021; @scheibehenneUsingBayesianHierarchical2015].
+Note further that the valuation of the prospects were rescaled by $\frac{1}{\alpha}$, as proposed by @stewartPsychologicalParametersHave2018, to guard against possible parameter interdependencies between $\alpha$ and $\rho$ [@krefeld-schwalbStructuralParameterInterdependencies2022; @scheibehenneUsingBayesianHierarchical2015].
 In sum, then, the model has four free parameters: $\alpha, \gamma, \delta, \rho$.
 
 Since for a given choice problem and parameter combination of the sampling and accumulation model there should be no systematic differences among the 100 iterations (synthetic agents), their data is combined for the estimation of the free parameters.
@@ -517,7 +528,7 @@ cols_choices <- list(.default = col_double(),
                      rare = col_factor(),
                      agent = col_factor(),
                      choice = col_factor())
-choices <- read_csv("data/choices/choices.csv", col_types = cols_choices)
+choices <- read_csv("data/simulation_summary.csv", col_types = cols_choices)
 choices <- choices %>% 
   filter(boundary == "absolute")
 
@@ -526,12 +537,12 @@ cols_cpt <- list(.default = col_double(),
                  boundary = col_factor(),
                  a = col_factor(),
                  parameter = col_factor())
-cpt <- read_csv("data/estimates/estimates_cpt.csv", col_types = cols_cpt)
+cpt <- read_csv("data/cpt_parameters.csv", col_types = cols_cpt)
 cpt <- cpt %>% 
   filter(boundary == "absolute")
 ```
 
-To estimate the posterior distributions of the free parameters, Markov Chain Monte Carlo sampling as implemented in `JAGS` was used, where 20 chains of 40,000 samples each were run after a warm-up period of 1000 samples.
+To estimate the posterior distributions of the free parameters, Markov Chain Monte Carlo sampling as implemented in JAGS was used, where 20 chains of 40,000 samples each were run after a warm-up period of 1000 samples.
 To reduce potential autocorrelation during the sampling process, only every 20th sample was kept (thinning), leaving a total of 40,000 samples across chains.
 The minimum effective sample size was `r min(cpt$n.eff)`.
 The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r round(max(cpt$Rhat), 4)` for all models and parameters, indicating good convergence.
