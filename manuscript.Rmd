@@ -808,13 +808,14 @@ The predictions of the choice patterns and CPT parameters alone do not render th
 It is right that cognitive models are underdetermined by "locally obtained" data and that they should not aim to merely explain effects---e.g., the as-if underweighting of rare outcomes---but fundamental capacities such as learning, reasoning, and decision making [@vanrooijTheoryTestHow2021].
 In explaining these capacities, cognitive models must be constrained to the extent that neither the computational resources of the human mind nor other relevant resources---e.g., time---are limitless [see, e.g., @jareckiFrameworkBuildingCognitive2020; @liederResourcerationalAnalysisUnderstanding2020; @vanrooijTheoryTestHow2021].
 Acknowledging these limitations, different theoretical frameworks can be used to narrow down the still abundant number of possible mechanisms the mind might employ in the decision-making process.
-Such frameworks build on different, sometimes related or complementary assumptions, e.g.: *ecological rationality* holds that the mind uses simple (decision) heuristics that exploit the information structures of the environment in which it operates [see, e.g., @payneAdaptiveStrategySelection1988; see also @simonRationalChoiceStructure1956]; sequential sampling models assume that the mind trades of processing speed and accuracy while accumulating evidence for or against choice alternatives [see, e.g., @ratcliffComparisonSequentialSampling2004; @bogaczPhysicsOptimalDecision2006]; and *resource rationality* assumes that the mind employs mechanisms that make optimal use of its actual resources in obtaining a specific goal [see, e.g.; @liederResourcerationalAnalysisUnderstanding2020].
+Such frameworks build on different, sometimes related or complementary assumptions, e.g.:
+*ecological rationality* holds that the mind uses simple (decision) heuristics that exploit the information structures of the environment in which it operates [see, e.g., @payneAdaptiveStrategySelection1988; see also @simonRationalChoiceStructure1956];
+sequential sampling models assume that the mind trades of processing speed and accuracy while accumulating evidence for or against choice alternatives [see, e.g.,  @bogaczPhysicsOptimalDecision2006; @ratcliffComparisonSequentialSampling2004];
+and *resource rationality* assumes that the mind employs mechanisms that make optimal use of its actual resources in obtaining a specific goal [see @liederResourcerationalAnalysisUnderstanding2020].
 
 Admittingly, although the current paper ought to sketch how the mind might exercise the capacity of making decisions from experience, it dealt with these constraints and frameworks rather implicitly and loosely.
-
-<!-- Marr: What is the goal and how can it be achieved -->
-
-<!-- Using CPT as effects -->
+The goal of this discussion therefore is to make some of the relations to the existing frameworks for the study of decision making more explicit. 
+Most importantly, this paper showed how the assumption that the sampling process is not random  
 
 # Conclusion
 
