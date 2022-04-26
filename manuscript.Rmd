@@ -1,6 +1,6 @@
 ---
 title             : |
-  Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation
+  Sampling Strategies in Decisions from Experience
   
 shorttitle        : "Sampling strategies"
 
@@ -117,9 +117,9 @@ In turn, for low switching probabilities, the accumulation process unfolds over 
 To substantiate the discussion, the model is used to simulate the sampling and accumulation process for choices between a safe and a two-outcome prospect, while systematically combining different switching probabilities and thresholds.
 Considering choice rates and parameter estimates of cumulative prospect theory [@tverskyAdvancesProspectTheory1992], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
 Importantly, the analysis also shows that these distinct choice patterns become more robust with increasing thresholds.
-Before presenting the model and the computational analysis, the following section provides a formal definition of prospects.
+Before presenting the model and the computational analysis, the following section provides a definition of prospects.
 
-# Formal Definition of Prospects
+# Definition of Prospects
 
 Since there is an uncountable number of choices people confront in the natural world, behavioral decision research routinely abstracts from choices between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
 Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.^[<!--Open footnote-->See @knightRiskUncertaintyProfit1921, Chapter 1, for a discussion on the reasonableness of such abstractions.<!--Close footnote-->]
@@ -287,7 +287,7 @@ Respectively, then, the as-if underweighting of rare outcomes should become more
 
 Before elaborating how the above model predictions may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
 
-### Formal Review of CPT
+### Desription of CPT
 
 The choices people make between prospects are often *described* in terms of deviations from EV maximization, according to which the prospect with the largest EV
 $$
@@ -804,7 +804,19 @@ ggarrange(alpha, rho, value, ncol = 1, nrow = 3, common.legend = TRUE, legend = 
 
 # Discussion
 
-[...]
+The predictions of the choice patterns and CPT parameters alone do not render the model theoretically or empirically meaningful. 
+It is right that cognitive models are underdetermined by "locally obtained" data and that they should not aim to merely explain effects---e.g., the as-if underweighting of rare outcomes---but fundamental capacities such as learning, reasoning, and decision making [@vanrooijTheoryTestHow2021].
+In explaining these capacities, cognitive models must be constrained to the extent that neither the computational resources of the human mind nor other relevant resources---e.g., time---are limitless [see, e.g., @jareckiFrameworkBuildingCognitive2020; @liederResourcerationalAnalysisUnderstanding2020; @vanrooijTheoryTestHow2021].
+Acknowledging these limitations, different theoretical frameworks can be used to narrow down the still abundant number of possible mechanisms the mind might employ in the decision-making process.
+Such frameworks build on different, sometimes related or complementary assumptions, e.g.: *ecological rationality* holds that the mind uses simple (decision) heuristics that exploit the information structures of the environment in which it operates [see, e.g., @payneAdaptiveStrategySelection1988; see also @simonRationalChoiceStructure1956]; sequential sampling models assume that the mind trades of processing speed and accuracy while accumulating evidence for or against choice alternatives [see, e.g., @ratcliffComparisonSequentialSampling2004; @bogaczPhysicsOptimalDecision2006]; and *resource rationality* assumes that the mind employs mechanisms that make optimal use of its actual resources in obtaining a specific goal [see, e.g.; @liederResourcerationalAnalysisUnderstanding2020].
+
+Admittingly, although the current paper ought to sketch how the mind might exercise the capacity of making decisions from experience, it dealt with these constraints and frameworks rather implicitly and loosely.
+
+<!-- Marr: What is the goal and how can it be achieved -->
+
+<!-- Using CPT as effects -->
+
+# Conclusion
 
 \newpage
 
