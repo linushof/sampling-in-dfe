@@ -802,22 +802,46 @@ rho <- cpt %>%
 ggarrange(alpha, rho, value, ncol = 1, nrow = 3, common.legend = TRUE, legend = "right") 
 ```
 
-# Discussion
+# Summary and Discussion
 
-The predictions of the choice patterns and CPT parameters alone do not render the model theoretically or empirically meaningful. 
-It is right that cognitive models are underdetermined by "locally obtained" data and that they should not aim to merely explain effects---e.g., the as-if underweighting of rare outcomes---but fundamental capacities such as learning, reasoning, and decision making [@vanrooijTheoryTestHow2021].
-In explaining these capacities, cognitive models must be constrained to the extent that neither the computational resources of the human mind nor other relevant resources---e.g., time---are limitless [see, e.g., @jareckiFrameworkBuildingCognitive2020; @liederResourcerationalAnalysisUnderstanding2020; @vanrooijTheoryTestHow2021].
-Acknowledging these limitations, different theoretical frameworks can be used to narrow down the still abundant number of possible mechanisms the mind might employ in the decision-making process.
-Such frameworks build on different, sometimes related or complementary assumptions, e.g.:
-*ecological rationality* holds that the mind uses simple (decision) heuristics that exploit the information structures of the environment in which it operates [see, e.g., @payneAdaptiveStrategySelection1988; see also @simonRationalChoiceStructure1956];
-sequential sampling models assume that the mind trades of processing speed and accuracy while accumulating evidence for or against choice alternatives [see, e.g.,  @bogaczPhysicsOptimalDecision2006; @ratcliffComparisonSequentialSampling2004];
-and *resource rationality* assumes that the mind employs mechanisms that make optimal use of its actual resources in obtaining a specific goal [see @liederResourcerationalAnalysisUnderstanding2020].
+The presented sampling and accumulation model ought to sketch how the mind might exercise the capacity of making decisions from experience.
+In DFE, one cannot rely on symbolic descriptions of all relevant properties of the choice alternatives, but only on samples of past experiences, e.g., when the alternatives were chosen in similar decisions in the past.
+To study DFE experimentally, one may use the sampling paradigm where people can sequentially sample the outcomes of prospects according to their probability of occurrence before making a final choice.
+To model the process by which people arrive at the final choice in this paradigm, one must explicate a number of assumptions, e.g.: How do people decide when to switch between prospects; how do they integrate the information obtained from the sampled outcomes; and, because they can sample as much as they want, how do they decide to stop sampling.
+To approach these questions, this paper presented a model that integrated a proposed link between sampling and decision strategies into the computational framework of sequential sampling models.
 
-Admittingly, although the current paper ought to sketch how the mind might exercise the capacity of making decisions from experience, it dealt with these constraints and frameworks rather implicitly and loosely.
-The goal of this discussion therefore is to make some of the relations to the existing frameworks for the study of decision making more explicit. 
-Most importantly, this paper showed how the assumption that the sampling process is not random  
+## Modeling Sampling Strategies and the Decision-Making Process
+
+@hillsInformationSearchDecisions2010 proposed---and provided tentative empirical support for---a systematic relation between what they considered two paradigmatic sampling and decision strategies. 
+That is, the authors assumed that people either switch prospects after each sampled outcome (piecewise sampling) to compare single outcomes over repeated rounds (round-wise decision strategy), or they switch only once between prospects (comprehensive sampling) and make only one comparison between the means across all sampled outcomes (summary decision strategy).
+In sequential sampling models [see, e.g., @ratcliffComparisonSequentialSampling2004], the decision-making process is modeled as accumulation of evidence for or against a prospect over time, with the prospect being chosen for which the accumulated evidence first reaches a threshold.
+The sampling and accumulation model that was presented in this paper integrates both propositions by assuming that people accumulate the wins and losses resulting from a sequence of mean comparisons, with switching probabilities determining the size of the samples underlying each comparison and thresholds determining how much (more) comparisons a prospect must win in order to be chosen.
+Hence, the model treats the two paradigmatic sampling and decision strategies as the extreme ends of possible continua, allowing the switching probability not only to take values close to 0 and 1 but also values in between, and allowing single and multiple mean comparisons between prospects to be based on samples of varying size.
+Moreover, the model explicates the suggested link between sampling and decision strategies by assuming that the accumulation process more closely resembles the round-wise strategy for high switching probabilities, and, vice versa, the summary strategy for low switching probabilities.
+This is because high (low) switching probabilities cause the accumulation process to unfold over mean comparisons based on samples of small (large) size.
+
+## Sampling Strategies Might Shape Final Choice
+
+In a computational analysis, the presented model was used to simulate how the proposed sampling and accumulation processes shape the final choice.
+Therefore, the switching probabilities and evidence thresholds were systematically varied, while simulating choices between a safe and a risky prospect.
+The model predicts the choices to vary systematically with the switching probability.
+Specifically, whereas the choice patterns correspond closely to the solutions of EV maximization for low switching probabilities, increases in the switching probability can lead to an increasingly pronounced as-if underweighting of rare outcomes pattern.
+This is because for high switching probabilities, each independent mean comparison is based on small samples, in which small-probability outcomes are underrepresented rather than overrepresented.
+As a consequence, then, small-probability outcomes are predicted to contribute to the accumulated evidence less rather than more than would be warranted by their objective probabilities.
+Accordingly, the analyses showed that the structure of the choice problem---i.e., whether a small-probability outcome is present and which value it takes---is an important moderator for the effect of sampling strategies on the choice pattern. 
+Importantly, while this explanation emphasizes that the reliance on small samples is a strong contributor to the as-if underweighting of rare outcomes pattern in DFE, it has little to do with the common notion of sampling error [e.g., @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004].
+That is, the as-if underweighting of rare outcomes is not caused by a deviation of the sampled relative frequencies from the objective probabilities, but by the way the sampled outcomes are integrated and processed to evaluate the prospects.
+The analyses made this clear by showing that an as-if underweighting of rare outcomes pattern occurred, even if the sampling error is controlled for.
+In sum, by explicitly modeling their link, the current computational analysis showed how the interplay of sampling and decision strategies can shape the final choice.
+
+## CPT Can Reflect the Adoption of Sampling Strategies
+
+The current paper further extended the analysis of @hillsInformationSearchDecisions2010 by showing that the effects of sampling and decision strategies on the final choice can translate to characteristic signatures in cumulative prospect theory's value and weighting function. 
+Having controlled for sampling error, the estimated CPT parameters and the resulting shapes of the value and weighting function primarily reflected how sensitive the combinations of sampling and decision strategies are to particular changes in the outcomes and their probabilities.
+Thereby, the analyses extends the notion that CPT can be used as a measurement tool to characterize information processing [@pachurHowTwainCan2017] from risky to uncertain choice.
 
 # Conclusion
+
 
 \newpage
 
