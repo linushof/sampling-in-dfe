@@ -72,30 +72,48 @@ pacman::p_load(papaja,
 ```
 
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the alternatives between which people can choose.
-In fact, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and return a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
-Respectively, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives.
-
-Now, let a *prospect* be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
+<!--Accordingly, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and return a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
+Thus, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives, where the selection can only be systematic to the extent it is based on the assessment of differences in the alternatives' properties.-->
+Now, let a prospect be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
 Importantly, the information that the inputs provide about these properties can come in different forms.
 Specifically, in *decisions from description* (DFD), the inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
-Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], these properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
-The inputs to DFE therefore take the form of sampled outcomes.
-Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
+In this case, people make decisions under risks, given that choosing one of the prospects does not inevitably lead to a certain outcome.
+Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
+In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk.
+The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
+
+```{r echo=TRUE}
+# define prospect
+outcomes <- c(5, 0)
+probabilities <- c(.2, .8)
+
+# input to decisions from description
+input_DFD <- data.frame(outcomes, probabilities)
+print(input_DFD)
+
+# input to decisions from experience, here: 10 sampled outcomes
+set.seed(2022)
+input_DFE <- sample(outcomes, size = 10, prob = probabilities, replace = T)
+print(input_DFE)
+```
+
+Although these distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-choice patterns in DFD deviate from the solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
+choice patterns in DFD deviate from the solutions of expected value (EV) maximization, *as if* small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
 in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 
-Similar to explanations for other behavioral phenomena that rest on the assumption that the mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [cf. @fiedlerBewareSamplesCognitiveecological2000], an explanation for the as-if underweighting of rare outcomes may be build on the assumption that the mind is sensitive to the information provided by small samples [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; see also @erevChoicePredictionCompetition2010; @erevAnomaliesForecastsDescriptive2017, for the performance of models assuming reliance on small samples in prediction competitions]:
+The current paper presents a model that aims to sketch how the mind might exercise the capacity of making decisions from experience and shows how such a model comes to imply an as-if underweighting of rare outcomes pattern.
+<!--Similar to explanations for other behavioral phenomena that rest on the assumption that the human mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [cf. @fiedlerBewareSamplesCognitiveecological2000], an explanation for the as-if underweighting of rare outcomes may build on the assumption that the mind is sensitive to the information provided by small samples [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; see also @erevChoicePredictionCompetition2010; @erevAnomaliesForecastsDescriptive2017, for the performance of models assuming reliance on small samples in prediction competitions]:
 Specifically, following from the laws of large numbers [cf., e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
-In such a case---or in the less strict case of large samples---, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[<!--Open footnote-->The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large sample. Respectively, the relative relative frequencies with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.<!--Close footnote-->]
+In such a case---or in the less strict case of large samples---, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large sample. Respectively, the relative relative frequencies with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.]
 However, for samples of small size, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
 
 In fact, in DFE, people tend to sample only a small number of outcomes from each prospect [@hertwigDecisionsExperienceEffect2004; @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; see also @wulffMetaanalyticReviewTwo2018], which is a sufficient condition for the reliance on small samples in the evaluation of prospects.
 Yet, the as-if underweighting of rare outcomes may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018].
 While this latter finding does not preclude the reliance on small samples---i.e., the mind may rely on only a portion of the sampled outcomes, discount them, or, as proposed in the current paper, distribute them over multiple smaller samples---, it suggests that an explanation for the as-if underweighting of rare outcomes cannot be reduced to inaccurate inferences about the latent properties of prospects that are caused by frugal sampling and the implied sampling error.
-Rather the opposite, this paper presents a simple sampling and accumulation model that suggests that the as-if underweighting of rare outcomes can be the consequence of an accurate assessment of differences among prospects in a latent property [but see @hertwigDescriptionexperienceGapRisky2009; @plonskyRelianceSmallSamples2015; @wulffMetaanalyticReviewTwo2018, for alternative explanations].
-
-Therefore, first consider the finding that in DFE *sampling strategies* were indicative for the final choice.
+Rather the opposite, this paper presents a sampling and accumulation model that suggests that the as-if underweighting of rare outcomes can be the consequence of an accurate assessment of differences among prospects in a latent property [but see @hertwigDescriptionexperienceGapRisky2009; @plonskyRelianceSmallSamples2015; @wulffMetaanalyticReviewTwo2018, for alternative explanations].
+-->
+Therefore, consider first what @hillsInformationSearchDecisions2010 consider the finding that in DFE *sampling strategies* were indicative for the final choice.
 That is, in one paradigm used to study DFE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
 Considering this paradigm and the choice between two prospects, @hillsInformationSearchDecisions2010 distinguished sampling strategies along the frequency of switches between the two prospects during the sampling phase,^[<!--Open footnote-->Note that @hillsInformationSearchDecisions2010 proposed two paradigmatic sampling strategies, where prospects are either switched just once (comprehensive sampling) or after each sampled outcome (piecewise sampling).
 Nevertheless, in their analyses of empirical sampling data, they used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and further acknowledged that "many [sampling] strategies will fall on the continuum between [the two paradigmatic strategies]" [@hillsInformationSearchDecisions2010, p. 1788].
@@ -122,7 +140,7 @@ Before presenting the model and the computational analysis, the following sectio
 # Definition of Prospects
 
 Since there is an uncountable number of choices people confront in the natural world, behavioral decision research routinely abstracts from choices between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.^[<!--Open footnote-->See @knightRiskUncertaintyProfit1921, Chapter 1, for a discussion on the reasonableness of such abstractions.<!--Close footnote-->]
+Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
 These fundamental properties are considered the possible outcomes of a choice alternative and the probabilities with which these outcomes occur following the choice of the alternative.
 Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs are prospects.
 As such, prospects can be understood as the distribution of a discrete random variable.
@@ -287,7 +305,7 @@ Respectively, then, the as-if underweighting of rare outcomes should become more
 
 Before elaborating how the above model predictions may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
 
-### Desription of CPT
+### Description of CPT
 
 The choices people make between prospects are often *described* in terms of deviations from EV maximization, according to which the prospect with the largest EV
 $$
@@ -839,6 +857,10 @@ In sum, by explicitly modeling their link, the current computational analysis sh
 The current paper further extended the analysis of @hillsInformationSearchDecisions2010 by showing that the effects of sampling and decision strategies on the final choice can translate to characteristic signatures in cumulative prospect theory's value and weighting function. 
 Having controlled for sampling error, the estimated CPT parameters and the resulting shapes of the value and weighting function primarily reflected how sensitive the combinations of sampling and decision strategies are to particular changes in the outcomes and their probabilities.
 Thereby, the analyses extends the notion that CPT can be used as a measurement tool to characterize information processing [@pachurHowTwainCan2017] from risky to uncertain choice.
+
+## Why Sampling and Decision Strategies?
+
+[...]
 
 # Conclusion
 
