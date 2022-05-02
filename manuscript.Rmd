@@ -67,6 +67,7 @@ pacman::p_load(papaja,
                dplyr,
                ggplot2,
                viridis,
+               scico,
                ggpubr,
                latex2exp)
 ```
@@ -77,13 +78,13 @@ Thus, decision making can be understood as an information-processing problem who
 Now, let a prospect be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
 Importantly, the information that the inputs provide about these properties can come in different forms.
 Specifically, in *decisions from description* (DFD), the inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
-In this case, people make decisions under risks, given that choosing one of the prospects does not inevitably lead to a certain outcome.
+In this case, people make decisions under risk, provided that choosing one of the prospects does not inevitably lead to a certain outcome.
 Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
 In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk.
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
 ```{r echo=TRUE}
-# define prospect
+# define a prospect with two outcomes
 outcomes <- c(5, 0)
 probabilities <- c(.2, .8)
 
@@ -97,12 +98,15 @@ input_DFE <- sample(outcomes, size = 10, prob = probabilities, replace = T)
 print(input_DFE)
 ```
 
-Although these distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
-In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-choice patterns in DFD deviate from the solutions of expected value (EV) maximization, *as if* small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
-in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+\noindent
+To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice between the prospects (see Figure\ \@ref(fig:sampling-paradigm)).
 
-The current paper presents a model that aims to sketch how the mind might exercise the capacity of making decisions from experience and shows how such a model comes to imply an as-if underweighting of rare outcomes pattern.
+Although the distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
+In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
+choice patterns in DFD deviate from the solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
+in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
+In other words, in DFD, people choose as if small-probability outcomes are more probable than objectively warranted, and in DFE, people choose as if the same small-probability outcomes are less probable than objectively warranted.
+
 <!--Similar to explanations for other behavioral phenomena that rest on the assumption that the human mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [cf. @fiedlerBewareSamplesCognitiveecological2000], an explanation for the as-if underweighting of rare outcomes may build on the assumption that the mind is sensitive to the information provided by small samples [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; see also @erevChoicePredictionCompetition2010; @erevAnomaliesForecastsDescriptive2017, for the performance of models assuming reliance on small samples in prediction competitions]:
 Specifically, following from the laws of large numbers [cf., e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
 In such a case---or in the less strict case of large samples---, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large sample. Respectively, the relative relative frequencies with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.]
@@ -113,17 +117,31 @@ Yet, the as-if underweighting of rare outcomes may appear, even if the overall n
 While this latter finding does not preclude the reliance on small samples---i.e., the mind may rely on only a portion of the sampled outcomes, discount them, or, as proposed in the current paper, distribute them over multiple smaller samples---, it suggests that an explanation for the as-if underweighting of rare outcomes cannot be reduced to inaccurate inferences about the latent properties of prospects that are caused by frugal sampling and the implied sampling error.
 Rather the opposite, this paper presents a sampling and accumulation model that suggests that the as-if underweighting of rare outcomes can be the consequence of an accurate assessment of differences among prospects in a latent property [but see @hertwigDescriptionexperienceGapRisky2009; @plonskyRelianceSmallSamples2015; @wulffMetaanalyticReviewTwo2018, for alternative explanations].
 -->
-Therefore, consider first what @hillsInformationSearchDecisions2010 consider the finding that in DFE *sampling strategies* were indicative for the final choice.
-That is, in one paradigm used to study DFE, namely, the sampling paradigm [@weberPredictingRiskSensitivity2004], before making a final choice between prospects with latent properties, people can, as much as they want, sequentially sample the prospects' outcomes according to their objective probabilities.
-Considering this paradigm and the choice between two prospects, @hillsInformationSearchDecisions2010 distinguished sampling strategies along the frequency of switches between the two prospects during the sampling phase,^[<!--Open footnote-->Note that @hillsInformationSearchDecisions2010 proposed two paradigmatic sampling strategies, where prospects are either switched just once (comprehensive sampling) or after each sampled outcome (piecewise sampling).
-Nevertheless, in their analyses of empirical sampling data, they used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and further acknowledged that "many [sampling] strategies will fall on the continuum between [the two paradigmatic strategies]" [@hillsInformationSearchDecisions2010, p. 1788].
-Respectively, in the current paper sampling strategies are defined as switching probabilities.
-<!--Close footnote-->] 
+
+@hillsInformationSearchDecisions2010 argued that one contributing factor to the description-experience gap might be a potential link between what they considered two paradigmatic sampling and decision strategies (see Figure\ \@ref(fig:sampling-paradigm)).
+That is, the authors assumed that in the sampling paradigm, people either switch prospects after each sampled outcome (piecewise sampling) to compare single outcomes over repeated rounds (round-wise decision), or they switch just once between prospects (comprehensive sampling) and make only one comparison between the means across all sampled outcomes (summary decision).
+In fact, @hillsInformationSearchDecisions2010 provided tentative evidence for such a coupling of sampling and decision strategies by finding that the choices of people who switched frequently between prospects during the sampling phase were better predicted by a round-wise strategy (rather than a summary strategy), and that this predictive pattern reversed for people who switched infrequently.^[<!--Open footnote-->
+Note that in their analyses of empirical sampling data,  @hillsInformationSearchDecisions2010 used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
+<!--Close footnote-->]
+Using the round-wise strategy may translate to an as-if underweighting of rare events pattern and the description-experience gap because the strategy selects the prospect that wins a majority of comparisons, while small-probability outcomes are predicted not to be considered in most of these comparisons.
+
+(ref:sampling-paradigm) Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice
+
+```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
+knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
+```
+
+
+<!-- Problems of Hills and Hertwig -->
+
+
+<!--Considering this paradigm and the choice between two prospects, @hillsInformationSearchDecisions2010 distinguished sampling strategies along the frequency of switches between the two prospects during the sampling phase,^
 and proposed two different decision strategies that people may adopt.
 Specifically, for a summary strategy, it is assumed that the prospect is chosen which produced the greater mean across all sampled outcomes.
-In turn, for a round-wise strategy, it is assumed that over multiple rounds two sampled outcomes---i.e., one from each of the prospects---are compared and that the prospect is chosen which won the comparison in most rounds.
-Then, @hillsInformationSearchDecisions2010 found that the choices of people who switched frequently between prospects during the sampling phase were better predicted by a round-wise strategy (rather than a summary strategy), and that this predictive pattern reversed for people who switched infrequently.
+In turn, for a round-wise strategy, it is assumed that over multiple rounds two sampled outcomes---i.e., one from each of the prospects---are compared and that the prospect is chosen which won the comparison in most rounds.-->
 
+<!--To model the process by which people arrive at the final choice, one must explicate a number of assumptions, e.g.: How do people decide when to switch between prospects during the sampling phase; how do they integrate and process the information obtained from the sampled outcomes; and, because they can sample as much as they want, how do they decide to stop sampling.
+To approach these questions, the model presented in this paper integrates the proposed link between sampling and decision strategies into the computational framework of sequential sampling models.-->
 Now, the current paper presents a sampling and accumulation model that provides an algorithmic link between sampling and decision strategies, and uses the model to discuss how the mind may rely on sampling strategies to alter which differences in the latent properties of prospects evidence is accumulated for.
 More specifically, the proposed model assumes an accumulation process over a sequence of mean comparisons, with switching probabilities---i.e., the probability of sampling
 outcomes from different prospects in direct succession---determining the size of the samples underlying each mean comparison and thresholds determining how many comparisons a prospect must win in order to be chosen.
@@ -407,7 +425,7 @@ wf %>%
        color = expression(gamma)) + 
   theme_apa() + 
   geom_line(aes(color = gamma), size = .5) +
-  scale_color_viridis(option = "viridis") + 
+  scale_color_viridis(option = "inferno") + 
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
 
@@ -583,7 +601,7 @@ choices %>%
   geom_line() + 
   geom_hline(yintercept = 14, linetype = "dashed", color = "gray") +
   annotate(geom="text", x=.95, y=16, label="Wulff et al. (2018)", color="gray") + 
-  scale_color_viridis_d(option = "viridis") +
+  scale_color_viridis_d(option = "plasma") +
   theme_apa()
 ```
 
@@ -608,8 +626,11 @@ From the reduced false response rates in the bottom panel, we see that the infla
 ```{r choice-rates, fig.cap="(ref:choice-rates)"}
 #prepare data
 
-## determine normative choice according to latent and sampled EV
-fr_rates <- choices %>%
+## determine normative choice according to latent EV and sampled mean
+
+### latent EV
+
+fr_rates_EV <- choices %>%
   mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
   filter(!is.na(norm)) %>% #exclude trials with equal EV
   group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
@@ -622,19 +643,12 @@ fr_rates <- choices %>%
   select(-c(norm, choice, n)) %>% 
   mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
                           rare == "attractive" ~ "\\in (0,.2)",
-                          rare == "unattractive" ~ "\\in (.8,1)"))
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "EV")
 
-# labeller functions
-label_theta <- function(string) {
-  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
-}
+### sampled mean
 
-label_rare <- function(string) {
-  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
-}
-
-###
-fr_rates_m <- choices %>%
+fr_rates_mean <- choices %>%
   mutate(norm = case_when(a_ev_exp/b_ev_exp > 1 ~ "A", a_ev_exp/b_ev_exp < 1 ~ "B")) %>% # determine normative choice
   filter(!is.na(norm)) %>% #exclude trials with equal EV
   group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
@@ -647,28 +661,41 @@ fr_rates_m <- choices %>%
   select(-c(norm, choice, n)) %>% 
   mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
                           rare == "attractive" ~ "\\in (0,.2)",
-                          rare == "unattractive" ~ "\\in (.8,1)"))
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "Mean")
 
-###
+fr_rates <- bind_rows(fr_rates_EV, fr_rates_mean)
 
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
+label_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
+}
 
 #plot
-fr_rates %>%
-  ggplot(aes(s, rate, group = type)) +
+
+fr_rates_risky <- fr_rates %>% filter(type == "Risky")
+fr_rates_safe <- fr_rates %>% filter(type == "Safe")
+
+fr_rates_risky %>%
+  ggplot(aes(s, rate, color = Norm)) +
   facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
                                          a = as_labeller(label_theta, default = label_parsed))) +
   labs(x = expression(psi),
        y = "False Response Rate",
-       color = expression(psi),
+       color = "Norm",
        shape = "False\nResponse") +
   scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
-  geom_line(data = fr_rates_m, aes(group = type), color = "gray") + 
-  geom_point(data = fr_rates_m, aes(shape = type), color = "gray", size = 2) +
-  geom_line(aes(color = s, group = type)) + 
-  geom_point(aes(color = s, shape = type), size = 2) +
+  geom_point(aes(shape = type), size = 2) +
+  geom_line() + 
+  geom_point(data = fr_rates_safe, aes(shape = type), size = 2) +
+  geom_line(data = fr_rates_safe) +
   scale_shape_manual(values = c(4, 16)) +
-  scale_color_viridis(option = "viridis") +
+  scale_color_viridis_d(option = "magma", begin = .3, end = .8) +
   theme_apa()
 ```
 
@@ -693,15 +720,13 @@ $\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the o
 ##gamma
 gamma <- cpt %>%
   filter(parameter == "gamma") %>%
-  ggplot(aes(s, mean, color = s)) +
+  ggplot(aes(s, mean)) +
   facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
   scale_y_continuous(limits = c(0,2), breaks = seq(0,2.0,1.0))+
   labs(x = element_blank(), #omit axis title
-       y = expression(gamma),
-       color = expression(psi)) +
+       y = expression(gamma)) +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  scale_color_viridis(option = "viridis") +
   theme_apa() +
   theme(axis.line.x = element_blank(),
         axis.ticks.x = element_blank(),
@@ -710,18 +735,16 @@ gamma <- cpt %>%
 ##delta
 delta <- cpt %>%
   filter(parameter == "delta") %>% 
-  ggplot(aes(s, mean, color = s)) +
+  ggplot(aes(s, mean)) +
   facet_wrap(~a, nrow = 1) + 
   scale_y_continuous(limits = c(0,10), breaks = seq(0,10,5)) +
   scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
   labs(x = expression(psi),
-       y = expression(delta),
-       color = expression(psi)) +
+       y = expression(delta)) +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  scale_color_viridis(option = "viridis") +
   theme_apa() + 
-  theme(strip.text.x = element_blank()) #omit facet labels
+  theme(strip.text.x = element_blank()) # omit facet labels
 
 wf <- cpt %>%
   select(s, boundary, a, parameter, mean) %>%
@@ -763,7 +786,7 @@ However, even for high values of $\psi$, the choices did not appear to be random
 ##alpha
 alpha <- cpt %>%
   filter(parameter == "alpha") %>% 
-  ggplot(aes(s, mean, color = s)) +
+  ggplot(aes(s, mean)) +
   facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
   scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
   scale_y_continuous(limits = c(0,1), breaks = seq(0,1, .5)) + 
@@ -772,7 +795,6 @@ alpha <- cpt %>%
        color = expression(psi)) +
   geom_point() +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_color_viridis(option = "viridis") +
   theme_apa() + 
   theme(axis.line.x = element_blank(),
         axis.ticks.x = element_blank(),
@@ -802,7 +824,7 @@ value <- vf %>%
 ##rho
 rho <- cpt %>%
   filter(parameter == "rho") %>% 
-  ggplot(aes(s, mean, color = s, shape = boundary)) +
+  ggplot(aes(s, mean)) +
   facet_wrap(~a, nrow = 1) + 
   labs(x = expression(psi),
        y = expression(rho),
@@ -811,8 +833,6 @@ rho <- cpt %>%
   scale_y_continuous(limits = c(0, 5), breaks = seq(0, 5,2.5)) +
   geom_point() +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  scale_color_viridis(option = "viridis") +
-  scale_shape_manual(values = c(4, 16)) +
   theme_apa() + 
   theme(strip.text.x = element_blank())
 
