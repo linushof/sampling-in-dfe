@@ -79,8 +79,8 @@ Now, let a prospect be a choice alternative that possesses only two kinds of fun
 Importantly, the information that the inputs provide about these properties can come in different forms.
 Specifically, in *decisions from description* (DFD), the inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
 In this case, people make decisions under risk, provided that choosing one of the prospects does not inevitably lead to a certain outcome.
-Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
-In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk.
+Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the same properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
+In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk [@knightRiskUncertaintyProfit1921].
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
 ```{r echo=TRUE}
@@ -99,24 +99,45 @@ print(input_DFE)
 ```
 
 \noindent
-To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice between the prospects (see Figure\ \@ref(fig:sampling-paradigm)).
+To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice (Figure\ \@ref(fig:sampling-paradigm)).
 
 Although the distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
-choice patterns in DFD deviate from the solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
+choice patterns in DFD deviate from the normative solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
 in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-In other words, in DFD, people choose as if small-probability outcomes are more probable than objectively warranted, and in DFE, people choose as if the same small-probability outcomes are less probable than objectively warranted.
+In other words, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
 
-<!--Similar to explanations for other behavioral phenomena that rest on the assumption that the human mind is sensitive to the composition of the *samples*---i.e., sets of sampled outcomes---on which it operates [cf. @fiedlerBewareSamplesCognitiveecological2000], an explanation for the as-if underweighting of rare outcomes may build on the assumption that the mind is sensitive to the information provided by small samples [@hertwigDecisionsExperienceEffect2004; @plonskyRelianceSmallSamples2015; see also @erevChoicePredictionCompetition2010; @erevAnomaliesForecastsDescriptive2017, for the performance of models assuming reliance on small samples in prediction competitions]:
-Specifically, following from the laws of large numbers [cf., e.g., @kolmogorovFoundationsTheoryProbability1950], the relative frequencies with which the prospect's outcomes occur in a sample of infinite size converge almost surely to the respective objective probabilities.
-In such a case---or in the less strict case of large samples---, then, the binomial distribution of each outcome can be approximated by a symmetric normal distribution.^[The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample. According to the *de Moivre-Laplace theorem* [see, e.g., @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015], the binomial distribution can be approximated by a normal distribution given a large sample. Respectively, the relative relative frequencies with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.]
-However, for samples of small size, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur in the sample to be smaller rather than larger than their latent objective probabilities.
-
+<!--
 In fact, in DFE, people tend to sample only a small number of outcomes from each prospect [@hertwigDecisionsExperienceEffect2004; @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; see also @wulffMetaanalyticReviewTwo2018], which is a sufficient condition for the reliance on small samples in the evaluation of prospects.
 Yet, the as-if underweighting of rare outcomes may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018].
 While this latter finding does not preclude the reliance on small samples---i.e., the mind may rely on only a portion of the sampled outcomes, discount them, or, as proposed in the current paper, distribute them over multiple smaller samples---, it suggests that an explanation for the as-if underweighting of rare outcomes cannot be reduced to inaccurate inferences about the latent properties of prospects that are caused by frugal sampling and the implied sampling error.
 Rather the opposite, this paper presents a sampling and accumulation model that suggests that the as-if underweighting of rare outcomes can be the consequence of an accurate assessment of differences among prospects in a latent property [but see @hertwigDescriptionexperienceGapRisky2009; @plonskyRelianceSmallSamples2015; @wulffMetaanalyticReviewTwo2018, for alternative explanations].
 -->
+
+What causes the description-experience gap?
+A quite common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+According to this notion, small *samples*---i.e., sets of sampled outcomes---differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box 1).
+This difference is then assumed to carry over to the decision-making process, eventually causing distinct choice patterns in DFD and DFE.
+\newline
+
+\noindent
+\fbox{
+    \parbox{\textwidth}{
+        \textbf{Box 1.} 
+        \textit{Reliance on Small Samples in DFE.}
+        The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample.
+        According to the \textit{de Moivre-Laplace theorem} (see, e.g., \protect\hyperlink{ref-georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015}{Georgii, 2015}), the binomial distribution can be approximated by a normal distribution given a large sample.
+        That is, the relative relative frequency with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.
+        However, for small samples, the binomial distribution associated with a small-probability outcome is positive skewed, causing the relative frequency with which this outcome occurs in the sample to be smaller rather than larger than its objective probability.
+        That is, small-probability outcomes tend to be underrepresented in small samples.
+        An explanation for the as-if underweighting of rare outcomes pattern may thus build on the assumption that the mind is sensitive to the information provided by small samples (\protect\hyperlink{ref-hertwigDecisionsExperienceEffect2004}{Hertwig et al., 2004}; \protect\hyperlink{ref-plonskyRelianceSmallSamples2015}{Plonsky et al., 2015}; see also \protect\hyperlink{ref-erevChoicePredictionCompetition2010}{Erev et al., 2010}, \protect\hyperlink{ref-erevAnomaliesForecastsDescriptive2017}{2017}, for the performance of models assuming reliance on small samples in prediction competitions).
+    }
+}
+\newline
+
+Yet, the description-experience gap might not be solely caused by the reliance on a small number of sampled outcomes and the associated differences between the information underlying the decision-making process in DFD and DFE [see also @hauDecisionsExperienceStatistical2010; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
+Rather, the decision-making process itself may contribute to the gap.
+That is, in DFE, people must ...
 
 @hillsInformationSearchDecisions2010 argued that one contributing factor to the description-experience gap might be a potential link between what they considered two paradigmatic sampling and decision strategies (see Figure\ \@ref(fig:sampling-paradigm)).
 That is, the authors assumed that in the sampling paradigm, people either switch prospects after each sampled outcome (piecewise sampling) to compare single outcomes over repeated rounds (round-wise decision), or they switch just once between prospects (comprehensive sampling) and make only one comparison between the means across all sampled outcomes (summary decision).
