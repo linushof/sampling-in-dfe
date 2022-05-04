@@ -1,6 +1,6 @@
 ---
 title             : |
-  Sampling Strategies in Decisions from Experience: Property Representation and Probability Weighting Approximation
+  Sampling Strategies in Decisions from Experience
   
 shorttitle        : "Sampling strategies"
 
@@ -16,7 +16,7 @@ affiliation:
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the GitHub repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash `r repro::current_hash()`, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
+ This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub repository`: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the `hash `r repro::current_hash()``, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
   
   \indent
   1. Prof. Dr. Thorsten Pachur, Technical University of Munich
@@ -75,13 +75,11 @@ pacman::p_load(papaja,
 <!-- Introduction -->
 
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the alternatives between which people can choose.
-<!--Accordingly, irrespective of their exact mathematical specification or computational implementation, decision models generally take as inputs information about a set of choice alternatives, each possessing some defining *properties*, and return a subset of chosen alternatives as outputs [@heOntologyDecisionModels2020].
-Thus, decision making can be understood as an information-processing problem whose solution requires a selection among choice alternatives, where the selection can only be systematic to the extent it is based on the assessment of differences in the alternatives' properties.-->
-Now, let a prospect be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
+Now, let a prospect (or: gamble) be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
 Importantly, the information that the inputs provide about these properties can come in different forms.
 Specifically, in *decisions from description* (DFD), the inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
 In this case, people make decisions under risk, provided that choosing one of the prospects does not inevitably lead to a certain outcome.
-Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the same properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospect was chosen in similar past decisions.
+Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the same properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospects were chosen in similar past decisions.
 In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk [@knightRiskUncertaintyProfit1921].
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
@@ -101,13 +99,13 @@ print(input_DFE)
 ```
 
 \noindent
-To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice (Figure\ \@ref(fig:sampling-paradigm)).
+To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice between the prospects (Figure\ \@ref(fig:sampling-paradigm)).
 
 Although the distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
 choice patterns in DFD deviate from the normative solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
 in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-In other words, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
+More general, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
 
 <!--
 In fact, in DFE, people tend to sample only a small number of outcomes from each prospect [@hertwigDecisionsExperienceEffect2004; @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; see also @wulffMetaanalyticReviewTwo2018], which is a sufficient condition for the reliance on small samples in the evaluation of prospects.
@@ -139,15 +137,22 @@ Specifically, small *samples*---i.e., sets of sampled outcomes---often differ fr
 \noindent
 This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing distinct choice patterns in DFD and DFE.
 
-Yet, the description-experience gap might not be solely caused by the reliance on a small number of sampled outcomes and the associated differences in the information underlying the decision-making processes in DFD and DFE [see also @hauDecisionsExperienceStatistical2010; @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
+Yet, the description-experience gap might not be solely caused by the reliance on a small number of sampled outcomes in DFE and the associated sampling error [see also @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
 Rather, the specifics of the decision-making processes themselves may contribute to the gap.
-To this end, the current paper models how the mind might exercise the capacity of making decisions from experience in the sampling paradigm and examines the choice patterns that result from the modeled decision-making processes.
-More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the interplay of previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] shapes DFE, and comes to imply choice patterns and functional forms in cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
-Note that CPT's value function is also considered. However, the focus of this paper is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, as well as the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
+To this end, the current paper presents a model that sketches how the mind might exercise the capacity of making decisions from experience in the sampling paradigm, and examines the choice patterns that result from the modeled decision-making processes.
+More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the interplay of previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
+CPT's value function is also considered in this paper.
+However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
 <!--Close footnote-->]
 
-The remainder of the paper is structured as follows:
+The rest of the paper is structured as follows:
+In the first section, it is briefly discussed how DFE in the sampling paradigm differ from DFD in terms of the tasks involved in the decision-making process and thus the assumptions that must be made when modeling the respective process.
+In the section that follows, 
 [...]
+Thereafter, a simulation study is presented, where the proposed models are used to simulate the sampling and accumulation processes for a set of choices between a safe and a two-outcome prospect.
+Considering choice rates and parameter estimates of CPT, the computational analysis shows that which translate to characteristic patterns in the psychoeconomic functions of CPT.
+The paper closes with a discussion and conclusion.
+Note that all materials, including the can be retrieved from the accompanying `GitHub repository`. 
 
 <!-- To substantiate the discussion, the model is used to simulate the sampling and accumulation process for choices between a safe and a two-outcome prospect, while systematically combining different switching probabilities and thresholds.
 Considering choice rates and parameter estimates of cumulative prospect theory [@tverskyAdvancesProspectTheory1992], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
@@ -227,7 +232,7 @@ To model the process by which people arrive at the final choice in the sampling 
 
 * How does the mind integrate and evaluate the information obtained from the sampled outcomes?
 
-To approach the above questions, this paper presents a model that integrates two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
+To approach the above questions, this paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
 
 # Sampling and Decision Strategies
 
@@ -942,6 +947,55 @@ Thereby, the analyses extends the notion that CPT can be used as a measurement t
 
 # Conclusion
 
+```{r}
+#load CPT estimates
+cols_cpt <- list(.default = col_double(),
+                               boundary = col_factor(),
+                               a = col_factor(),
+                               parameter = col_factor())
+cpt_c <- read_csv("supplements/estimates_cpt_comprehensive.csv", col_types = cols_cpt)
+cpt_c <- cpt_c %>% 
+  filter(boundary == "absolute")
+
+cpt <- cpt %>% mutate(integration = "round")
+cpt_c <- cpt_c %>% mutate(integration = "summary")
+cpt_both <- bind_rows(cpt, cpt_c)
+```
+
+
+```{r test}
+
+#plot estimates
+
+
+gamma_2 <- cpt_both %>%
+  filter(parameter == "gamma") %>%
+  ggplot(aes(s, mean, color = integration)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free_y") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  scale_color_scico_d(palette = "berlin") + 
+  labs(x = expression(psi), 
+       y = expression(gamma)) +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() + 
+  theme_apa()
+
+
+delta_2 <- cpt_both %>%
+  filter(parameter == "delta") %>%
+  ggplot(aes(s, mean, color = integration)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free_y") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  scale_color_scico_d(palette = "berlin") + 
+  labs(y = expression(delta)) +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() + 
+  theme_apa()
+
+ggarrange(gamma_2, delta_2, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
+```
 
 \newpage
 
