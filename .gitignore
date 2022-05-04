@@ -4,6 +4,7 @@
 .Ruserdata
 *.tex
 *.pdf
+*.pptx
 notes/
 manuscript_files/
 supplements/
