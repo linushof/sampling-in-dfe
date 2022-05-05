@@ -5,6 +5,8 @@
 *.tex
 *.pdf
 *.pptx
+*.csl
+simulation_*.csv
 notes/
 manuscript_files/
 supplements/
