@@ -51,25 +51,71 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, #omit messages
-                      fig.align = "l", #align figures to left margin
-                      fig.pos = "t", #display figures at the top of a page
+# set global chunk options
+knitr::opts_chunk$set(echo = FALSE, 
+                      fig.align = "l", 
+                      fig.pos = "t", 
                       fig.height=7, 
                       fig.width=10)
 ```
 
 ```{r packages, include=FALSE}
-#load required packages
+# load required packages
 pacman::p_load(papaja,
-               knitr,
-               readr,
-               tidyr, 
-               dplyr,
-               ggplot2,
-               viridis,
-               scico,
-               ggpubr,
-               latex2exp)
+               tidyverse,
+               viridis, 
+               scico, 
+               ggpubr,  
+               latex2exp 
+               )
+```
+
+```{r data, include=FALSE}
+# load and prepare required data
+
+## choice data
+
+### specify column types
+cols_choices <- list(.default = col_double(),
+                     boundary = col_factor(),
+                     gamble = col_factor(),
+                     rare = col_factor(),
+                     agent = col_factor(),
+                     choice = col_factor())
+
+### load data files from round-wise and summary model
+choices_roundwise <- read_csv("data/choices_roundwise.csv", col_types = cols_choices)
+choices_summary <- read_csv("data/choices_summary.csv", col_types = cols_choices)
+
+### merge data files 
+choices_roundwise <- choices_roundwise %>%
+  mutate(model = "roundwise") %>% 
+  select(model, everything())
+
+choices_summary <- choices_summary %>%
+  mutate(model = "summary") %>% 
+  select(model, everything())
+
+choices <- bind_rows(choices_roundwise, choices_summary)
+
+## cpt estimates
+cols_cpt <- list(.default = col_double(),
+                 boundary = col_factor(),
+                 a = col_factor(),
+                 parameter = col_factor())
+
+cpt_roundwise <- read_csv("data/cpt-parameters_roundwise.csv", col_types = cols_cpt)
+cpt_summary <- read_csv("data/cpt-parameters_summary.csv", col_types = cols_cpt)
+
+cpt_roundwise <- cpt_roundwise %>%
+  mutate(model = "roundwise") %>% 
+  select(model, everything())
+
+cpt_summary <- cpt_summary %>%
+  mutate(model = "summary") %>% 
+  select(model, everything())
+  
+cpt <- bind_rows(cpt_roundwise, cpt_summary)
 ```
 
 <!-- Introduction -->
@@ -83,7 +129,7 @@ Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004]
 In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk [@knightRiskUncertaintyProfit1921].
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
-```{r echo=TRUE}
+```{r code-example-1, echo=TRUE}
 # define a prospect with two outcomes
 outcomes <- c(5, 0)
 probabilities <- c(.2, .8)
@@ -245,7 +291,7 @@ Using the round-wise strategy may translate to an as-if underweighting of rare e
 
 (ref:sampling-paradigm) Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice
 
-```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
+```{r fig-sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
 knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
 ```
 
@@ -339,11 +385,11 @@ Therefore, (8) may be adapted such that $Z$ takes the value $-1$ instead of $0$,
 Below, the key predictions concerning the effects of the model parameters $\psi$ and $\theta$ on the length of the sampling and accumulation process and the resulting choice are outlined.
 Moreover, previous research has shown that differences as to how information about the properties of prospects is processed can translate to characteristic shapes of cumulative prospect theory's (CPT) value and weighting function [see @pachurHowTwainCan2017; @zilkerNonlinearProbabilityWeighting2021].
 Respectively, this section also contains predictions about the relations between $\psi$ and $\theta$ and the CPT parameters.
-A summary of the model predictions can be found in Table\ \@ref(tab:predictions).
+A summary of the model predictions can be found in Table\ \@ref(tab:tab-predictions).
 
 (ref:predictions) Summary of Model Predictions
 
-```{r predictions}
+```{r tab-predictions}
 predictions <- tibble("Measure" = 
                         c("Choices pattern",
                           "",
@@ -465,7 +511,7 @@ As a consequence from (13), then, each combination of parameters implies a parti
 
 (ref:weighting-function) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
 
-```{r weighting-function, fig.cap="(ref:weighting-function)"}
+```{r fig-weighting-function, fig.cap="(ref:weighting-function)"}
 #compute images of weighting function (wf)
 wf <- tibble(p = seq(0, 1, .01)) %>%  #cumulative probabilities
   expand_grid(gamma = seq(.1, 2, .1), #gamma values
@@ -577,7 +623,16 @@ $\psi$ was varied in the interval $[.1, 1]$ in increments of $.1$.
 * *Threshold*: 
 $\theta$ was varied in the interval $[1,5]$ in increments of 1. 
 
-* *Decision variable*: The decision variable of a prospect either counts the number of won comparisons---implying an absolute threshold---or how many more comparisons were won relative to the other prospect---implying a relative threshold.^[The results are similar for absolute and relative thresholds. For simplification, only the results of the absolute thresholds are reported in the main text.]
+* *Decision variable*: The decision variable of a prospect either counts the number of won comparisons---implying an absolute threshold---or how many more comparisons were won relative to the other prospect---implying a relative threshold.^[<!--Open footnote-->
+The results are similar for absolute and relative thresholds. 
+For simplification, only the results of the absolute thresholds are reported in the main text.
+The results for relative thresholds are reported in the Appendix.
+<!--Close footnote-->]
+
+```{r subset-absolute, include=FALSE}
+choices_absolute <- choices %>% filter(boundary == "absolute")
+cpt_absolute <- cpt %>% filter(boundary == "absolute")
+```
 
 \noindent
 Since $\psi$ introduces some stochasticity into the sampling and accumulation process, each of the 100 resulting parameter combinations was used 100 times---resembling 100 independent agents---to solve the test set. 
@@ -606,28 +661,6 @@ Such a grouped approach should reveal the main effects of a given parameter comb
 To facilitate comparisons across parameter combinations of the sampling and accumulation model, uninformative prior distributions were used throughout for all four parameters.
 Specifically, the prior distributions $\alpha \sim U(0,1)$, $\gamma \sim U(0,2)$, $\delta \sim U(0,10)$, and $\rho \sim U(0,5)$ were used.  
  
-```{r data, include=FALSE}
-#load choice data
-cols_choices <- list(.default = col_double(),
-                     boundary = col_factor(),
-                     gamble = col_factor(),
-                     rare = col_factor(),
-                     agent = col_factor(),
-                     choice = col_factor())
-choices <- read_csv("data/simulation_summary.csv", col_types = cols_choices)
-choices <- choices %>% 
-  filter(boundary == "absolute")
-
-#load CPT estimates
-cols_cpt <- list(.default = col_double(),
-                 boundary = col_factor(),
-                 a = col_factor(),
-                 parameter = col_factor())
-cpt <- read_csv("data/cpt_parameters.csv", col_types = cols_cpt)
-cpt <- cpt %>% 
-  filter(boundary == "absolute")
-```
-
 To estimate the posterior distributions of the free parameters, Markov Chain Monte Carlo sampling as implemented in JAGS was used, where 20 chains of 40,000 samples each were run after a warm-up period of 1000 samples.
 To reduce potential autocorrelation during the sampling process, only every 20th sample was kept (thinning), leaving a total of 40,000 samples across chains.
 The minimum effective sample size was `r min(cpt$n.eff)`.
@@ -635,7 +668,7 @@ The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulat
 
 ## Results
 
-Overall, the results of the simulation match the predictions from Table\ \@ref(tab:predictions), however, with some exceptions concerning the estimates for the parameter $\delta$ of the weighting function. 
+Overall, the results of the simulation match the predictions from Table\ \@ref(tab:tab-predictions), however, with some exceptions concerning the estimates for the parameter $\delta$ of the weighting function. 
 We start by inspecting how the length of the information-processing chain changes with varying combinations of $\psi$ and $\theta$.
 
 ### Simulated Length of the Information-Processing Chains
@@ -650,11 +683,12 @@ Moreover, while parameter combinations that can be understood as falling in betw
 
 (ref:chain-length) Lengths of Information-Processing Chains
 
-```{r chain-length, fig.cap="(ref:chain-length)"}
-choices %>%
-  group_by(s, a) %>% 
+```{r chain-length, fig.cap="(ref:chain-length)", eval = FALSE}
+choices_absolute %>%
+  group_by(model, s, a) %>% 
   summarize(n_med = median(n_sample)) %>% 
   ggplot(aes(x = s, y = n_med, group = as.factor(a), color = as.factor(a))) + 
+  facet_wrap(~model, nrow = 1) + 
    labs(x = expression(psi),
        y = "Median of Overall Sampled Outcomes",
        color = expression(theta)) +
@@ -686,7 +720,7 @@ From the reduced false response rates in the bottom panel, we see that the infla
 
 (ref:choice-rates) Rates of False Risky and False Safe Choices
 
-```{r choice-rates, fig.cap="(ref:choice-rates)"}
+```{r choice-rates, fig.cap="(ref:choice-rates)", eval = FALSE}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
@@ -774,65 +808,46 @@ For $\theta > 1$, the estimates substantiate the prediction that $\gamma$ takes 
 In other words, the higher the value of $\psi$, the more severe is the underweighting (overweighting) of the high-rank outcome of the risky prospect in CPT, if it is of small (large) probability.
 $\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point. [...]
 
-(ref:weighting-parameters) Parameter Estimates and Graphical Shape of the Weighting Function
+(ref:weighting-parameters) Parameter Estimates of the Weighting Function
 
 ```{r weighting-parameters, fig.cap="(ref:weighting-parameters)"}
 
-#plot estimates
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
 
-##gamma
-gamma <- cpt %>%
+# plot gamma estimates
+gamma <- cpt_absolute %>%
   filter(parameter == "gamma") %>%
-  ggplot(aes(s, mean)) +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
-  scale_y_continuous(limits = c(0,2), breaks = seq(0,2.0,1.0))+
-  labs(x = element_blank(), #omit axis title
-       y = expression(gamma)) +
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(gamma),
+       color = "Model") +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  theme_apa() +
-  theme(axis.line.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank())
+  geom_line() +
+  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  theme_minimal()
 
-##delta
-delta <- cpt %>%
-  filter(parameter == "delta") %>% 
-  ggplot(aes(s, mean)) +
-  facet_wrap(~a, nrow = 1) + 
-  scale_y_continuous(limits = c(0,10), breaks = seq(0,10,5)) +
-  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
-  labs(x = expression(psi),
-       y = expression(delta)) +
+# plot delta estimates
+delta <- cpt_absolute %>%
+  filter(parameter == "delta") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(delta),
+       color = "Model") +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
-  theme_apa() + 
-  theme(strip.text.x = element_blank()) # omit facet labels
+  geom_line() +
+  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  theme_minimal()
 
-wf <- cpt %>%
-  select(s, boundary, a, parameter, mean) %>%
-  pivot_wider(names_from = parameter, values_from = mean) %>%
-  select(-c(alpha, rho)) %>%
-  expand_grid(p = seq(0, 1, .05)) %>%
-  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
-
-##weighting function
-weight <- wf %>% #graphs for absolute boundary
-  ggplot(aes(p, w, group = s, color = s)) +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
-  labs(x = "Experienced Probability",
-       y = expression(pi),
-       color = expression(psi)) +
-  scale_x_continuous(breaks = seq(0, 1, .5)) +
-  scale_y_continuous(breaks = seq(0, 1, .5)) +
-  geom_line(size = .5) +
-  scale_color_viridis(option = "viridis") +
-  theme_apa() + 
-  theme(strip.text.x = element_blank()) #omit facet labels
-
-
-##merge figures
-ggarrange(gamma, delta, weight, ncol = 1, nrow = 3, common.legend = TRUE, legend = "right")
+# merge plots
+ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
 Figure\ \@ref(fig:value-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$, as well as the shape of the value function.
@@ -841,69 +856,100 @@ The respective shape of the value function is more concave, the higher the value
 Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low values of $\psi$.
 However, even for high values of $\psi$, the choices did not appear to be random. [...]
 
-(ref:value-parameters) Parameter Estimates and Graphical Shape of the Value Function
+(ref:sensitivity-parameters) Parameter Estimates of the Outcome and Choice Sensitivity Parameter
 
-```{r value-parameters, fig.cap="(ref:value-parameters)"}
-#plot estimates
+```{r sensitivity-parameters, fig.cap="(ref:sensitivity-parameters)"}
 
-##alpha
-alpha <- cpt %>%
-  filter(parameter == "alpha") %>% 
-  ggplot(aes(s, mean)) +
-  facet_wrap(~a, nrow = 1, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) +
-  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0,1,.5)) +
-  scale_y_continuous(limits = c(0,1), breaks = seq(0,1, .5)) + 
-  labs(x = element_blank(),
+# plot alpha estimates
+alpha <- cpt_absolute %>%
+  filter(parameter == "alpha") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
        y = expression(alpha),
-       color = expression(psi)) +
-  geom_point() +
+       color = "Model") +
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  theme_apa() + 
-  theme(axis.line.x = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank())
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  theme_minimal()
 
-###value function
-vf <- cpt %>%
-  select(s, boundary, a, parameter, mean) %>%
+# plot rho estimates
+rho <- cpt_absolute %>%
+  filter(parameter == "rho") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(rho),
+       color = "Model") +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  theme_minimal()
+
+# merge plots
+ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
+```
+
+Figure\ \@ref(fig:function-forms) displays the resulting graphical shapes of the weighting and value function.
+
+(ref:function-forms) Estimated Graphical Shape of the Weighting and Value Function
+
+```{r function-forms, fig.cap="(ref:function-forms)"}
+
+# plot weighting function
+
+## compute decision weights
+
+weights <- cpt_absolute %>%
+  select(model, s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(alpha, rho)) %>%
+  expand_grid(p = seq(0, 1, .05)) %>%
+  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
+
+## plot graphs
+
+wf <- weights %>% 
+  ggplot(aes(p, w, group = s, color = s)) +
+  facet_wrap(~a~model, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Experienced Probability",
+       y = expression(pi),
+       color = expression(psi)) +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
+  geom_line(size = .5) +
+  scale_color_viridis(option = "plasma") +
+  theme_minimal()
+
+# value functions
+
+values <- cpt_absolute %>%
+  select(model, s, boundary, a, parameter, mean) %>%
   pivot_wider(names_from = parameter, values_from = mean) %>%
   select(-c(gamma, delta, rho)) %>%
   expand_grid(x = seq(0, 20, .5)) %>%  
   mutate(v = round(x^alpha, 2)) 
 
-value <- vf %>% 
+vf <- values %>% 
   ggplot(aes(x, v, group = s, color = s)) +
-  facet_wrap(~a, nrow = 1)+ 
+  facet_wrap(~a~model, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
   labs(x = "Objective Outcome",
        y = "Subjective Value",
        color=expression(psi)) +
   scale_x_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
-  scale_y_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
   geom_line(size = .5) +
-  scale_color_viridis(option = "viridis") +
-  theme_apa() + 
-  theme(strip.text.x = element_blank())
+  scale_color_viridis(option = "plasma") +
+  theme_minimal()
 
-##rho
-rho <- cpt %>%
-  filter(parameter == "rho") %>% 
-  ggplot(aes(s, mean)) +
-  facet_wrap(~a, nrow = 1) + 
-  labs(x = expression(psi),
-       y = expression(rho),
-       color = expression(psi)) +
-  scale_x_continuous(limits = c(0, 1.1), breaks = seq(0, 1,.5)) +
-  scale_y_continuous(limits = c(0, 5), breaks = seq(0, 5,2.5)) +
-  geom_point() +
-  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  theme_apa() + 
-  theme(strip.text.x = element_blank())
-
-##merge figure
-ggarrange(alpha, rho, value, ncol = 1, nrow = 3, common.legend = TRUE, legend = "right") 
+# merge plots
+ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
-# Summary and Discussion
+# Discussion
 
 The presented sampling and accumulation model ought to sketch how the mind might exercise the capacity of making decisions from experience.
 In DFE, one cannot rely on symbolic descriptions of all relevant properties of the choice alternatives, but only on samples of past experiences, e.g., when the alternatives were chosen in similar decisions in the past.
@@ -947,55 +993,7 @@ Thereby, the analyses extends the notion that CPT can be used as a measurement t
 
 # Conclusion
 
-```{r}
-#load CPT estimates
-cols_cpt <- list(.default = col_double(),
-                               boundary = col_factor(),
-                               a = col_factor(),
-                               parameter = col_factor())
-cpt_c <- read_csv("supplements/estimates_cpt_comprehensive.csv", col_types = cols_cpt)
-cpt_c <- cpt_c %>% 
-  filter(boundary == "absolute")
-
-cpt <- cpt %>% mutate(integration = "round")
-cpt_c <- cpt_c %>% mutate(integration = "summary")
-cpt_both <- bind_rows(cpt, cpt_c)
-```
-
-
-```{r test}
-
-#plot estimates
-
-
-gamma_2 <- cpt_both %>%
-  filter(parameter == "gamma") %>%
-  ggplot(aes(s, mean, color = integration)) +
-  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free_y") +
-  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
-  scale_color_scico_d(palette = "berlin") + 
-  labs(x = expression(psi), 
-       y = expression(gamma)) +
-  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  geom_point() +
-  geom_line() + 
-  theme_apa()
-
-
-delta_2 <- cpt_both %>%
-  filter(parameter == "delta") %>%
-  ggplot(aes(s, mean, color = integration)) +
-  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free_y") +
-  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
-  scale_color_scico_d(palette = "berlin") + 
-  labs(y = expression(delta)) +
-  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
-  geom_point() +
-  geom_line() + 
-  theme_apa()
-
-ggarrange(gamma_2, delta_2, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
-```
+[...]
 
 \newpage
 
