@@ -63,8 +63,8 @@ knitr::opts_chunk$set(echo = FALSE,
 # load required packages
 pacman::p_load(papaja,
                tidyverse,
-               viridis, 
-               scico, 
+               viridis,
+               viridisLite, 
                ggpubr,  
                latex2exp 
                )
@@ -683,29 +683,29 @@ Moreover, while parameter combinations that can be understood as falling in betw
 
 (ref:chain-length) Lengths of Information-Processing Chains
 
-```{r chain-length, fig.cap="(ref:chain-length)", eval = FALSE}
-choices_absolute %>%
-  group_by(model, s, a) %>% 
-  summarize(n_med = median(n_sample)) %>% 
-  ggplot(aes(x = s, y = n_med, group = as.factor(a), color = as.factor(a))) + 
-  facet_wrap(~model, nrow = 1) + 
-   labs(x = expression(psi),
-       y = "Median of Overall Sampled Outcomes",
-       color = expression(theta)) +
-  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
-  scale_y_continuous(limits = c(0, 120), breaks = seq(0, 150, 50)) +
-  geom_point() +
-  geom_line() + 
+```{r prepare-chain-length, eval = FALSE}
+chain_lengths <- choices_absolute %>%
+  ggplot(aes(x = s, y = n_sample, color = model)) +
+  facet_wrap(~a, nrow = 2, scales = "free") + 
+  labs(x = expression(psi),
+       y = "Number of Sampled Outcomes",
+       color = "Model") + 
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5))+
+  geom_jitter(alpha = .05) + 
+  geom_smooth(color = "gray") + 
   geom_hline(yintercept = 14, linetype = "dashed", color = "gray") +
-  annotate(geom="text", x=.95, y=16, label="Wulff et al. (2018)", color="gray") + 
-  scale_color_viridis_d(option = "plasma") +
-  theme_apa()
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
+  guides(color = guide_legend(override.aes = list(alpha = 1))) +
+  theme_minimal()
 ```
 
+```{r chain-length, fig.cap="(ref:chain-length)", out.width="100%"}
+knitr::include_graphics(path = "manuscript_files/chain-lengths.png")
+```
 
 ### Simulated Final Choice
 
-Figure\ \@ref(fig:choice-rates) displays the rates of choices that did not maximize the latent EV (hereafter: false response rates) for each combination of $\psi$ and $\theta$.
+Figures\ \@ref(fig:choice-rates-roundwise) and \@ref(fig:choice-rates-summary) display the rates of choices that did not maximize the latent EV (hereafter: false response rates) for each combination of $\psi$ and $\theta$.
 To demonstrate that the deviations from EV maximization are not just due to sampling error, the rates of choices that did not maximize the sampled mean are displayed in gray. 
 Rates are separated for presence and rank of small-probability outcomes.
 Consider first the top panel showing the false response rates across all problems where the low-rank outcome of the risky prospect possesses a small probability:
@@ -718,16 +718,17 @@ Note from the middle panel that the pattern of false response rates reverses for
 In this case, then, the mean of the risky prospect tends to be more deflated the higher the value of $\psi$, which increases the risk of falsely choosing the safe prospect.
 From the reduced false response rates in the bottom panel, we see that the inflation and deflation of the means for high values of $\psi$ is significantly attenuated when a prospect possesses no small-probability outcome.  
 
-(ref:choice-rates) Rates of False Risky and False Safe Choices
+(ref:choice-rates-roundwise) Rates of False Risky and False Safe Choices in the Round-Wise Integration Model
 
-```{r choice-rates, fig.cap="(ref:choice-rates)", eval = FALSE}
+```{r choice-rates-roundwise, fig.cap="(ref:choice-rates-roundwise)"}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
 
 ### latent EV
 
-fr_rates_EV <- choices %>%
+fr_rates_EV <- choices_absolute %>%
+  filter(model == "roundwise") %>% 
   mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
   filter(!is.na(norm)) %>% #exclude trials with equal EV
   group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
@@ -745,7 +746,8 @@ fr_rates_EV <- choices %>%
 
 ### sampled mean
 
-fr_rates_mean <- choices %>%
+fr_rates_mean <- choices_absolute %>% 
+  filter(model == "roundwise") %>% 
   mutate(norm = case_when(a_ev_exp/b_ev_exp > 1 ~ "A", a_ev_exp/b_ev_exp < 1 ~ "B")) %>% # determine normative choice
   filter(!is.na(norm)) %>% #exclude trials with equal EV
   group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
@@ -791,10 +793,91 @@ fr_rates_risky %>%
   geom_line() + 
   geom_point(data = fr_rates_safe, aes(shape = type), size = 2) +
   geom_line(data = fr_rates_safe) +
-  scale_shape_manual(values = c(4, 16)) +
-  scale_color_viridis_d(option = "magma", begin = .3, end = .8) +
-  theme_apa()
+  scale_shape_manual(values = c(8, 16)) +
+  scale_color_manual(values = c("#d3d3d3", "#35b779")) + 
+  theme_minimal()
 ```
+
+(ref:choice-rates-summary) Rates of False Risky and False Safe Choices in the Summary Integration Model
+
+```{r choice-rates-summary, fig.cap="(ref:choice-rates-summary)"}
+#prepare data
+
+## determine normative choice according to latent EV and sampled mean
+
+### latent EV
+
+fr_rates_EV <- choices_absolute %>%
+  filter(model == "summary") %>% 
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "EV")
+
+### sampled mean
+
+fr_rates_mean <- choices_absolute %>% 
+  filter(model == "summary") %>% 
+  mutate(norm = case_when(a_ev_exp/b_ev_exp > 1 ~ "A", a_ev_exp/b_ev_exp < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "Mean")
+
+fr_rates <- bind_rows(fr_rates_EV, fr_rates_mean)
+
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
+label_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
+}
+
+#plot
+
+fr_rates_risky <- fr_rates %>% filter(type == "Risky")
+fr_rates_safe <- fr_rates %>% filter(type == "Safe")
+
+fr_rates_risky %>%
+  ggplot(aes(s, rate, color = Norm)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
+                                         a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = expression(psi),
+       y = "False Response Rate",
+       color = "Norm",
+       shape = "False\nResponse") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  geom_point(aes(shape = type), size = 2) +
+  geom_line() + 
+  geom_point(data = fr_rates_safe, aes(shape = type), size = 2) +
+  geom_line(data = fr_rates_safe) +
+  scale_shape_manual(values = c(8, 16)) +
+  scale_color_manual(values = c("#d3d3d3", "#3e4989")) + 
+  theme_minimal()
+```
+
 
 ### Simulation-Implied Cumulative Prospect Theory
 
@@ -828,7 +911,7 @@ gamma <- cpt_absolute %>%
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
   geom_line() +
-  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   theme_minimal()
 
 # plot delta estimates
@@ -843,14 +926,14 @@ delta <- cpt_absolute %>%
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
   geom_line() +
-  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   theme_minimal()
 
 # merge plots
 ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
-Figure\ \@ref(fig:value-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$, as well as the shape of the value function.
+Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$.
 An increase in $\psi$ leads to a decrease in $\alpha$, reflecting that outcome information are largely ignored if choices are based on ordinal comparisons of single outcomes rather than on means of large samples.
 The respective shape of the value function is more concave, the higher the values of $\psi$. 
 Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low values of $\psi$.
@@ -872,7 +955,7 @@ alpha <- cpt_absolute %>%
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
   geom_line() +
-  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   theme_minimal()
 
 # plot rho estimates
@@ -887,7 +970,7 @@ rho <- cpt_absolute %>%
   geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
   geom_point() +
   geom_line() +
-  scale_color_viridis_d(option = "viridis", begin = .3, end = .8) + 
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   theme_minimal()
 
 # merge plots
@@ -915,16 +998,16 @@ weights <- cpt_absolute %>%
 
 wf <- weights %>% 
   ggplot(aes(p, w, group = s, color = s)) +
-  facet_wrap(~a~model, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  facet_wrap(~model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
   labs(x = "Experienced Probability",
        y = expression(pi),
        color = expression(psi)) +
   scale_x_continuous(breaks = seq(0, 1, .5)) +
   scale_y_continuous(breaks = seq(0, 1, .5)) +
   geom_line(size = .5) +
-  scale_color_viridis(option = "plasma") +
+  scale_color_viridis(option = "mako") +
   theme_minimal()
-
+  
 # value functions
 
 values <- cpt_absolute %>%
@@ -936,13 +1019,13 @@ values <- cpt_absolute %>%
 
 vf <- values %>% 
   ggplot(aes(x, v, group = s, color = s)) +
-  facet_wrap(~a~model, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  facet_wrap(model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
   labs(x = "Objective Outcome",
        y = "Subjective Value",
        color=expression(psi)) +
   scale_x_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
   geom_line(size = .5) +
-  scale_color_viridis(option = "plasma") +
+  scale_color_viridis(option = "mako") +
   theme_minimal()
 
 # merge plots
