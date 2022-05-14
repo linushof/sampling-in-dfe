@@ -129,7 +129,7 @@ Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004]
 In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk [@knightRiskUncertaintyProfit1921].
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
-```{r code-example-1, echo=TRUE}
+```{r code-example, echo=TRUE}
 # define a prospect with two outcomes
 outcomes <- c(5, 0)
 probabilities <- c(.2, .8)
@@ -152,13 +152,6 @@ In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGap
 choice patterns in DFD deviate from the normative solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
 in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
 More general, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
-
-<!--
-In fact, in DFE, people tend to sample only a small number of outcomes from each prospect [@hertwigDecisionsExperienceEffect2004; @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; see also @wulffMetaanalyticReviewTwo2018], which is a sufficient condition for the reliance on small samples in the evaluation of prospects.
-Yet, the as-if underweighting of rare outcomes may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities [@hauDescriptionexperienceGapRisky2008; @hauDecisionsExperienceStatistical2010; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018].
-While this latter finding does not preclude the reliance on small samples---i.e., the mind may rely on only a portion of the sampled outcomes, discount them, or, as proposed in the current paper, distribute them over multiple smaller samples---, it suggests that an explanation for the as-if underweighting of rare outcomes cannot be reduced to inaccurate inferences about the latent properties of prospects that are caused by frugal sampling and the implied sampling error.
-Rather the opposite, this paper presents a sampling and accumulation model that suggests that the as-if underweighting of rare outcomes can be the consequence of an accurate assessment of differences among prospects in a latent property [but see @hertwigDescriptionexperienceGapRisky2009; @plonskyRelianceSmallSamples2015; @wulffMetaanalyticReviewTwo2018, for alternative explanations].
--->
 
 What causes the description-experience gap?
 A quite common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
@@ -184,75 +177,44 @@ Specifically, small *samples*---i.e., sets of sampled outcomes---often differ fr
 This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing distinct choice patterns in DFD and DFE.
 
 Yet, the description-experience gap might not be solely caused by the reliance on a small number of sampled outcomes in DFE and the associated sampling error [see also @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
-Rather, the specifics of the decision-making processes themselves may contribute to the gap.
+Rather, the specifics of the actual decision-making process, such as how the outcomes of the prospects of choice are sampled, integrated, and evaluated, might contribute to the gap.
 To this end, the current paper presents a model that sketches how the mind might exercise the capacity of making decisions from experience in the sampling paradigm, and examines the choice patterns that result from the modeled decision-making processes.
-More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the interplay of previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
+More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
 CPT's value function is also considered in this paper.
 However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
 <!--Close footnote-->]
 
+<!-- Outline -->
+
+<!--
 The rest of the paper is structured as follows:
 In the first section, it is briefly discussed how DFE in the sampling paradigm differ from DFD in terms of the tasks involved in the decision-making process and thus the assumptions that must be made when modeling the respective process.
-In the section that follows, 
+In the section that follows, two previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] are described.
+It is discussed 
 [...]
 Thereafter, a simulation study is presented, where the proposed models are used to simulate the sampling and accumulation processes for a set of choices between a safe and a two-outcome prospect.
-Considering choice rates and parameter estimates of CPT, the computational analysis shows that which translate to characteristic patterns in the psychoeconomic functions of CPT.
+Considering choice rates and parameter estimates of CPT, the computational analysis shows that ... which translate to characteristic patterns in the psychoeconomic functions of CPT.
+[...]
 The paper closes with a discussion and conclusion.
-Note that all materials, including the can be retrieved from the accompanying `GitHub repository`. 
-
-<!-- To substantiate the discussion, the model is used to simulate the sampling and accumulation process for choices between a safe and a two-outcome prospect, while systematically combining different switching probabilities and thresholds.
-Considering choice rates and parameter estimates of cumulative prospect theory [@tverskyAdvancesProspectTheory1992], the computational analysis shows that the choices converge to the solutions of EV maximization for low switching probabilities, but take the form of an as-if underweighting of rare outcomes for high switching probabilities.
-Importantly, the analysis also shows that these distinct choice patterns become more robust with increasing thresholds.
-Before presenting the model and the computational analysis, the following section provides a definition of prospects.-->
+Note that all materials, including the can be retrieved from the accompanying `GitHub repository`.
+-->
 
 # Explaining Decision Making in the Sampling Paradigm
 
 <!-- Formal Definition of Prospects / Notation -->
 
-Since there is an uncountable number of choices people confront in the natural world, behavioral decision research routinely abstracts from choices between particular choice alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
-These fundamental properties are considered the possible outcomes of a choice alternative and the probabilities with which these outcomes occur following the choice of the alternative.
-Roughly speaking, then, all choice alternatives that can be fully described by their outcome-probability pairs are prospects.
-As such, prospects can be understood as the distribution of a discrete random variable.
-More specifically, following @kolmogorovFoundationsTheoryProbability1950 and adopting the notation from @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015, let the tuple $(\Omega, \mathcal{F}, P)$ be a probability space.
-Accordingly, $\Omega$ is a finite sample space with each element $\omega \in \Omega$ denoting a possible consequence of choosing the respective prospect.
-$\mathcal{F}$ is the power set $\mathcal{P}(\Omega)$ with each element $A \in \mathcal{F}$ being a subset of $\Omega$, also denoted a random event.
-$P$ is the probability measure
+<!--Since there is an uncountable number of choices people confront in their daily life, behavioral decision research routinely abstracts from choices between particular alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
+Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.-->
+With the choice between at least two prospects, behavioral decision research studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
+These fundamental properties are considered the $n$ possible outcomes of a choice alternative, denoted by the set $\{x_i\}_{i \in \{1, ..., n\}}$, and the probabilities with which these outcomes occur following the choice of the alternative, denoted by the set $\{p(x_i)\}$.
+That is, each choice alternative that is fully described by a set of outcome-probability pairs $\{(x_i, p(x_i))\}$ satisfying $\sum_{i = 1}^n p(x_i) = 1$ is a prospect.
+Note that a prospect can be conceptualized as the distribution $P$ of a discrete random variable $X$, where each outcome in $\{x_i\}$ denotes a possible value that $X$ can take.
+In other words, then, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
 $$
-P: \mathcal{F} \to [0,1]
+\{P^1, ... , P^k\}
+\; .
 \tag{1}
 $$
-assigning the elements of $\mathcal{F}$ a probability $0 < p(A) \leq 1$ with $P(\Omega) = 1$.
-Now, the random variable is a function
-$$
-\begin{aligned}
-  X : (\Omega, \mathcal{F}) &\to (\Omega', \mathcal{F'})  \\
-  \omega &\mapsto x
-  \; ,
-\end{aligned}
-\tag{2}
-$$
-where $(\Omega', \mathcal{F'})$ is a measurable space with each element $x \in \Omega'$ denoting a possible outcome of a prospect and each element $A' \in \mathcal{F'}$ being a subset of $\Omega'$.
-An outcome's probability $p_X(x)$ is then provided by the pushforward measure
-$$
-P' : \mathcal{F'} \to [0,1]
-\tag{3}
-$$
-with 
-$$
-P'(A' \in \mathcal{F'}) := P(\{\omega: X(\omega) = x \in A'\})
-\; .
-\tag{4}
-$$
-Note that the measure in (3) and (4), respectively, is a random variable's distribution and therefore a prospect. 
-Accordingly, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
-$$
-\{P'^1, ... , P'^k\}
-\; ,
-\tag{5}
-$$
-where each element $P'$ can itself be considered a finite set of outcome-probability pairs $\{(x_i, p_X(x_i)\}_{i \in \mathbb{N}}$.
-
 <!-- Modeling steps and assumptions -->
 
 Since it is only through their fundamental properties, or combinations thereof, that any distinction between the prospects can be made, systematic---as opposed to random---choices between prospects must be based on the assessment of differences in their properties.
@@ -291,14 +253,9 @@ Using the round-wise strategy may translate to an as-if underweighting of rare e
 
 (ref:sampling-paradigm) Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice
 
-```{r fig-sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
+```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
 knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
 ```
-
-<!--Considering this paradigm and the choice between two prospects, @hillsInformationSearchDecisions2010 distinguished sampling strategies along the frequency of switches between the two prospects during the sampling phase,^
-and proposed two different decision strategies that people may adopt.
-Specifically, for a summary strategy, it is assumed that the prospect is chosen which produced the greater mean across all sampled outcomes.
-In turn, for a round-wise strategy, it is assumed that over multiple rounds two sampled outcomes---i.e., one from each of the prospects---are compared and that the prospect is chosen which won the comparison in most rounds.-->
 
 <!-- Critique -->
 
@@ -385,11 +342,11 @@ Therefore, (8) may be adapted such that $Z$ takes the value $-1$ instead of $0$,
 Below, the key predictions concerning the effects of the model parameters $\psi$ and $\theta$ on the length of the sampling and accumulation process and the resulting choice are outlined.
 Moreover, previous research has shown that differences as to how information about the properties of prospects is processed can translate to characteristic shapes of cumulative prospect theory's (CPT) value and weighting function [see @pachurHowTwainCan2017; @zilkerNonlinearProbabilityWeighting2021].
 Respectively, this section also contains predictions about the relations between $\psi$ and $\theta$ and the CPT parameters.
-A summary of the model predictions can be found in Table\ \@ref(tab:tab-predictions).
+A summary of the model predictions can be found in Table\ \@ref(tab:predictions).
 
 (ref:predictions) Summary of Model Predictions
 
-```{r tab-predictions}
+```{r predictions}
 predictions <- tibble("Measure" = 
                         c("Choices pattern",
                           "",
@@ -440,7 +397,10 @@ EV = \sum_i^n x_i \times p_X(x_i)
 \tag{10}
 $$ 
 should be chosen.
-To describe how people's choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, where the latter were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. Together, these empirical choice patterns indicate a violation of EV and expected utility (EU) maximization [see @bernoulliExpositionNewTheory1954\/1738].<!--Close footnote-->]
+To describe how people's choices deviate from EV maximization [see @erevAnomaliesForecastsDescriptive2017, for a recent replication of classical demonstrations],^[<!--Open footnote-->
+@tverskyAdvancesProspectTheory1992 addressed the *fourfold pattern of risk attitudes*---i.e., choices between prospects indicate risk aversion for gains of high probability and losses of low probability, and risk seeking for gains of low probability and losses of high probability---and related effects, e.g., the *certainty effect* and the *reflection effect*, where the latter were already addressed by CPT's predecessor, prospect theory [@kahnemanProspectTheoryAnalysis1979]. 
+Together, these empirical choice patterns indicate a violation of EV and expected utility (EU) maximization [see @bernoulliExpositionNewTheory1954\/1738].
+<!--Close footnote-->]
 CPT and similar rank-dependent models [see @stottCumulativeProspectTheory2006, for an overview of models] fit choice data by assuming that people maximize the valuation
 $$
 V = \sum_i^n v(x_i) \times \pi_i
@@ -511,7 +471,7 @@ As a consequence from (13), then, each combination of parameters implies a parti
 
 (ref:weighting-function) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
 
-```{r fig-weighting-function, fig.cap="(ref:weighting-function)"}
+```{r weighting-function, fig.cap="(ref:weighting-function)"}
 #compute images of weighting function (wf)
 wf <- tibble(p = seq(0, 1, .01)) %>%  #cumulative probabilities
   expand_grid(gamma = seq(.1, 2, .1), #gamma values
@@ -532,7 +492,7 @@ wf %>%
   labs(x = expression(p),
        y = expression(w(p)), 
        color = expression(gamma)) + 
-  theme_apa() + 
+  theme_minimal() + 
   geom_line(aes(color = gamma), size = .5) +
   scale_color_viridis(option = "inferno") + 
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
@@ -545,7 +505,11 @@ Now, both deviations from $\gamma = 1$ and $\delta = 1$ produce a nonlinear grap
 That is, for $\gamma > 1$, the graphs take a S-shape---running below (above) the identity line for small (large) cumulative probabilities---which is more accentuated for larger deviations from $\gamma = 1$.
 Importantly, the same *small* numerical difference between two cumulative probabilities $p$ then translates to varying differences between the respective images $w(p)$ depending on the interval on the cumulative probability scale. 
 Specifically, because of the S-shaped curvature, the differences between the images $w(p)$ may be smaller than those between the respective cumulative probabilities in the lower and upper part of the cumulative probability scale, but may be considerably greater in the middle part.
-As a consequence, the cumulative decisions weights are smaller than the respective objective probabilities for small-probability outcomes of low and high rank, but they are larger for small-probability outcomes of a middle rank.^[<!--Open footnote-->Note that the distinction between outcomes of either low/high rank or middle rank is unnecessary for at most two-outcome prospects [see @tverskyAdvancesProspectTheory1992, see also below]. However, for finite many outcomes, the distinction is critical. More so, the fact that CPT may weigh outcomes of the same small probability differently, adds another reasons why the description-experience gap should not be equated with a reversed weighting pattern in CPT [see @hertwigConstructbehaviorGapDescription2018]. I.e., neither could one interpretation of the gap be in terms of an as-if underweighting (overweighting) of rare outcomes in DFE (DFD), nor would any of the potential contributors to the gap considered so far [cf. @hertwigDescriptionexperienceGapRisky2009; @wulffMetaanalyticReviewTwo2018] treat some small-probability outcomes differently than other small-probability outcomes.<!--Close footnote-->]
+As a consequence, the cumulative decisions weights are smaller than the respective objective probabilities for small-probability outcomes of low and high rank, but they are larger for small-probability outcomes of a middle rank.^[<!--Open footnote-->
+Note that the distinction between outcomes of either low/high rank or middle rank is unnecessary for at most two-outcome prospects [see @tverskyAdvancesProspectTheory1992, see also below].
+However, for finite many outcomes, the distinction is critical. More so, the fact that CPT may weigh outcomes of the same small probability differently, adds another reasons why the description-experience gap should not be equated with a reversed weighting pattern in CPT [see @hertwigConstructbehaviorGapDescription2018].
+I.e., neither could one interpretation of the gap be in terms of an as-if underweighting (overweighting) of rare outcomes in DFE (DFD), nor would any of the potential contributors to the gap considered so far [cf. @hertwigDescriptionexperienceGapRisky2009; @wulffMetaanalyticReviewTwo2018] treat some small-probability outcomes differently than other small-probability outcomes.
+<!--Close footnote-->]
 Note that for all $\gamma < 1$ the graph of $w$ takes an inverse S-shape and the entire weighting pattern is reversed.
 Moreover, the shape of the weighting function, and thus the weighting pattern, depends strongly on $\delta$, which affects the overall elevation of the graph.
 That is, for $\delta < 1$, the interval on the cumulative probability scale over which the weighting function runs below the identity line is greater than the interval over which the weighting function runs above the identity line; and this pattern reverses for $\delta > 1$.
@@ -637,7 +601,7 @@ cpt_absolute <- cpt %>% filter(boundary == "absolute")
 \noindent
 Since $\psi$ introduces some stochasticity into the sampling and accumulation process, each of the 100 resulting parameter combinations was used 100 times---resembling 100 independent agents---to solve the test set. 
 In sum, then 100 (parameter combinations) $\times$ 100 (agents) $\times$ 60 (choice problems)  = 600,000 sampling and accumulation processes were simulated.
-The respective dataset can be retrieved from the accompanying `GitHub` repository.
+The respective dataset can be retrieved from the accompanying `GitHub repository`.
 
 ### Estimation of Stochastic CPT
 
@@ -668,7 +632,7 @@ The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulat
 
 ## Results
 
-Overall, the results of the simulation match the predictions from Table\ \@ref(tab:tab-predictions), however, with some exceptions concerning the estimates for the parameter $\delta$ of the weighting function. 
+Overall, the results of the simulation match the predictions from Table\ \@ref(tab:predictions), however, with some exceptions concerning the estimates for the parameter $\delta$ of the weighting function. 
 We start by inspecting how the length of the information-processing chain changes with varying combinations of $\psi$ and $\theta$.
 
 ### Simulated Length of the Information-Processing Chains
@@ -683,7 +647,7 @@ Moreover, while parameter combinations that can be understood as falling in betw
 
 (ref:chain-length) Lengths of Information-Processing Chains
 
-```{r prepare-chain-length, eval = FALSE}
+```{r fig.cap="(ref:chain-length)", eval = FALSE}
 chain_lengths <- choices_absolute %>%
   ggplot(aes(x = s, y = n_sample, color = model)) +
   facet_wrap(~a, nrow = 2, scales = "free") + 
@@ -697,6 +661,7 @@ chain_lengths <- choices_absolute %>%
   scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   guides(color = guide_legend(override.aes = list(alpha = 1))) +
   theme_minimal()
+chain_lengths
 ```
 
 ```{r chain-length, fig.cap="(ref:chain-length)", out.width="100%"}
@@ -884,12 +849,15 @@ fr_rates_risky %>%
 Figure\ \@ref(fig:weighting-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the curvature parameter $\gamma$ and the elevation parameter $\delta$, as well as the resulting graphical shape of the weighting function.
 Note that the estimates for the parameter combination $\theta = 1$ and $\psi = 1$ have large posterior intervals.
 In these cases, no relative frequencies other than 0 and 1 are supplied to the weighting function, which may explain that the values in between cannot be reliably accounted for.
-However, for $\theta = 1$ and $\psi < 1$, the estimates imply a linear weighting pattern, in line with the explanation that if the mind were to infer the latent objective probabilities of outcomes from the sampled relative frequencies and to follow the principle of EV maximization, sampling error can account for any deviations from it.^[<!--Open footnote-->Note that the same line of reasoning holds, were the mind to approximate the solutions of EV maximization by choosing the prospect with higher sampled mean.<!--Close footnote-->]
-Note also Figure\ \@ref(fig:choice-rates), where there are no choices for $\theta = 1$ that do not maximize the sampled mean.
+However, for $\theta = 1$ and $\psi < 1$, the estimates imply a linear weighting pattern, in line with the explanation that if the mind were to infer the latent objective probabilities of outcomes from the sampled relative frequencies and to follow the principle of EV maximization, sampling error can account for any deviations from it.^[<!--Open footnote-->
+Note that the same line of reasoning holds, were the mind to approximate the solutions of EV maximization by choosing the prospect with higher sampled mean.
+<!--Close footnote-->]
+Note also Figure\ \@ref(fig:choice-rates-roundwise), where there are no choices for $\theta = 1$ that do not maximize the sampled mean.
 
 For $\theta > 1$, the estimates substantiate the prediction that $\gamma$ takes values $\geq 1$ which increase with $\psi$, resulting in a increasingly pronounced S-shaped weighting function.
 In other words, the higher the value of $\psi$, the more severe is the underweighting (overweighting) of the high-rank outcome of the risky prospect in CPT, if it is of small (large) probability.
-$\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point. [...]
+$\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point. 
+[...]
 
 (ref:weighting-parameters) Parameter Estimates of the Weighting Function
 
