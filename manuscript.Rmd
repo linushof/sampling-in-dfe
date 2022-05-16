@@ -121,12 +121,12 @@ cpt <- bind_rows(cpt_roundwise, cpt_summary)
 <!-- Introduction -->
 
 The human mind is a cognitive system that operates on inputs from an environment or memory, and in the domain of decision making, such inputs provide information about the alternatives between which people can choose.
-Now, let a prospect (or: gamble) be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
+Let a prospect (or: gamble) be a choice alternative that possesses only two kinds of fundamental properties: the possible outcomes of the alternative (e.g., gains or losses of some amount) and the probabilities with which these outcomes occur following the choice of the alternative.
 Importantly, the information that the inputs provide about these properties can come in different forms.
 Specifically, in *decisions from description* (DFD), the inputs take the form of explicit and complete descriptions of all outcomes and probabilities.
-In this case, people make decisions under risk, provided that choosing one of the prospects does not inevitably lead to a certain outcome.
+In this case, people make decisions under risk, provided that choosing one of the prospects does not inevitably lead to a particular outcome.
 Yet, in *decisions from experience* [DFE, @hertwigDecisionsExperienceEffect2004], the same properties are latent and therefore not known with certainty, but they must be inferred from the relative frequencies with which the outcomes occurred in the past, e.g., when the prospects were chosen in similar past decisions.
-In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk [@knightRiskUncertaintyProfit1921].
+In other words, in DFE, the inputs take the form of sampled outcomes, with the lack of precise knowledge about all possible outcomes and their probabilities rendering the decision one under uncertainty rather than just risk.
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
 ```{r code-example, echo=TRUE}
@@ -144,18 +144,16 @@ input_DFE <- sample(outcomes, size = 10, prob = probabilities, replace = T)
 print(input_DFE)
 ```
 
-\noindent
-To study DFE experimentally, one can use several paradigms, one of which is the sampling paradigm [see @hertwigDescriptionexperienceGapRisky2009], where people can, as much as they want, sequentially sample the outcomes of two prospects according to their objective probabilities before making a final choice between the prospects (Figure\ \@ref(fig:sampling-paradigm)).
-
-Although the distinct input forms---i.e., descriptions or sampled outcomes---may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that---taking a quite general perspective---there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
+Although these distinct input forms may in principle carry the same information about a given set of prospects, behavioral decision research has so far produced a large body of papers indicating that there are robust differences between the choices that are made in DFD and DFE, leading to the notion of the *description-experience gap* [@hertwigDescriptionexperienceGapRisky2009].
 In one reading of the gap,^[<!--Open footnote-->See @hertwigConstructbehaviorGapDescription2018, for a discussion on the interpretation of the gap.<!--Close footnote-->]
 choice patterns in DFD deviate from the normative solutions of expected value (EV) maximization, as if small-probability outcomes are given more weight than would be warranted by their objective probabilities (*as-if overweighting of rare outcomes*);
 in turn, in DFE, choice patterns deviate from the solutions of EV maximization, as if the same small-probability outcomes are given less weight than would be objectively warranted [*as-if underweighting of rare outcomes*, e.g., @barronSmallFeedbackbasedDecisions2003; @hertwigDecisionsExperienceEffect2004; @weberPredictingRiskSensitivity2004; @erevAnomaliesForecastsDescriptive2017; @regenwetterConstructbehaviorGapBehavioral2017; see @wulffMetaanalyticReviewTwo2018, for a comprehensive meta-analytic review].
-More general, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
+More generally, in DFD, people choose as if small-probability outcomes are more probable than they objectively are, and in DFE, people choose as if the same small-probability outcomes are less probable.
 
 What causes the description-experience gap?
-A quite common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
+A common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
 Specifically, small *samples*---i.e., sets of sampled outcomes---often differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box \hyperlink{box}{1}, see also for illustrative purposes the `code example`, where the objective probability of outcome `5` is `.2`, and the sampled relative frequency is `.1`).
+This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing, ceteris paribus, distinct choice patterns in DFD and DFE.
 \newline
 
 \noindent
@@ -173,12 +171,23 @@ Specifically, small *samples*---i.e., sets of sampled outcomes---often differ fr
 }
 \newline
 
-\noindent
-This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing distinct choice patterns in DFD and DFE.
+Yet, peoples' reliance on a small number of sampled outcomes in DFE, and the associated sampling error, are presumably not the sole cause of the description-experience gap [see @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
+Rather, the specifics of the actual decision-making process---i.e, how the mind exercises the capacity of making decisions from experience as opposed to descriptions---might contribute to the gap.
+In experimental studies of DFE using the *sampling paradigm*, people can, as much as they want, sequentially sample the outcomes of two latent prospects according to their objective probabilities before making a final, consequential choice between the prospects [see @hertwigDescriptionexperienceGapRisky2009, see also Figure\ \@ref(fig:sampling-paradigm)].
+Because in the sampling paradigm people cannot rely on the descriptions of outcomes and probabilities to make a decision, but are required to learn about the prospects from experiential sampling of outcomes over time, the tasks involved in the decision-making process differ from those in DFD.
+That is, in order to model the process by which people arrive at the final choice in the sampling paradigm, one must explicate a number of assumptions concerning, in particular, the sampling process and the mind's operations on the sequence of sampled outcomes that are of no relevance to DFD whatsoever, e.g.: How the mind 
 
-Yet, the description-experience gap might not be solely caused by the reliance on a small number of sampled outcomes in DFE and the associated sampling error [see also @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
-Rather, the specifics of the actual decision-making process, such as how the outcomes of the prospects of choice are sampled, integrated, and evaluated, might contribute to the gap.
-To this end, the current paper presents a model that sketches how the mind might exercise the capacity of making decisions from experience in the sampling paradigm, and examines the choice patterns that result from the modeled decision-making processes.
+* decides when to switch between prospects during the sampling phase;
+
+* decides when to stop sampling;
+
+* integrates the information obtained from the sampled outcomes.
+
+To approach the above questions, this paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
+Sampling strategies [...].
+
+
+The current paper presents two models that sketch how the mind might exercise the capacity of making decisions from experience in the sampling paradigm, and examines the choice patterns that result from the modeled decision-making processes.
 More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
 CPT's value function is also considered in this paper.
 However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
@@ -232,15 +241,6 @@ The inputs to DFE are then the realizations of the random variables in (6).
 
 [...]
 
-To model the process by which people arrive at the final choice in the sampling paradigm, one must explicate a number of assumptions, e.g.: 
-
-* How does the mind decide when to switch between prospects during the sampling phase?
-
-* How does the mind decide when to stop sampling?
-
-* How does the mind integrate and evaluate the information obtained from the sampled outcomes?
-
-To approach the above questions, this paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
 
 # Sampling and Decision Strategies
 
