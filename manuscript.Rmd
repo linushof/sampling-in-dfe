@@ -31,7 +31,7 @@ keywords          : "risky choice, information sampling, evidence accumulation, 
 wordcount         : ""
 
 bibliography      : references.bib
-csl               : apa.csl
+csl               : "`r system.file('rmd', 'apa7.csl', package = 'papaja')`"
 
 figurelist        : no
 tablelist         : no
@@ -44,7 +44,7 @@ draft             : no
 
 classoption       : "man"
 documentclass     : "apa7"
-output: papaja::apa6_pdf
+output            : papaja::apa6_pdf
 
 header-includes:
    - \usepackage[capposition=top]{floatrow}
@@ -173,9 +173,9 @@ This distortion of the sampled information (sampling error) is then assumed to c
 
 Yet, peoples' reliance on a small number of sampled outcomes in DFE, and the associated sampling error, are presumably not the sole cause of the description-experience gap [see @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
 Rather, the specifics of the actual decision-making process---i.e, how the mind exercises the capacity of making decisions from experience as opposed to descriptions---might contribute to the gap.
-In experimental studies of DFE using the *sampling paradigm*, people can, as much as they want, sequentially sample the outcomes of two latent prospects according to their objective probabilities before making a final, consequential choice between the prospects [see @hertwigDescriptionexperienceGapRisky2009, see also Figure\ \@ref(fig:sampling-paradigm)].
+In experimental studies of DFE using the *sampling paradigm*, people can, as much as they want, sequentially sample the outcomes of two latent prospects according to their objective probabilities before making a final, consequential choice between the prospects [see @hertwigDescriptionexperienceGapRisky2009, see also Fig.\ \@ref(fig:sampling-paradigm)].
 Because in the sampling paradigm people cannot rely on the descriptions of outcomes and probabilities to make a decision, but are required to learn about the prospects from experiential sampling of outcomes over time, the tasks involved in the decision-making process differ from those in DFD.
-That is, in order to model the process by which people arrive at the final choice in the sampling paradigm, one must explicate a number of assumptions concerning, in particular, the sampling process and the mind's operations on the sequence of sampled outcomes that are of no relevance to DFD whatsoever, e.g.: How the mind 
+That is, in order to model the process by which people arrive at the final choice in the sampling paradigm, one must explicate a number of assumptions concerning, in particular, the sampling process and the mind's operations on the sequence of sampled outcomes, which are of no relevance to DFD whatsoever, e.g.: How the mind
 
 * decides when to switch between prospects during the sampling phase;
 
@@ -183,21 +183,45 @@ That is, in order to model the process by which people arrive at the final choic
 
 * integrates the information obtained from the sampled outcomes.
 
-To approach the above questions, this paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
-Sampling strategies [...].
+\noindent
+The questions of interest are then how the mind solves these tasks and, subordinate to that,^[<!--Open footnote-->
+As van Rooij and Baggio [-@vanrooijTheoryTestHow2021] put it: "Only in the manner in which we postulate that
+such capacities [i.e., decision making] are exercised do our explanations of capacities come to imply effects [e.g., as-if underweighting of rare outcomes]" (p. 682, square brackets added).
+<!--Close footnote-->]
+whether this leads to choice patterns that are consistent with an as-if underweighting of rare outcomes pattern, irrespective of the existence or absence of sampling error.
+
+While approaching the above questions, the current paper focuses on the effects of the potential interplay between sampling and decisions strategies.
+Figure\ \@ref(fig:sampling-paradigm) displays what Hills and Hertwig [-@hillsInformationSearchDecisions2010] considered to be paradigmatic instances of both types of strategies. 
+Sampling strategies refer to the sequential pattern with which people sample outcomes from the two prospects over time.
+That is, in the sampling paradigm, people can decide without costs when to sample outcomes from which prospect and when to switch between them.
+They can do so entirely randomly, resulting in no discernible sequential sampling pattern, or they proceed more systematically.
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people may either switch just once between prospects (comprehensive sampling) or after each sampled outcome (piecewise sampling).^[<!--Open footnote-->
+Note that in their analyses of empirical sampling data,  Hills and Hertwig [-@hillsInformationSearchDecisions2010] used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
+<!--Close footnote-->]
+Decision strategies refer to the way people integrate the information obtained from the sampled outcomes in order to evaluate the prospects and make a corresponding decision.
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of comparisons (round-wise decision).
+In more general terms, whereas sampling strategies determine how the information about prospects are collected, decision strategies determine how the collected information are processed or transformed to arrive at a final choice.
+
+```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
+knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
+```
+
+To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between sampling and decision strategies.
+Specifically, they assumed that comprehensive sampling is associated with making summary decisions, while piecewise sampling is associated with making round-wise decisions.
+Since in round-wise decisions small-probability outcomes are predicted not to be considered in the majority of comparisons, such a coupling could indeed explain an as-if underweighting of rare events (see also Fig.\ \@ref(fig:sampling-paradigm), for illustrative purposes).
 
 
-The current paper presents two models that sketch how the mind might exercise the capacity of making decisions from experience in the sampling paradigm, and examines the choice patterns that result from the modeled decision-making processes.
-More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper investigates in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
+Pointing to such a coupling of sampling and decision strategies, they found that a larger proportion choices of people who, on average, switched infrequently between prospects during the sampling phase were better predicted by a summary strategy (rather than a round-wise strategy), and that this predictive pattern reversed for people who switched frequently [but see @wulffHowShortLongrun2015].
+
+This paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
+More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper seeks to investigate in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
 CPT's value function is also considered in this paper.
 However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
 <!--Close footnote-->]
 
 <!-- Outline -->
-
-<!--
 The rest of the paper is structured as follows:
-In the first section, it is briefly discussed how DFE in the sampling paradigm differ from DFD in terms of the tasks involved in the decision-making process and thus the assumptions that must be made when modeling the respective process.
+In the first section, it is briefly discussed 
 In the section that follows, two previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] are described.
 It is discussed 
 [...]
@@ -206,7 +230,6 @@ Considering choice rates and parameter estimates of CPT, the computational analy
 [...]
 The paper closes with a discussion and conclusion.
 Note that all materials, including the can be retrieved from the accompanying `GitHub repository`.
--->
 
 # Explaining Decision Making in the Sampling Paradigm
 
@@ -252,10 +275,6 @@ Note that in their analyses of empirical sampling data,  @hillsInformationSearch
 Using the round-wise strategy may translate to an as-if underweighting of rare events pattern and the description-experience gap because the strategy selects the prospect that wins a majority of comparisons, while small-probability outcomes are predicted not to be considered in most of these comparisons.
 
 (ref:sampling-paradigm) Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice
-
-```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
-knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
-```
 
 <!-- Critique -->
 
