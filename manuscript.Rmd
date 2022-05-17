@@ -16,7 +16,7 @@ affiliation:
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub repository`: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the `hash `r repro::current_hash()``, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
+ This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is submitted as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
   
   \indent
   1. Prof. Dr. Thorsten Pachur, Technical University of Munich
@@ -514,9 +514,7 @@ for the respective values of the parameters $\gamma \in [0,2]$ and $\delta > 0$.
 Evidently, both parameters have distinct effects on the graphs' shape, with $\gamma$ affecting the curvature and $\delta$ the elevation.
 As a consequence from (13), then, each combination of parameters implies a particular weighting pattern, with some of them being similar and others being rather distinct.
 
-(ref:weighting-function) Possible Graphical Shapes of Goldstein and Einhorn's -@goldsteinExpressionTheoryPreference1987 Weighting Function
-
-```{r weighting-function, fig.cap="(ref:weighting-function)"}
+```{r weighting-function, include=FALSE}
 #compute images of weighting function (wf)
 wf <- tibble(p = seq(0, 1, .01)) %>%  #cumulative probabilities
   expand_grid(gamma = seq(.1, 2, .1), #gamma values
@@ -542,6 +540,12 @@ wf %>%
   scale_color_viridis(option = "inferno") + 
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
+
+\begin{figure}[t]
+\caption{Possible Graphical Shapes of Goldstein and Einhorn's (\protect\hyperlink{ref-goldsteinExpressionTheoryPreference1987}{1987}) Weighting Function}
+\includegraphics{manuscript_files/figure-latex/weighting-function-1} \label{fig:weighting-function}
+\raggedright \textit{Note.} Add note
+\end{figure}
 
 More specifically: The gray-dashed identity lines in Figure\ \@ref(fig:weighting-function) imply a linear weighting pattern.
 That is, since the images of $w$, $w(p)$, are equal to the respective cumulative probabilities $p$, all cumulative decision weights $\pi$ that are derived according to (13) would be equal to the differences between the respective objective cumulative probabilities---and therefore also to the objective probabilities of the outcomes for which the weights are determined.
@@ -690,9 +694,7 @@ Consider also the dashed horizontal line in Figure\ \@ref(fig:chain-length), whi
 Notably, the parameter combinations that closely resemble the round-wise strategy---i.e., high values of $\psi$ and $\theta$---or the summary strategy---i.e., low values of $\psi$ and $\theta$---lead to overall numbers of sampled outcomes that come close to the meta-analytic median.
 Moreover, while parameter combinations that can be understood as falling in between the round-wise and the summary strategy also lead to overall numbers of sampled outcomes that approximate the meta-analytic median, extreme combinations produce numbers that are considerably lower or higher, and thus less plausible from an empirical stance.
 
-(ref:chain-length) Lengths of Information-Processing Chains
-
-```{r fig.cap="(ref:chain-length)", eval = FALSE}
+```{r chain-length, eval = FALSE}
 chain_lengths <- choices_absolute %>%
   ggplot(aes(x = s, y = n_sample, color = model)) +
   facet_wrap(~a, nrow = 2, scales = "free") + 
@@ -709,9 +711,11 @@ chain_lengths <- choices_absolute %>%
 chain_lengths
 ```
 
-```{r chain-length, fig.cap="(ref:chain-length)", out.width="100%"}
-knitr::include_graphics(path = "manuscript_files/chain-lengths.png")
-```
+\begin{figure}[t]
+\caption{Lengths of Information-Processing Chains}
+\includegraphics[width=1\linewidth]{manuscript_files/chain-length} \label{fig:chain-length}
+\raggedright \textit{Note.} Add note
+\end{figure}
 
 ### Simulated Final Choice
 
@@ -728,9 +732,7 @@ Note from the middle panel that the pattern of false response rates reverses for
 In this case, then, the mean of the risky prospect tends to be more deflated the higher the value of $\psi$, which increases the risk of falsely choosing the safe prospect.
 From the reduced false response rates in the bottom panel, we see that the inflation and deflation of the means for high values of $\psi$ is significantly attenuated when a prospect possesses no small-probability outcome.  
 
-(ref:choice-rates-roundwise) Rates of False Risky and False Safe Choices in the Round-Wise Integration Model
-
-```{r choice-rates-roundwise, fig.cap="(ref:choice-rates-roundwise)"}
+```{r choice-rates-roundwise, include=FALSE}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
@@ -808,9 +810,13 @@ fr_rates_risky %>%
   theme_minimal()
 ```
 
-(ref:choice-rates-summary) Rates of False Risky and False Safe Choices in the Summary Integration Model
+\begin{figure}[t]
+\caption{Rates of False Risky and False Safe Choices in the Round-Wise Integration Model}
+\includegraphics{manuscript_files/figure-latex/choice-rates-roundwise-1} \label{fig:choice-rates-roundwise}
+\raggedright \textit{Note.} Add note
+\end{figure}
 
-```{r choice-rates-summary, fig.cap="(ref:choice-rates-summary)"}
+```{r choice-rates-summary, include=FALSE}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
@@ -888,6 +894,11 @@ fr_rates_risky %>%
   theme_minimal()
 ```
 
+\begin{figure}[t]
+\caption{Rates of False Risky and False Safe Choices in the Summary Integration Model}
+\includegraphics{manuscript_files/figure-latex/choice-rates-summary-1} \label{fig:choice-rates-summary}
+\raggedright \textit{Note.} Add note
+\end{figure}
 
 ### Simulation-Implied Cumulative Prospect Theory
 
@@ -904,9 +915,7 @@ In other words, the higher the value of $\psi$, the more severe is the underweig
 $\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point. 
 [...]
 
-(ref:weighting-parameters) Parameter Estimates of the Weighting Function
-
-```{r weighting-parameters, fig.cap="(ref:weighting-parameters)"}
+```{r weighting-parameters, include=FALSE}
 
 label_theta <- function(string) {
   TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
@@ -946,15 +955,19 @@ delta <- cpt_absolute %>%
 ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
+\begin{figure}[t]
+\caption{Parameter Estimates of the Weighting Function}
+\includegraphics{manuscript_files/figure-latex/weighting-parameters-1} \label{fig:weighting-parameters}
+\raggedright \textit{Note.} Add note
+\end{figure}
+
 Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$.
 An increase in $\psi$ leads to a decrease in $\alpha$, reflecting that outcome information are largely ignored if choices are based on ordinal comparisons of single outcomes rather than on means of large samples.
 The respective shape of the value function is more concave, the higher the values of $\psi$. 
 Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low values of $\psi$.
 However, even for high values of $\psi$, the choices did not appear to be random. [...]
 
-(ref:sensitivity-parameters) Parameter Estimates of the Outcome and Choice Sensitivity Parameter
-
-```{r sensitivity-parameters, fig.cap="(ref:sensitivity-parameters)"}
+```{r sensitivity-parameters, include=FALSE}
 
 # plot alpha estimates
 alpha <- cpt_absolute %>%
@@ -990,11 +1003,15 @@ rho <- cpt_absolute %>%
 ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
 ```
 
+\begin{figure}[t]
+\caption{Parameter Estimates of the Outcome and Choice Sensitivity Parameter}
+\includegraphics{manuscript_files/figure-latex/sensitivity-parameters-1} \label{fig:sensitivity-parameters}
+\raggedright \textit{Note.} Add note
+\end{figure}
+
 Figure\ \@ref(fig:function-forms) displays the resulting graphical shapes of the weighting and value function.
 
-(ref:function-forms) Estimated Graphical Shape of the Weighting and Value Function
-
-```{r function-forms, fig.cap="(ref:function-forms)"}
+```{r function-forms, include=FALSE}
 
 # plot weighting function
 
@@ -1045,6 +1062,12 @@ vf <- values %>%
 ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
+\begin{figure}[t]
+\caption{Estimated Graphical Shape of the Weighting and Value Function}
+\includegraphics{manuscript_files/figure-latex/function-forms-1} \label{fig:function-forms}
+\raggedright \textit{Note.} Add note
+\end{figure}
+
 # Discussion
 
 The presented sampling and accumulation model ought to sketch how the mind might exercise the capacity of making decisions from experience.
@@ -1090,6 +1113,10 @@ Thereby, the analyses extends the notion that CPT can be used as a measurement t
 # Conclusion
 
 [...]
+
+\newpage
+
+# Acknowledgements
 
 \newpage
 
