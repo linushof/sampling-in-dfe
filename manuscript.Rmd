@@ -27,7 +27,7 @@ authornote: |
 abstract: |
   Add abstract
   
-keywords          : "risky choice, information sampling, evidence accumulation, cognitive modeling, cumulative prospect theory"
+keywords          : "risky choice, information sampling, evidence accumulation, computational modeling, cumulative prospect theory"
 wordcount         : ""
 
 bibliography      : references.bib
@@ -130,8 +130,8 @@ In other words, in DFE, the inputs take the form of sampled outcomes, with the l
 The differences in the input formats between DFD and DFE are illustrated in the following `code example`:
 
 ```{r code-example, echo=TRUE}
-# define a prospect with two outcomes
-outcomes <- c(5, 0)
+# define prospect with two outcomes: 6 with 20%, 0 otherwise (80%)
+outcomes <- c(6, 0)
 probabilities <- c(.2, .8)
 
 # input to decisions from description
@@ -152,7 +152,7 @@ More generally, in DFD, people choose as if small-probability outcomes are more 
 
 What causes the description-experience gap?
 A common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
-Specifically, small *samples*---i.e., sets of sampled outcomes---often differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box \hyperlink{box}{1}, see also for illustrative purposes the `code example`, where the objective probability of outcome `5` is `.2`, and the sampled relative frequency is `.1`).
+Specifically, small *samples*---i.e., sets of sampled outcomes---often differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box \hyperlink{box}{1}, see also for illustrative purposes the `code example`, where the objective probability of outcome `6` is `.2`, and the sampled relative frequency is `.1`).
 This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing, ceteris paribus, distinct choice patterns in DFD and DFE.
 \newline
 
@@ -199,8 +199,8 @@ Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people m
 Note that in their analyses of empirical sampling data,  Hills and Hertwig [-@hillsInformationSearchDecisions2010] used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
 <!--Close footnote-->]
 Decision strategies refer to the way people integrate the information obtained from the sampled outcomes in order to evaluate the prospects and make a corresponding decision.
-Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of comparisons (round-wise decision).
-In more general terms, whereas sampling strategies determine how the information about prospects are collected, decision strategies determine how the collected information are processed or transformed to arrive at a final choice.
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary integration/decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of such comparisons (round-wise integration/decision).
+In more general terms, whereas sampling strategies determine how the information about prospects are collected, decision strategies determine how the collected information are processed, or transformed, to arrive at a final choice.
 
 ```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
 knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
@@ -208,10 +208,38 @@ knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
 
 To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between sampling and decision strategies.
 Specifically, they assumed that comprehensive sampling is associated with making summary decisions, while piecewise sampling is associated with making round-wise decisions.
-Since in round-wise decisions small-probability outcomes are predicted not to be considered in the majority of comparisons, such a coupling could indeed explain an as-if underweighting of rare events (see also Fig.\ \@ref(fig:sampling-paradigm), for illustrative purposes).
+Since in round-wise decisions small-probability outcomes are expected to be left unconsidered in the majority of comparisons---each of which is weighted equally---, such a coupling could translate to an as-if underweighting of rare events pattern, even if a large number of outcomes is sampled.
+That is, if the prospect that is more likely to produce a higher outcome most of the time does *not* also possess a higher EV, round-wise decisions are expected to cause deviations from the solutions of EV maximization that take the form of an as-if underweighting of rare outcomes pattern (see Fig.\ \@ref(fig:sampling-paradigm), for illustrative purposes).
+Pointing to the suggested coupling of sampling and decision strategies, Hills and Hertwig [-@hillsInformationSearchDecisions2010] found that a larger proportion of the choices of people who, on average, switched infrequently between prospects were better predicted by a summary strategy (rather than a round-wise strategy), and that this predictive pattern reversed for people who switched frequently.
+Moreover, simulating both round-wise and summary decisions on the basis of peoples' sampled outcomes, they showed that round-wise decisions led to a higher proportion of choices that are consistent with an as-if underweighting of rare outcomes.
 
+To summarize the preceding paragraphs: 
+Since small samples may distort the information about the properties of latent prospects, a great deal of research on the sampling paradigm has been invested into the question which factors affect how much people sample [see @wulffAdaptiveExplorationWhat2019, Table 7.2, for a recent summary of relevant factors and papers].
+Assuming that people proceed systematically when sampling outcomes, and that their sampling strategies are systematically related to decision strategies, Hills and Hertwig [-@hillsInformationSearchDecisions2010] emphasize that in order to understand how people make DFE and how this comes to imply certain choice patterns, one might need a richer understanding of peoples' sampling behavior.
+That is, not only we need to know how much outcomes are sampled, but also in what way they are sampled, and how this interplays with the way the obtained information is processed to evaluate the latent prospects.
 
-Pointing to such a coupling of sampling and decision strategies, they found that a larger proportion choices of people who, on average, switched infrequently between prospects during the sampling phase were better predicted by a summary strategy (rather than a round-wise strategy), and that this predictive pattern reversed for people who switched frequently [but see @wulffHowShortLongrun2015].
+Yet, the presented approach invites objections, both theoretical and methodological.
+The following gaps and problems in Hills and Hertwig's [-@hillsInformationSearchDecisions2010] work stand out:
+
+1. *Lack of formal modeling/unstated theoretical commitments:* The authors offer a verbal description of their theoretical claim that sampling strategies are systematically linked to decision strategies.
+Yet, they do not provide a formal specification or computational implementation of their theory.
+Such a lack of formal, mathematical or computational modeling can, among others, hide gaps and inconsistencies in the theory [@guestHowComputationalModeling2021; @vanrooijPsychologicalModelsTheir2022].
+For instance, although the proposed links between sampling and decision strategies are used to explain the (non)occurrence of an as-if underweighting of rare outcomes pattern, no formal and complete accounts of the potential choice-generating mechanisms---which must contain the proposed links---are provided.
+One key characteristic of the sampling paradigm is that people can freely decide when to stop sampling.
+Thus, in order to be considered complete, models aiming to explain how the mind exercises the capacity of making DFE in the sampling paradigm must account for stopping.
+Theoretical frameworks that do so, e.g., sequential sampling models [e.g., @markantModelingChoiceSearch2015], may, however, make themselves assumptions about the decision-making process that constrain how such a proposed link between sampling and decision strategies can be   
+Failing to explicitly spell out theoretical commitments and/or to formally model the decision-making process  
+
+2. *Vague consideration of hybrid models:* In principal, the sampling and decision strategies, as proposed, are independent of each other and can be freely combined---i.e., each instance of a sampling strategy can be combined with each instance of a decision strategy. 
+
+3. *Use of heuristic analysis methods:* 
+
+4. *Strong analysis constraints:*
+
+<!-- Outline -->
+The current paper aims to address these four problems.
+The rest of the paper is structured as follows:
+In the first section, the current approach is described
 
 This paper presents a couple of models that integrate two proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010] into the computational framework of sequential sampling models of decision-making [see, e.g., @markantModelingChoiceSearch2015].
 More specifically, controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper seeks to investigate in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
@@ -219,12 +247,7 @@ CPT's value function is also considered in this paper.
 However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
 <!--Close footnote-->]
 
-<!-- Outline -->
-The rest of the paper is structured as follows:
-In the first section, it is briefly discussed 
-In the section that follows, two previously proposed sampling and decision strategies [see @hillsInformationSearchDecisions2010, see also below] are described.
-It is discussed 
-[...]
+
 Thereafter, a simulation study is presented, where the proposed models are used to simulate the sampling and accumulation processes for a set of choices between a safe and a two-outcome prospect.
 Considering choice rates and parameter estimates of CPT, the computational analysis shows that ... which translate to characteristic patterns in the psychoeconomic functions of CPT.
 [...]
