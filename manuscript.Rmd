@@ -202,9 +202,11 @@ Decision strategies refer to the way people integrate the information obtained f
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary integration/decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of such comparisons (round-wise integration/decision).
 In more general terms, whereas sampling strategies determine how the information about prospects are collected, decision strategies determine how the collected information are processed, or transformed, to arrive at a final choice.
 
-```{r sampling-paradigm, fig.cap="(ref:sampling-paradigm)"}
-knitr::include_graphics(path = "manuscript_files/sampling-paradigm.png")
-```
+\begin{figure}[t]
+\caption{Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice}
+\includegraphics{manuscript_files/sampling-paradigm} \label{fig:sampling-paradigm}
+\raggedright \textit{Note.} Add note
+\end{figure}
 
 To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between sampling and decision strategies.
 Specifically, they assumed that comprehensive sampling is associated with making summary decisions, while piecewise sampling is associated with making round-wise decisions.
@@ -221,16 +223,17 @@ That is, not only we need to know how much outcomes are sampled, but also in wha
 Yet, the presented approach invites objections, both theoretical and methodological.
 The following gaps and problems in Hills and Hertwig's [-@hillsInformationSearchDecisions2010] work stand out:
 
-1. *Lack of formal modeling/unstated theoretical commitments:* The authors offer a verbal description of their theoretical claim that sampling strategies are systematically linked to decision strategies.
-Yet, they do not provide a formal specification or computational implementation of their theory.
+1. *Lack of formal modeling/unstated theoretical commitments:*
+The authors offer a verbal description of their theoretical claim that sampling strategies are systematically linked to decision strategies, but do not provide a formal specification or computational implementation of their claim.
+Moreover, although the proposed links between sampling and decision strategies are used to "explain" the (non)occurrence of an as-if underweighting of rare outcomes pattern, no formal and complete accounts of the potential choice-generating mechanisms---which must contain the proposed links---are provided.
 Such a lack of formal, mathematical or computational modeling can, among others, hide gaps and inconsistencies in the theory [@guestHowComputationalModeling2021; @vanrooijPsychologicalModelsTheir2022].
-For instance, although the proposed links between sampling and decision strategies are used to explain the (non)occurrence of an as-if underweighting of rare outcomes pattern, no formal and complete accounts of the potential choice-generating mechanisms---which must contain the proposed links---are provided.
-One key characteristic of the sampling paradigm is that people can freely decide when to stop sampling.
+For instance, one key characteristic of the sampling paradigm is that people can freely decide when to stop sampling.
 Thus, in order to be considered complete, models aiming to explain how the mind exercises the capacity of making DFE in the sampling paradigm must account for stopping.
-Theoretical frameworks that do so, e.g., sequential sampling models [e.g., @markantModelingChoiceSearch2015], may, however, make themselves assumptions about the decision-making process that constrain how such a proposed link between sampling and decision strategies can be   
-Failing to explicitly spell out theoretical commitments and/or to formally model the decision-making process  
+Theoretical frameworks that do so, e.g., sequential sampling models [e.g., @markantModelingChoiceSearch2015], make themselves assumptions about the decision-making process that may constrain how the a proposed link between sampling and decision strategies can be specified.
+Failing to explicitly spell out theoretical commitments and/or to formally model the decision-making process can later on 
 
-2. *Vague consideration of hybrid models:* In principal, the sampling and decision strategies, as proposed, are independent of each other and can be freely combined---i.e., each instance of a sampling strategy can be combined with each instance of a decision strategy. 
+2. *Vague consideration of hybrid models:*
+In principal, the sampling and decision strategies, as proposed, are independent of each other and can be freely combined---i.e., each instance of a sampling strategy can be combined with each instance of a decision strategy. 
 
 3. *Use of heuristic analysis methods:* 
 
