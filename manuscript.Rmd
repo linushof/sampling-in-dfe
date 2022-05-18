@@ -247,16 +247,23 @@ But this would be a superficial and vulnerable argument for reasons that become 
 For instance, if people do not exactly follow the piecewise sampling strategy, one might still be willing to allow for the adoption of a round-wise decision strategy and, in order to make this go through, assume that a comparison-round may encompass more than one outcome sampled from each prospect.
 In this case, however, sampling strategies can have a severe impact on the evaluation of prospects because they alter the size of the samples that a round encompasses (see analyses in this paper).
 One may otherwise waive the assumption that a comparison-round encompasses more than one outcome per prospect, but this can cause the decision-making process to take a form that is fundamentally different from how it might have been perceived---at least implicitly according to unstated theoretical commitments---when only the paradigmatic instances were considered.
-In sum, to understand whether and how sampling and decision strategies act together to shape DFE, one should not only explicitly model their links, but also consider their interplay more broadly and systematically.
+In sum, to understand whether and how sampling and decision strategies act together to shape DFE, one should not only explicitly model their links, but also consider their interplay broadly and systematically.
 
 3. *Use of heuristic analysis methods:*
-[...]
-For reasons that can be found in Regenwetter and Robinson's [-@regenwetterConstructbehaviorGapBehavioral2017] rigorous work, 
+The empirical re-analyses relies on various heuristic methods to assess whether the observed choices are consistent with the claimed links between sampling and decision strategies and their impact on the as-if weighting of rare events pattern.
+For instance, aggregated data over participants and choice problems is used to compare, within and between sampling strategies, the proportions of choices that are consistent with the predictions of the decision strategies and an as-if underweighting of rare outcomes.
+In addition, to obtain indicators for the applied sampling strategies, each participant's mean switching frequency across all choice problems was calculated and a median split was used to identify infrequently and frequently switching people, supposedly indicating comprehensive and piecewise sampling, respectively.
+While acknowledging that existing data was used, such heuristic methods can be problematic, e.g., because they can cause a construct-behavior gap where inferences from the data to the tested theory, although statistically sound, become logically invalid.
+@regenwetterConstructbehaviorGapBehavioral2017 show that ... For example, aggregate data may ignore potential individual differences and heterogeneity within people, which may be permitted by a theory.
+Also, aggregating across choice problems and using the frequent vs. infrequent switchers render confuses process vs. individual trait.
+Moreover, sampling error and the undersampling of small-probability outcomes is only accounted for to the extent that choice trials in which small-probability outcomes were not sampled are excluded.
+This does not control for systematic distortions.
 
 4. *Narrow scope of analysis:*
+[...]
 
 <!-- Outline -->
-The current paper aims to address the outlined problems and thereby to extend and improve the work of Hills and Hertwig [@hillsInformationSearchDecisions2010].
+The current paper aims to address the outlined problems.
 The rest of the paper is structured as follows:
 In the first section, the current approach is described
 
