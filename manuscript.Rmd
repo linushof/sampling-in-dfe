@@ -152,7 +152,7 @@ More generally, in DFD, people choose as if small-probability outcomes are more 
 
 What causes the description-experience gap?
 A common notion is that of the mind being sensitive to the information provided by the small number of sampled outcomes that people tend to rely on in DFE [see @foxDecisionsExperienceSampling2006; @hertwigDecisionsExperienceEffect2004; @hertwigDecisionsExperienceWhy2010; @rakowBiasedSamplesNot2008; @wulffMetaanalyticReviewTwo2018].
-Specifically, small *samples*---i.e., sets of sampled outcomes---often differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box \hyperlink{box}{1}, see also for illustrative purposes the `code example`, where the objective probability of outcome `6` is `.2`, and the sampled relative frequency is `.1`).
+Specifically, small samples---i.e., sets of sampled outcomes---often differ from descriptions in the information they actually provide about the prospects because they tend to underrepresent small-probability outcomes (Box \hyperlink{box}{1}, see also for illustrative purposes the `code example`, where the objective probability of outcome `6` is `.2`, and the sampled relative frequency is `.1`).
 This distortion of the sampled information (sampling error) is then assumed to carry over to the decision-making process, eventually causing, ceteris paribus, distinct choice patterns in DFD and DFE.
 \newline
 
@@ -218,29 +218,45 @@ Moreover, simulating both round-wise and summary decisions on the basis of peopl
 To summarize the preceding paragraphs: 
 Since small samples may distort the information about the properties of latent prospects, a great deal of research on the sampling paradigm has been invested into the question which factors affect how much people sample [see @wulffAdaptiveExplorationWhat2019, Table 7.2, for a recent summary of relevant factors and papers].
 Assuming that people proceed systematically when sampling outcomes, and that their sampling strategies are systematically related to decision strategies, Hills and Hertwig [-@hillsInformationSearchDecisions2010] emphasize that in order to understand how people make DFE and how this comes to imply certain choice patterns, one might need a richer understanding of peoples' sampling behavior.
-That is, not only we need to know how much outcomes are sampled, but also in what way they are sampled, and how this interplays with the way the obtained information is processed to evaluate the latent prospects.
+That is, not only we need to know how much outcomes are sampled, but also in what way they are sampled, and how this affects the way the obtained information is processed to evaluate the latent prospects.
 
-Yet, the presented approach invites objections, both theoretical and methodological.
-The following gaps and problems in Hills and Hertwig's [-@hillsInformationSearchDecisions2010] work stand out:
+While offering a novel, convincing inroad into the broader question how sampling and information-processing can act together to shape DFE in environments where people can sample without costs,^[<!--Open footnote-->
+Meaning that people do not gain/loose the amount of each sampled outcome. Of course, sampling implies other costs, such as time and cognitive capacities.
+<!--Close footnote-->]
+Hills and Hertwig's [-@hillsInformationSearchDecisions2010] work invites some objections, both theoretical and methodological.
+The following gaps and problems stand out:
 
-1. *Lack of formal modeling/unstated theoretical commitments:*
-The authors offer a verbal description of their theoretical claim that sampling strategies are systematically linked to decision strategies, but do not provide a formal specification or computational implementation of their claim.
-Moreover, although the proposed links between sampling and decision strategies are used to "explain" the (non)occurrence of an as-if underweighting of rare outcomes pattern, no formal and complete accounts of the potential choice-generating mechanisms---which must contain the proposed links---are provided.
-Such a lack of formal, mathematical or computational modeling can, among others, hide gaps and inconsistencies in the theory [@guestHowComputationalModeling2021; @vanrooijPsychologicalModelsTheir2022].
+1. *No formal modeling/unstated theoretical commitments:*
+The authors provide a verbal description of their theoretical claims, but no formal specification or computational implementation thereof.
+That is, they claim that sampling strategies are systematically linked to decision strategies, and that the proposed links can explain the (non)occurrence of an as-if underweighting of rare outcomes pattern.
+Yet, no formal and complete accounts of the potential choice-generating mechanisms---which must contain the proposed links---are offered.
+Such a lack of mathematical and/or computational modeling can, among others, hide needed auxiliary assumptions and potential gaps and inconsistencies in the theory [@guestHowComputationalModeling2021; @vanrooijPsychologicalModelsTheir2022].
 For instance, one key characteristic of the sampling paradigm is that people can freely decide when to stop sampling.
 Thus, in order to be considered complete, models aiming to explain how the mind exercises the capacity of making DFE in the sampling paradigm must account for stopping.
-Theoretical frameworks that do so, e.g., sequential sampling models [e.g., @markantModelingChoiceSearch2015], make themselves assumptions about the decision-making process that may constrain how the a proposed link between sampling and decision strategies can be specified.
-Failing to explicitly spell out theoretical commitments and/or to formally model the decision-making process can later on 
+However, theoretical frameworks and their model members that do so, e.g., sequential sampling models [e.g., @markantModelingChoiceSearch2015], make their own assumptions about the decision-making process that not only have implications for what choice data is expected, but may also constrain how the proposed link between sampling and decision strategies can plausibly be integrated in a given framework (see model specifications/implementations in this paper).
+Assuming that "every scientific output is model- and theory-laden (i.e., contains theoretical and modeling commitments)" [@guestHowComputationalModeling2021, p. 5], not explicitly spelling out such commitments and/or formally modeling the respective decision-making process reduces (at least) the clarity of the theoretical claims and everything that follows in the scientific inference process.
 
-2. *Vague consideration of hybrid models:*
-In principal, the sampling and decision strategies, as proposed, are independent of each other and can be freely combined---i.e., each instance of a sampling strategy can be combined with each instance of a decision strategy. 
+2. *No systematic consideration of intermediate and hybrid models:*
+In principal, the sampling and decision strategies, as proposed, can be combined without constraints---i.e., each instance of a sampling strategy can be combined with each instance of a decision strategy.
+Moreover, the discussed sampling strategies (comprehensive and piecewise sampling) are considered paradigmatic not in the sense that people are expected to adopt either one or the other sampling strategy, but in the sense that they are the ends of a continuum and that many people are expected to adopt strategies that fall in between these two (see Fig.\ \@ref(fig:sampling-paradigm)).
+Focusing only on the proposed links between sampling and decision strategies, the authors do not discuss the potential implications of either one of these points for the resulting choice patterns.
+That is, the presented work does not systematically consider the potential interplay between sampling and decision strategies and its effects.
+In defense, one might object that the decision strategies determine how the prospects are evaluated on the basis of the sampled outcomes, and thus, once a given decision strategy is adopted, the sampling strategy upfront has no more impact on the final choice.
+In other words, sampling strategies may alter which decision strategies are used, but they do not alter how a given decision strategy evaluates a prospect.
+But this would be a superficial and vulnerable argument for reasons that become obvious when trying to specify or implement a plausible model of the decision-making process.
+For instance, if people do not exactly follow the piecewise sampling strategy, one might still be willing to allow for the adoption of a round-wise decision strategy and, in order to make this go through, assume that a comparison-round may encompass more than one outcome sampled from each prospect.
+In this case, however, sampling strategies can have a severe impact on the evaluation of prospects because they alter the size of the samples that a round encompasses (see analyses in this paper).
+One may otherwise waive the assumption that a comparison-round encompasses more than one outcome per prospect, but this can cause the decision-making process to take a form that is fundamentally different from how it might have been perceived---at least implicitly according to unstated theoretical commitments---when only the paradigmatic instances were considered.
+In sum, to understand whether and how sampling and decision strategies act together to shape DFE, one should not only explicitly model their links, but also consider their interplay more broadly and systematically.
 
-3. *Use of heuristic analysis methods:* 
+3. *Use of heuristic analysis methods:*
+[...]
+For reasons that can be found in Regenwetter and Robinson's [-@regenwetterConstructbehaviorGapBehavioral2017] rigorous work, 
 
-4. *Strong analysis constraints:*
+4. *Narrow scope of analysis:*
 
 <!-- Outline -->
-The current paper aims to address these four problems.
+The current paper aims to address the outlined problems and thereby to extend and improve the work of Hills and Hertwig [@hillsInformationSearchDecisions2010].
 The rest of the paper is structured as follows:
 In the first section, the current approach is described
 
