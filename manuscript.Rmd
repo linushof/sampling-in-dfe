@@ -293,35 +293,37 @@ It is only through these fundamental properties, or combinations thereof, that a
 Hence, systematic---as opposed to random---choices between prospects must be based on the assessment of differences in their properties.
 
 Rarely in peoples' daily life, the information provided about the prospects take the form of explicit and complete descriptions of all their outcome-probability pairs.
-In such rare cases, people would make DFD and can---strongly simplified---proceed by selecting a property or combinations thereof to assess differences among the prospects and make a respective choice.
+In such rare cases, people would make DFD and can---strongly simplified---directly proceed by selecting a property or combinations thereof to assess differences among the prospects and make a respective choice.
 In stark contrast and rather often, people are required to make DFE, where the mind can learn about the latent properties only by "experiential sampling [of outcomes] over time" [@hertwigDescriptionexperienceGapRisky2009, p. 517, square bracket added].
-The sampling paradigm is just one paradigm that can be used to study DFE and allows people to sample the prospects' outcomes without costs and without constraints regarding the sequential pattern and the amount of sampled outcomes.
+The sampling paradigm is just one paradigm that can be used to study DFE experimentally and allows people to sample the prospects' outcomes without costs and without constraints regarding the sequential pattern and the amount of sampled outcomes.
 
 How do people arrive at a final choice in the sampling paradigm? 
 Sequential sampling models of decision making under risk (DFD) and/or uncertainty [DFE, see @markantModelingChoiceSearch2015, who explicitly consider DFE and the sampling paradigm; see also, e.g., @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993] assume that the decision-making process takes the form of an accumulation of evidence for the prospects over time.
-The process is assumed to stop---i.e., a choice is made---once the accumulated evidence for one of the prospects reaches a certain threshold.
+The process is assumed to stop---i.e., a choice is made---once the accumulated evidence for one of the prospects reaches an evidence threshold.
 More specifically, for DFE, it is assumed that the outcomes of prospects are sequentially sampled and integrated into dynamic decision variables and that a choice is made once the value of a decision variable exceeds a threshold.
-How exactly this integration is carried out and what the value of a dynamic decision variable represents, is a theoretical question---and thus a matter of the exact specification of the model---largely concerning the way .
+How exactly this integration is carried out and what the value of a dynamic decision variable represents, is a theoretical question---and thus a matter of the exact specification of the model---largely concerned with the way the prospects are assumed to be evaluated.
+Depending on the integration and evaluation mechanisms they assume, the member models of the sequential sampling framework have been shown to explain some of the robust deviations from EV maximization, including the as-if underweighting of rare outcomes in the sampling paradigm [@markantModelingChoiceSearch2015].
+Moreover, these models implement speed-accuracy trade-offs, with the amount of evidence that must be sampled in favor for a prospect increasing with thresholds, leading to more accurate but slower choices for high thresholds, and vice versa.
 
-This class of process models thereby provides an algorithmic link between the actual sampling process and the choices in DFE, and has shown to explain some of the robust deviations from EV maximization [see @bhatiaSequentialSamplingParadoxes2014; @busemeyerDecisionFieldTheory1993], including the as-if underweighting of rare outcomes in the sampling paradigm [see @markantModelingChoiceSearch2015].
-Moreover, these models implement speed-accuracy trade-offs, with the amount of evidence that must be sampled in favor for a prospect increasing with thresholds, leading to more (less) accurate but slower (faster) choices for high (low) thresholds.
+The current paper commits to the core assumptions of the sequential sampling framework and uses its flexibility regarding the exact mechanisms of sampling, integration, and evaluation to incorporate the idea of sampling and decision strategies, including their interplay.
+The two models presented below, one assuming an integration and evaluation mechanism resembling the round-wise strategy, the other assuming mechanisms resembling the summary strategy, offer a formal route to explore the potential interplay between sampling and integration/decision strategies, and their effects on the choice behavior.
+The sequential sampling framework is chosen as a modeling outlet not only because it makes parsimonious assumptions and has assembled a good *"track record"* [cf. @meehlAppraisingAmendingTheories1990] by explaining and predicting actual choice behavior, but primarily because it makes explicit a core part of the computational problem the mind is trying to solve: 
+in order to make systematic choices, the mind must assess differences in latent properties.
+And in accumulating evidence for and against propsects, what should the mind accumulate evidence for if not such differences?
+round-wise and summary decisions are both indicative for distinct properties the expected value and the probability to produce a higher outcome most of the time.
+The remainder of the paper discusses and demonstrates in a simulation, how sampling and decision strategies as well as thresholds can act together to alter the degree and the accuracy with which these differences are assessed.
 
-[...] 
-
-Yet, there are several distinct properties that can be used to assess differences between the prospects, among them the EV, for which the summary decision strategy is indicative, and the probability to produce a higher outcome most of the time, for which the round-wise decision strategy is indicative [@hillsInformationSearchDecisions2010; see also @wulffHowShortLongrun2015].
+<!--Yet, there are several distinct properties that can be used to assess differences between the prospects, among them the EV, for which the summary decision strategy is indicative, and the probability to produce a higher outcome most of the time, for which the round-wise decision strategy is indicative [@hillsInformationSearchDecisions2010; see also @wulffHowShortLongrun2015].
 Respectively, in the following, both decision strategies are implemented into a common sampling and accumulation model to demonstrate how the mind may rely on different sampling strategies to alter the degree to which evidence is accumulated for differences in either one of these properties.
 More specifically, the proposed model accumulates the outcomes obtained from a sequence of comparisons between sample means, with the size of the samples underlying each mean comparison tending to be large (small) for low (high) switching probabilities.
 Accordingly, whereas the decision variables of the model capture how many comparisons a prospect has won, the unfolding accumulation process more closely resembles the summary strategy for low switching probabilities and the round-wise strategy for high switching probabilities.
-
-[...]
 
 Now, the current paper presents a sampling and accumulation model that provides an algorithmic link between sampling and decision strategies, and uses the model to discuss how the mind may rely on sampling strategies to alter which differences in the latent properties of prospects evidence is accumulated for.
 More specifically, the proposed model assumes an accumulation process over a sequence of mean comparisons, with switching probabilities---i.e., the probability of sampling
 outcomes from different prospects in direct succession---determining the size of the samples underlying each mean comparison and thresholds determining how many comparisons a prospect must win in order to be chosen.
 The model is such that when switching probabilities are high, the accumulation process unfolds over mean comparisons based on small samples, thus resembling the round-wise strategy and accumulating evidence for differences in the probability to produce a higher outcome most of the time.
 Notably, in this case, small-probability outcomes are predicted to contribute to the majority of mean comparisons less than would be objectively warranted, which can translate to an as-if underweighting of rare outcomes, irrespective of what the thresholds require the number of won comparisons to be.
-<!--Accordingly, while increases in thresholds---and thus in the number of sampled outcomes distributed over multiple small samples, each of which is considered---allow to choose with increasing accuracy the prospect that is more likely to return a higher outcome, the resulting choices can produce an as-if underweighting of rare outcomes.-->
-In turn, for low switching probabilities, the accumulation process unfolds over mean comparisons based on large samples, thus resembling the summary strategy---for low thresholds, respectively---and accumulating evidence for differences in the EV.
+In turn, for low switching probabilities, the accumulation process unfolds over mean comparisons based on large samples, thus resembling the summary strategy---for low thresholds, respectively---and accumulating evidence for differences in the EV.-->
 
 # Models 
 
