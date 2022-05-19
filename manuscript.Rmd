@@ -16,7 +16,7 @@ affiliation:
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is submitted as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
+ This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
   
   \indent
   1. Prof. Dr. Thorsten Pachur, Technical University of Munich
@@ -254,16 +254,18 @@ The empirical re-analyses relies on various heuristic methods to assess whether 
 For instance, aggregated data over participants and choice problems is used to compare, within and between sampling strategies, the proportions of choices that are consistent with the predictions of the decision strategies and an as-if underweighting of rare outcomes.
 In addition, to obtain indicators for the applied sampling strategies, each participant's mean switching frequency across all choice problems was calculated and a median split was used to identify infrequently and frequently switching people, supposedly indicating comprehensive and piecewise sampling, respectively.
 While acknowledging that existing data was used, such heuristic methods can be problematic, e.g., because they can cause a construct-behavior gap where inferences from the data to the tested theory, although statistically sound, become logically invalid.
-@regenwetterConstructbehaviorGapBehavioral2017 show that ... For example, aggregate data may ignore potential individual differences and heterogeneity within people, which may be permitted by a theory.
-Also, aggregating across choice problems and using the frequent vs. infrequent switchers render confuses process vs. individual trait.
-Moreover, sampling error and the undersampling of small-probability outcomes is only accounted for to the extent that choice trials in which small-probability outcomes were not sampled are excluded.
-This does not control for systematic distortions.
+In a rigorous analysis, @regenwetterConstructbehaviorGapBehavioral2017 demonstrate how the use of aggregate data and heuristic scoring rules, e.g., counting the proportion of correct choice predictions across problems and people, lead at least to hard-to-interpret inferences about individuals' as-if weighting patterns and the description-experience gap.
+One can alleviate such risks by taking heterogeneity between individuals into account and modeling the as-if weighting more explicitly.
+Also, the averaging of switching frequencies across choice problems to group into frequent and infrequent switchers can be falsely interpreted as if sampling strategies are more a characteristic of the decision maker than of the sampling process.
+Finally, sampling error is only controlled for to the extent that choice trials in which small-probability outcomes were not sampled at least once are excluded from the analyses.
+This still leaves room for the sampled relative frequencies to deviate from the latent objective probabilities.
 
-4. *Narrow scope of analysis:*
-[...]
+4. *No discussion of choice problems:*
+Assuming representative sampled frequencies, summary and round-wise decisions only predict different choices, if the prospect with the larger EV is not also more likely to produce a higher outcome most of the time ((see Fig.\ \@ref(fig:sampling-paradigm)).
+In consequence, the structure of the choice problems---i.e, whether a small-probability outcome exists and how desirable it is---can quite dramatically shape how the (interplay of) strategies differ in the choices and as-if weighting patterns they produce.
+Focusing only on problems of such a structure may provide a parsimonious but narrow-in-scope interpretation. 
 
-<!-- Outline -->
-The current paper aims to address the outlined problems.
+The current paper aims to extend the work of @hillsInformationSearchDecisions2010 and to address the outlined problems.
 The rest of the paper is structured as follows:
 In the first section, the current approach is described
 
@@ -313,21 +315,6 @@ The inputs to DFE are then the realizations of the random variables in (6).
 
 [...]
 
-
-# Sampling and Decision Strategies
-
-Specifically, @hillsInformationSearchDecisions2010 argued that one contributing factor to the description-experience gap might be a potential link between what they considered two paradigmatic sampling and decision strategies (see Figure\ \@ref(fig:sampling-paradigm)).
-That is, the authors assumed that in the sampling paradigm, people either switch prospects after each sampled outcome (piecewise sampling) to compare single outcomes over repeated rounds (round-wise decision), or they switch just once between prospects (comprehensive sampling) and make only one comparison between the means across all sampled outcomes (summary decision).
-In fact, @hillsInformationSearchDecisions2010 provided tentative evidence for such a coupling of sampling and decision strategies by finding that the choices of people who switched frequently between prospects during the sampling phase were better predicted by a round-wise strategy (rather than a summary strategy), and that this predictive pattern reversed for people who switched infrequently.^[<!--Open footnote-->
-Note that in their analyses of empirical sampling data,  @hillsInformationSearchDecisions2010 used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
-<!--Close footnote-->]
-Using the round-wise strategy may translate to an as-if underweighting of rare events pattern and the description-experience gap because the strategy selects the prospect that wins a majority of comparisons, while small-probability outcomes are predicted not to be considered in most of these comparisons.
-
-(ref:sampling-paradigm) Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice
-
-<!-- Critique -->
-
-[...]
 
 # Current Approach: Sampling Strategies and the Accumulation of Different Types of Evidence
 
