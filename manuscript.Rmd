@@ -324,7 +324,17 @@ $$
 $$
 -->
 
-We consider the sampling paradigm and a choice between two prospects denoting the distributions $P'^X$ and $P'^Y$ of the discrete random variables $X$ and $Y$, respectively.
+Let us consider the sampling paradigm and a choice between two prospects, $P^X$ and $P^Y$.
+Let $P^X$ be a probability---or pushforward---measure assigning to each possible outcome $x$ of the random variable $X$ a probability $p_X(x)$.
+$P^Y$ is defined in a similar way.
+Graphical sketches of the round-wise and summary integration model are displayed in Figure\ \@ref(fig:models).
+
+\begin{figure}[t!]
+\caption{Integration of Sampling and Integration/Decision Strategies into a Sequential Sampling Model}
+\includegraphics{manuscript_files/models} \label{fig:models}
+\raggedright \textit{Note.} In both models, to arrive at a final choice, it is assumed that outcomes from two prospects (here: violet vs. orange, see Fig.~\ref{fig:sampling-paradigm}, for details), are sequentially sampled and integrated
+into dynamic decision variables until one of the variables reaches a threshold (not displayed). Round-wise integration model: The value of the decision variable is the cumulative sum of won mean comparisons. Each mean comparison encompasses the outcomes that were sampled from the same prospect in direct succession (without a switch in between). The thresholds govern the required (difference in the) number of won comparisons. Summary integration: The value of the decision variable is the cumulative sum across all outcomes sampled from a prospect. The thresholds govern the required (difference in the) cumulative sums. Both integration models allow for differences in thresholds and switching probabilities.  
+\end{figure}
 
 ## Round-Wise Integration Model
 
