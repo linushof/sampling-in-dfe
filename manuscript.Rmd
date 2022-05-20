@@ -315,15 +315,6 @@ The remainder of the paper discusses and demonstrates in a simulation, how integ
 
 # Models 
 
-<!--Note that a prospect can be conceptualized as the distribution $P$ of a discrete random variable $X$, where each outcome in $\{x_i\}$ denotes a possible value that $X$ can take.
-In other words, then, given a choice between $1, ..., k$ prospects, the inputs from the environment or memory should provide information about the set
-$$
-\{P^1, ... , P^k\}
-\; .
-\tag{1}
-$$
--->
-
 Let us consider the sampling paradigm and a choice between two prospects, $P^X$ and $P^Y$.
 Let $P^X$ be a probability---or pushforward---measure assigning to each possible outcome $x$ of the random variable $X$ a probability $p_X(x)$.
 $P^Y$ is defined in a similar way.
@@ -338,50 +329,80 @@ into dynamic decision variables until one of the variables reaches a threshold (
 
 ## Round-Wise Integration Model
 
-The model assumes that the sampling process starts at random with a stochastic process on one of the two random variables.
-Specifically, it is assumed that an agent starts with equal probability to sample from one of the prospects, say $P'^X$, and generates a sequence of random variables $X_1, X_2,...$, where the mean over the sequence is computed or updated with each new outcome that is sampled.
-The respective stochastic process $\{S^X_n\}_{n \in \mathbb{N}}$ is defined by
+The model assumes that the sampling process starts at random with a stochastic process on one of the two prospects.
+Specifically, it is assumed that an agent starts with equal probability to sample from one of the prospects, say $P^X$, and generates a sequence of sampled outcomes, denoted by the random variables $X_1, X_2,...$, where the mean over this sequence is computed or updated with each new sampled outcome.
+The respective stochastic process $\{S^X_t\}_{t \in \mathbb{N}}$ is defined by
 $$
-S^X_n = \frac{1}{n} \sum_{t = 1}^n X_t, \quad n \in \mathbb{N}
+S^X_t = \frac{1}{t} \sum_{k = 1}^t X_k, \quad k,t \in \mathbb{N}
 \; ,
-\tag{7}
+\tag{1}
 $$
-and terminates as soon as an outcome is sampled from the other prospect.
-The switching probability $\psi \in (0,1]$, which is assumed to be adopted prior the start of the information-processing chain and is fixed throughout, controls the probability with which outcomes from different prospects are sampled in direct succession.
-In other words, the switching probability is the probability with which the stochastic process on the current random variable stops and a new stochastic process on the other random variable starts with the subsequently sampled outcome.
-To implement the accumulation process, the model assumes that each time after a new stochastic process was started and terminated on both random variables, their respective values are compared, with the prospect underlying the stochastic process with the greater final value receiving a round win.
-Accordingly, for the prospect $P'^X$, this stage is modeled as the mapping
+where $S^X_t$ is the mean across $t$ outcomes that were *successively* sampled from prospect $P^X$.
+Each such stochastic process terminates as soon as an outcome is sampled from the other prospect, i.e., the stochastic process on prospect $P^X$ stops as soon as an outcome is sampled from prospect $P^Y$, and vice versa.
+The switching probability $\psi \in (0,1]$, which is assumed to be adopted prior the start of the sampling and accumulation process, is fixed throughout and controls the probability with which outcomes from different prospects are sampled in direct succession.
+In other words, the switching probability $\psi$ governs the probability with which the stochastic process on a given prospect, defined as in (1), stops and a new stochastic process on the other prospect starts with the subsequently sampled outcome.
+
+To implement the evidence accumulation process, the round-wise integration model assumes that each time after a *new* stochastic process was started and terminated on both prospects, their respective means are compared, with the prospect underlying the stochastic process with the greater mean receiving a round win.
+Accordingly, assuming that $S^Y_m$ is the mean across $m$ outcomes successively sampled from prospect $P^Y$, this stage is modeled for the prospect $P^X$as the mapping
 $$
 \begin{aligned}
   Z^X : \mathbb{R} &\to \mathbb{N} \\
-  S^X_n - S^Y_n &\mapsto 
+  S^X_t - S^Y_m &\mapsto 
   \begin{cases}
-     1 &\text{if} \quad  S^X_n > S^Y_n, \\
+     1 &\text{if} \qquad  S^X_t > S^Y_m, \\
      0 &\text{else}
      \; ,
   \end{cases}
 \end{aligned}
-\tag{8}
+\tag{2}
 $$
-where $Z^X$ is a random variable that takes only the two values $0$ and $1$, denoting a lost or won mean comparison, respectively. 
-The model assumes that a round consisting of a pair of stochastic processes---i.e., one for each prospect---and the subsequent comparison of their final values is repeated until the sum of round wins for one of the two prospects reaches a threshold $\theta \in \mathbb{N}$.
-Similar to the switching probability, it is assumed that the threshold is adopted prior the start of the information-processing chain and is fixed throughout.
-For $P'^X$, then, we obtain a sequence of independent comparisons $Z^X_1, Z^X_2, ...$ and model the respective evidence accumulation process as a random walk $\{D^X_m\}_{m \in \mathbb{N}}$ defined by 
+where $Z^X$ is a random variable that takes only the two values $0$ and $1$, denoting a lost or won mean comparison, respectively.
+Let us denote the steps defined in (1) and (2) as a round of mean comparison (short: *comparison round*, see Fig.\ \@ref(fig:models)).
+
+The model assumes that such comparison rounds are repeatedly carried out until the cumulative sum of round wins for one of the two prospects reaches a threshold $\theta \in \mathbb{N}$.
+Similar to the switching probability, it is assumed that the threshold $\theta$ is adopted prior the start of the sampling and accumulation process and is fixed throughout.
+For $P^X$, then, one obtains a sequence of mean comparisons, denoted as $Z^X_1, Z^X_2, ...$, and an evidence accumulation process taking the form of a random walk $\{D^X_v\}_{v \in \mathbb{N}}$ defined by
 $$
-D^X_m = \sum_{i = 1}^m Z^X_i, \quad m \in \mathbb{N}
-\;,
-\tag{9}
+D^X_v = \sum_{c = 1}^v Z^X_c, \quad c,v \in \mathbb{N}
+\;.
+\tag{3}
 $$
-resembling a dynamic decision variable.
-Note that since (8) describes a Bernoulli trial, the random walk in (9) is based on a Bernoulli process.
+$D^X_v$ is the cumulative sum of round wins of prospect $P^X$ after $v$ comparison rounds, and resembles a dynamic decision variable.
+Note that since (2) describes a Bernoulli trial, the random walk in (3) is based on a Bernoulli process.
+Prospect $P^X$ would be chosen, if $D^Y_v < \theta \leq D^X_v$ is satisfied, and vice versa.
 
 Finally, note that the described model assumes two random walks---i.e., one for each prospect---approaching the same threshold, which is the absolute number of mean comparisons a prospect must win in order to be chosen.
 However, one may also define a single random walk, resembling a common dynamic decision variable, which approaches a positive threshold $\theta^+$ and a negative threshold $\theta^-$.
-Therefore, (8) may be adapted such that $Z$ takes the value $-1$ instead of $0$, such that the threshold determines how many more mean comparisons a prospect must win in order to be chosen.
+That is, (2) may be adapted such that $Z$ takes the value $-1$ instead of $0$, such that the threshold determines how many more mean comparisons a prospect must win in order to be chosen.
 
 ## Summary Integration Model
 
-[...]
+The model assumes that an agent starts with equal probability to sample outcomes from one of the prospects and continues sampling while switching between prospects according to the switching probability $\psi$.
+As in the round-wise integration model, the switching probability $\psi$ is assumed to be adopted prior the start of the sampling and accumulation process and is fixed throughout.
+
+To implement the evidence accumulation process, the summary integration model assumes that an agent continues sampling from both prospects until the cumulative sum across all outcomes sampled from one of the prospects reaches a threshold $\theta$. 
+As in the round-wise integration model, the threshold $\theta$ is assumed to be adopted prior the start of the sampling and accumulation process and is fixed throughout.
+For $P^X$, then, one obtains a sequence of sampled outcomes, $X_1, X_2, ...$, and an evidence accumulation process taking the form of a random walk $\{D^X_t\}_{t \in \mathbb{N}}$ defined by 
+$$
+D^X_t = \sum_{k = 1}^t X_k, \quad k,t \in \mathbb{N}
+\; ,
+\tag{4}
+$$
+where $D^X_t$ is the cumulative sum after $t$ outcomes sampled from prospect $P^X$ and resembles a dynamic decision variable.
+Assuming that $D^Y_m$ is the cumulative sum after $m$ sampled outcomes from prospect $P^Y$, prospect $P^X$ would be chosen, if $D^Y_m < \theta \leq D^X_t$ is satisfied, and vice versa.
+
+Note again that the described model assumes two random walks---i.e., one for each prospect---approaching the same threshold, which now is the cumulative sum across all sampled outcomes a prospect must produce in order to be chosen.
+However, one may also define a single random walk, resembling a common dynamic decision variable, which approaches a positive threshold $\theta^+$ and a negative threshold $\theta^-$.
+That is, (4) may be substituted by
+$$
+D^X_{t,m} = \sum_{k = 1}^t X_k - \sum_{j = 1}^m Y_j \quad k,t,j,m \in \mathbb{N}
+\; ,
+\tag{5}
+$$
+where $D^X_{t,m}$ is the difference between the cumulative sums after $t$ and $m$ outcomes sampled from prospects $P^X$ and $P^Y$, respectively.
+The thresholds thus determine how much larger the cumulative sum of a prospect must be in order for the prospect to be chosen.
+
+\newpage
 
 # What Model Behaviors Are Expected?
 
