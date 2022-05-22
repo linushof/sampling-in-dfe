@@ -404,46 +404,70 @@ The thresholds thus determine how much larger the cumulative sum of a prospect m
 
 # What Model Behaviors Are Expected?
 
-Below, it is discussed which effects the key model parameters, i.e., the switching probability $\psi$ and the threshold $\theta$, could have on the choices and the corresponding as-if weighting pattern that are implied by the round-wise and the summary integration model.
+Below, it is discussed which effects the key model parameters, i.e., the switching probability $\psi$ and the threshold $\theta$, could have on the choices and the corresponding as-if weighting patterns that are implied by the round-wise and the summary integration model.
 The effects of the switching probability $\psi$ should be informative about the interplay between different sampling strategies and the integration/decision strategy each model resembles.
 Assuming that both models aim to assess true differences in the latent properties of prospects, the effects of the threshold $\theta$ should indicate whether these differences are indeed more accurately assessed---thus, leading to more systematic choices and as-if weighting patterns---the more evidence is accumulated.
-In addition, previous research has shown that differences as to how information about the properties of prospects is processed can translate to distinct signatures in CPT's psychoeconomic value and weighting function, without actually assuming these functions to be computed whatsoever [see @pachurHowTwainCan2017; @stewartDecisionSampling2006; @zilkerNonlinearProbabilityWeighting2021].^[<!--Open footnote-->
+In addition, previous research has shown that differences as to how information about the properties of prospects is processed can translate to distinct signatures in CPT's psychoeconomic value and weighting function, without actually assuming that these functions are computed whatsoever [see @pachurHowTwainCan2017; @stewartDecisionSampling2006; @zilkerNonlinearProbabilityWeighting2021].^[<!--Open footnote-->
 Note that it has been argued that the distinction between CPT's functions used to describe choice data and models aiming to explain how this data is generated in first place are reminiscent of Marr's [-@marrVisionComputationalInvestigation1982] different levels of explanation [@zilkerMeasuringModelingConstruction2020; also cf. @griffithsProbabilisticModelsCognition2010].
-That is, whereas CPT may be considered a computational-level theory that describes an abstract solution to the problem the mind aims to solve when offered a choice between prospects, process models [cf. @jareckiFrameworkBuildingCognitive2020] such as heuristics and sequential sampling models may be considered algorithmic-level theories that specify how the mind can approximate the abstract solution with the capacity limits it possesses.
+That is, whereas CPT may be considered a computational-level theory that describes an abstract solution to the problem the mind aims to solve when offered a choice between prospects, process models [cf. @jareckiFrameworkBuildingCognitive2020], such as heuristics and sequential sampling models, may be considered algorithmic-level theories that specify how the mind can approximate the abstract solution with the capacity limits it is constrained by.
 <!--Close footnote-->]
 Accordingly, this section also formulates expectations regarding the potential relations between the switching probability $\psi$ and threshold $\theta$ (data-generating parameters) and the CPT parameters (data-modeling parameters).
-Summaries of the expected model behaviors can be found in Tables\ \@ref(tab:expectations-roundwise) and \@ref(tab:expectations-summary).
 
-## Length of Sampling and Accumulation Processes and Final Choice
+## Potential Impact on Final Choices
+
+The discussion below is constrained to choices between prospects that possess only positive outcomes. 
+Summaries of the expected model behaviors can be found in Tables\ \@ref(tab:expectations-roundwise) and \@ref(tab:expectations-summary).
 
 ### Round-Wise Integration Model
 
-The required number of independent mean comparisons increases with thresholds $\theta$.
-Since each comparison is based on its own pair of stochastic processes, an increase in $\theta$ translates to a larger number of required stochastic processes and, ceteris paribus, therefore also to a larger overall number of outcomes sampled over the course of a sampling and accumulation process.
-In turn, each stochastic process is predicted to terminate faster, the higher the probability that the subsequent outcome is sampled from the other prospect, determined by the switching probability $\psi$.
-Accordingly, an increase in $\psi$ leads to shorter stochastic processes, which translate, ceteris paribus, to a smaller overall number of sampled outcomes.
+Considering a *single* comparison round, the stochastic process for each prospect---which results in a mean computed across the outcomes sampled from the prospect---is predicted to terminate faster, the higher the probability that the subsequent outcome is sampled from the other prospect, i.e., the higher the switching probability $\psi$.
+Because the switching probability is predicted to alter the length of the stochastic processes underlying *each independent* mean comparison, it should affect whether low-probability outcomes contribute to each required mean comparisons about as much as would be warranted based on their objective probabilities, or whether they contribute rather less.
+That is, for high switching probabilities and thus, short stochastic processes, the binomial distribution associated with small-probability outcomes is positive skewed, causing the relative frequencies with which these outcomes occur within each comparison round to be smaller rather than larger than their latent objective probabilities.
+Because such a distortion of the relative sampled frequencies from the objective probabilities is expected for each comparison round, increases in the thresholds $\theta$ should not affect the following expectations concerning the model behavior; rather because each comparison is independent and increases in sample size (here: number of comparisons) reduce random error, the expectations should be more accurately met for higher thresholds:
+If the small-probability outcome is smaller (larger) than the EV, high switching probabilities cause the mean within each comparison round to be an inflated (deflated) estimate of the EV.
+Such an inflation and deflation of the means within each round can then translate to choices that take the form of an as-if underweighting of rare outcomes:
+Specifically, if the means of the prospect with the lower (higher) EV are inflated (deflated), the outcomes of each mean comparison may be a reversal---in sign---of the outcome of a comparison between the EVs, eventually translating to choices resembling an as-if underweighting of rare outcomes.
+Yet, if the means of the prospect with the lower (higher) EV are deflated (inflated), the difference between the means should be larger than the differences between the EV, which can simplify EV maximization [see @hertwigDecisionsExperienceWhy2010].
+In contrast, for low values of the switching probability $\psi$---and therefore pairs of long stochastic processes---the means in each round should closely correspond to the EVs, leading to choices that are in line with EV maximization.
 
-Because the switching probability $\psi$ is predicted to alter the length of the stochastic processes underlying each mean comparison, $\psi$ should affect whether low-probability outcomes contribute to the majority of the required mean comparisons about as much as would be warranted based on their objective probabilities, or whether they contribute rather less.
-That is, for short stochastic processes, the binomial distribution associated with small-probability outcomes is positive skewed, therefore causing the relative frequencies with which these outcomes occur over the course of such a process to be smaller rather than larger than their latent objective probabilities.
-Respectively, if the small-probability outcome is smaller (larger) than the EV, high values of $\psi$---and therefore pairs of short stochastic processes---cause the mean to be an inflated (deflated) estimate of the EV.
-Such an inflation and deflation of the means can then translate to an as-if underweighting of rare outcomes.
-Specifically, if the mean of the prospect with the lower (higher) EV is inflated (deflated), the outcome of the comparison between the means may be a reversal---in sign---of the outcome of a comparison between the EVs, leading to choices that take the form of an as-if underweighting of rare outcomes.
-Yet, if the mean of the prospect with the lower (higher) EV is deflated (inflated), the difference between the means should be larger than the differences between the EV, which can simplify EV maximization [see @hertwigDecisionsExperienceWhy2010].
-In turn, for low values of $\psi$---and therefore pairs of long stochastic processes---the means should closely correspond to the EVs, leading to choices that are in line with EV maximization.
+Note that the entire line of reasoning from above should also apply, if sampling error is controlled for.
+That is, if the EVs are substituted by the means across all outcomes sampled from a prospect over the course of the entire sampling and accumulation process, the means within each comparison round are still expected to deviate from this sampling error-encompassing substitute in the manner outlined above.
+Moreover, because the mean across the entire sampling and accumulation process is expected to converge to the EV the more outcomes are sampled overall, the choice patterns with and without sampling error accounted for should resemble each other more closely, the higher the thresholds get.
 
 To summarize the choice predictions and simplify: 
-If the prospect that is more likely to return a higher outcome most of the time does not also possess the higher EV, high values of $\psi$---and therefore pairs of short stochastic processes---are predicted to cause an as-if underweighting of rare outcomes.
-While these predictions emphasize the close link between small samples and the as-if underweighting of rare outcomes, they suggest that the reliance on multiple or many small samples can serve the accumulation of evidence for differences in a latent property.
-Specifically, for an increasing sequence of independent comparisons between single outcomes sampled from two prospects, the relative winning frequency of a prospect should converge against the objective probability of producing a higher outcome in each comparison.
-Respectively, then, the as-if underweighting of rare outcomes should become more robust as the thresholds $\theta$ increase.^[This clarifies the role of $\theta$: Whatever systematic differences between the prospects is reflected in a mean comparison should be more accurately assessed for high values of $\theta$.]
+If the prospect that is more likely to return a higher outcome most of the time does not also possess the higher EV or mean across all outcomes sampled over the course of a sampling and accumulation process, high values of the switching probability $\psi$ are predicted to cause an as-if underweighting of rare outcomes pattern.
+For low switching probabilities, choices are expected to maximize the EV or mean across all sampled outcomes.
+Hence, in the round-wise integration model, the switching probability is expected to alter the degree and thus, also the accuracy with which differences among prospects are assessed in either one of these latent properties: the expected value or the probability to produce a higher outcome most of the time.
+These expectations concerning the model behavior should be more accurately met, the larger the thresholds $\theta$.
 
 ### Summary Integration Model
 
-[...]
+First, note that the summary integration model differs from the summary strategy proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010] to the extent that cumulative sums rather than means are calculated across all outcomes sampled from a prospect.^[<!--Open footnote-->
+I.e., one must ensure that the summary statistic in fact approaches and reaches a threshold in order for the code to not run endlessly.
+Note that this is not a mere technical issue, but implied by the theoretical assumptions of the sequential sampling framework.
+<!--Close footnote-->] 
+This could introduce interactions between the switching probability $\psi$ and the threshold $\theta$ that are not implied by a model that assumes comparisons between means.
+
+Because the required (difference in) cumulative sums across all outcomes sampled from each prospect increases with thresholds $\theta$, the number of outcomes that is required to be sampled to reach the thresholds should increase accordingly.
+Hence, in principle, the larger the thresholds, the more should small-probability outcomes contribute to the cumulative sum as much as would be warranted by their objective probabilities.
+Accordingly, one might expect that the implied choices converge to the solutions of EV maximization, the larger the thresholds get.
+However, the switching probabilities $\psi$ should introduce temporal imbalances between prospects regarding the number of sampled outcomes over which the sums are computed (and compared, assuming relative thresholds, respectively).
+That is, whatever prospect is first sampled from is allowed to start accumulating evidence sooner than the respective other prospect.
+This is likely to be a negligible factor for large but not for small switching probabilities.
+Specifically, the temporal imbalances---i.e., the temporal advantage for the prospect which is first sampled from---grows as the switching probabilities decrease.
+Accordingly, for small switching probabilities, choices might be largely driven by the truly random event which prospect is first sampled from.
+This random choice behavior should diminish with increases in the switching probability and choices should converge to the solutions of EV maximization the higher the thresholds get.
+
+Taking together the expected effects for thresholds and switching probabilities, the expectations for the choices implied by the summary integration model are summarized as follows:
+For small switching probabilities, choice behavior should be more or less random.
+With increasing switching probabilities, choice behavior should become more systematic and driven by differences in the thresholds:
+For small thresholds, an as-if underweighting of rare outcomes pattern is expected to occur because small-probability outcomes should be systematically underrepresented due to their skewed binomial distribution.
+This pattern should be alleviated, if sampling error is taken into account.
+For large thresholds, choices should converge more to the solutions of EV maximization, even more so to the solutions of sampled mean maximization (i.e., when sampling error is accounted for).
 
 ## Cumulative Prospect Theory
 
-Before elaborating how the expectation outlined above may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
+Before elaborating how the expectations outlined above may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
 
 ### Description of CPT
 
@@ -485,7 +509,7 @@ $$
 \tag{9}
 $$
 where $w$ is a monotonic increasing, nonlinear weighting function satisfying $w^+(0) = w^-(0) = 0$ and $w^+(1) = w^-(1) = 1$.
-To simplify matters, the further discussion and the computational analysis are constrained to choices between a safe prospect---possessing just one outcome that occurs with certainty---and a two-outcome prospect (hereafter: risky prospect).
+To simplify matters, the further discussion of CPT and the computational analysis are constrained to choices between a safe prospect---possessing just one outcome that occurs with certainty---and a two-outcome prospect (hereafter: risky prospect).
 All outcomes are assumed to be positive and the safe outcome is assumed to fall between the the low-rank outcome, $x_{low}$, and the high-rank outcome, $x_{high}$, of the risky prospect to omit dominance.
 One can then disregard the negative parts of (8) and (9), including the parameter $\lambda$ of the value function, and (9) simplifies to
 $$
@@ -504,8 +528,7 @@ Importantly, the as-if prefix indicates that there is no claim that the mind ind
 rather, the mind processes the information about the properties of choice alternatives in a way that the resulting choices translate to the estimated weighting pattern [cf. @gigerenzerHowExplainBehavior2020].
 Accordingly, once again, this paper treats CPT as a data model and discusses---and refines in a simulation---what weighting patterns can be expected, were the mind to carry out the sampling and accumulation processes that are assumed by the presented round-wise and summary integration model [see @pachurHowTwainCan2017; @zilkerNonlinearProbabilityWeighting2021, for similar theoretical inquiries].
 
-Now, several consequences for the weighting patterns that can be estimated in CPT follow from the exact specification of the weighting function $w$, which are briefly reviewed next:
-Therefore, Figure\ \@ref(fig:weighting-function) illustrates some of the possible graphical shapes of the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987, which, however, is just one of several parameterizations that have been proposed [e.g., @prelecProbabilityWeightingFunction1998; @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview].
+Now, several consequences for the weighting patterns that can be estimated in CPT follow from the exact specification of the weighting function $w$, which are briefly reviewed next. Figure\ \@ref(fig:weighting-function) illustrates some of the possible graphical shapes of the two-parameter weighting function of @goldsteinExpressionTheoryPreference1987, which, however, is just one of several parameterizations that have been proposed [e.g., @prelecProbabilityWeightingFunction1998; @tverskyAdvancesProspectTheory1992; see @stottCumulativeProspectTheory2006, for an overview].
 Each graph in Figure\ \@ref(fig:weighting-function) displays the graphical shape of the weighting function
 $$
 \begin{aligned}
@@ -517,8 +540,9 @@ $$
 \tag{11}
 $$
 for the respective values of the parameters $\gamma \in [0,2]$ and $\delta > 0$.
-Evidently, both parameters have distinct effects on the graphs' shape, with $\gamma$ affecting the curvature and $\delta$ the elevation.
-[As a consequence from (13), then, each combination of parameters implies a particular weighting pattern, with some of them being similar and others being rather distinct.]
+Evidently from the figure, both parameters have distinct effects on the graphs' shape, with $\gamma$ affecting the curvature and $\delta$ the elevation.
+As a consequence from (10) and (11), each combination of parameters implies a particular weighting pattern that amounts to either a linear or an over- and underweighting of the high-rank outcome of the risky prospect, depending on its probability.
+Hence, for the considered case---choices between a safe and a two-outcome risky prospect---, the estimated weighting function can be directly interpreted in terms of an as-if over- or underweighting of small-probability outcomes. 
 
 ```{r weighting-function, include=FALSE}
 #compute images of weighting function (wf)
@@ -539,7 +563,7 @@ wf %>%
   scale_x_continuous(breaks = seq(0, 1, .5)) +
   scale_y_continuous(breaks = seq(0, 1, .5)) + 
   labs(x = "Probability of High-Rank Risky Outcome",
-       y = "Transformed Probability / Decision Weight", 
+       y = "Transformed Probability (Decision Weight)", 
        color = expression(gamma)) + 
   theme_minimal() + 
   geom_line(aes(color = gamma), size = .5) +
@@ -547,70 +571,39 @@ wf %>%
   geom_abline(intercept = 0, slope = 1, color = "gray", linetype = "dashed")
 ```
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \caption{Possible Graphical Shapes of Goldstein and Einhorn's (\protect\hyperlink{ref-goldsteinExpressionTheoryPreference1987}{1987}) Weighting Function}
 \includegraphics{manuscript_files/figure-latex/weighting-function-1} \label{fig:weighting-function}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} The gray-dashed identity lines indicate a linear weighting pattern, implied by \(\gamma = 1\) and \(\delta = 1\). Deviations produce a nonlinear graphical shape. \(\gamma\): For \(\gamma > 1\), graphs take a S-shape---running below (above) the identity line for small (large) probabilities---which is more accentuated for larger deviations from \(\gamma = 1\). Hence, decisions weights are smaller (larger) than the objective probabilities for small-probability (high-probability) outcomes. For \(\gamma < 1\), the graph of \(w\) takes an inverse S-shape and the weighting pattern reverses. \(\delta\): Shifts across the entire probability scale the intervals within which objective probabilities translate to either smaller or greater decision weights. For \(\delta < 1\), the interval over which the graph runs below the identity line is greater than the interval over which the graph runs above the identity line; the pattern reverses for \(\delta > 1\).
 \end{figure}
 
-More specifically: The gray-dashed identity lines in Figure\ \@ref(fig:weighting-function) imply a linear weighting pattern.
-That is, since the images of $w$, $w(p)$, are equal to the respective cumulative probabilities $p$, all cumulative decision weights $\pi$ that are derived according to (13) would be equal to the differences between the respective objective cumulative probabilities---and therefore also to the objective probabilities of the outcomes for which the weights are determined.
-Such a linear weighting pattern is implied by $\gamma = 1$ and $\delta = 1$. 
-Now, both deviations from $\gamma = 1$ and $\delta = 1$ produce a nonlinear graphical shape.
-That is, for $\gamma > 1$, the graphs take a S-shape---running below (above) the identity line for small (large) cumulative probabilities---which is more accentuated for larger deviations from $\gamma = 1$.
-Importantly, the same *small* numerical difference between two cumulative probabilities $p$ then translates to varying differences between the respective images $w(p)$ depending on the interval on the cumulative probability scale. 
-Specifically, because of the S-shaped curvature, the differences between the images $w(p)$ may be smaller than those between the respective cumulative probabilities in the lower and upper part of the cumulative probability scale, but may be considerably greater in the middle part.
-As a consequence, the cumulative decisions weights are smaller than the respective objective probabilities for small-probability outcomes of low and high rank, but they are larger for small-probability outcomes of a middle rank.^[<!--Open footnote-->
-Note that the distinction between outcomes of either low/high rank or middle rank is unnecessary for at most two-outcome prospects [see @tverskyAdvancesProspectTheory1992, see also below].
-However, for finite many outcomes, the distinction is critical. More so, the fact that CPT may weigh outcomes of the same small probability differently, adds another reasons why the description-experience gap should not be equated with a reversed weighting pattern in CPT [see @hertwigConstructbehaviorGapDescription2018].
-I.e., neither could one interpretation of the gap be in terms of an as-if underweighting (overweighting) of rare outcomes in DFE (DFD), nor would any of the potential contributors to the gap considered so far [cf. @hertwigDescriptionexperienceGapRisky2009; @wulffMetaanalyticReviewTwo2018] treat some small-probability outcomes differently than other small-probability outcomes.
-<!--Close footnote-->]
-Note that for all $\gamma < 1$ the graph of $w$ takes an inverse S-shape and the entire weighting pattern is reversed.
-Moreover, the shape of the weighting function, and thus the weighting pattern, depends strongly on $\delta$, which affects the overall elevation of the graph.
-That is, for $\delta < 1$, the interval on the cumulative probability scale over which the weighting function runs below the identity line is greater than the interval over which the weighting function runs above the identity line; and this pattern reverses for $\delta > 1$.
-In other words, $\delta$ shifts across the entire cumulative probability scale the intervals within which small differences between objective cumulative probabilities translate to either smaller or greater cumulative decision weights.
+### How Is CPT Expected to Reflect the Model-Implied Choices?
 
-To summarize the preceding paragraphs: CPT is a data model that can be used to describe choices between prospects by capturing systematic deviations from EV maximization in the parameter estimates of its value and weighting function.
-Because the graph of the weighting function usually takes a more or less accentuated (inverse) S-shape, the implied weighting pattern is such that small probability outcomes of low and high rank are underweighted (overweighted) in CPT's valuation of a prospect according to (11).
-
-### How Is CPT Expected to Reflect the Model Predictions?
-
-
-A summary of the predictions for the CPT parameters can be found in Table\ \@ref(tab:predictions).
-
-To begin with, note through simplifying (13) to
-$$
-\begin{aligned}
-  \pi_{high} &= w(p_x(x_{high})) \\
-  \pi_{low} &= w(p_x(x_{low}) + p_x(x_{high})) - w(p_x(x_{high})) \\
-  &= 1 - \pi_{high}
-  \; ,
-\end{aligned}
-\tag{15}
-$$
-that the possible weighting patterns amount to an over- and underweighting of the high-rank outcome of the risky prospect, depending on its probability.
-That is, the weighting function is supplied with the probability of the high-rank outcome of the risky prospect and its images are the decision weights assigned to this outcome.
-Respectively, as can be seen from Figure\ \@ref(fig:weighting-function), for $\gamma > 1$, the high-rank outcome of the risky prospect is overweighted (underweighted) in CPT, if it is of large (small) probability, and $\delta \neq 1$ shifts the range of the over- and underweighting.
+To begin with, as evident from Figure\ \@ref(fig:weighting-function), for $\gamma > 1$, the high-rank outcome of the risky prospect is underweighted (overweighted) in CPT, if it is of small (large) probability, and $\delta \neq 1$ shifts the range of the over- and underweighting.
+In the following discussion, it is assumed that sampling error is controlled for. 
+That is, for each sampling and accumulation process, the weighting function is supplied with the overall sampled relative frequencies (hereafter: sampled probability) rather than with the objective probabilities.  
 
 #### Round-Wise Integration Model
 
-Now, since for low values of $\psi$ the model tends to choose the prospect possessing the larger EV, the parameters of the value and weighting function in this case are predicted to correspond to a linear weighting of outcomes and probabilities, which is given for $\alpha = 1$, $\gamma = 1$, and $\delta = 1$.
-However, for high values of $\psi$, the model tends to choose the risky prospect for $p_x(x_{high}) > .5$---i.e., the risky prospect produces the higher outcome most of the time---, irrespective of the differences in the EV.
-Vice versa, the model tends to choose the safe outcome for $p_x(x_{high}) < .5$---i.e., the safe prospect produces the higher outcome most of the time.
-Respectively, for high values of $\psi$, the weighting pattern should be such that the high-rank outcome of the risky prospect is overweighted for $p_x(x_{high}) > .5$, and underweighted otherwise.
-Hence, the graph of the weighting function should take a S-shape, which is given for $\gamma > 1$.
-Because the over- and underweighting of the high-rank outcome is not predicted to extend across the mid-point of the probability scale, $\delta$ should take values around 1.
-Note that the graph of the weighting function for high values of $\psi$ reflects the round-wise strategy's high sensitivity to differences in the probability to produce the higher outcome most of the time:
-Specifically, the slope of the weighting function's graph is most severe around the midpoint of the probability scale.
-The predicted flat ends of the graph, however, indicate that the round-wise strategy more or less ignores how much larger the probability to produce a higher outcome is. 
-In sum, then, we do not predict $\delta$ to change with $\psi$.
-However, we expect $\gamma$ to increase with $\psi$, thereby reflecting differences in the extent to which the prospect with the higher EV or with the probability to produce a higher outcome most of the time is chosen.
+Since for low values of the switching probability $\psi$ the model is expected to choose the prospect that produced the larger overall sample mean, the parameters of the value and weighting function should correspond to a linear weighting of outcomes and sampled probabilities, which is given for $\alpha = 1$, $\gamma = 1$, and $\delta = 1$.
+However, for high switching probabilities, the model is expected to choose the risky prospect for $p_x(x_{high}) > .5$---i.e., if the latent probability of the higher risky prospect is $> .5$, the risky prospect is expected to produce the higher outcome most of the time---, irrespective of the differences in the overall sample mean.
+Vice versa, the model tends to choose the safe outcome for $p_x(x_{high}) < .5$---i.e., the safe prospect is expected to produce the higher outcome most of the time.
+Correspondingly, for high switching probabilities, the weighting pattern should be such that the high-rank outcome of the risky prospect is overweighted for sampled relative frequencies $> .5$, and underweighted otherwise.
+Hence, for high switching probabilities, the graph of the weighting function should take a S-shape, which is given for $\gamma > 1$.
+Because the over- and underweighting of the high-rank outcome is not expected to extend across the mid-point of the probability scale, $\delta$ should take values around 1.
 
-Moreover, because the model is such that the magnitudes of outcomes are ignored once a comparison is carried out, increases in $\psi$ should lead to a more concave value function.
-That is, the higher the values of $\psi$, the more the choices depend on which prospect produces the higher outcome most of the time, irrespective of how much larger the outcomes are.
+Note that the graph of the weighting function that is expected for high switching probabilities would reflect the round-wise strategy's high sensitivity to differences in the latent probability to produce the higher outcome most of the time:
+Specifically, the slope of the weighting function's graph would be most severe around the midpoint of the probability scale.
+The predicted flat ends of the graph, however, indicate that the round-wise strategy more or less ignores how much larger than $.5$ the probability to produce a higher outcome is. 
+In sum, then, $\delta$ is not expected to change with the switching probability.
+However, $\gamma$ is expected to increase with the switching probability, thereby reflecting differences in the extent to which the prospect with the higher EV or with the probability to produce a higher outcome most of the time is chosen.
+As for the choice patterns, the expectations should be more accurately met for high thresholds.
+
+Moreover, because the model is such that the magnitudes of outcomes are ignored once a comparison is carried out, increases in the switching probability $\psi$ should lead to a more concave value function.
+That is, the higher the switching probabilities, the more the choices depend on which prospect produces the higher outcome most of the time, irrespective of how much larger the outcomes are.
 Respectively, $\alpha$ is predicted to decrease with increases in $\psi$.
 
-(ref:expectations-roundwise) Expected Effects of Switching Probability $\psi$ and Threshold $\theta$ in the Round-Wise Integration Model
+(ref:expectations-roundwise) Expected Effects of Switching Probability $\psi$ and Threshold $\theta$ Implied by the Round-Wise Integration Model
 
 ```{r expectations-roundwise}
 exp_roundwise <- tibble("Measure" = 
@@ -619,21 +612,26 @@ exp_roundwise <- tibble("Measure" =
                           "$\\gamma$ (curvature of $w$)",
                           "$\\delta$ (elevation of $w$)",
                           "$\\alpha$ (concavity of $v$)"),
-                      "Predictions for changes in $\\psi$" = 
-                        c("More EV maximization for decreasing $\\psi$",
+                      "Predictions for changes in $\\psi$ and $\\theta$" = 
+                        c("More maximization of sampled mean for decreasing $\\psi$",
                           "More as-if underweighting of rare outcomes for increasing $\\psi$",
                           "$\\geq 1$, increases with $\\psi$",
                           "1, no effect of $\\psi$",
                           "$\\leq 1$, decreases with increasing $\\psi$"))
 
-apa_table(exp_roundwise, caption = "(ref:expectations-roundwise)", note = "The predictions should become more robust for high values of $\\theta$.", escape = FALSE)
+apa_table(exp_roundwise, caption = "(ref:expectations-roundwise)", note = "Expectations should be more closely met for high values of $\\theta$. Expectations rely on the assumption that sampling error is controlled for. The weighting function is assumed to be supplied with sampled relative frequencies.", escape = FALSE)
 ```
 
 #### Summary Integration Model
 
-[...]
+For small switching probabilities $\psi$, the model is expected to make random choices to some unknown degree.
+The respective CPT parameter estimates would be hard to interpret (if at all).
+In the computational analysis, a stochastic version of CPT is estimated to account for such random behavior using a choice sensitivity parameter (see equation (12) below).
+Because the summary integration model chooses the prospect that produces the larger cumulative sum across all sampled outcomes, a linear weighting of outcomes and sampled probabilities is expected for high switching probabilities, i.e., $\alpha = 1$, $\gamma = 1$, and $\delta = 1$.
+This is because for high switching probabilities, differences in the cumulative sum across all sampled outcomes should be indicative for differences in the sampled means.
+If thresholds $\theta$ are low, however, even large switching probabilities might produce some random behavior because of the temporal advantage of the prospect that is first sampled from.
 
-(ref:expectations-summary) Expected Effects of Switching Probability $\psi$ and Threshold $\theta$ in the Summary Integration Model
+(ref:expectations-summary) Expected Effects of Switching Probability $\psi$ and Threshold $\theta$ Implied by the Summary Integration Model
 
 ```{r expectations-summary}
 exp_summary <- tibble("Measure" = 
@@ -642,24 +640,25 @@ exp_summary <- tibble("Measure" =
                           "$\\gamma$ (curvature of $w$)",
                           "$\\delta$ (elevation of $w$)",
                           "$\\alpha$ (concavity of $v$)"),
-                      "Predictions for changes in $\\psi$" = 
-                        c("More EV maximization for decreasing $\\psi$",
-                          "More as-if underweighting of rare outcomes for increasing $\\psi$",
-                          "$\\geq 1$, increases with $\\psi$",
-                          "1, no effect of $\\psi$",
-                          "$\\leq 1$, decreases with increasing $\\psi$"))
+                      "Predictions for changes in $\\psi$ and $\\theta$" = 
+                        c("Random for low $\\psi$",
+                          "More Maximization of sampled mean for high $\\psi$ and $\\theta$",
+                          "",
+                          "1 for high $\\psi$ and $\\theta$, otherwise ?",
+                          ""))
 
-apa_table(exp_summary, caption = "(ref:expectations-summary)", note = "The predictions should become more robust for high values of $\\theta$.", escape = FALSE)
+apa_table(exp_summary, caption = "(ref:expectations-summary)", note = "Expectations rely on the assumption that sampling error is controlled for. The weighting function is assumed to be supplied with sampled relative frequencies.", escape = FALSE)
 ```
 
+\newpage
 
 # Simulation Study
 
-To substantiate and refine the predictions of the model, a computational implementation was used to simulate the sampling and accumulation process for a set of choices between a safe prospect and a two-outcome (risky) prospect.
-The computational model was written in R and is embodied in the GitHub repository accompanying this paper.
+To substantiate the discussion and obtain the actual predictions of the models, computational implementations thereof were used to simulate the sampling and accumulation process for a set of choices between a safe prospect and a two-outcome (risky) prospect.
+The computational models were written in `R` and are embodied in the `GitHub` repository accompanying this paper.
 The simulation was conducted for varying combinations of $\psi$ and $\theta$.
 For each of these combinations, the simulated data was modeled with a stochastic version of CPT, using Bayesian parameter estimation.
-The simulated choices and estimated CPT parameters can be roughly understood as theory-implied data and data models, which remain to be tested against empirical data [see, e.g., @guestHowComputationalModeling2021; @haslbeckModelingPsychopathologyData2021].
+The simulated choices and estimated CPT parameters can be roughly understood as theory-implied data and data models, which remain to be tested against empirical data.
 
 ## Method
 
