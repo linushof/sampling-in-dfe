@@ -1,0 +1,46 @@
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = F, #omit messages
+                      fig.align = "l" #align figures to left margin
+                      )
+```
+
+Note that the figures presented in the appendix differ from those presented in the main text to the extent that the thresholds $\theta$ have a different meaning. 
+That is, for the round-wise integration model, $\theta$ is not the absolute number of mean comparisons a prospect must win (absolute threshold), but the required difference in the number of wins between prospects (relative threshold).
+For the summary integration model, $\theta$ is not the absolute cumulative sum across all sampled outcomes a prospect must reach (absolute threshold), but the differences in these sums between prospects.
+
+\newpage
+
+\begin{figure}
+\caption{Rates of False Risky and False Safe Choices in the Round-Wise Integration Model}
+\includegraphics{manuscript_files/figure-latex/choice-rates-roundwise-relative-1} \label{fig:choice-rates-roundwise-relative}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+\caption{Rates of False Risky and False Safe Choices in the Round-Wise Integration Model}
+\includegraphics{manuscript_files/figure-latex/choice-rates-summary-relative-1} \label{fig:choice-rates-summary-relative}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+\caption{Parameter Estimates of the Weighting Function}
+\includegraphics{manuscript_files/figure-latex/weighting-parameters-relative-1} \label{fig:weighting-parameters-relative}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+\caption{Parameter Estimates of the Outcome and Choice Sensitivity Parameter}
+\includegraphics{manuscript_files/figure-latex/sensitivity-parameters-relative-1} \label{fig:sensitivity-parameters-relative}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+\caption{Estimated Graphical Shape of CPT's Weighting and Value Function}
+\includegraphics{manuscript_files/figure-latex/function-forms-relative-1} \label{fig:function-forms-relative}
+\end{figure}
+
