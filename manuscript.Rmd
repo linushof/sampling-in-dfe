@@ -31,7 +31,8 @@ keywords          : "risky choice, information sampling, evidence accumulation, 
 wordcount         : ""
 
 bibliography      : references.bib
-csl               : "`r system.file('rmd', 'apa7.csl', package = 'papaja')`"
+appendix          : "manuscript_appendix.Rmd"
+csl               : "C:/Users/Linus Hof/Documents/Psychologie/ARC/sampling-in-dfe/apa.csl"
 
 figurelist        : no
 tablelist         : no
@@ -64,7 +65,7 @@ knitr::opts_chunk$set(echo = FALSE,
 pacman::p_load(papaja,
                tidyverse,
                viridis,
-               viridisLite, 
+               viridisLite,
                ggpubr,  
                latex2exp 
                )
@@ -734,31 +735,37 @@ The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulat
 ## Results
 
 Below, the round-wise and the summary integration model are discussed separately.
-However, except for the choice rates, displayed in Figures\ \@ref(fig:choice-rates-roundwise) and \@ref(fig:choice-rates-summary), the results of both models are displayed in the same figures using a green and blue color-coding for the round-wise and the summary integration model, respectively.
+However, except for the choice rates, displayed in Figures\ \@ref(fig:choice-rates-roundwise) and \@ref(fig:choice-rates-summary), the results of both models are reported in the same figures using a green and blue color-coding for the round-wise and the summary integration model, respectively.
 
 ### Round-Wise Integration Model
 
 Overall, the results of the simulations (model predictions) match the expectations formulated in Table\  \@ref(tab:expectations-roundwise), however, with some exceptions concerning the estimates for the parameter $\delta$ of the weighting function.
-First, it is inspected how the lengths of the sampling and accumulation processes---measured in the number of sampled outcomes---changes with varying combinations of the switching probability $\psi$ and threshold $\theta$.
+First, it is inspected how the lengths of the sampling and accumulation processes---measured in the number of sampled outcomes---change with varying combinations of the switching probability $\psi$ and threshold $\theta$.
 
 #### Number of Sampled Outcomes
 
-Figure\ \@ref(fig:chain-length) displays the number of outcomes sampled over the course of a sampling and accumulation process for each parameter combination.
-The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability $\psi$.
-As can be seen from the changes in the slopes of the gray lines of the smoothed functions, the magnitude of this decrease diminishes as the relative increase in $\psi$ diminishes.
+Figure\ \@ref(fig:sample-sizes) displays the number of outcomes sampled over the course of a sampling and accumulation process for each combination of the switching probability $\psi$ and the threshold $\theta$.
+The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability.
+As can be seen from the changes in the slopes of the gray lines of the smoothed functions, the magnitude of this decrease diminishes as the relative increase in the switching probability diminishes.
 The overall number of sampled outcomes increases with thresholds at a relatively constant rate.
-Consider also the dashed horizontal lines, which display the median number of 14 outcomes that @wulffMetaanalyticReviewTwo2018 found to be sampled in 10,712 trials involving a choice between a safe and a two-outcome prospect in the sampling paradigm.
-The parameter combinations that closely resemble the links between sampling and decision strategies proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010]---i.e, high values of $\psi$ and $\theta$ for piecewise sampling and round-wise decisions vs. low values of $\psi$ and $\theta = 1$ for comprehensive sampling and summary decisions)---led to overall numbers of sampled outcomes that come close to the meta-analytic median found by @wulffMetaanalyticReviewTwo2018.
-Moreover, while parameter combinations that can be understood as falling in between the originally proposed links---i.e., values in the mid-range for both $\psi$ and $\theta$---also led to overall numbers of sampled outcomes that approximate the meta-analytic median, extreme combinations of both models produce numbers that are considerably lower or higher, and thus less plausible from an empirical stance.
+Consider also the dashed horizontal lines, which display the median number of 14 outcomes that @wulffMetaanalyticReviewTwo2018 found to be sampled in 10,712 trials involving a choice between a safe and a two-outcome prospect in the sampling paradigm:
+The parameter combinations that closely resemble the links between sampling and decision strategies originally proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010]---i.e, high switching probabilities and thresholds for piecewise sampling and round-wise decisions vs. low switching probabilities and a single mean comparison ($\theta = 1$) for comprehensive sampling and summary decisions---lead to overall numbers of sampled outcomes that come close to the meta-analytic median.
+Moreover, while parameter combinations that can be understood as falling in between the originally proposed links---i.e., mid-range values for both switching probability and threshold---also lead to overall numbers of sampled outcomes that approximate the meta-analytic median, extreme combinations (e.g., low switching probability and high threshold) produce numbers that are considerably lower or higher, and thus less plausible from an empirical stance.
 
 ```{r chain-length, eval = FALSE}
+
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
 chain_lengths <- choices_absolute %>%
   ggplot(aes(x = s, y = n_sample, color = model)) +
-  facet_wrap(~a, nrow = 2, scales = "free") + 
-  labs(x = expression(psi),
+  facet_wrap(~a, nrow = 2, scales = "free", labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = expression(paste("Switching Probability ", psi)),
        y = "Number of Sampled Outcomes",
        color = "Model") + 
-  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5))+
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) +
   geom_jitter(alpha = .05) + 
   geom_smooth(color = "gray") + 
   geom_hline(yintercept = 14, linetype = "dashed", color = "gray") +
@@ -770,27 +777,27 @@ chain_lengths
 
 \begin{figure}[t!]
 \caption{Lengths of the Sampling and Accumulation Processes}
-\includegraphics[width=1\linewidth]{manuscript_files/chain-length} \label{fig:chain-length}
-\raggedright \textit{Note.} Each point represents a single sampling and accumulation process (choice trial) and is the overall number of outcomes sampled over the course of this process. The gray lines are estimates of \textit{ggplot2}'s \texttt{stat\_smooth()} function. All gray-dashed horizontal lines represent the meta-analytic median, med = 14, for choices between a safe and a risky prospect, found by \protect\hyperlink{ref-wulffMetaanalyticReviewTwo2018}{Wulff et al., 2018}. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
+\includegraphics[width=1\linewidth]{manuscript_files/sample-sizes} \label{fig:sample-sizes}
+\raggedright \textit{Note.} Columns represent different thresholds. x-axes display the switching probability. Each point represents a single sampling and accumulation process (choice trial) for the respective combination of the threshold and switching probability, and is the overall number of outcomes sampled over the course of this process. The gray lines are estimates of \textit{ggplot2}'s \texttt{stat\_smooth()} function. All gray-dashed horizontal lines represent the meta-analytic median, med = 14, for choices between a safe and a risky prospect, found by \protect\hyperlink{ref-wulffMetaanalyticReviewTwo2018}{Wulff et al., 2018}. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
 \end{figure}
 
 #### Final Choice
 
-For each combination of the switching probability $\psi$ and the threshold $\theta$, Figure\ \@ref(fig:choice-rates-roundwise) displays the rates of choices that did not maximize the sampled mean (i.e., the mean across all outcomes sampled over the course of a sampling and accumulation process, hereafter: false response rates).
+For each combination of the switching probability and the threshold, Figure\ \@ref(fig:choice-rates-roundwise) displays the rates of choices that did not maximize the sampled mean (i.e., the mean across all outcomes sampled over the course of a sampling and accumulation process, hereafter: false response rates).
 Rates are separated for presence and rank of small-probability outcomes.
 Consider first the top panel showing the false response rates across all problems where the low-rank outcome of the risky prospect possesses a small probability:
-For high switching probabilities $\psi$, the low-rank outcome was expected to be sampled less often than would be objectively warranted *within each* comparison round, leading to an inflation of the respective round means of the risky prospect.
-Accordingly, the top panels show that for each threshold $\theta$ the rates of false choices of the risky prospect increase with the switching probability $\psi$, thereby causing deviation from sampled mean maximization that take the form of an as-if underweighting of rare outcomes.
+For high switching probabilities, the low-rank outcome was expected to be sampled less often than would be objectively warranted *within each* comparison round, leading to an inflation of the respective round means of the risky prospect.
+Accordingly, the top panels show that for each threshold the rates of false choices of the risky prospect increase with the switching probability, causing deviations from sampled mean maximization that take the form of an as-if underweighting of rare outcomes.
 In turn, rates of false safe choices remain generally low.
-To demonstrate how the false response rates would have turned out given the normative solutions of EV maximization---i.e., when sampling error is not controlled for---, the rates of choices that did not maximize the latent EV are displayed in gray. 
-Here, a similar but more severe pattern can be found, showing that sampling error exercises an influence beyond the effects implied by the interplay of the sampling strategy and the round-wise integration/decision strategy.
+To demonstrate how the false response rates would have turned out given the normative solutions of EV maximization (i.e., when sampling error is not controlled for), the rates of choices that did not maximize the latent EV are displayed in gray.
+Here, a similar but more severe pattern can be found, showing that sampling error exercises an influence independent of the effects implied by the interplay of the sampling strategies and the round-wise integration/decision strategy.
 Note from the middle panel that the pattern of false response rates reverses for problems where the high-rank outcome of the risky prospect possesses a small probability.
-In this case, then, the means of the risky prospect within each comparison round tend to be more deflated the higher the switching probability $\psi$, which increases the risk of falsely choosing the safe prospect.
-Again, the resulting choice patterns resemble an as-if underweighting of rare outcomes.
+In this case, then, the means of the risky prospect within each comparison round tend to be more deflated the higher the switching probability, which increases the risk of falsely choosing the safe prospect.
+Again, the resulting choice patterns resemble an as-if underweighting of rare outcomes pattern.
 Importantly, note from the reduced false response rates in the bottom panel that the inflation and deflation of the means for high switching probabilities must be significantly attenuated when a prospect possesses no small-probability outcome.
 In sum, then, the simulated choices show that the potential interplay between sampling strategies and a round-wise integration/decision strategy can lead to distinct choice patterns and as-if weighting patterns in DFE, which, however, strongly depend on the structure of the choice problems.
 
-```{r choice-rates-roundwise, include=FALSE}
+```{r choice-rates-roundwise, include=FALSE, cache=TRUE}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
@@ -853,7 +860,7 @@ fr_rates_risky %>%
   ggplot(aes(s, rate, color = Norm)) +
   facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
                                          a = as_labeller(label_theta, default = label_parsed))) +
-  labs(x = expression(psi),
+  labs(x = expression(paste("Switching Probability ", psi)),
        y = "False Response Rate",
        color = "Norm",
        shape = "False\nResponse") +
@@ -868,28 +875,33 @@ fr_rates_risky %>%
   theme_minimal()
 ```
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \caption{Rates of False Risky and False Safe Choices in the Round-Wise Integration Model}
 \includegraphics{manuscript_files/figure-latex/choice-rates-roundwise-1} \label{fig:choice-rates-roundwise}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (green, false response rates). Stars: Rates of choice trials, where risky prospect was chosen, although safe prospect produced the greater mean (false risky response). Points: Rates of trials, where safe prospect was chosen, although risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
 \end{figure}
 
 #### CPT Parameters
 
-Figure\ \@ref(fig:weighting-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the curvature parameter $\gamma$ and the elevation parameter $\delta$, as well as the resulting graphical shape of the weighting function.
-Note that the estimates for the parameter combination $\theta = 1$ and $\psi = 1$ have large posterior intervals.
+Figure\ \@ref(fig:weighting-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the curvature parameter $\gamma$ and the elevation parameter $\delta$.
+First, note that the estimates for the parameter combination $\theta = 1$ and $\psi = 1$ have large posterior intervals.
 In these cases, no relative frequencies other than 0 and 1 are supplied to the weighting function, which may explain that the values in between cannot be reliably accounted for.
-However, for $\theta = 1$ and $\psi < 1$, the estimates imply a linear weighting pattern, in line with the explanation that if the mind were to infer the latent objective probabilities of outcomes from the sampled relative frequencies and to follow the principle of EV maximization, sampling error can account for any deviations from it.^[<!--Open footnote-->
-Note that the same line of reasoning holds, were the mind to approximate the solutions of EV maximization by choosing the prospect with higher sampled mean.
-<!--Close footnote-->]
-Note also Figure\ \@ref(fig:choice-rates-roundwise), where there are no choices for $\theta = 1$ that do not maximize the sampled mean.
+For $\theta = 1$ and $\psi < 1$, the estimates imply a linear weighting pattern, since in this case only a single round of comparison is carried out and therefore the round-wise integration strategy always chooses the prospect that produces the larger mean across all outcomes sampled over the course of a sampling and accumulation process.
+This result is well in line with the explanation that if the mind were to infer the latent objective probabilities of outcomes from the sampled relative frequencies and to follow the principle of EV maximization, sampling error can account for any deviations from it.
+In this regard, note also Figure\ \@ref(fig:choice-rates-roundwise), where there are no choices for $\theta = 1$ that do not maximize the sampled mean.
 
-For $\theta > 1$, the estimates substantiate the prediction that $\gamma$ takes values $\geq 1$ which increase with $\psi$, resulting in a increasingly pronounced S-shaped weighting function.
-In other words, the higher the value of $\psi$, the more severe is the underweighting (overweighting) of the high-rank outcome of the risky prospect in CPT, if it is of small (large) probability.
-$\delta$ takes values $\geq 1$ and increases slightly with $\psi$, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point. 
-[...]
+For $\theta > 1$, the curvature parameter $\gamma$ takes values $\geq 1$ which increase with the switching probability, resulting in a increasingly pronounced S-shaped weighting function.
+In other words, the higher the switching probability, the more severe is the underweighting (overweighting) of the high-rank outcome of the risky prospect in CPT, if it is of small (large) probability.
+That is, the as-if underweighting of rare outcomes pattern indicated by the final choices (i.e., the false response rates) translates rather directly to an underweighting of small-probability outcomes in CPT.
+As expected, the elevation parameter $\delta$ takes no values $< 1$, however, the estimates increase slightly with the switching probability, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point of the probability scale.
+It is open for discussion whether this extension of overweighting beyond the mid-point is theoretically implied by the mechanisms of the round-wise integration model:
+That is, for high switching probabilities the model is expected to choose the risky prospect, if the probability of its high-rank outcome is $> .5$.
+To account for the implied choice behavior, CPT might have to overweight high-rank outcomes with a probability far larger than .5 less severely than high-rank outcomes with a probability only little larger than .5. 
+Such a pattern is implied for $\delta > 1$.
+Aside this open issue, the estimates for the $\gamma$ and $\delta$ parameter show that the choices implied by the potential interplay of different sampling strategies and the round-wise integration/decision strategy can lead to distinct signatures in CPT's weighting function (see Figure\ \@ref(fig:function-forms), for the resulting graphs of the weighting function).
+Once again, these signatures cannot be due to sampling error.
 
-```{r weighting-parameters, include=FALSE}
+```{r weighting-parameters, include=FALSE, cache=TRUE}
 
 label_theta <- function(string) {
   TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
@@ -929,19 +941,22 @@ delta <- cpt_absolute %>%
 ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \caption{Parameter Estimates of the Weighting Function}
 \includegraphics{manuscript_files/figure-latex/weighting-parameters-1} \label{fig:weighting-parameters}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posteriors distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
 \end{figure}
 
 Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$.
-An increase in $\psi$ leads to a decrease in $\alpha$, reflecting that outcome information are largely ignored if choices are based on ordinal comparisons of single outcomes rather than on means of large samples.
-The respective shape of the value function is more concave, the higher the values of $\psi$. 
-Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low values of $\psi$.
-However, even for high values of $\psi$, the choices did not appear to be random. [...]
+As expected, an increase in the switching probability leads to a decrease in $\alpha$, showing that the round-wise integration model largely ignores outcome information, if choices are based on ordinal comparisons of single outcomes rather than of means across larger sets of sampled outcomes.
+In other words, for high switching probabilities, the round-wise integration model is expected to choose the prospect that produces the higher outcome most of the time.
+Once it is established which prospect does so, it is of no more utility to know the exact magnitude of the difference in the outcomes.
+The corresponding shape of the value function is shown in Figure\ \@ref(fig:function-forms) and is more concave for high switching probabilities. 
+Thus, the estimates for the outcome sensitivity parameter $\alpha$ show that the potential interplay between different sampling strategies and the round-wise integration/decision strategy may lead to choice patterns that also translate to distinct signatures in CPT's value function.
+Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low switching probabilities.
+However, for high switching probabilities, the choices did not appear to be random whatsoever.
 
-```{r sensitivity-parameters, include=FALSE}
+```{r sensitivity-parameters, include=FALSE, cache=TRUE}
 
 # plot alpha estimates
 alpha <- cpt_absolute %>%
@@ -977,15 +992,13 @@ rho <- cpt_absolute %>%
 ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
 ```
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \caption{Parameter Estimates of the Outcome and Choice Sensitivity Parameter}
 \includegraphics{manuscript_files/figure-latex/sensitivity-parameters-1} \label{fig:sensitivity-parameters}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posteriors distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
 \end{figure}
 
-Figure\ \@ref(fig:function-forms) displays the resulting graphical shapes of the weighting and value function.
-
-```{r function-forms, include=FALSE}
+```{r function-forms, include=FALSE, cache=TRUE}
 
 # plot weighting function
 
@@ -1004,8 +1017,8 @@ wf <- weights %>%
   ggplot(aes(p, w, group = s, color = s)) +
   facet_wrap(~model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
   labs(x = "Experienced Probability",
-       y = expression(pi),
-       color = expression(psi)) +
+       y = expression(paste("Decision Weight ", pi)),
+       color = expression(paste("Switching\nProbability ", psi))) +
   scale_x_continuous(breaks = seq(0, 1, .5)) +
   scale_y_continuous(breaks = seq(0, 1, .5)) +
   geom_line(size = .5) +
@@ -1026,7 +1039,7 @@ vf <- values %>%
   facet_wrap(model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
   labs(x = "Objective Outcome",
        y = "Subjective Value",
-       color=expression(psi)) +
+       color= expression(paste("Switching\nProbability ", psi))) +
   scale_x_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
   geom_line(size = .5) +
   scale_color_viridis(option = "mako") +
@@ -1036,19 +1049,35 @@ vf <- values %>%
 ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
 
-\begin{figure}[t]
-\caption{Estimated Graphical Shape of the Weighting and Value Function}
+\begin{figure}[t!]
+\caption{Estimated Graphical Shape of CPT's Weighting and Value Function}
 \includegraphics{manuscript_files/figure-latex/function-forms-1} \label{fig:function-forms}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} All displayed graphs are computed on the basis of the parameter values that were estimated for the respective model and combination of the switching probability \(\psi\) and the threshold \(\theta\).
 \end{figure}
 
 ### Summary Integration Model
 
+The choice behavior exercised by the summary integration model is less systematic than that of the round-wise integration model, especially for low switching probabilities.
+The random choice behavior is indicated by false response rates around the value of .5 (see Fig.\ \@ref(fig:choice-rates-summary)) and low estimates for the choice sensitivity parameter $\rho$ (see Fig.\ \@ref(fig:sensitivity-parameters)).
+Because the choices become more systematic with increasing switching probabilities, randomness is likely to be caused by the temporal advantage that one of the prospect gains by chance.
+For high switching probabilities, choice rates and parameter estimates are roughly in line with the expectations formulated in Table\  \@ref(tab:expectations-summary).
+
 #### Number of Sampled Outcomes
+
+The model predicts the number of outcomes sampled over the course of a sampling and accumulation process to increase with thresholds (see Fig.\ \@ref(fig:sample-sizes)).
+As indicated by the gray smoothed functions, the number of sampled outcomes is generally small and reaches the meta-analytic median found by @wulffMetaanalyticReviewTwo2018 only for higher thresholds.
+The switching probability is predicted to exercise no or (at most) a negligible effect on the number of sampled outcomes.
 
 #### Final Choice
 
-```{r choice-rates-summary, include=FALSE}
+For each combination of switching probabilities and the thresholds, Figure\ \@ref(fig:choice-rates-summary) displays the rates of choices that did not maximize the sampled mean.
+As for the round-wise integration model, rates are separated for presence and rank of small-probability outcomes.
+Consider first the bottom panel which displays the choice rates for all choice problems that do not include an outcome with a probability $< .2$.
+Here, the false response rates decrease with increases in the switching probability, going from random choice behavior at rates around .5 for low switching probabilities to a systematic maximization of the sampled mean for high switching probabilities.
+Because sampling error and a systematic underrepresentation of small-probability outcomes is accounted for, a similar pattern would be expected for the choice problems that include outcomes with a probability $<.2$.
+In principle, this is the case, however, choice behavior appears to be more random over a wider range of switching probabilities.
+
+```{r choice-rates-summary, include=FALSE, cache=TRUE}
 #prepare data
 
 ## determine normative choice according to latent EV and sampled mean
@@ -1111,7 +1140,7 @@ fr_rates_risky %>%
   ggplot(aes(s, rate, color = Norm)) +
   facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
                                          a = as_labeller(label_theta, default = label_parsed))) +
-  labs(x = expression(psi),
+  labs(x = expression(paste("Switching Probability ", psi)),
        y = "False Response Rate",
        color = "Norm",
        shape = "False\nResponse") +
@@ -1126,15 +1155,19 @@ fr_rates_risky %>%
   theme_minimal()
 ```
 
-\begin{figure}[t]
+\begin{figure}[t!]
 \caption{Rates of False Risky and False Safe Choices in the Summary Integration Model}
 \includegraphics{manuscript_files/figure-latex/choice-rates-summary-1} \label{fig:choice-rates-summary}
-\raggedright \textit{Note.} Add note
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (blue, false response rates). Stars: Rates of choice trials, where risky prospect was chosen, although safe prospect produced the greater mean (false risky response). Points: Rates of trials, where safe prospect was chosen, although risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
 \end{figure}
 
 #### CPT Parameters
 
-# Discussion
+First, note that the estimates for the choice sensitivity parameter $rho$ tend to be low for small switching probabilities (see Fig.\ \@ref(fig:sensitivity-parameters)), implying that for these cases the choices are random and thus, more or less insensitive to the evaluations of the core CPT model. 
+Interpretation of CPT parameter estimates for small switching probabilities should therefore be made with great caution (if at all).
+For high switching probabilities, the estimates for the weighting function's $\gamma$ and $\delta$ parameter and the value function's $\alpha$ parameter indicate a linear weighting of sampled relative frequencies and outcomes, i.e., $\gamma \approx 1, \delta \approx 1, \alpha \approx 1$.
+
+# Discussion and Conclusion
 
 The presented sampling and accumulation model ought to sketch how the mind might exercise the capacity of making decisions from experience.
 In DFE, one cannot rely on symbolic descriptions of all relevant properties of the choice alternatives, but only on samples of past experiences, e.g., when the alternatives were chosen in similar decisions in the past.
@@ -1176,10 +1209,6 @@ Thereby, the analyses extends the notion that CPT can be used as a measurement t
 
 [...]
 
-# Conclusion
-
-[...]
-
 \newpage
 
 # Acknowledgements
@@ -1187,3 +1216,297 @@ Thereby, the analyses extends the notion that CPT can be used as a measurement t
 \newpage
 
 # References
+
+<!-- # Appendix --> 
+
+```{r subset-relative, include=FALSE}
+choices_relative <- choices %>% filter(boundary == "relative")
+cpt_relative <- cpt %>% filter(boundary == "relative")
+```
+
+<!-- ## False Response Rates -->
+
+```{r choice-rates-roundwise-relative, include=FALSE, cache=TRUE}
+#prepare data
+
+## determine normative choice according to latent EV and sampled mean
+
+### latent EV
+
+fr_rates_EV <- choices_relative %>%
+  filter(model == "roundwise") %>% 
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "EV")
+
+### sampled mean
+
+fr_rates_mean <- choices_relative %>% 
+  filter(model == "roundwise") %>% 
+  mutate(norm = case_when(a_ev_exp/b_ev_exp > 1 ~ "A", a_ev_exp/b_ev_exp < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "Mean")
+
+fr_rates <- bind_rows(fr_rates_EV, fr_rates_mean)
+
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
+label_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
+}
+
+#plot
+
+fr_rates_risky <- fr_rates %>% filter(type == "Risky")
+fr_rates_safe <- fr_rates %>% filter(type == "Safe")
+
+fr_rates_risky %>%
+  ggplot(aes(s, rate, color = Norm)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
+                                         a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = expression(paste("Switching Probability ", psi)),
+       y = "False Response Rate",
+       color = "Norm",
+       shape = "False\nResponse") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  geom_point(aes(shape = type), size = 2) +
+  geom_line() + 
+  geom_point(data = fr_rates_safe, aes(shape = type), size = 2) +
+  geom_line(data = fr_rates_safe) +
+  scale_shape_manual(values = c(8, 16)) +
+  scale_color_manual(values = c("#d3d3d3", "#35b779")) + 
+  theme_minimal()
+```
+
+```{r choice-rates-summary-relative, include=FALSE, cache=TRUE}
+#prepare data
+
+## determine normative choice according to latent EV and sampled mean
+
+### latent EV
+
+fr_rates_EV <- choices_relative %>%
+  filter(model == "summary") %>% 
+  mutate(norm = case_when(ev_ratio > 1 ~ "A", ev_ratio < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "EV")
+
+### sampled mean
+
+fr_rates_mean <- choices_relative %>% 
+  filter(model == "summary") %>% 
+  mutate(norm = case_when(a_ev_exp/b_ev_exp > 1 ~ "A", a_ev_exp/b_ev_exp < 1 ~ "B")) %>% # determine normative choice
+  filter(!is.na(norm)) %>% #exclude trials with equal EV
+  group_by(s, boundary, a, rare, norm, choice) %>% #separate by model parameter and type of rare event
+  summarise(n = n()) %>%
+  mutate(rate = round(n/sum(n), 2), #compute response rates
+         type = case_when(norm == "A" & choice == "B" ~ "Safe", #determine false response type
+                          norm == "B" & choice == "A" ~ "Risky")) %>%
+  ungroup() %>%
+  filter(!is.na(type)) %>% #remove correct responses
+  select(-c(norm, choice, n)) %>% 
+  mutate(rare = case_when(rare == "none" ~ "\\in \\[.2,.8\\]", #change facet labels for rare events
+                          rare == "attractive" ~ "\\in (0,.2)",
+                          rare == "unattractive" ~ "\\in (.8,1)"),
+         Norm = "Mean")
+
+fr_rates <- bind_rows(fr_rates_EV, fr_rates_mean)
+
+# labeller functions
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
+label_rare <- function(string) {
+  TeX(paste("$\\p_{High}$", string, sep = "")) #type of rare event
+}
+
+#plot
+
+fr_rates_risky <- fr_rates %>% filter(type == "Risky")
+fr_rates_safe <- fr_rates %>% filter(type == "Safe")
+
+fr_rates_risky %>%
+  ggplot(aes(s, rate, color = Norm)) +
+  facet_grid(rare~a, labeller = labeller(rare = as_labeller(label_rare, default = label_parsed), 
+                                         a = as_labeller(label_theta, default = label_parsed))) +
+  labs(x = expression(paste("Switching Probability ", psi)),
+       y = "False Response Rate",
+       color = "Norm",
+       shape = "False\nResponse") +
+  scale_x_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, .5)) +
+  geom_point(aes(shape = type), size = 2) +
+  geom_line() + 
+  geom_point(data = fr_rates_safe, aes(shape = type), size = 2) +
+  geom_line(data = fr_rates_safe) +
+  scale_shape_manual(values = c(8, 16)) +
+  scale_color_manual(values = c("#d3d3d3", "#3e4989")) + 
+  theme_minimal()
+```
+
+<!-- ## Parameter Estimates and CPT Graphs -->
+
+```{r weighting-parameters-relative, include=FALSE, cache=TRUE}
+
+label_theta <- function(string) {
+  TeX(paste("$\\theta=$", string, sep = "")) #threshold parameter theta
+}
+
+# plot gamma estimates
+gamma <- cpt_relative %>%
+  filter(parameter == "gamma") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(gamma),
+       color = "Model") +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() +
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
+  theme_minimal()
+
+# plot delta estimates
+delta <- cpt_relative %>%
+  filter(parameter == "delta") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(delta),
+       color = "Model") +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() +
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
+  theme_minimal()
+
+# merge plots
+ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
+```
+
+```{r sensitivity-parameters-relative, include=FALSE, cache=TRUE}
+
+# plot alpha estimates
+alpha <- cpt_relative %>%
+  filter(parameter == "alpha") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(alpha),
+       color = "Model") +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() +
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
+  theme_minimal()
+
+# plot rho estimates
+rho <- cpt_relative %>%
+  filter(parameter == "rho") %>%
+  ggplot(aes(s, mean, color = model)) +
+  facet_wrap(~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed)), scales = "free") +
+  scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) + 
+  labs(x = expression(paste("Switching Probability ", psi)), 
+       y = expression(rho),
+       color = "Model") +
+  geom_errorbar(aes(ymin=`2.5%`, ymax=`97.5%`)) + 
+  geom_point() +
+  geom_line() +
+  scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
+  theme_minimal()
+
+# merge plots
+ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right") 
+```
+
+```{r function-forms-relative, include=FALSE, cache=TRUE}
+
+# plot weighting function
+
+## compute decision weights
+
+weights <- cpt_relative %>%
+  select(model, s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(alpha, rho)) %>%
+  expand_grid(p = seq(0, 1, .05)) %>%
+  mutate(w = round(  (delta * p^gamma)/ ((delta * p^gamma)+(1-p)^gamma), 2))
+
+## plot graphs
+
+wf <- weights %>% 
+  ggplot(aes(p, w, group = s, color = s)) +
+  facet_wrap(~model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Experienced Probability",
+       y = expression(paste("Decision Weight ", pi)),
+       color = expression(paste("Switching\nProbability ", psi))) +
+  scale_x_continuous(breaks = seq(0, 1, .5)) +
+  scale_y_continuous(breaks = seq(0, 1, .5)) +
+  geom_line(size = .5) +
+  scale_color_viridis(option = "mako") +
+  theme_minimal()
+  
+# value functions
+
+values <- cpt_relative %>%
+  select(model, s, boundary, a, parameter, mean) %>%
+  pivot_wider(names_from = parameter, values_from = mean) %>%
+  select(-c(gamma, delta, rho)) %>%
+  expand_grid(x = seq(0, 20, .5)) %>%  
+  mutate(v = round(x^alpha, 2)) 
+
+vf <- values %>% 
+  ggplot(aes(x, v, group = s, color = s)) +
+  facet_wrap(model~a, nrow = 2, labeller = labeller(a = as_labeller(label_theta, default = label_parsed))) + 
+  labs(x = "Objective Outcome",
+       y = "Subjective Value",
+       color= expression(paste("Switching\nProbability ", psi))) +
+  scale_x_continuous(limits = c(0,20), breaks = seq(0, 20, 10)) +
+  geom_line(size = .5) +
+  scale_color_viridis(option = "mako") +
+  theme_minimal()
+
+# merge plots
+ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
+```
