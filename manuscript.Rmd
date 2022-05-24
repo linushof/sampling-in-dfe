@@ -406,13 +406,13 @@ The thresholds thus determine how much larger the cumulative sum of a prospect m
 # What Model Behaviors Are Expected?
 
 Below, it is discussed which effects the key model parameters, i.e., the switching probability $\psi$ and the threshold $\theta$, could have on the choices and the corresponding as-if weighting patterns that are implied by the round-wise and the summary integration model.
-The effects of the switching probability $\psi$ should be informative about the interplay between different sampling strategies and the integration/decision strategy each model resembles.
-Assuming that both models aim to assess true differences in the latent properties of prospects, the effects of the threshold $\theta$ should indicate whether these differences are indeed more accurately assessed---thus, leading to more systematic choices and as-if weighting patterns---the more evidence is accumulated.
+The effects of the switching probability should be informative about the interplay between different sampling strategies and the integration/decision strategy each model resembles.
+Assuming that both models aim to assess true differences in the latent properties of prospects, the effects of the threshold should indicate whether these differences are indeed more accurately assessed---thus, leading to more systematic choices and as-if weighting patterns---the more evidence is accumulated.
 In addition, previous research has shown that differences as to how information about the properties of prospects is processed can translate to distinct signatures in CPT's psychoeconomic value and weighting function, without actually assuming that these functions are computed whatsoever [see @pachurHowTwainCan2017; @stewartDecisionSampling2006; @zilkerNonlinearProbabilityWeighting2021].^[<!--Open footnote-->
 Note that it has been argued that the distinction between CPT's functions used to describe choice data and models aiming to explain how this data is generated in first place are reminiscent of Marr's [-@marrVisionComputationalInvestigation1982] different levels of explanation [@zilkerMeasuringModelingConstruction2020; also cf. @griffithsProbabilisticModelsCognition2010].
 That is, whereas CPT may be considered a computational-level theory that describes an abstract solution to the problem the mind aims to solve when offered a choice between prospects, process models [cf. @jareckiFrameworkBuildingCognitive2020], such as heuristics and sequential sampling models, may be considered algorithmic-level theories that specify how the mind can approximate the abstract solution with the capacity limits it is constrained by.
 <!--Close footnote-->]
-Accordingly, this section also formulates expectations regarding the potential relations between the switching probability $\psi$ and threshold $\theta$ (data-generating parameters) and the CPT parameters (data-modeling parameters).
+Accordingly, this section also formulates expectations regarding the potential relations between switching probabilities and thresholds (data-generating parameters) and the CPT parameters (data-modeling parameters).
 
 ## Potential Impact on Final Choices
 
@@ -424,7 +424,7 @@ Summaries of the expected model behaviors can be found in Tables\ \@ref(tab:expe
 Considering a *single* comparison round, the stochastic process for each prospect---which results in a mean computed across the outcomes sampled from the prospect---is predicted to terminate faster, the higher the probability that the subsequent outcome is sampled from the other prospect, i.e., the higher the switching probability $\psi$.
 Because the switching probability is predicted to alter the length of the stochastic processes underlying *each independent* mean comparison, it should affect whether low-probability outcomes contribute to each required mean comparisons about as much as would be warranted based on their objective probabilities, or whether they contribute rather less.
 That is, for high switching probabilities and thus, short stochastic processes, the binomial distribution associated with small-probability outcomes is positive skewed, causing the relative frequencies with which these outcomes occur within each comparison round to be smaller rather than larger than their latent objective probabilities.
-Because such a distortion of the relative sampled frequencies from the objective probabilities is expected for each comparison round, increases in the thresholds $\theta$ should not affect the following expectations concerning the model behavior; rather because each comparison is independent and increases in sample size (here: number of comparisons) reduce random error, the expectations should be more accurately met for higher thresholds:
+Because such a distortion of the relative sampled frequencies from the objective probabilities is expected for each comparison round, increases in the threshold $\theta$ should not affect the following expectations concerning the model behavior; rather because each comparison is independent and increases in sample size (here: number of comparisons) reduce random error, the expectations should be more accurately met for higher thresholds:
 If the small-probability outcome is smaller (larger) than the EV, high switching probabilities cause the mean within each comparison round to be an inflated (deflated) estimate of the EV.
 Such an inflation and deflation of the means within each round can then translate to choices that take the form of an as-if underweighting of rare outcomes:
 Specifically, if the means of the prospect with the lower (higher) EV are inflated (deflated), the outcomes of each mean comparison may be a reversal---in sign---of the outcome of a comparison between the EVs, eventually translating to choices resembling an as-if underweighting of rare outcomes.
@@ -433,10 +433,10 @@ In contrast, for low values of the switching probability $\psi$---and therefore 
 
 Note that the entire line of reasoning from above should also apply, if sampling error is controlled for.
 That is, if the EVs are substituted by the means across all outcomes sampled from a prospect over the course of the entire sampling and accumulation process, the means within each comparison round are still expected to deviate from this sampling error-encompassing substitute in the manner outlined above.
-Moreover, because the mean across the entire sampling and accumulation process is expected to converge to the EV the more outcomes are sampled overall, the choice patterns with and without sampling error accounted for should resemble each other more closely, the higher the thresholds get.
+Moreover, because the mean across the entire sampling and accumulation process is expected to converge to the EV the more outcomes are sampled overall, the choice patterns with and without sampling error should resemble each other more closely, the higher the thresholds get.
 
 To summarize the choice predictions and simplify: 
-If the prospect that is more likely to return a higher outcome most of the time does not also possess the higher EV or mean across all outcomes sampled over the course of a sampling and accumulation process, high values of the switching probability $\psi$ are predicted to cause an as-if underweighting of rare outcomes pattern.
+If the prospect that is more likely to return a higher outcome most of the time does not also possess the higher EV or mean across all outcomes sampled over the course of a sampling and accumulation process, high switching probabilities are predicted to cause an as-if underweighting of rare outcomes pattern.
 For low switching probabilities, choices are expected to maximize the EV or mean across all sampled outcomes.
 Hence, in the round-wise integration model, the switching probability is expected to alter the degree and thus, also the accuracy with which differences among prospects are assessed in either one of these latent properties: the expected value or the probability to produce a higher outcome most of the time.
 These expectations concerning the model behavior should be more accurately met, the larger the thresholds $\theta$.
@@ -447,23 +447,23 @@ First, note that the summary integration model differs from the summary strategy
 I.e., one must ensure that the summary statistic in fact approaches and reaches a threshold in order for the code to not run endlessly.
 Note that this is not a mere technical issue, but implied by the theoretical assumptions of the sequential sampling framework.
 <!--Close footnote-->] 
-This could introduce interactions between the switching probability $\psi$ and the threshold $\theta$ that are not implied by a model that assumes comparisons between means.
+This could introduce interactions between switching probabilities and thresholds that are not implied by a model that assumes comparisons between means.
 
 Because the required (difference in) cumulative sums across all outcomes sampled from each prospect increases with thresholds $\theta$, the number of outcomes that is required to be sampled to reach the thresholds should increase accordingly.
 Hence, in principle, the larger the thresholds, the more should small-probability outcomes contribute to the cumulative sum as much as would be warranted by their objective probabilities.
-Accordingly, one might expect that the implied choices converge to the solutions of EV maximization, the larger the thresholds get.
-However, the switching probabilities $\psi$ should introduce temporal imbalances between prospects regarding the number of sampled outcomes over which the sums are computed (and compared, assuming relative thresholds, respectively).
+Accordingly, one might expect that the implied choices generally maximize the overall sampled mean and converge to the solutions of EV maximization, the larger the thresholds get.
+However, the switching probabilities should introduce temporal imbalances between prospects regarding the number of sampled outcomes over which the sums are computed (and compared, assuming relative thresholds, respectively).
 That is, whatever prospect is first sampled from is allowed to start accumulating evidence sooner than the respective other prospect.
 This is likely to be a negligible factor for large but not for small switching probabilities.
 Specifically, the temporal imbalances---i.e., the temporal advantage for the prospect which is first sampled from---grows as the switching probabilities decrease.
 Accordingly, for small switching probabilities, choices might be largely driven by the truly random event which prospect is first sampled from.
-This random choice behavior should diminish with increases in the switching probability and choices should converge to the solutions of EV maximization the higher the thresholds get.
+This random choice behavior should diminish with increases in the switching probability and choices should converge to the solutions of sampled mean and EV maximization the higher the thresholds get.
 
 Taking together the expected effects for thresholds and switching probabilities, the expectations for the choices implied by the summary integration model are summarized as follows:
 For small switching probabilities, choice behavior should be more or less random.
 With increasing switching probabilities, choice behavior should become more systematic and driven by differences in the thresholds:
 For small thresholds, an as-if underweighting of rare outcomes pattern is expected to occur because small-probability outcomes should be systematically underrepresented due to their skewed binomial distribution.
-This pattern should be alleviated, if sampling error is taken into account.
+This pattern should be (fully) alleviated, if sampling error is taken into account.
 For large thresholds, choices should converge more to the solutions of EV maximization, even more so to the solutions of sampled mean maximization (i.e., when sampling error is accounted for).
 
 ## Cumulative Prospect Theory
@@ -732,7 +732,7 @@ To reduce potential autocorrelation during the sampling process, only every 20th
 The minimum effective sample size was `r format(effsize, big.mark=",", trim=TRUE)`.
 The potential scale reduction factor $\hat{R}$ [@gelmanInferenceIterativeSimulation1992] was $\leq$ `r rhat` for all models and parameters, indicating good convergence.
 
-## Results
+## Model Predictions
 
 Below, the round-wise and the summary integration model are discussed separately.
 However, except for the choice rates, displayed in Figures\ \@ref(fig:choice-rates-roundwise) and \@ref(fig:choice-rates-summary), the results of both models are reported in the same figures using a green and blue color-coding for the round-wise and the summary integration model, respectively.
@@ -744,15 +744,15 @@ First, it is inspected how the lengths of the sampling and accumulation processe
 
 #### Number of Sampled Outcomes
 
-Figure\ \@ref(fig:sample-sizes) displays the number of outcomes sampled over the course of a sampling and accumulation process for each combination of the switching probability $\psi$ and the threshold $\theta$.
-The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability.
-As can be seen from the changes in the slopes of the gray lines of the smoothed functions, the magnitude of this decrease diminishes as the relative increase in the switching probability diminishes.
-The overall number of sampled outcomes increases with thresholds at a relatively constant rate.
-Consider also the dashed horizontal lines, which display the median number of 14 outcomes that @wulffMetaanalyticReviewTwo2018 found to be sampled in 10,712 trials involving a choice between a safe and a two-outcome prospect in the sampling paradigm:
-The parameter combinations that closely resemble the links between sampling and decision strategies originally proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010]---i.e, high switching probabilities and thresholds for piecewise sampling and round-wise decisions vs. low switching probabilities and a single mean comparison ($\theta = 1$) for comprehensive sampling and summary decisions---lead to overall numbers of sampled outcomes that come close to the meta-analytic median.
-Moreover, while parameter combinations that can be understood as falling in between the originally proposed links---i.e., mid-range values for both switching probability and threshold---also lead to overall numbers of sampled outcomes that approximate the meta-analytic median, extreme combinations (e.g., low switching probability and high threshold) produce numbers that are considerably lower or higher, and thus less plausible from an empirical stance.
+Figure\ \@ref(fig:sample-sizes) displays the number of outcomes sampled over the course of a sampling and accumulation process for each combination of switching probabilities and thresholds.
+The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability, whereas the overall number of sampled outcomes is predicted to increase with thresholds at relatively constant rate.
+These differences in the number of sampled outcomes are subtle indicators for how sampling strategies and the mechanisms of the round-wise integration model act together to imply different final choices.
+Essentially, they foreshadow how the round-wise integration model accumulates evidence for differences in the latent EV for low switching probabilities, and for differences in the latent probability to produce a higher outcome most of the time for high switching probabilities.
 
-```{r chain-length, eval = FALSE}
+Consider also the dashed horizontal lines, which display the median number of 14 outcomes that @wulffMetaanalyticReviewTwo2018 found to be sampled in 10,712 trials involving a choice between a safe and a two-outcome prospect in the sampling paradigm:
+The parameter combinations that closely resemble the links between the sampling and decision strategies originally proposed by Hills and Hertwig [-@hillsInformationSearchDecisions2010]---i.e, high switching probabilities and thresholds for piecewise sampling and round-wise decisions vs. low switching probabilities and a single mean comparison ($\theta = 1$) for comprehensive sampling and summary decisions---lead to overall numbers of sampled outcomes that come close to the meta-analytic median.
+
+```{r chain-length, include=FALSE, cache=TRUE}
 
 # labeller functions
 label_theta <- function(string) {
@@ -767,35 +767,40 @@ chain_lengths <- choices_absolute %>%
        color = "Model") + 
   scale_x_continuous(limits = c(0,1), breaks = seq(0,1,.5)) +
   geom_jitter(alpha = .05) + 
-  geom_smooth(color = "gray") + 
-  geom_hline(yintercept = 14, linetype = "dashed", color = "gray") +
+  geom_smooth(color = "gray", size = 1) + 
+  geom_hline(yintercept = 14, linetype = "dashed", color = "gray", size = 1) +
   scale_color_manual(values = c("#35b779" ,"#3e4989")) + 
   guides(color = guide_legend(override.aes = list(alpha = 1))) +
   theme_minimal()
+
 chain_lengths
 ```
 
 \begin{figure}[t!]
 \caption{Lengths of the Sampling and Accumulation Processes}
 \includegraphics[width=1\linewidth]{manuscript_files/sample-sizes} \label{fig:sample-sizes}
-\raggedright \textit{Note.} Columns represent different thresholds. x-axes display the switching probability. Each point represents a single sampling and accumulation process (choice trial) for the respective combination of the threshold and switching probability, and is the overall number of outcomes sampled over the course of this process. The gray lines are estimates of \textit{ggplot2}'s \texttt{stat\_smooth()} function. All gray-dashed horizontal lines represent the meta-analytic median, med = 14, for choices between a safe and a risky prospect, found by \protect\hyperlink{ref-wulffMetaanalyticReviewTwo2018}{Wulff et al., 2018}. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
+\raggedright \textit{Note.} Each point represents a single sampling and accumulation process (choice trial) for the respective combination of thresholds and switching probabilities, and is the overall number of outcomes sampled over the course of this process. The gray lines are estimates of \textit{ggplot2}'s \texttt{stat\_smooth()} function. All gray-dashed horizontal lines represent the meta-analytic median for choices between a safe and a risky prospect, found by \protect\hyperlink{ref-wulffMetaanalyticReviewTwo2018}{Wulff et al., 2018}. Note that for better resolution the scales on the y-axis differ for the levels of \(\theta\).
 \end{figure}
 
 #### Final Choice
 
-For each combination of the switching probability and the threshold, Figure\ \@ref(fig:choice-rates-roundwise) displays the rates of choices that did not maximize the sampled mean (i.e., the mean across all outcomes sampled over the course of a sampling and accumulation process, hereafter: false response rates).
+For each combination of switching probabilities and thresholds, Figure\ \@ref(fig:choice-rates-roundwise) displays the rates of choices that did not maximize the sampled mean (i.e., the mean across all outcomes sampled over the course of a sampling and accumulation process, hereafter: false response rates).
 Rates are separated for presence and rank of small-probability outcomes.
 Consider first the top panel showing the false response rates across all problems where the low-rank outcome of the risky prospect possesses a small probability:
 For high switching probabilities, the low-rank outcome was expected to be sampled less often than would be objectively warranted *within each* comparison round, leading to an inflation of the respective round means of the risky prospect.
 Accordingly, the top panels show that for each threshold the rates of false choices of the risky prospect increase with the switching probability, causing deviations from sampled mean maximization that take the form of an as-if underweighting of rare outcomes.
-In turn, rates of false safe choices remain generally low.
+In turn, rates of false safe choices remain low.
 To demonstrate how the false response rates would have turned out given the normative solutions of EV maximization (i.e., when sampling error is not controlled for), the rates of choices that did not maximize the latent EV are displayed in gray.
 Here, a similar but more severe pattern can be found, showing that sampling error exercises an influence independent of the effects implied by the interplay of the sampling strategies and the round-wise integration/decision strategy.
 Note from the middle panel that the pattern of false response rates reverses for problems where the high-rank outcome of the risky prospect possesses a small probability.
 In this case, then, the means of the risky prospect within each comparison round tend to be more deflated the higher the switching probability, which increases the risk of falsely choosing the safe prospect.
 Again, the resulting choice patterns resemble an as-if underweighting of rare outcomes pattern.
-Importantly, note from the reduced false response rates in the bottom panel that the inflation and deflation of the means for high switching probabilities must be significantly attenuated when a prospect possesses no small-probability outcome.
+Importantly, note from the reduced false response rates in the bottom panel, that the inflation and deflation of the means for high switching probabilities must be significantly attenuated when the prospects possess no small-probability outcome.
+
 In sum, then, the simulated choices show that the potential interplay between sampling strategies and a round-wise integration/decision strategy can lead to distinct choice patterns and as-if weighting patterns in DFE, which, however, strongly depend on the structure of the choice problems.
+For small switching probabilities, the round-wise integration model accumulates evidence for differences in the latent EVs, which is reflected in low false response rates.
+For high switching probabilities, the round-wise integration model accumulates evidence for differences in the latent probability to produce a higher outcome most of the time.
+This is reflected in low false response rates, if the respective prospect also possesses the higher latent EV, otherwise in high false response rates. 
 
 ```{r choice-rates-roundwise, include=FALSE, cache=TRUE}
 #prepare data
@@ -890,12 +895,12 @@ For $\theta = 1$ and $\psi < 1$, the estimates imply a linear weighting pattern,
 This result is well in line with the explanation that if the mind were to infer the latent objective probabilities of outcomes from the sampled relative frequencies and to follow the principle of EV maximization, sampling error can account for any deviations from it.
 In this regard, note also Figure\ \@ref(fig:choice-rates-roundwise), where there are no choices for $\theta = 1$ that do not maximize the sampled mean.
 
-For $\theta > 1$, the curvature parameter $\gamma$ takes values $\geq 1$ which increase with the switching probability, resulting in a increasingly pronounced S-shaped weighting function.
+For $\theta > 1$, the curvature parameter $\gamma$ takes values $\geq 1$ which increase with switching probabilities, resulting in a increasingly pronounced S-shaped weighting function.
 In other words, the higher the switching probability, the more severe is the underweighting (overweighting) of the high-rank outcome of the risky prospect in CPT, if it is of small (large) probability.
 That is, the as-if underweighting of rare outcomes pattern indicated by the final choices (i.e., the false response rates) translates rather directly to an underweighting of small-probability outcomes in CPT.
-As expected, the elevation parameter $\delta$ takes no values $< 1$, however, the estimates increase slightly with the switching probability, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point of the probability scale.
+As expected, the elevation parameter $\delta$ takes no values $< 1$, however, the estimates increase slightly with switching probabilities, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point of the probability scale.
 It is open for discussion whether this extension of overweighting beyond the mid-point is theoretically implied by the mechanisms of the round-wise integration model:
-That is, for high switching probabilities the model is expected to choose the risky prospect, if the probability of its high-rank outcome is $> .5$.
+That is, for high switching probabilities, the model is expected to choose the risky prospect, if the probability of its high-rank outcome is $> .5$.
 To account for the implied choice behavior, CPT might have to overweight high-rank outcomes with a probability far larger than .5 less severely than high-rank outcomes with a probability only little larger than .5. 
 Such a pattern is implied for $\delta > 1$.
 Aside this open issue, the estimates for the $\gamma$ and $\delta$ parameter show that the choices implied by the potential interplay of different sampling strategies and the round-wise integration/decision strategy can lead to distinct signatures in CPT's weighting function (see Figure\ \@ref(fig:function-forms), for the resulting graphs of the weighting function).
@@ -951,8 +956,10 @@ Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 9
 As expected, an increase in the switching probability leads to a decrease in $\alpha$, showing that the round-wise integration model largely ignores outcome information, if choices are based on ordinal comparisons of single outcomes rather than of means across larger sets of sampled outcomes.
 In other words, for high switching probabilities, the round-wise integration model is expected to choose the prospect that produces the higher outcome most of the time.
 Once it is established which prospect does so, it is of no more utility to know the exact magnitude of the difference in the outcomes.
+This resonates well with the proposition that round-wise and summary decision strategies are differently equipped to meet short-term and long-term aspirations [cf. @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
 The corresponding shape of the value function is shown in Figure\ \@ref(fig:function-forms) and is more concave for high switching probabilities. 
 Thus, the estimates for the outcome sensitivity parameter $\alpha$ show that the potential interplay between different sampling strategies and the round-wise integration/decision strategy may lead to choice patterns that also translate to distinct signatures in CPT's value function.
+
 Finally, $\rho$ varied systematically such that the choices were more sensitive to the valuations of the core CPT model for low switching probabilities.
 However, for high switching probabilities, the choices did not appear to be random whatsoever.
 
@@ -1057,25 +1064,41 @@ ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 
 ### Summary Integration Model
 
-The choice behavior exercised by the summary integration model is less systematic than that of the round-wise integration model, especially for low switching probabilities.
+As expected, the choice behavior exercised by the summary integration model is less systematic than that of the round-wise integration model, especially for low switching probabilities.
 The random choice behavior is indicated by false response rates around the value of .5 (see Fig.\ \@ref(fig:choice-rates-summary)) and low estimates for the choice sensitivity parameter $\rho$ (see Fig.\ \@ref(fig:sensitivity-parameters)).
-Because the choices become more systematic with increasing switching probabilities, randomness is likely to be caused by the temporal advantage that one of the prospect gains by chance.
+Because choices become more systematic with increasing switching probabilities, randomness is likely to be caused by the temporal advantage that one of the prospect gains by chance.
 For high switching probabilities, choice rates and parameter estimates are roughly in line with the expectations formulated in Table\  \@ref(tab:expectations-summary).
 
 #### Number of Sampled Outcomes
 
 The model predicts the number of outcomes sampled over the course of a sampling and accumulation process to increase with thresholds (see Fig.\ \@ref(fig:sample-sizes)).
-As indicated by the gray smoothed functions, the number of sampled outcomes is generally small and reaches the meta-analytic median found by @wulffMetaanalyticReviewTwo2018 only for higher thresholds.
-The switching probability is predicted to exercise no or (at most) a negligible effect on the number of sampled outcomes.
+As indicated by the gray smoothed functions and the dashed horizontal line, the number of sampled outcomes tends to be generally small and reaches the meta-analytic median found by @wulffMetaanalyticReviewTwo2018 only for higher thresholds.^[<!--Open footnote-->
+This may indicate that the thresholds used to generate the choice data were set too low.
+However, note that, in contrast to the round-wise integration model, thresholds in the summary integration model are in the same unit as the outcomes.
+Given a particular threshold, the number of sampled outcomes required to reach the threshold can vary substantially between choice problems.
+<!--Close footnote-->]
+Switching probabilities are not predicted to have a meaningful impact on the number of sampled outcomes.
+Since the summary integration model assumes that all outcomes sampled from a prospects are integrated into the same cumulative sum, this is already a strong indicator that changes in the sampling strategy should not cause the model to make systematically different choices.
 
 #### Final Choice
 
-For each combination of switching probabilities and the thresholds, Figure\ \@ref(fig:choice-rates-summary) displays the rates of choices that did not maximize the sampled mean.
+For each combination of switching probabilities and thresholds, Figure\ \@ref(fig:choice-rates-summary) displays the rates of choices that did not maximize the sampled mean.
 As for the round-wise integration model, rates are separated for presence and rank of small-probability outcomes.
-Consider first the bottom panel which displays the choice rates for all choice problems that do not include an outcome with a probability $< .2$.
-Here, the false response rates decrease with increases in the switching probability, going from random choice behavior at rates around .5 for low switching probabilities to a systematic maximization of the sampled mean for high switching probabilities.
-Because sampling error and a systematic underrepresentation of small-probability outcomes is accounted for, a similar pattern would be expected for the choice problems that include outcomes with a probability $<.2$.
-In principle, this is the case, however, choice behavior appears to be more random over a wider range of switching probabilities.
+Consider first the bottom panel, which displays the false response rates for all choice problems in which the risky prospect does not possess an outcome with a probability $< .2$:
+False response rates decrease with increasing switching probabilities, transitioning from random choice behavior at rates around .5 for low switching probabilities to a systematic maximization of the sampled mean for high switching probabilities.
+This actually demonstrates that changes in the sampling strategies do not cause the summary integration model to make systematically different choices.
+Specifically: The mechanisms of the summary integration model are such that evidence is accumulated for difference in the latent EVs, given that approximately the same number of outcomes is sampled from *both* prospects.
+The more outcomes are sampled from both prospects, i.e., the higher the thresholds, the more accurately these differences should be assessed.
+Changes in the sampling strategy do not change the latent property for which evidence is accumulated in the summary integration model.
+Rather they affect whether approximately the same number of outcomes is sampled from both prospects or whether one of the prospects obtains, by chance, a temporal advantage, rendering decision either systematic or unsystematic, respectively.
+
+In sum, then, the differences compared to the round-wise integration model are striking: 
+For the round-wise integration model, changes in the sampling strategy alter the degree to which evidence is sampled for one or the other latent property, which can translate to systematically different choices.
+That is, for low switching probabilities, the round-wise integration model accumulates evidence for differences in the latent EV's, resulting in similar choice patterns (false response rates) as produced by the summary integration model.
+For high switching probabilities, however, the round-wise integration model accumulates evidence for differences in the latent property to produce a higher outcome most of the time. 
+Depending on the structure of the choice problem, this implies an as-if underweighting of rare outcomes pattern, even if sampling error is controlled for.
+In contrast, neither do the mechanisms of the summary integration model imply that evidence is systematically sampled for differences in the latent probability to produce a higher outcome most of a time, nor does it predict an as-if underweighting of rare outcomes pattern ones sampling error is controlled for. 
+The false response rates displayed in the top and middle panel of Figure\ \@ref(fig:choice-rates-summary), where choice problems include prospects possessing a small-probability outcome, provide support for this notion.
 
 ```{r choice-rates-summary, include=FALSE, cache=TRUE}
 #prepare data
@@ -1163,8 +1186,8 @@ fr_rates_risky %>%
 
 #### CPT Parameters
 
-First, note that the estimates for the choice sensitivity parameter $rho$ tend to be low for small switching probabilities (see Fig.\ \@ref(fig:sensitivity-parameters)), implying that for these cases the choices are random and thus, more or less insensitive to the evaluations of the core CPT model. 
-Interpretation of CPT parameter estimates for small switching probabilities should therefore be made with great caution (if at all).
+Note that the estimates for the choice sensitivity parameter $rho$ tend to be low for small switching probabilities (see Fig.\ \@ref(fig:sensitivity-parameters)), implying that in these cases the highest model fit is achieved, if a random choice is assumed.
+Thus, for small switching probabilities, interpretations of the parameter estimates for the core CPT model should be made with great caution (if at all).
 For high switching probabilities, the estimates for the weighting function's $\gamma$ and $\delta$ parameter and the value function's $\alpha$ parameter indicate a linear weighting of sampled relative frequencies and outcomes, i.e., $\gamma \approx 1, \delta \approx 1, \alpha \approx 1$.
 
 # Discussion and Conclusion
@@ -1510,3 +1533,8 @@ vf <- values %>%
 # merge plots
 ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('manuscript_appendix.Rmd')
+```
+
