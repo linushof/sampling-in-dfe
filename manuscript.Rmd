@@ -165,7 +165,7 @@ This distortion of the sampled information (sampling error) is then assumed to c
         The binomial distribution of an outcome is the probability distribution of the number of times an outcome occurs in a sample.
         According to the \textit{de Moivre-Laplace theorem} (see, e.g., \protect\hyperlink{ref-georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015}{Georgii, 2015}), the binomial distribution can be approximated by a symmetric normal distribution given a large sample.
         That is, the relative frequency with which an outcome occurs in a large sample is predicted to correspond to the objective probability of the outcome most of the time and is not predicted to be lower more often than higher or vice versa.
-        However, for small samples, the binomial distribution associated with a small-probability outcome is positive skewed, causing the relative frequency with which this outcome occurs in the sample to be smaller rather than larger than its objective probability.
+        However, for small samples, the binomial distribution associated with a small-probability outcome is positively skewed, causing the relative frequency with which this outcome occurs in the sample to be smaller rather than larger than its objective probability.
         That is, small-probability outcomes tend to be underrepresented in small samples.
         An explanation for the as-if underweighting of rare outcomes pattern may thus build on the assumption that the mind is sensitive to the information provided by small samples (\protect\hyperlink{ref-hertwigDecisionsExperienceEffect2004}{Hertwig et al., 2004}; \protect\hyperlink{ref-plonskyRelianceSmallSamples2015}{Plonsky et al., 2015}; see also \protect\hyperlink{ref-erevChoicePredictionCompetition2010}{Erev et al., 2010}, \protect\hyperlink{ref-erevAnomaliesForecastsDescriptive2017}{2017}, for the performance of models assuming reliance on small samples in prediction competitions).
     }
@@ -173,7 +173,7 @@ This distortion of the sampled information (sampling error) is then assumed to c
 \newline
 (ref:references-box-1) @georgiiStochastikEinfuhrungWahrscheinlichkeitstheorie2015; @hertwigDecisionsExperienceEffect2004; @erevChoicePredictionCompetition2010; @plonskyRelianceSmallSamples2015; @erevAnomaliesForecastsDescriptive2017
 
-Yet, peoples' reliance on a small number of sampled outcomes in DFE, and the associated sampling error, are presumably not the sole cause of the description-experience gap [see @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
+Yet, peoples' reliance on a small number of sampled outcomes in DFE, and the associated sampling error are presumably not the sole cause of the description-experience gap [see @hauDescriptionexperienceGapRisky2008; @ungemachAreProbabilitiesOverweighted2009; @wulffMetaanalyticReviewTwo2018, who show that the as-if underweighting of rare outcomes pattern may appear, even if the overall number of sampled outcomes is large and the relative frequencies closely resemble the latent objective probabilities].
 Rather, the specifics of the actual decision-making process---i.e, how the mind exercises the capacity of making decisions from experience as opposed to descriptions---might contribute to the gap.
 In experimental studies of DFE using the *sampling paradigm*, people can, as much as they want, sequentially sample the outcomes of two latent prospects according to their objective probabilities before making a final, consequential choice between the prospects [see @hertwigDescriptionexperienceGapRisky2009, see also Fig.\ \@ref(fig:sampling-paradigm)].
 Because in the sampling paradigm people cannot rely on the descriptions of outcomes and probabilities to make a decision, but are required to learn about the prospects from experiential sampling of outcomes over time, the tasks involved in the decision-making process differ from those in DFD.
@@ -207,7 +207,7 @@ In more general terms, whereas sampling strategies determine how the information
 \begin{figure}[t!]
 \caption{Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice}
 \includegraphics{manuscript_files/sampling-paradigm} \label{fig:sampling-paradigm}
-\raggedright \textit{Note.} In the sampling paradigm, people are offered the choice between at least two prospects (here: violet vs. orange), whose exact properties (outcomes and probabilities) remain hidden. To learn about the properties, people can, as much as they want, sample the prospects' outcomes according to their probabilities. Sampling strategies: Refer to the sequential pattern with which people sample the outcomes from both prospects over time. People may switch infrequently (comprehensive sampling) or frequently (piecewise sampling) or something in between. Decision strategies: Refer to the way people integrate the sampled outcomes in order to evaluate the prospects. People may integrate all outcomes stemming from the same prospect in order to compute and compare summary scores (summary integration/decision); or they integrate and compare outcomes of the two prospects over repeated rounds (round-wise integration/decision).  
+\raggedright \textit{Note.} In the sampling paradigm, people are offered the choice between at least two prospects (here: violet vs. orange), whose exact properties (outcomes and probabilities) remain hidden. To learn about the properties, people can, as much as they want, sample the prospects' outcomes according to their probabilities. Sampling strategies: Refer to the sequential pattern with which people sample the outcomes from both prospects over time. People may switch infrequently (comprehensive sampling) or frequently (piecewise sampling) or with a frequency somewhere in between. Decision strategies: Refer to the way people integrate the sampled outcomes in order to evaluate the prospects. People may integrate all outcomes stemming from the same prospect in order to compute and compare summary scores (summary integration/decision); or they integrate and compare outcomes of the two prospects over repeated rounds (round-wise integration/decision).  
 \end{figure}
 
 To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between sampling and decision strategies.
@@ -218,11 +218,11 @@ Pointing to the suggested coupling of sampling and decision strategies, Hills an
 Moreover, simulating both round-wise and summary decisions on the basis of peoples' sampled outcomes, they showed that round-wise decisions led to a higher proportion of choices that are consistent with an as-if underweighting of rare outcomes.
 
 To summarize the preceding paragraphs: 
-Since small samples may distort the information about the properties of latent prospects, a great deal of research on the sampling paradigm has been invested into the question which factors affect how much people sample [see @wulffAdaptiveExplorationWhat2019, Table 7.2, for a recent summary of relevant factors and papers].
+Since small samples may distort the information about the properties of latent prospects, a great deal of research on the sampling paradigm has been invested into the question of which factors affect how much people sample [see @wulffAdaptiveExplorationWhat2019, Table 7.2, for a recent summary of relevant factors and papers].
 Assuming that people proceed systematically when sampling outcomes, and that their sampling strategies are systematically related to decision strategies, Hills and Hertwig [-@hillsInformationSearchDecisions2010] emphasize that in order to understand how people make DFE and how this comes to imply certain choice patterns, one might need a richer understanding of peoples' sampling behavior.
-That is, not only we need to know how much outcomes are sampled, but also in what way they are sampled, and how this affects the way the obtained information is processed to evaluate the latent prospects.
+That is, not only do we need to know how many outcomes are sampled, but also in what way they are sampled, and how this affects the way the obtained information is processed to evaluate the latent prospects.
 
-While offering a novel, convincing inroad into the broader question how sampling and information-processing can act together to shape DFE in environments where people can sample without costs,^[<!--Open footnote-->
+While offering a novel, convincing inroad into the broader question of how sampling and information-processing can act together to shape DFE in environments where people can sample without costs,^[<!--Open footnote-->
 Meaning that people do not gain/loose the amount of each sampled outcome. Of course, sampling implies other costs, such as time and cognitive capacities.
 <!--Close footnote-->]
 Hills and Hertwig's [-@hillsInformationSearchDecisions2010] work invites some objections, both theoretical and methodological.
@@ -252,11 +252,11 @@ One may otherwise waive the assumption that a comparison-round encompasses more 
 In sum, to understand whether and how sampling and decision strategies act together to shape DFE, one should not only explicitly model their links, but also consider their interplay broadly and systematically.
 
 3. *Use of heuristic analysis methods:*
-The empirical re-analyses relies on various heuristic methods to assess whether the observed choices are consistent with the claimed links between sampling and decision strategies and their impact on the as-if weighting of rare events pattern.
+The empirical re-analysis relies on various heuristic methods to assess whether the observed choices are consistent with the claimed links between sampling and decision strategies and their impact on the as-if weighting of rare events pattern.
 For instance, aggregated data over participants and choice problems is used to compare, within and between sampling strategies, the proportions of choices that are consistent with the predictions of the decision strategies and an as-if underweighting of rare outcomes.
 In addition, to obtain indicators for the applied sampling strategies, each participant's mean switching frequency across all choice problems was calculated and a median split was used to identify infrequently and frequently switching people, supposedly indicating comprehensive and piecewise sampling, respectively.
 While acknowledging that existing data was used, such heuristic methods can be problematic, e.g., because they can cause a construct-behavior gap where inferences from the data to the tested theory, although statistically sound, become logically invalid.
-In a rigorous analysis, @regenwetterConstructbehaviorGapBehavioral2017 demonstrate how the use of aggregate data and heuristic scoring rules, e.g., counting the proportion of correct choice predictions across problems and people, lead at least to hard-to-interpret inferences about individuals' as-if weighting patterns and the description-experience gap.
+In a rigorous analysis, @regenwetterConstructbehaviorGapBehavioral2017 demonstrate how the use of aggregated data and heuristic scoring rules, e.g., counting the proportion of correct choice predictions across problems and people, lead at least to hard-to-interpret inferences about individuals' as-if weighting patterns and the description-experience gap.
 One can alleviate such risks by taking heterogeneity between individuals into account and modeling the as-if weighting more explicitly.
 Also, the averaging of switching frequencies across choice problems to group into frequent and infrequent switchers can be falsely interpreted as if sampling strategies are more a characteristic of the decision maker than of the sampling process.
 Finally, sampling error is only controlled for to the extent that choice trials in which small-probability outcomes were not sampled at least once are excluded from the analyses.
@@ -286,14 +286,14 @@ Note that all materials---i.e., code and data---underlying this paper, including
 
 # Sampling and Decision Strategies Within a Sequential Sampling Framework
 
-Because there is an uncountable number of decisions people confront in their daily life, behavioral decision research routinely abstracts from choices between particular alternatives, e.g., the choice between job offers, political parties to vote for, investment plans, and whatnot.
-Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation, but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
+Because there is an uncountable number of decisions people confront in their daily life, behavioral decision research routinely abstracts from choices between particular alternatives, e.g., the choice between job offers, political parties to vote for, or investment plans.
+Rather, with the choice between at least two prospects, it studies a case which is counterfactual in that it omits the many particularities of each choice situation but retains in the form of prospects the fundamental properties that almost all choice alternatives are assumed to possess.
 These fundamental properties are considered the $n$ possible outcomes of a choice alternative, denoted as $x_1, ..., x_n$, and the probabilities with which these outcomes occur following the choice of the alternative, denoted as $p_X(x_1), ..., p_X(x_n)$. 
 That is, each choice alternative that is fully described by a set of outcome-probability pairs, $\{(x_i, p_X(x_i))\}_{i \in \{1, ..., n\}}$, satisfying $\sum_{i = 1}^n p_X(x_i) = 1$, is a prospect.
 It is only through these fundamental properties, or combinations thereof, that any necessary distinction between the prospects can be made.
 Hence, systematic---as opposed to random---choices between prospects must be based on the assessment of differences in their properties.
 
-Rarely in peoples' daily life, the information provided about the prospects take the form of explicit and complete descriptions of all their outcome-probability pairs.
+Rarely in peoples' daily life, does the information provided about the prospects take the form of explicit and complete descriptions of all their outcome-probability pairs.
 In such rare cases, people would make DFD and can---strongly simplified---directly proceed by selecting a property or combinations thereof to assess differences among the prospects and make a respective choice.
 In stark contrast and rather often, people are required to make DFE, where the mind can learn about the latent properties only by "experiential sampling [of outcomes] over time" [@hertwigDescriptionexperienceGapRisky2009, p. 517, square bracket added].
 The sampling paradigm is just one paradigm that can be used to study DFE experimentally and allows people to sample the prospects' outcomes without costs and without constraints regarding the sequential pattern and the amount of sampled outcomes.
@@ -304,7 +304,7 @@ The process is assumed to stop---i.e., a choice is made---once the accumulated e
 More specifically, for DFE, it is assumed that the outcomes of prospects are sequentially sampled and integrated into dynamic decision variables and that a choice is made once the value of a decision variable exceeds a threshold.
 How exactly this integration is carried out and what the value of a dynamic decision variable represents, is a theoretical question---and thus a matter of the exact specification of the model---largely concerned with the way the prospects are assumed to be evaluated.
 Depending on the integration and evaluation mechanisms they assume, the member models of the sequential sampling framework have been shown to explain some of the robust deviations from EV maximization, including the as-if underweighting of rare outcomes in the sampling paradigm [@markantModelingChoiceSearch2015].
-Moreover, these models implement speed-accuracy trade-offs, with the amount of evidence that must be sampled in favor for a prospect increasing with thresholds, leading to more accurate but slower choices for high thresholds, and vice versa.
+Moreover, these models implement speed-accuracy trade-offs, with the amount of evidence that must be sampled in favor of a prospect increasing with thresholds, leading to more accurate but slower choices for high thresholds, and vice versa.
 
 The current paper commits to the core assumptions of the sequential sampling framework and uses its flexibility regarding the exact mechanisms of sampling, integration, and evaluation to incorporate the idea of sampling and decision strategies, including their interplay.
 The two models presented below, one assuming an integration and evaluation mechanism resembling the round-wise strategy, the other assuming mechanisms resembling the summary strategy, offer a formal route to explore the potential interplay between sampling and integration/decision strategies, and their effects on the choice behavior.
@@ -343,7 +343,7 @@ Each such stochastic process terminates as soon as an outcome is sampled from th
 The switching probability $\psi \in (0,1]$, which is assumed to be adopted prior the start of the sampling and accumulation process, is fixed throughout and controls the probability with which outcomes from different prospects are sampled in direct succession.
 In other words, the switching probability $\psi$ governs the probability with which the stochastic process on a given prospect, defined as in (1), stops and a new stochastic process on the other prospect starts with the subsequently sampled outcome.
 
-To implement the evidence accumulation process, the round-wise integration model assumes that each time after a *new* stochastic process was started and terminated on both prospects, their respective means are compared, with the prospect underlying the stochastic process with the greater mean receiving a round win.
+To implement the evidence accumulation process, the round-wise integration model assumes that each time a *new* stochastic process gets started and then terminated on both prospects, their respective means are compared, with the prospect underlying the stochastic process with the greater mean receiving a round win.
 Accordingly, assuming that $S^Y_m$ is the mean across $m$ outcomes successively sampled from prospect $P^Y$, this stage is modeled for the prospect $P^X$as the mapping
 $$
 \begin{aligned}
@@ -379,7 +379,7 @@ That is, (2) may be adapted such that $Z$ takes the value $-1$ instead of $0$, s
 ## Summary Integration Model
 
 The model assumes that an agent starts with equal probability to sample outcomes from one of the prospects and continues sampling while switching between prospects according to the switching probability $\psi$.
-As in the round-wise integration model, the switching probability $\psi$ is assumed to be adopted prior the start of the sampling and accumulation process and is fixed throughout.
+As in the round-wise integration model, the switching probability $\psi$ is assumed to be adopted prior to the start of the sampling and accumulation process and is fixed throughout.
 
 To implement the evidence accumulation process, the summary integration model assumes that an agent continues sampling from both prospects until the cumulative sum across all outcomes sampled from one of the prospects reaches a threshold $\theta$. 
 As in the round-wise integration model, the threshold $\theta$ is assumed to be adopted prior the start of the sampling and accumulation process and is fixed throughout.
@@ -409,7 +409,7 @@ Below, it is discussed which effects the key model parameters, i.e., the switchi
 The effects of the switching probability should be informative about the interplay between different sampling strategies and the integration/decision strategy each model resembles.
 Assuming that both models aim to assess true differences in the latent properties of prospects, the effects of the threshold should indicate whether these differences are indeed more accurately assessed---thus, leading to more systematic choices and as-if weighting patterns---the more evidence is accumulated.
 In addition, previous research has shown that differences as to how information about the properties of prospects is processed can translate to distinct signatures in CPT's psychoeconomic value and weighting function, without actually assuming that these functions are computed whatsoever [see @pachurHowTwainCan2017; @stewartDecisionSampling2006; @zilkerNonlinearProbabilityWeighting2021].^[<!--Open footnote-->
-Note that it has been argued that the distinction between CPT's functions used to describe choice data and models aiming to explain how this data is generated in first place are reminiscent of Marr's [-@marrVisionComputationalInvestigation1982] different levels of explanation [@zilkerMeasuringModelingConstruction2020; also cf. @griffithsProbabilisticModelsCognition2010].
+Note that it has been argued that the distinction between CPT's functions used to describe choice data and models aiming to explain how this data is generated in the first place are reminiscent of Marr's [-@marrVisionComputationalInvestigation1982] different levels of explanation [@zilkerMeasuringModelingConstruction2020; also cf. @griffithsProbabilisticModelsCognition2010].
 That is, whereas CPT may be considered a computational-level theory that describes an abstract solution to the problem the mind aims to solve when offered a choice between prospects, process models [cf. @jareckiFrameworkBuildingCognitive2020], such as heuristics and sequential sampling models, may be considered algorithmic-level theories that specify how the mind can approximate the abstract solution with the capacity limits it is constrained by.
 <!--Close footnote-->]
 Accordingly, this section also formulates expectations regarding the potential relations between switching probabilities and thresholds (data-generating parameters) and the CPT parameters (data-modeling parameters).
@@ -422,8 +422,8 @@ Summaries of the expected model behaviors can be found in Tables\ \@ref(tab:expe
 ### Round-Wise Integration Model
 
 Considering a *single* comparison round, the stochastic process for each prospect---which results in a mean computed across the outcomes sampled from the prospect---is predicted to terminate faster, the higher the probability that the subsequent outcome is sampled from the other prospect, i.e., the higher the switching probability $\psi$.
-Because the switching probability is predicted to alter the length of the stochastic processes underlying *each independent* mean comparison, it should affect whether low-probability outcomes contribute to each required mean comparisons about as much as would be warranted based on their objective probabilities, or whether they contribute rather less.
-That is, for high switching probabilities and thus, short stochastic processes, the binomial distribution associated with small-probability outcomes is positive skewed, causing the relative frequencies with which these outcomes occur within each comparison round to be smaller rather than larger than their latent objective probabilities.
+Because the switching probability is predicted to alter the length of the stochastic processes underlying *each independent* mean comparison, it should affect whether low-probability outcomes contribute to each required mean comparison about as much as would be warranted based on their objective probabilities, or whether they contribute rather less.
+That is, for high switching probabilities and thus, short stochastic processes, the binomial distribution associated with small-probability outcomes is positively skewed, causing the relative frequencies with which these outcomes occur within each comparison round to be smaller rather than larger than their latent objective probabilities.
 Because such a distortion of the relative sampled frequencies from the objective probabilities is expected for each comparison round, increases in the threshold $\theta$ should not affect the following expectations concerning the model behavior; rather because each comparison is independent and increases in sample size (here: number of comparisons) reduce random error, the expectations should be more accurately met for higher thresholds:
 If the small-probability outcome is smaller (larger) than the EV, high switching probabilities cause the mean within each comparison round to be an inflated (deflated) estimate of the EV.
 Such an inflation and deflation of the means within each round can then translate to choices that take the form of an as-if underweighting of rare outcomes:
@@ -455,7 +455,7 @@ Accordingly, one might expect that the implied choices generally maximize the ov
 However, the switching probabilities should introduce temporal imbalances between prospects regarding the number of sampled outcomes over which the sums are computed (and compared, assuming relative thresholds, respectively).
 That is, whatever prospect is first sampled from is allowed to start accumulating evidence sooner than the respective other prospect.
 This is likely to be a negligible factor for large but not for small switching probabilities.
-Specifically, the temporal imbalances---i.e., the temporal advantage for the prospect which is first sampled from---grows as the switching probabilities decrease.
+Specifically, the temporal imbalances---i.e., the temporal advantage for the prospect which is sampled from first---grows as the switching probabilities decrease.
 Accordingly, for small switching probabilities, choices might be largely driven by the truly random event which prospect is first sampled from.
 This random choice behavior should diminish with increases in the switching probability and choices should converge to the solutions of sampled mean and EV maximization the higher the thresholds get.
 
@@ -468,7 +468,7 @@ For large thresholds, choices should converge more to the solutions of EV maximi
 
 ## Cumulative Prospect Theory
 
-Before elaborating how the expectations outlined above may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
+Before elaborating on how the expectations outlined above may translate into estimates of the CPT parameters, the following section reviews how CPT in general and its weighting function in particular capture deviations from EV maximization.
 
 ### Description of CPT
 
@@ -668,10 +668,10 @@ Below, the simulation and modeling procedure is briefly described.
 A test set of 60 choice problems was obtained by stratified sampling from an initial set of 10,000 problems.
 The stratification procedure was used to ensure that the test set contained choice problems with small-probability outcomes of different rank---i.e., small-probability outcomes that are either higher or lower than the EV of the risky prospect---as well as choice problems without small-probability outcomes.
 The exact procedure was as follows:
-For each of the 10,000 problems in the initial set, three outcomes were randomly drawn from a uniform distribution over the interval $[0, 20]$, with the smallest and highest of these three outcomes being assigned to the risky prospect to omit dominance.^[I.e., when one prospect always produces a higher outcome.]
+For each of the 10,000 problems in the initial set, three outcomes were randomly drawn from a uniform distribution over the interval $[0, 20]$, with the smallest and highest of these three outcomes being assigned to the risky prospect to omit dominance.^[<!--Open footnote-->I.e., where one prospect always produces a higher outcome.<!--Close footnote-->]
 The probability for the lower outcome of the risky prospect, $p_x(x_{low})$, was drawn from a uniform distribution over the interval $(0, 1)$, with the probability of the higher outcome being set to $p_x(x_{high}) = 1-p_x(x_{low})$.
 To obtain the 60 choice problems of the test set, the initial set was divided into three subsets, where each subset contained either all problems with $p_x(x_{high}) \in (0,.2)$ or $p_x(x_{high}) \in [.2,.8]$ or $p_x(x_{high}) \in (.8,1)$.
-From each of these subset, then, $20$ choice problems were randomly sampled.
+From each of these subsets, then, $20$ choice problems were randomly sampled.
 
 ### Data Generation
 
@@ -745,7 +745,7 @@ First, it is inspected how the lengths of the sampling and accumulation processe
 #### Number of Sampled Outcomes
 
 Figure\ \@ref(fig:sample-sizes) displays the number of outcomes sampled over the course of a sampling and accumulation process for each combination of switching probabilities and thresholds.
-The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability, whereas the overall number of sampled outcomes is predicted to increase with thresholds at relatively constant rate.
+The model predicts a decrease in the overall number of sampled outcomes with increases in the switching probability, whereas the overall number of sampled outcomes is predicted to increase with thresholds at a relatively constant rate.
 These differences in the number of sampled outcomes are subtle indicators for how sampling strategies and the mechanisms of the round-wise integration model act together to imply different final choices.
 Essentially, they foreshadow how the round-wise integration model accumulates evidence for differences in the latent EV for low switching probabilities, and for differences in the latent probability to produce a higher outcome most of the time for high switching probabilities.
 
@@ -901,9 +901,9 @@ That is, the as-if underweighting of rare outcomes pattern indicated by the fina
 As expected, the elevation parameter $\delta$ takes no values $< 1$, however, the estimates increase slightly with switching probabilities, causing the overweighting of the high-rank outcome of the risky prospect to extend across the mid-point of the probability scale.
 It is open for discussion whether this extension of overweighting beyond the mid-point is theoretically implied by the mechanisms of the round-wise integration model:
 That is, for high switching probabilities, the model is expected to choose the risky prospect, if the probability of its high-rank outcome is $> .5$.
-To account for the implied choice behavior, CPT might have to overweight high-rank outcomes with a probability far larger than .5 less severely than high-rank outcomes with a probability only little larger than .5. 
+To account for the implied choice behavior, CPT might have to overweight high-rank outcomes with a probability far larger than .5 less severely than high-rank outcomes with a probability only a little larger than .5. 
 Such a pattern is implied for $\delta > 1$.
-Aside this open issue, the estimates for the $\gamma$ and $\delta$ parameter show that the choices implied by the potential interplay of different sampling strategies and the round-wise integration/decision strategy can lead to distinct signatures in CPT's weighting function (see Figure\ \@ref(fig:function-forms), for the resulting graphs of the weighting function).
+Leaving this open issue, the estimates for the $\gamma$ and $\delta$ parameter show that the choices implied by the potential interplay of different sampling strategies and the round-wise integration/decision strategy can lead to distinct signatures in CPT's weighting function (see Figure\ \@ref(fig:function-forms), for the resulting graphs of the weighting function).
 Once again, these signatures cannot be due to sampling error.
 
 ```{r weighting-parameters, include=FALSE, cache=TRUE}
@@ -953,7 +953,7 @@ ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "righ
 \end{figure}
 
 Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$.
-As expected, an increase in the switching probability leads to a decrease in $\alpha$, showing that the round-wise integration model largely ignores outcome information, if choices are based on ordinal comparisons of single outcomes rather than of means across larger sets of sampled outcomes.
+As expected, an increase in the switching probability leads to a decrease in $\alpha$, showing that the round-wise integration model largely ignores outcome information if choices are based on ordinal comparisons of single outcomes rather than of means across larger sets of sampled outcomes.
 In other words, for high switching probabilities, the round-wise integration model is expected to choose the prospect that produces the higher outcome most of the time.
 Once it is established which prospect does so, it is of no more utility to know the exact magnitude of the difference in the outcomes.
 This resonates well with the proposition that round-wise and summary decision strategies are differently equipped to meet short-term and long-term aspirations [cf. @hillsInformationSearchDecisions2010; @wulffHowShortLongrun2015].
@@ -1066,7 +1066,7 @@ ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 
 As expected, the choice behavior exercised by the summary integration model is less systematic than that of the round-wise integration model, especially for low switching probabilities.
 The random choice behavior is indicated by false response rates around the value of .5 (see Fig.\ \@ref(fig:choice-rates-summary)) and low estimates for the choice sensitivity parameter $\rho$ (see Fig.\ \@ref(fig:sensitivity-parameters)).
-Because choices become more systematic with increasing switching probabilities, randomness is likely to be caused by the temporal advantage that one of the prospect gains by chance.
+Because choices become more systematic with increasing switching probabilities, randomness is likely to be caused by the temporal advantage that one of the prospects gains by chance.
 For high switching probabilities, choice rates and parameter estimates are roughly in line with the expectations formulated in Table\  \@ref(tab:expectations-summary).
 
 #### Number of Sampled Outcomes
@@ -1090,7 +1090,7 @@ This actually demonstrates that changes in the sampling strategies do not cause 
 Specifically: The mechanisms of the summary integration model are such that evidence is accumulated for difference in the latent EVs, given that approximately the same number of outcomes is sampled from *both* prospects.
 The more outcomes are sampled from both prospects, i.e., the higher the thresholds, the more accurately these differences should be assessed.
 Changes in the sampling strategy do not change the latent property for which evidence is accumulated in the summary integration model.
-Rather they affect whether approximately the same number of outcomes is sampled from both prospects or whether one of the prospects obtains, by chance, a temporal advantage, rendering decision either systematic or unsystematic, respectively.
+Rather, they affect whether approximately the same number of outcomes is sampled from both prospects or whether one of the prospects obtains, by chance, a temporal advantage, rendering the decision either systematic or unsystematic, respectively.
 
 In sum, then, the differences compared to the round-wise integration model are striking: 
 For the round-wise integration model, changes in the sampling strategy alter the degree to which evidence is sampled for one or the other latent property, which can translate to systematically different choices.
@@ -1190,14 +1190,14 @@ Note that the estimates for the choice sensitivity parameter $rho$ tend to be lo
 Thus, for small switching probabilities, interpretations of the parameter estimates for the core CPT model should be made with great caution (if at all).
 For high switching probabilities, the estimates for the weighting function's $\gamma$ and $\delta$ parameter and the value function's $\alpha$ parameter indicate a linear weighting of sampled relative frequencies and outcomes, i.e., $\gamma \approx 1, \delta \approx 1, \alpha \approx 1$.
 
-# Discussion
+# Discussion and Conclusion
 
 The aim of this paper was to sketch how the mind might exercise the capacity of making decisions from experience (DFE).
 In DFE, people cannot rely on symbolic descriptions of the choice alternatives, but only on samples of past experiences.
 One paradigm used to study DFE experimentally is the sampling paradigm, where people can---as much as they want, in the way they want, and without costs---sample the possible outcomes of prospects before making a final choice.
 To approach an explanation for how people proceed and choose in such a paradigm, this paper presented two models that integrate the potential interplay between sampling and integration/decision strategies into the sequential sampling framework.
 
-## Summary 
+## Summary
 
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that the way people sample the outcomes of prospects (sampling strategy) may be linked to the way they process the outcomes in order to evaluate the prospects and make a corresponding choice (integration/decision strategy).
 Specifically, the authors assumed two potential links between what they considered paradigmatic instances of both types of strategies:
@@ -1217,30 +1217,45 @@ The current paper extended the original discussion and analyses of Hills and Her
 
 This paper started from the computational problem the mind is trying to solve in the sampling paradigm, and the principle logic that governs its solution:
 In order to make systematic choices between prospects, the mind must assess true differences in their latent properties, and it can only do so by searching for evidence in information samples.
-Relying on the sequential sampling framework, the current paper assumed that this search process takes the form of an evidence accumulation over time, where outcomes are sampled until an evidence threshold is reached.
-Two different models were presented, each of which assumed an accumulation process that resembles a distinct decision strategy.
-The round-wise integration model assumed that the means across sets of sampled outcomes are repeatedly compared and a choice is made once the number of won comparisons reaches a threshold.
-The summary integration model assumed that all outcomes sampled from a prospect are integrated into the same cumulative sum and that a choice is made once the sum reaches a threshold.
+Relying on the sequential sampling framework, the current paper assumed that this search process takes the form of an evidence accumulation over time, where outcomes are sampled until the accumulated evidence reaches a threshold.
+Two different models were presented, each of which assumed an accumulation process that resembles a distinct integration/decision strategy.
+The round-wise integration model assumes that the means across sets of sampled outcomes are repeatedly compared and a choice is made once the number of won comparisons reaches a threshold.
+The summary integration model assumes that all outcomes sampled from a prospect are integrated into the same cumulative sum and that a choice is made once the sum reaches a threshold.
 
 The current paper discussed and demonstrated in a computational analysis how sampling strategies may or may not alter the latent property for which each of the models accumulates evidence, and thus may or may not cause each model to produce systematically different choice patterns:
-Specifically, in the round-wise integration model, changes in the sampling strategy alter the degree to which evidence is accumulated for differences in either the expected values or in the probability to produce a higher outcome most of the time.
-If the prospect that produces the higher outcome most of the time does not also possess the higher expected value, changes in the sampling strategy come to imply systematically different choice patterns.
-The simulations showed that high switching probabilities led the round-wise integration model to produce systematic deviations from EV maximization that take the form of an as-if underweighting of rare outcomes, even if sampling error is controlled for. 
-In contrast, in the summary integration model, changes in the sampling strategy do not cause  alter which latent property evidence is accumulated for, but rather 
+In the round-wise integration model, changes in the sampling strategy alter the degree to which evidence is accumulated for differences in either the expected values or in the probability to produce a higher outcome most of the time.
+Accordingly, the simulations showed that low switching probabilities lead the round-wise integration model to make choices in line with EV maximization, whereas high switching probabilities lead the model to produce systematic deviations from EV maximization taking the form of an as-if underweighting of rare outcomes, even if sampling error is controlled for. 
+In contrast, in the summary integration model, evidence is, in principal, accumulated for differences in the latent EVs.
+Accordingly, the simulations showed that high switching probabilities lead the model to make choices in line with EV maximization. 
+However, low switching probabilities have been shown to introduce random temporal imbalances between the prospects regarding the amount of evidence that can be sampled, resulting in choices that are less sensitive to differences in the EVs but rather unsystematic.
 
-Finally, it was shown how the effects of the potential interplay between sampling and integration/decision strategies on the final choice can translate to characteristic signatures in cumulative prospect theory's value and weighting function. 
-Having controlled for sampling error, the estimated CPT parameters and the resulting shapes of the value and weighting function primarily reflected how sensitive the combinations of sampling and decision strategies are to particular changes in the outcomes and their probabilities.
-Thereby, the analyses extends the notion that CPT can be used as a measurement tool to characterize information processing [@pachurHowTwainCan2017] from risky to uncertain choice.
+Finally, the current paper demonstrated how the effects of the potential interplay between sampling and integration/decision strategies on the final choice can translate to characteristic signatures in cumulative prospect theory's value and weighting function.
+Having controlled for sampling error, the estimated CPT parameters and the resulting function shapes primarily reflected how sensitive the different  combinations of sampling and integration/decision strategies are to particular changes in the outcomes and their probabilities.
 
-## Limitations and Outlook
+## Why Sampling and Decision Strategies and Why Particular Links?
 
-## Why Particular Sampling and Decision Strategies Could Be Linked?
+This concluding section intends to briefly draw attention to one particular limitation of the current paper and to what may be gained from overcoming it.
+Of course, this paper is purely theoretical, and the validity of its claims and simulations eventually depends on whether they stand the test of empirical data.
+Here, however, the concern is less about the current lack of an empirical test, but that more could have been done and should be done in future work to endow the idea of an interplay between sampling and integration/strategies with theoretical plausibility.
 
-# Conclusion
+In explaining cognitive capacities, such as decision making from experience, models thereof must be constrained to the extent that neither the computational resources of the human mind nor other relevant resources---e.g., time---are limitless [see, e.g., @jareckiFrameworkBuildingCognitive2020; @liederResourcerationalAnalysisUnderstanding2020; @vanrooijTheoryTestHow2021].
+Acknowledging these limitations, different theoretical frameworks can be used to narrow down the still abundant number of possible mechanisms the mind might employ in the decision-making process.
+Such frameworks build on different, sometimes related or complementary assumptions, e.g.:
+*ecological rationality* holds that the mind uses simple (decision) heuristics that exploit the information structures of the environment in which it operates [@payneAdaptiveStrategySelection1988; see also @simonRationalChoiceStructure1956];
+several sequential sampling models have been shown to implement optimal speed-accuracy trade-offs in that they make the most accurate choices for a given speed or the fastest for a given accuracy [@bogaczPhysicsOptimalDecision2006];
+and *resource rationality* assumes that the mind employs mechanisms that make optimal use of its actual resources in obtaining a specific goal [@liederResourcerationalAnalysisUnderstanding2020].
+
+The current paper dealt with these frameworks and their assumptions rather loosely and implicitly.
+A thorough and explicit treatment will help to move the idea of an interplay between sampling and integration/decision strategies beyond the "mere" consideration of its effects and endow it with greater theoretical plausibility, even before contact with data. 
+That is, the question of why particular sampling and decision strategies might be employed and linked is not at all answered by the choices and weighting patterns they imply.
+Rather an answer is approached by showing how the idea of an interplay of both types of strategies can be integrated into the wider study of the computationally limited but adaptive mind.
 
 \newpage
 
 # Acknowledgements
+
+\noindent
+I thank Thorsten Pachur and Veronika Zilker for the opportunity of an internship at the Center for Adaptive Rationality at the Max Planck Institute for Human Development in Berlin and for supervising this thesis.
 
 \newpage
 
@@ -1539,6 +1554,11 @@ vf <- values %>%
 # merge plots
 ggarrange(wf, vf, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right")
 ```
+
+```{r echo = FALSE, results = 'asis', cache = FALSE}
+papaja::render_appendix('manuscript_appendix.Rmd')
+```
+
 
 ```{r echo = FALSE, results = 'asis', cache = FALSE}
 papaja::render_appendix('manuscript_appendix.Rmd')
