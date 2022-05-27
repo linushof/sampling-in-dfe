@@ -8,31 +8,31 @@ author:
   - name          : "Linus Hof"
     affiliation   : "1"
     corresponding : yes
-    address       : "Institute of Psychology, Heidelberg University, Hauptstr. 47 – 51, 69117 Heidelberg"    
-    email         : "linus.hof@stud.uni-heidelberg.de"
+    email         : "linushof@posteo.de"
     
 affiliation:
   - id            : "1"
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is prepared for submission as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Supervisors:
+ This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is submitted as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Matr.-Nr.: Removed from online version. Supervisors:
   
   \indent
-  1. Prof. Dr. Thorsten Pachur, Technical University of Munich
+  1. Prof. Dr. Thorsten Pachur, delegated by Prof. Dr. Klaus Fiedler
   
   \indent
-  2. Dr. Veronika Zilker, Max Planck Institute for Human Development
+  2. Dr. Veronika Zilker, delegated by Prof. Dr. Jan Rummel
  
 abstract: |
-  In the sampling paradigm, people can---as much as they want, in the way they want, and without costs---sample the possible outcomes of prospects before making a final choice. Do the sequential pattern in which the outcomes are sampled (sampling strategy) and the way the sampled outcomes are integrated and processed to evaluate the prospects (integration/decision strategy) act together to shape the choice? This paper presents two models that incorporate the potential interplay between both types of strategies into the sequential sampling framework. Each model assumes an evidence accumulation process representing a distinct integration/decision strategy and is used to simulate choices between a safe and a risky prospect, while systematically varying sampling strategies. The simulations show that the potential interplay between both types of strategies can lead to systematically different choice patterns and can contribute to the as-if underweighting of rare outcomes pattern in decisions from experience, irrespective of the existence or absence of sampling error. The model-implied differences in the choice patterns translate to distinct signatures in the psychoeconomic functions of cumulative prospect theory.
+  In the sampling paradigm, people can---as much as they want, in the way they want, and without costs---sample the possible outcomes of prospects before making a final choice. Do the sequential pattern in which the outcomes are sampled (sampling strategy) and the way the sampled outcomes are integrated and processed to evaluate the prospects (decision strategy) act together to shape the choice? This paper presents two models that incorporate the potential interplay between both types of strategies into the sequential sampling framework. Each model assumes an evidence accumulation process representing a distinct decision strategy and is used to simulate choices between a safe and a risky prospect, while systematically varying sampling strategies. The simulations show that the potential interplay between both types of strategies can lead to systematically different choice patterns and can contribute to the as-if underweighting of rare outcomes pattern in decisions from experience, irrespective of the existence or absence of sampling error. The model-implied differences in the choice patterns translate to distinct signatures in the psychoeconomic functions of cumulative prospect theory.
   
 keywords          : "decisions from experience, information sampling, evidence accumulation, computational modeling, cumulative prospect theory"
 wordcount         : ""
 
 bibliography      : references.bib
-appendix          : "manuscript_appendix.Rmd"
 csl               : "C:/Users/Linus Hof/Documents/Psychologie/ARC/sampling-in-dfe/apa.csl"
+appendix          : 
+  - "manuscript_appendix.Rmd"
 
 figurelist        : no
 tablelist         : no
@@ -198,19 +198,19 @@ Sampling strategies refer to the sequential pattern with which people sample out
 That is, in the sampling paradigm, people can decide without costs when to sample outcomes from which prospect and when to switch between them.
 They can do so entirely randomly, resulting in no discernible sequential sampling pattern, or they proceed more systematically.
 Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people may either switch just once between prospects (comprehensive sampling) or after each sampled outcome (piecewise sampling).^[<!--Open footnote-->
-Note that in their analyses of empirical sampling data,  Hills and Hertwig [-@hillsInformationSearchDecisions2010] used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
+Note that in their analysis of empirical sampling data,  Hills and Hertwig [-@hillsInformationSearchDecisions2010] used the number of switches between prospects relative to the overall number of sampled outcomes from both prospects (switching frequency) as an approximate measure for the two proposed sampling strategies, and acknowledged that "many [sampling] strategies will fall on the continuum in between [the two paradigmatic strategies]" (p. 1788).
 <!--Close footnote-->]
-Decision strategies refer to the way people integrate the information obtained from the sampled outcomes in order to evaluate the prospects and make a corresponding decision.
-Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary integration/decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of such comparisons (round-wise integration/decision).
+Decision strategies refer to the way people integrate the information obtained from the sampled outcomes in order to evaluate the prospects and make a corresponding choice.
+Hills and Hertwig [-@hillsInformationSearchDecisions2010] proposed that people compare the prospects either on the basis of the means across all sampled outcomes (summary decision) or they compare two sampled outcomes---i.e., one from each prospect---over repeated rounds and choose the prospect that won the majority of such comparisons (round-wise decision).
 In more general terms, whereas sampling strategies determine how the information about prospects are collected, decision strategies determine how the collected information are processed, or transformed, to arrive at a final choice.
 
 \begin{figure}[t!]
 \caption{Possible Sampling and Decision Strategies in the Sampling Paradigm and Their Impact on the Final Choice}
 \includegraphics{manuscript_files/sampling-paradigm} \label{fig:sampling-paradigm}
-\raggedright \textit{Note.} In the sampling paradigm, people are offered the choice between at least two prospects (here: violet vs. orange), whose exact properties (outcomes and probabilities) remain hidden. To learn about the properties, people can, as much as they want, sample the prospects' outcomes according to their probabilities. Sampling strategies: Refer to the sequential pattern with which people sample the outcomes from both prospects over time. People may switch infrequently (comprehensive sampling) or frequently (piecewise sampling) or with a frequency somewhere in between. Decision strategies: Refer to the way people integrate the sampled outcomes in order to evaluate the prospects. People may integrate all outcomes stemming from the same prospect in order to compute and compare summary scores (summary integration/decision); or they integrate and compare outcomes of the two prospects over repeated rounds (round-wise integration/decision).  
+\raggedright \textit{Note.} In the sampling paradigm, people are offered the choice between at least two prospects (here: violet vs. orange), whose exact properties (outcomes and probabilities) remain hidden. To learn about the properties, people can, as much as they want, sample the prospects' outcomes according to their probabilities. Sampling strategies: Refer to the sequential pattern with which people sample the outcomes from both prospects over time. People may switch infrequently (comprehensive sampling) or frequently (piecewise sampling) or with a frequency somewhere in between. Decision strategies: Refer to the way people integrate the sampled outcomes in order to evaluate the prospects. People may integrate all outcomes stemming from the same prospect in order to compute and compare summary scores (summary decision); or they integrate and compare outcomes of the two prospects over repeated rounds (round-wise decision).  
 \end{figure}
 
-To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between sampling and decision strategies.
+To provide an explanation for the as-if underweighting of rare outcomes pattern and the related description-experience gap, Hills and Hertwig [-@hillsInformationSearchDecisions2010] suggested a systematic link between both types of strategies.
 Specifically, they assumed that comprehensive sampling is associated with making summary decisions, while piecewise sampling is associated with making round-wise decisions.
 Since in round-wise decisions small-probability outcomes are expected to be left unconsidered in the majority of comparisons---each of which is weighted equally---, such a coupling could translate to an as-if underweighting of rare events pattern, even if a large number of outcomes is sampled.
 That is, if the prospect that is more likely to produce a higher outcome most of the time does *not* also possess a higher EV, round-wise decisions are expected to cause deviations from the solutions of EV maximization that take the form of an as-if underweighting of rare outcomes pattern (see Fig.\ \@ref(fig:sampling-paradigm), for illustrative purposes).
@@ -273,13 +273,13 @@ In the first section, the current approach and its theoretical commitments are b
 The paper starts from the proposition that systematic choices in DFE must be based on the assessment of differences in the latent properties of prospects (e.g., differences in EV or differences in the probability to produce a higher outcome most of the time).
 Sequential sampling models of decision making are considered as a theoretical framework that can be used to explain how the mind samples and accumulates evidence about such differences over time, and---importantly---how the mind stops sampling once an evidence threshold is reached.
 In the section that follows, two models are specified, each of which integrates the continuum of sampling strategies and one of the proposed decision strategies into the computational framework of sequential sampling models.
-The expected behavior of the models are outlined.
+The expected behaviors of the models are outlined.
 Thereafter, a simulation study is presented, where the proposed models are used to simulate the sampling and accumulation processes for a set of choices between a safe and a two-outcome prospect, the latter of which may or may not possess a small-probability outcome of different rank/desirability.
 Controlling for sampling error---i.e., considering the sampled relative frequencies rather than the latent objective probabilities---, this paper then seeks to investigate in a computational analysis whether and how the potential interplay of sampling and decision strategies shapes DFE and comes to imply choice patterns and functional forms of cumulative prospect theory [CPT, @tverskyAdvancesProspectTheory1992] that are consistent with an as-if underweighting of rare outcomes pattern.^[<!--Open footnote-->
 CPT's value function is also considered in this paper.
 However, the focus is on the weighting function, as it is commonly used to describe an as-if overweighting and underweighting of rare outcomes, and the description-experience gap [see, e.g., @kellenHowVariantAre2016; @regenwetterConstructbehaviorGapBehavioral2017; but see @hertwigConstructbehaviorGapDescription2018].
 <!--Close footnote-->]
-It is shown that within a sequential sampling framework, the interplay of sampling and integration/decision strategies produces systematically different choice patterns that depend on the structure of the choice problems and translate to distinct signatures in CPT's weighting and value function.
+It is shown that within a sequential sampling framework, the interplay of sampling and decision strategies produces systematically different choice patterns that depend on the structure of the choice problems and translate to distinct signatures in CPT's weighting and value function.
 The simulated choices and estimated CPT parameters can be understood as model-implied data and data models, which remain to be tested against empirical data.
 The paper closes with a brief discussion and conclusion.
 Note that all materials---i.e., code and data---underlying this paper, including instructions on how to reproduce this manuscript, can be retrieved from the accompanying `GitHub` repository.
@@ -883,7 +883,7 @@ fr_rates_risky %>%
 \begin{figure}[t!]
 \caption{Rates of False Risky and False Safe Choices in the Round-Wise Integration Model}
 \includegraphics{manuscript_files/figure-latex/choice-rates-roundwise-1} \label{fig:choice-rates-roundwise}
-\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (green, false response rates). Stars: Rates of choice trials, where risky prospect was chosen, although safe prospect produced the greater mean (false risky response). Points: Rates of trials, where safe prospect was chosen, although risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (green, false response rates). Stars: Rates of choice trials, where the risky prospect was chosen, although the safe prospect produced the greater mean (false risky response). Points: Rates of trials, where the safe prospect was chosen, although the risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
 \end{figure}
 
 #### CPT Parameters
@@ -949,7 +949,7 @@ ggarrange(gamma, delta, ncol = 1, nrow = 2, common.legend = TRUE, legend = "righ
 \begin{figure}[t!]
 \caption{Parameter Estimates of the Weighting Function}
 \includegraphics{manuscript_files/figure-latex/weighting-parameters-1} \label{fig:weighting-parameters}
-\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posteriors distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posterior distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
 \end{figure}
 
 Figure\ \@ref(fig:sensitivity-parameters) displays the estimated means and the 95%-intervals of the posterior distributions of the outcome sensitivity parameter $\alpha$ and the choice sensitivity parameter $\rho$.
@@ -1002,7 +1002,7 @@ ggarrange(alpha, rho, ncol = 1, nrow = 2, common.legend = TRUE, legend = "right"
 \begin{figure}[t!]
 \caption{Parameter Estimates of the Outcome and Choice Sensitivity Parameter}
 \includegraphics{manuscript_files/figure-latex/sensitivity-parameters-1} \label{fig:sensitivity-parameters}
-\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posteriors distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), points represent the means of the posterior distributions. Error bars represent the 95\%-intervals of the posterior distributions. Note that for better resolution the scales on the y-axis differ for different levels of \(\theta\).
 \end{figure}
 
 ```{r function-forms, include=FALSE, cache=TRUE}
@@ -1181,7 +1181,7 @@ fr_rates_risky %>%
 \begin{figure}[t!]
 \caption{Rates of False Risky and False Safe Choices in the Summary Integration Model}
 \includegraphics{manuscript_files/figure-latex/choice-rates-summary-1} \label{fig:choice-rates-summary}
-\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (blue, false response rates). Stars: Rates of choice trials, where risky prospect was chosen, although safe prospect produced the greater mean (false risky response). Points: Rates of trials, where safe prospect was chosen, although risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
+\raggedright \textit{Note.} For each combination of the switching probability \(\psi\) and the threshold \(\theta\), stars and points represent the rate of choices that did not maximize the latent EV (gray) or the mean across all outcomes sampled over the course of a sampling and accumulation process (blue, false response rates). Stars: Rates of choice trials, where the risky prospect was chosen, although the safe prospect produced the greater mean (false risky response). Points: Rates of trials, where the safe prospect was chosen, although the risky prospect produced the greater mean (false safe response). \(p_{high} \in (.8, 1)\): Rates for all choice problems that include a small-probability outcome of low rank. \(p_{high} \in (0, 2)\): Rates for problems that include a small-probability outcome of high rank. \(p_{high} \in [.2, .8]\): Rates for problems that do not include an outcome with a probability < .2.
 \end{figure}
 
 #### CPT Parameters
@@ -1218,7 +1218,7 @@ The current paper extended the original discussion and analyses of Hills and Her
 This paper started from the computational problem the mind is trying to solve in the sampling paradigm, and the principle logic that governs its solution:
 In order to make systematic choices between prospects, the mind must assess true differences in their latent properties, and it can only do so by searching for evidence in information samples.
 Relying on the sequential sampling framework, the current paper assumed that this search process takes the form of an evidence accumulation over time, where outcomes are sampled until the accumulated evidence reaches a threshold.
-Two different models were presented, each of which assumed an accumulation process that resembles a distinct integration/decision strategy.
+Two different models were presented, each of which assumes an accumulation process that resembles a distinct integration/decision strategy.
 The round-wise integration model assumes that the means across sets of sampled outcomes are repeatedly compared and a choice is made once the number of won comparisons reaches a threshold.
 The summary integration model assumes that all outcomes sampled from a prospect are integrated into the same cumulative sum and that a choice is made once the sum reaches a threshold.
 

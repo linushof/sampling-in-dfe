@@ -44,3 +44,18 @@ For the summary integration model, $\theta$ is not the absolute cumulative sum a
 \includegraphics{manuscript_files/figure-latex/function-forms-relative-1} \label{fig:function-forms-relative}
 \end{figure}
 
+\newpage
+
+\noindent \begin{center} \textbf{Declaration of Independent Work}  \end{center}
+
+\noindent I hereby declare that I completed the master’s thesis independently based only on the stated resources and references. I have not submitted the master’s thesis, or parts of it, to another academic institution and the thesis has not been accepted or rejected accordingly. I declare that I have acknowledged the regulations for the master’s program in Psychology of the Faculty of Behavioural and Cultural Studies of Heidelberg University of June 22, 2010 and its First Amendment of June 5, 2019. Furthermore, I declare that the principles of Heidelberg University for ensuring good academic practice were abided by.
+
+\noindent \begin{center} \textbf{Eigenständigkeitserklärung}  \end{center}
+
+\noindent \textit{Hiermit erkläre ich, die Masterarbeit selbstständig und nur unter Verwendung der angegebenen Hilfen und Quellen angefertigt zu haben. Ich erkläre, dass ich die Masterarbeit oder Teile davon nicht bereits bei einer anderen wissenschaftlichen Einrichtung eingereicht habe und dass sie dort weder angenommen noch abgelehnt wurde. Ich erkläre die Kenntnisnahme der fachspezifischen Prüfungsordnung für das Masterstudium im Fach Psychologie an der Fakultät für Verhaltens- und Empirische Kulturwissenschaften an der Universität Heidelberg vom 22. Juni 2010 und ihrer letzten Änderung vom 05. Juni 2019. Ich erkläre abschließend, dass die Grundsätze der Universität Heidelberg zur Sicherung guter wissenschaftlicher Praxis eingehalten wurden.}
+
+\hfill \break
+
+\noindent Linus Hof
+
+\noindent Heidelberg, 27.05.2022
