@@ -27,7 +27,7 @@ abstract: |
   In the sampling paradigm, people can---as much as they want, in the way they want, and without costs---sample the possible outcomes of prospects before making a final choice. Do the sequential pattern in which the outcomes are sampled (sampling strategy) and the way the sampled outcomes are integrated and processed to evaluate the prospects (decision strategy) act together to shape the choice? This paper presents two models that incorporate the potential interplay between both types of strategies into the sequential sampling framework. Each model assumes an evidence accumulation process representing a distinct decision strategy and is used to simulate choices between a safe and a risky prospect, while systematically varying sampling strategies. The simulations show that the potential interplay between both types of strategies can lead to systematically different choice patterns and can contribute to the as-if underweighting of rare outcomes pattern in decisions from experience, irrespective of the existence or absence of sampling error. The model-implied differences in the choice patterns translate to distinct signatures in the psychoeconomic functions of cumulative prospect theory.
   
 keywords          : "decisions from experience, information sampling, evidence accumulation, computational modeling, cumulative prospect theory"
-wordcount         : ""
+wordcount         : "12,450"
 
 bibliography      : references.bib
 csl               : "C:/Users/Linus Hof/Documents/Psychologie/ARC/sampling-in-dfe/apa.csl"
