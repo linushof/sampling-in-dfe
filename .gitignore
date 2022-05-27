@@ -3,10 +3,8 @@
 .RData
 .Ruserdata
 *.tex
-*.pdf
 *.pptx
 *.csl
-simulation_*.csv
 notes/
-manuscript_files/
-supplements/
+manuscript_files/figure-latex/
+simulation_*.csv
