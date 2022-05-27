@@ -15,7 +15,7 @@ affiliation:
     institution   : "Heidelberg University"
     
 authornote: |
- This manuscript is a dynamic document which can be reproduced using the materials and instructions provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is submitted as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Matr.-Nr.: Removed from online version. Supervisors:
+ This manuscript is a dynamic document created from the materials provided on the `GitHub` repository: https://github.com/linushof/sampling-in-dfe. The current version of the manuscript, created from the commit with the hash ``r repro::current_hash()``, is submitted as a master's thesis in fulfillment of the requirements for the degree Master of Science (M.Sc.) at Heidelberg University, Faculty of Behavioural and Cultural Studies, Institute of Psychology. Matr.-Nr.: Removed from online version. Supervisors:
   
   \indent
   1. Prof. Dr. Thorsten Pachur, delegated by Prof. Dr. Klaus Fiedler
@@ -27,7 +27,7 @@ abstract: |
   In the sampling paradigm, people can---as much as they want, in the way they want, and without costs---sample the possible outcomes of prospects before making a final choice. Do the sequential pattern in which the outcomes are sampled (sampling strategy) and the way the sampled outcomes are integrated and processed to evaluate the prospects (decision strategy) act together to shape the choice? This paper presents two models that incorporate the potential interplay between both types of strategies into the sequential sampling framework. Each model assumes an evidence accumulation process representing a distinct decision strategy and is used to simulate choices between a safe and a risky prospect, while systematically varying sampling strategies. The simulations show that the potential interplay between both types of strategies can lead to systematically different choice patterns and can contribute to the as-if underweighting of rare outcomes pattern in decisions from experience, irrespective of the existence or absence of sampling error. The model-implied differences in the choice patterns translate to distinct signatures in the psychoeconomic functions of cumulative prospect theory.
   
 keywords          : "decisions from experience, information sampling, evidence accumulation, computational modeling, cumulative prospect theory"
-wordcount         : "12,450"
+wordcount         : "12,442"
 
 bibliography      : references.bib
 csl               : "C:/Users/Linus Hof/Documents/Psychologie/ARC/sampling-in-dfe/apa.csl"
@@ -282,7 +282,7 @@ However, the focus is on the weighting function, as it is commonly used to descr
 It is shown that within a sequential sampling framework, the interplay of sampling and decision strategies produces systematically different choice patterns that depend on the structure of the choice problems and translate to distinct signatures in CPT's weighting and value function.
 The simulated choices and estimated CPT parameters can be understood as model-implied data and data models, which remain to be tested against empirical data.
 The paper closes with a brief discussion and conclusion.
-Note that all materials---i.e., code and data---underlying this paper, including instructions on how to reproduce this manuscript, can be retrieved from the accompanying `GitHub` repository.
+Note that all materials---i.e., code and data---underlying this paper can be retrieved from the accompanying `GitHub` repository.
 
 # Sampling and Decision Strategies Within a Sequential Sampling Framework
 
